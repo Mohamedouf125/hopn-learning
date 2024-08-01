@@ -10,6 +10,12 @@ import img5 from "../../assets/images/authImages/authBg-5.jpeg";
 import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  // const img1 = "/assets/images/authImages/authBg.png";
+  // const img2 = "/assets/images/authImages/authBg-2.jpeg";
+  // const img3 = "/assets/images/authImages/authBg-3.jpeg";
+  // const img4 = "/assets/images/authImages/authBg-4.jpeg";
+  // const img5 = "/assets/images/authImages/authBg-5.jpeg";
+
   const welcomeSlides = [
     {
       header: "Welcome to Sports In!",
@@ -56,7 +62,7 @@ const Login = () => {
 
   useEffect(() => {
     if (overlayRref.current) {
-      overlayRref.current.style.backgroundImage = `url(${welcomeSlides[slider].image}?${new Date().getTime()})`;
+      overlayRref.current.style.backgroundImage = `url(${welcomeSlides[slider].image})`;
     }
   }, [slider]);
 
@@ -235,6 +241,11 @@ const Login = () => {
       >
         <div
           ref={overlayRref}
+          style={{
+            backgroundImage: `url(${welcomeSlides[slider].image})`,
+            backgroundSize: 'cover',  // Ensure the image covers the element
+            backgroundPosition: 'center',  // Center the image within the element
+          }}
           className={` flex flex-col justify-center items-center gap-2.5 overflow-hidden relative rounded-[20px] w-full min-h-[750px] bg-center bg-cover transition-all ease-in-out duration-1000 shadow-[0px_3px_4px_rgba(0,0,0,0.03)]`}
         >
           <div className={`flex justify-center items-center gap-5 w-full`}>
