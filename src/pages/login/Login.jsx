@@ -56,7 +56,7 @@ const Login = () => {
 
   useEffect(() => {
     if (overlayRref.current) {
-      overlayRref.current.style.backgroundImage = `url(${welcomeSlides[slider].image})`;
+      overlayRref.current.style.backgroundImage = `url(${welcomeSlides[slider].image}?${new Date().getTime()})`;
     }
   }, [slider]);
 
