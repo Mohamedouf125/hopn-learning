@@ -1,9 +1,9 @@
 import googleIcon from "../../assets/images/icons/googleIcon.png";
-import img1 from "../../assets/images/authImages/SignUpEmIl.png";
+import img1 from "../../assets/images/authImages/Forgot password.png";
 
 import { Link } from "react-router-dom";
 
-const SignUpEmail2 = () => {
+const ForgotePasswordNewPassword = () => {
   return (
     <div
       className={`flex items-center justify-between py-0 px-[40px] container mx-auto mt-8 mb-20`}
@@ -19,43 +19,16 @@ const SignUpEmail2 = () => {
             <span className={`font-semibold text-[#779341]`}> SPORTS IN</span>
           </h4>
           <h2
-            className={`font-[Poppins] text-[55px] font-medium leading-[82.5px] text-left text-black`}
+            className={`font-[Poppins] text-[40px] font-[500] leading-[82.5px] text-left text-black`}
           >
-            Sign Up
+            Enter a New Password
           </h2>
-        </div>
-        <div
-          className={`flex justify-center items-center w-full cursor-pointer py-6`}
-        >
-          <div
-            className={`flex justify-center items-center gap-2 w-full mx-auto bg-[#e9f1ff] rounded-[20px] py-[15px]`}
-          >
-            <img
-              className={`w-[26px] flex-shrink-0 flex-grow-0`}
-              src={googleIcon}
-              alt="Google"
-            />
-            <div
-              className={`text-[#4285f4] text-[16px] font-[Poppins] font-normal`}
-            >
-              Sign Up with Google
-            </div>
-          </div>
-        </div>
-        <div className={`flex justify-center items-center gap-2.5 w-full py-6`}>
-          <div className={`w-[35%] border-b border-[#e6e6e6]`} />
-          <div
-            className={`text-center text-[#858494] text-[16px] font-[Poppins] font-normal`}
-          >
-            OR
-          </div>
-          <div className={`w-[35%] border-b border-[#e6e6e6]`} />
         </div>
         <div
           className={`flex flex-col justify-start items-start gap-2.5 w-full`}
         >
           <div
-            className={`flex flex-col justify-start items-start gap-2.5 w-full`}
+            className={`flex flex-col justify-start items-start gap-2.5 w-full mt-10`}
           >
             {/* password */}
             <div
@@ -151,33 +124,18 @@ const SignUpEmail2 = () => {
             </div>
           </div>
           {/* progress line */}
-          <div className={`w-full my-7`}>
-            <div
-              className={`flex w-full items-center justify-end text-[#075178] font-bold`}
-            >
-              2 of 2
-            </div>
-            <div
-              className={`w-full flex items-center justify-center bg-[#E9F1FF] rounded-lg overflow-hidden `}
-            >
-              <div className={`w-1/2 border-[5px] border-[#075178] `}></div>
-              <div className={`w-1/2 border-[5px] border-[#075178]`}></div>
-            </div>
-          </div>
         </div>
-        <div className={`flex justify-end items-center w-full`}>
+        <div
+          className={`flex justify-end items-center w-full py-[16px] mt-[50px] bg-[#075178] rounded-[20px] cursor-pointer`}
+        >
           <div
-            className={`flex justify-end items-center w-1/2 py-[16px] mt-[50px] bg-[#075178] rounded-[20px] cursor-pointer`}
+            className={`text-center text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
           >
-            <div
-              className={`text-center text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
-            >
-              Sign Up
-            </div>
+            Confirm
           </div>
         </div>
         <div
-          className={`w-full text-center mt-16 flex items-center justify-center`}
+          className={`w-full text-center mt-10 flex items-center justify-center`}
         >
           <span
             className={`text-[#858494] text-[14px] font-[Poppins] font-normal`}
@@ -197,7 +155,7 @@ const SignUpEmail2 = () => {
         className={`flex justify-center items-center overflow-hidden w-[50%] min-h-[750px]`}
       >
         <div
-          className={`w-full min-h-[750px] flex items-center justify-center`}
+          className={`w-full min-h-[750px] flex items-start justify-center`}
         >
           <img src={img1} alt="signUp" />
         </div>
@@ -206,4 +164,4 @@ const SignUpEmail2 = () => {
   );
 };
 
-export default SignUpEmail2;
+export default ForgotePasswordNewPassword;

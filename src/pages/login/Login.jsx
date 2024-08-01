@@ -7,7 +7,7 @@ import img2 from "../../assets/images/authImages/authBg-2.jpeg";
 import img3 from "../../assets/images/authImages/authBg-3.jpeg";
 import img4 from "../../assets/images/authImages/authBg-4.jpeg";
 import img5 from "../../assets/images/authImages/authBg-5.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const welcomeSlides = [
@@ -40,6 +40,7 @@ const Login = () => {
 
   const [slider, setSlider] = useState(0);
   const overlayRref = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -198,6 +199,7 @@ const Login = () => {
           </div>
           <div
             className={`self-stretch text-right text-[#075178] text-[14px] font-[Poppins] font-medium cursor-pointer`}
+            onClick={() => navigate(`/forgotePassword-addEmail`)}
           >
             Forgot Password?
           </div>
@@ -217,11 +219,11 @@ const Login = () => {
           <span
             className={`text-[#858494] text-[14px] font-[Poppins] font-normal`}
           >
-            Don’t have an account? 
+            Don’t have an account?
           </span>
           <Link to={`/signUp`}>
             <span className="text-[#075178] text-[14px] font-[Poppins] font-medium cursor-pointer">
-               Sign up
+              Sign up
             </span>
           </Link>
         </div>

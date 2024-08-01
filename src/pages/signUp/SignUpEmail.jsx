@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
 import googleIcon from "../../assets/images/icons/googleIcon.png";
 import img1 from "../../assets/images/authImages/SignUpEmIl.png";
 
@@ -210,7 +209,7 @@ const SignUpEmail = () => {
         className={`flex justify-center items-center overflow-hidden w-[50%] min-h-[750px]`}
       >
         <div
-          className={`w-full min-h-[750px] flex items-center justify-center`}
+          className={`w-full min-h-[750px] flex items-start justify-center`}
         >
           <img src={img1} alt="signUp" />
         </div>
