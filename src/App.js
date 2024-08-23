@@ -1,5 +1,5 @@
 import "./App.css";
-import { Header } from "./components/header/header";
+import  Header  from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";
