@@ -1,4 +1,3 @@
-import React, { useState, useEffect, useRef } from "react";
 import googleIcon from "../../assets/images/icons/googleIcon.png";
 import img1 from "../../assets/images/authImages/signUp.png";
 

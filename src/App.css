@@ -29,6 +29,11 @@
   }
 }
 
+:root{
+  --blue-primary: #075178;
+  --border: #F1F1F2;
+}
+
 .showWelcomeBox {
   animation: slideIn 1s forwards;
 }
@@ -39,4 +44,9 @@
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.active{
+  color: #fff;
+  background-color: var(--blue-primary);
 }

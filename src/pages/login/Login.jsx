@@ -66,11 +66,7 @@ const Login = () => {
     <div
       className={`flex items-start justify-between py-0 px-[40px] container mx-auto mt-8 mb-20`}
     >
-      {/* <img className={`hidden`} src={img1} alt="img1" />
-      <img className={`hidden`} src={img2} alt="img1" />
-      <img className={`hidden`} src={img3} alt="img1" />
-      <img className={`hidden`} src={img4} alt="img1" />
-      <img className={`hidden`} src={img5} alt="img1" /> */}
+      
       <div
         className={`flex flex-col justify-start items-start p-10 pt-10 pb-0 w-[45%] max-w-[609px] min-h-[750px]`}
       >
