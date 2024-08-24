@@ -15,8 +15,13 @@ import slideHead from "../../assets/images/home/slideHeader.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courceImg from "../../assets/images/home/courceImg.png";
 import ahlyClub from "../../assets/images/home/ahlyClub.png";
+import { useSelector } from "react-redux";
+import RegistrationGifts from "../../components/gifts/RegistrationGifts";
+import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 
 const Home = () => {
+  const user = useSelector((state) => state.user);
+
   const Celebrities = [
     {
       name: "ibrahim mohamed",
@@ -72,8 +77,14 @@ const Home = () => {
     filledIcon: <i className="fa fa-star" />,
   };
 
+  console.log(user);
+
   return (
-    <div>
+    <main>
+      {/* <RegistrationGifts /> */}
+      <ExceptionalGifts />
+
+      {/* home content */}
       <div className="container mx-auto px-4 py-8">
         <section className="mb-8">
           <h1 className="text-3xl font-bold text-center">Banner</h1>
@@ -331,7 +342,7 @@ const Home = () => {
           </div>
         </section>
       </div>
-    </div>
+    </main>
   );
 };
 
