@@ -18,6 +18,7 @@ import ahlyClub from "../../assets/images/home/ahlyClub.png";
 import { useSelector } from "react-redux";
 import RegistrationGifts from "../../components/gifts/RegistrationGifts";
 import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
+import DepositGifts from "../../components/gifts/DepositGifts";
 
 const Home = () => {
   const user = useSelector((state) => state.user);
@@ -82,7 +83,8 @@ const Home = () => {
   return (
     <main>
       {/* <RegistrationGifts /> */}
-      <ExceptionalGifts />
+      {/* <ExceptionalGifts /> */}
+      {/* <DepositGifts /> */}
 
       {/* home content */}
       <div className="container mx-auto px-4 py-8">

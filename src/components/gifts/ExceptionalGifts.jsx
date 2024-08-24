@@ -1,4 +1,3 @@
-import React from "react";
 import FullPagePopup from "../popups/FullPagePopup";
 
 const ExceptionalGifts = () => {
@@ -8,24 +7,24 @@ const ExceptionalGifts = () => {
         <h2 className="w-full text-center bg-[#075178] text-white py-3 font-[600] text-[20px] ">
           Exceptional gifts
         </h2>
-        <div>
-          <h3>Did you know that you can get exceptional gifts?</h3>
-        </div>
-        <div>
-          <ul>
-            <li>
+        <h3 className="mx-auto w-fit border-b border-[#28AF60] text-[20px] font-[400] text-[#0B274B] my-6 pb-2 ">
+          Did you know that you can get exceptional gifts?
+        </h3>
+        <div className="flex items-center justify-center w-[80%] mx-auto">
+          <ul className="flex items-start justify-start flex-col list-disc gap-3">
+            <li className="text-[16px] font-[400]">
               You can get other training programs for free, just invite 10
               friends to get another free training program.
             </li>
-            <li>
+            <li className="text-[16px] font-[400]">
               Also for every 10 friends who register through your invitation
               link you will get another free training program with a maximum of
               10 training programs.
             </li>
-            <li>
+            <li className="text-[16px] font-[400] text-start gap-2">
               Just copy the following invitation link and share it with your
               friends.
-              <span className="bg-[#075178] flex items-center justify-center">
+              <span className="bg-[#075178] inline-flex items-center justify-center cursor-pointer text-[14px] font-[600] ml-3 p-2 rounded-lg text-white gap-1">
                 Copy invitation code
                 <svg
                   width="20"
@@ -42,6 +41,11 @@ const ExceptionalGifts = () => {
               </span>
             </li>
           </ul>
+        </div>
+        <div className="flex items-center justify-end gap-2 my-5 w-[95%] mx-0  ">
+          <button className="border-none outline-0 flex items-center justify-center gap-1 bg-[#075178] text-[14px] font-[500] text-white rounded py-2 px-4 ">
+            Next <i class="fas fa-angle-double-right"></i>
+          </button>
         </div>
       </div>
     </FullPagePopup>

@@ -10,6 +10,7 @@ import ForgotePasswordAddOTP from "./pages/forgotPassword/ForgotePasswordAddOTP"
 import ForgotePasswordNewPassword from "./pages/forgotPassword/ForgotePasswordNewPassword";
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
+import Gifts from "./pages/gifts/Gifts";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/gifts" element={<Gifts />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signUp-email" element={<SignUpEmail />} />
         <Route path="/signUp-email-2" element={<SignUpEmail2 />} />
