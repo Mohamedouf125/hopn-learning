@@ -60,6 +60,18 @@ const Home = () => {
     },
   ];
 
+  const stars = {
+    count: 5,
+    size: 20,
+    activeColor: "#FFD130",
+    edit: false,
+    value: 4.5,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    filledIcon: <i className="fa fa-star" />,
+  };
+
   return (
     <div>
       <div className="container mx-auto px-4 py-8">
@@ -147,13 +159,13 @@ const Home = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_301_338)">
+                <g clipPath="url(#clip0_301_338)">
                   <path
                     d="M15.5 6L9.5 12L15.5 18"
                     stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </g>
                 <defs>
@@ -176,13 +188,13 @@ const Home = () => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <g clip-path="url(#clip0_301_332)">
+                <g clipPath="url(#clip0_301_332)">
                   <path
                     d="M9.5 6L15.5 12L9.5 18"
                     stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </g>
                 <defs>
@@ -265,17 +277,7 @@ const Home = () => {
                       becoming professional Illustrator Now...
                     </p>
                     <div className="flex w-full items-center justify-start gap-1">
-                      <ReactStars
-                        count={5}
-                        size={20}
-                        activeColor="#FFD130"
-                        edit={false}
-                        value={4.5}
-                        isHalf={true}
-                        emptyIcon={<i className="far fa-star" />}
-                        halfIcon={<i className="fa fa-star-half-alt" />}
-                        filledIcon={<i className="fa fa-star" />}
-                      />
+                      <ReactStars {...stars} />
                       <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
                         (1.2K)
                       </span>
@@ -301,16 +303,24 @@ const Home = () => {
                   className="rounded-xl border p-5 border-[#D9D9D9] min-w-[260px]"
                 >
                   <div className="p-5">
-                    <img src={bigAvatar} alt="personal image" className="w-full " />
+                    <img
+                      src={bigAvatar}
+                      alt="personal image"
+                      className="w-full "
+                    />
                   </div>
                   <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                    <h3 className="font-[600] text-[18px] w-full text-center ">Mohamed Aboelyazed</h3>
+                    <h3 className="font-[600] text-[18px] w-full text-center ">
+                      Mohamed Aboelyazed
+                    </h3>
                     <div className="flex items-center justify-center gap-1 mt-2">
                       <div>
                         <img src={ahlyClub} alt="club" />
                       </div>
                       <div className="flex items-center justify-center flex-col ">
-                        <span className="text-[12px] font-[400] ">Football Player in</span>
+                        <span className="text-[12px] font-[400] ">
+                          Football Player in
+                        </span>
                         <span className="text-[16px] font-[700] ">Alahly</span>
                       </div>
                     </div>

@@ -70,7 +70,7 @@ const Footer = () => {
                     className="bg-transparent text-[14px] font-[400] w-[80%] text-[#7A7E92] border-none outline-none "
                   />
                   <button className="border-none outline-none bg-[#28AF60] px-6 py-2">
-                    <i class="fas fa-arrow-right"></i>
+                    <i className="fas fa-arrow-right"></i>
                   </button>
                 </div>
               </div>
@@ -95,13 +95,13 @@ const Footer = () => {
           </div>
           <div className="flex items-center justify-center gap-5">
             <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
-              <i class="fab fa-linkedin-in"></i>
+              <i className="fab fa-linkedin-in"></i>
             </div>
             <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
-              <i class="fab fa-facebook-f"></i>
+              <i className="fab fa-facebook-f"></i>
             </div>
             <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
-              <i class="fab fa-twitter"></i>
+              <i className="fab fa-twitter"></i>
             </div>
           </div>
         </div>
