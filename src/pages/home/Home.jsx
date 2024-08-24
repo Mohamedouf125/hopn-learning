@@ -21,7 +21,6 @@ import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 import DepositGifts from "../../components/gifts/DepositGifts";
 
 const Home = () => {
-  const user = useSelector((state) => state.user);
 
   const Celebrities = [
     {
@@ -78,7 +77,6 @@ const Home = () => {
     filledIcon: <i className="fa fa-star" />,
   };
 
-  console.log(user);
 
   return (
     <main>
