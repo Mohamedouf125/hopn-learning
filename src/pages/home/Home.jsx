@@ -21,6 +21,8 @@ import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 import DepositGifts from "../../components/gifts/DepositGifts";
 
 const Home = () => {
+  const { newAccount } = useSelector((state) => state.user);
+  const { defaultStars } = useSelector((state) => state.ratingStars);
 
   const Celebrities = [
     {
@@ -65,22 +67,9 @@ const Home = () => {
     },
   ];
 
-  const stars = {
-    count: 5,
-    size: 20,
-    activeColor: "#FFD130",
-    edit: false,
-    value: 4.5,
-    isHalf: true,
-    emptyIcon: <i className="far fa-star" />,
-    halfIcon: <i className="fa fa-star-half-alt" />,
-    filledIcon: <i className="fa fa-star" />,
-  };
-
-
   return (
     <main>
-      {/* <RegistrationGifts /> */}
+      {newAccount && <RegistrationGifts />}
       {/* <ExceptionalGifts /> */}
       {/* <DepositGifts /> */}
 
@@ -288,7 +277,7 @@ const Home = () => {
                       becoming professional Illustrator Now...
                     </p>
                     <div className="flex w-full items-center justify-start gap-1">
-                      <ReactStars {...stars} />
+                      <ReactStars {...defaultStars} />
                       <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
                         (1.2K)
                       </span>
