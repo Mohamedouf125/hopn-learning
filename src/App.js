@@ -11,6 +11,7 @@ import ForgotePasswordNewPassword from "./pages/forgotPassword/ForgotePasswordNe
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 import Gifts from "./pages/gifts/Gifts";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gifts" element={<Gifts />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signUp-email" element={<SignUpEmail />} />
         <Route path="/signUp-email-2" element={<SignUpEmail2 />} />

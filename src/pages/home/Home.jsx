@@ -15,10 +15,10 @@ import slideHead from "../../assets/images/home/slideHeader.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courceImg from "../../assets/images/home/courceImg.png";
 import ahlyClub from "../../assets/images/home/ahlyClub.png";
-import { useSelector } from "react-redux";
-import RegistrationGifts from "../../components/gifts/RegistrationGifts";
-import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
-import DepositGifts from "../../components/gifts/DepositGifts";
+// import { useSelector } from "react-redux";
+// import RegistrationGifts from "../../components/gifts/RegistrationGifts";
+// import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
+// import DepositGifts from "../../components/gifts/DepositGifts";
 
 const Home = () => {
 

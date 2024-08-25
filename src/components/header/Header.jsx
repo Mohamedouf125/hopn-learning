@@ -32,7 +32,7 @@ const Header = () => {
                 alt="user photo"
               />
             </button>
-            {/* use dropdown */}
+            {/* user dropdown */}
             <div
               className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
               id="user-dropdown"
@@ -48,10 +48,10 @@ const Header = () => {
               <ul className="py-2" aria-labelledby="user-menu-button">
                 <li>
                   <Link
-                    to="#"
+                    to="/profile"
                     className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                   >
-                    Dashboard
+                    Profile
                   </Link>
                 </li>
                 <li>
