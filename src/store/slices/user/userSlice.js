@@ -1,9 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "universal-cookie";
 
 const initialState = {
-  isLoggedIn: true,
+  isLoggedIn: false,
   newAccount: true,
+  user: {},
+  token: "",
 };
+
+const cookies = new Cookies(null, { path: "/" });
 
 export const userSlice = createSlice({
   name: "user",
@@ -12,9 +17,35 @@ export const userSlice = createSlice({
     oldAccount: (state) => {
       state.newAccount = false;
     },
+    setUser: (state, action) => {
+      state.user = action.payload.user;
+      state.token = action.payload.token;
+      state.isLoggedIn = true;
+    },
+    rememberUser: (state, action) => {
+      cookies.set("token", action.payload.token);
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+    },
+    getRememberedUser: (state) => {
+      const token = cookies.get("token");
+      const user = localStorage.getItem("user");
+      if (token && user) {
+        state.user = JSON.parse(user);
+        state.token = token;
+        state.isLoggedIn = true;
+      }
+    },
+    logout: (state) => {
+      state.isLoggedIn = false;
+      state.user = {};
+      state.token = "";
+      cookies.remove("token");
+      localStorage.removeItem("user");
+    },
   },
 });
 
-export const { oldAccount } = userSlice.actions;
+export const { oldAccount, setUser, rememberUser, getRememberedUser, logout } =
+  userSlice.actions;
 
 export default userSlice.reducer;

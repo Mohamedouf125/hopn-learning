@@ -12,8 +12,19 @@ import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 import Gifts from "./pages/gifts/Gifts";
 import Profile from "./pages/profile/Profile";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getRememberedUser } from "./store/slices/user/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  // get user data from localstorage
+  useEffect(() => {
+    dispatch(getRememberedUser());
+  }, []);
+
+
   return (
     <div className="App">
       <Header />

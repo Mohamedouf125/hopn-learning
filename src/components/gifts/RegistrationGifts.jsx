@@ -1,11 +1,66 @@
 import { useSelector } from "react-redux";
 import FullPagePopup from "../popups/FullPagePopup";
 import { Link } from "react-router-dom";
-
-
+import ReactStars from "react-rating-stars-component";
+import courceImg from "../../assets/images/home/courceImg.png";
+import avatar from "../../assets/images/icons/avatar.png";
 
 const RegistrationGifts = () => {
-    const user = useSelector(state => state.user)
+  const user = useSelector((state) => state.user);
+  const stars = {
+    count: 5,
+    size: 20,
+    activeColor: "#FFD130",
+    edit: false,
+    value: 4.5,
+    isHalf: true,
+    emptyIcon: <i className="far fa-star" />,
+    halfIcon: <i className="fa fa-star-half-alt" />,
+    filledIcon: <i className="fa fa-star" />,
+  };
+
+  const Celebrities = [
+    {
+      name: "ibrahim mohamed",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "ahmed mohamed",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "mahnoud ibrahim",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "amir mohamed",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "mohamed ahmed",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "mohamed ahmed",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "mohamed ahmed",
+      job: "frontend",
+      image: avatar,
+    },
+    {
+      name: "mohamed ahmed",
+      job: "frontend",
+      image: avatar,
+    },
+  ];
   return (
     <>
       {user.newAccount && (
@@ -15,7 +70,7 @@ const RegistrationGifts = () => {
               Registration gifts
             </h2>
             {/* choose cource */}
-            {/* <div className="flex items-center justify-start gap-2 w-[75%] mx-auto bg-[#0751784D] rounded-xl my-5 p-2 ">
+            <div className="flex items-center justify-start gap-2 w-[75%] mx-auto bg-[#0751784D] rounded-xl my-5 p-2 ">
               <svg
                 width="20"
                 height="20"
@@ -77,7 +132,7 @@ const RegistrationGifts = () => {
               <button className="border-none outline-0 flex items-center justify-center gap-1 bg-[#075178] text-[14px] font-[500] text-white rounded py-2 px-4 ">
                 Next <i class="fas fa-angle-double-right"></i>
               </button>
-            </div> */}
+            </div>
 
             {/* enter information */}
             <div className="w-full items-center justify-start m-5   ">

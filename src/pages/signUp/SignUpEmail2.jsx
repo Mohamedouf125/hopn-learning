@@ -1,9 +1,45 @@
 import googleIcon from "../../assets/images/icons/googleIcon.png";
 import img1 from "../../assets/images/authImages/SignUpEmIl.png";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changeData,
+  resetRejesterState,
+} from "../../store/slices/user/rejesterSlice";
+import server from "../../assets/axios/server";
+import { rememberUser, setUser } from "../../store/slices/user/userSlice";
 
 const SignUpEmail2 = () => {
+  const dispatch = useDispatch();
+  const rejesterData = useSelector((state) => state.rejester);
+  const navigate = useNavigate();
+
+  const handelRejester = () => {
+    server
+      .post("/register-api", rejesterData)
+      .then((data) => {
+        dispatch(
+          setUser({ user: data.data.data.user, token: data.data.data.token })
+        );
+        dispatch(
+          rememberUser({
+            user: data.data.data.user,
+            token: data.data.data.token,
+          })
+        );
+        dispatch(resetRejesterState());
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(changeData({ field: name, value }));
+  };
   return (
     <div
       className={`flex items-center justify-between py-0 px-[40px] container mx-auto mt-8 mb-20`}
@@ -101,6 +137,8 @@ const SignUpEmail2 = () => {
                 type="password"
                 placeholder="Password"
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                name="password"
+                onChange={handleInputChange}
               />
             </div>
             {/* cofirm password */}
@@ -147,6 +185,8 @@ const SignUpEmail2 = () => {
                 type="password"
                 placeholder="Confirm Password"
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                name="password_confirmation"
+                onChange={handleInputChange}
               />
             </div>
           </div>
@@ -169,11 +209,12 @@ const SignUpEmail2 = () => {
           <div
             className={`flex justify-end items-center w-1/2 py-[16px] mt-[50px] bg-[#075178] rounded-[20px] cursor-pointer`}
           >
-            <div
-              className={`text-center text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
+            <button
+              onClick={handelRejester}
+              className={`text-center border-none outline-none text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
             >
               Sign Up
-            </div>
+            </button>
           </div>
         </div>
         <div

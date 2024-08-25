@@ -2,9 +2,22 @@ import logoIcon from "../../assets/images/logo/logoIconBlue.png";
 import logoTitle from "../../assets/images/logo/logoTitleBlue.png";
 import avatar from "../../assets/images/icons/avatar.png";
 import "flowbite";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
+import { logout } from "../../store/slices/user/userSlice";
 
 const Header = () => {
+  const { isLoggedIn, user, token } = useSelector((state) => state.user);
+  const loggedIn = useUserLoggedIn();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handelLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
   return (
     <div>
       <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -16,70 +29,69 @@ const Header = () => {
             <img src={logoIcon} className="h-8" alt="Logo" />
             <img src={logoTitle} alt="Logo" />
           </Link>
+
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <button
-              type="button"
-              className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-              id="user-menu-button"
-              aria-expanded="false"
-              data-dropdown-toggle="user-dropdown"
-              data-dropdown-placement="bottom"
-            >
-              <span className="sr-only">Open user menu</span>
-              <img
-                className="w-8 h-8 rounded-full"
-                src={avatar}
-                alt="user photo"
-              />
-            </button>
-            {/* user dropdown */}
-            <div
-              className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
-              id="user-dropdown"
-            >
-              <div className="px-4 py-3">
-                <span className="block text-sm text-gray-900 dark:text-white">
-                  Bonnie Green
-                </span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
-                  name@flowbite.com
-                </span>
-              </div>
-              <ul className="py-2" aria-labelledby="user-menu-button">
-                <li>
-                  <Link
-                    to="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Profile
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Settings
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Earnings
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                  >
-                    Sign out
-                  </Link>
-                </li>
-              </ul>
-            </div>
+            {loggedIn ? (
+              <>
+                <button
+                  type="button"
+                  className="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                  id="user-menu-button"
+                  aria-expanded="false"
+                  data-dropdown-toggle="user-dropdown"
+                  data-dropdown-placement="bottom"
+                >
+                  <span className="sr-only">Open user menu</span>
+                  <img
+                    className="w-8 h-8 rounded-full"
+                    src={avatar}
+                    alt="user photo"
+                  />
+                </button>
+                {/* user dropdown */}
+                <div
+                  className="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                  id="user-dropdown"
+                >
+                  <div className="px-4 py-3">
+                    <span className="block text-sm text-gray-900 dark:text-white">
+                      {user?.name}
+                    </span>
+                    <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
+                      {user?.email}
+                    </span>
+                  </div>
+                  <ul className="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                      <Link
+                        to="/profile"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="#"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Settings
+                      </Link>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handelLogout}
+                        className="block px-4 border-none outline-none py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                      >
+                        Sign out
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              </>
+            ) : (
+              <button onClick={() => navigate("/login")}>login</button>
+            )}
             <button
               data-collapse-toggle="navbar-user"
               type="button"

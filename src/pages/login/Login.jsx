@@ -8,9 +8,41 @@ import img3 from "../../assets/images/authImages/authBg-3.jpg";
 import img4 from "../../assets/images/authImages/authBg-4.jpg";
 import img5 from "../../assets/images/authImages/authBg-5.jpg";
 import { Link, useNavigate } from "react-router-dom";
+import server from "../../assets/axios/server";
+import { useDispatch } from "react-redux";
+import { rememberUser, setUser } from "../../store/slices/user/userSlice";
+import { resetRejesterState } from "../../store/slices/user/rejesterSlice";
 
 const Login = () => {
- 
+  const [logindata, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const dispatch = useDispatch();
+
+  const handelLgin = () => {
+    server
+      .post("/login-api", logindata)
+      .then((data) => {
+        dispatch(
+          setUser({ user: data.data.data.user, token: data.data.data.token })
+        );
+        dispatch(
+          rememberUser({
+            user: data.data.data.user,
+            token: data.data.data.token,
+          })
+        );
+        setLoginData({
+          email: "",
+          password: "",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const welcomeSlides = [
     {
@@ -66,7 +98,6 @@ const Login = () => {
     <div
       className={`flex items-start justify-between py-0 px-[40px] container mx-auto mt-8 mb-20`}
     >
-      
       <div
         className={`flex flex-col justify-start items-start p-10 pt-10 pb-0 w-[45%] max-w-[609px] min-h-[750px]`}
       >
@@ -151,6 +182,9 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Email"
+                onChange={(e) =>
+                  setLoginData((prev) => ({ ...prev, email: e.target.value }))
+                }
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
               />
             </div>
@@ -196,6 +230,12 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Password"
+                onChange={(e) =>
+                  setLoginData((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }))
+                }
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
               />
             </div>
@@ -210,11 +250,12 @@ const Login = () => {
         <div
           className={`flex justify-center items-center w-full py-[16px] mt-[50px] bg-[#075178] rounded-[20px] cursor-pointer`}
         >
-          <div
-            className={`text-center text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
+          <button
+            onClick={handelLgin}
+            className={`text-center border-none outline-none text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
           >
             Login
-          </div>
+          </button>
         </div>
         <div
           className={`w-full text-center mt-16 flex items-center justify-center`}
@@ -240,8 +281,8 @@ const Login = () => {
           ref={overlayRref}
           style={{
             backgroundImage: `url(${welcomeSlides[slider].image})`,
-            backgroundSize: 'cover',  // Ensure the image covers the element
-            backgroundPosition: 'center',  // Center the image within the element
+            backgroundSize: "cover", // Ensure the image covers the element
+            backgroundPosition: "center", // Center the image within the element
           }}
           className={` flex flex-col justify-center items-center gap-2.5 overflow-hidden relative rounded-[20px] w-full min-h-[750px] bg-center bg-cover transition-all ease-in-out duration-1000 shadow-[0px_3px_4px_rgba(0,0,0,0.03)]`}
         >

@@ -4,7 +4,8 @@ import img1 from "../../assets/images/authImages/signUp.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+
   return (
     <div
       className={`flex items-center justify-between py-0 px-[40px] container mx-auto mt-8 mb-20`}
@@ -50,7 +51,7 @@ const SignUp = () => {
           {/* email bt */}
           <div
             className={`flex justify-center items-center w-full cursor-pointer py-6`}
-            onClick={()=> navigate(`/signUp-email`)}
+            onClick={() => navigate(`/signUp-email`)}
           >
             <div
               className={`flex justify-center items-center gap-2 w-full mx-auto bg-[#075178] rounded-[20px] py-[15px]`}

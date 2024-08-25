@@ -2,9 +2,18 @@ import googleIcon from "../../assets/images/icons/googleIcon.png";
 import img1 from "../../assets/images/authImages/SignUpEmIl.png";
 
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeData } from "../../store/slices/user/rejesterSlice";
 
 const SignUpEmail = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    dispatch(changeData({ field: name, value }));
+  };
+
   return (
     <div
       className={`flex items-center justify-between py-0 px-[40px] container mx-auto mt-8 mb-20`}
@@ -93,7 +102,9 @@ const SignUpEmail = () => {
               <input
                 type="text"
                 placeholder="Your name"
+                name="name"
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                onChange={handleInputChange}
               />
             </div>
             {/* email */}
@@ -132,7 +143,9 @@ const SignUpEmail = () => {
               <input
                 type="email"
                 placeholder="Email"
+                name="email"
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                onChange={handleInputChange}
               />
             </div>
             {/* birthday */}
@@ -142,7 +155,9 @@ const SignUpEmail = () => {
               <input
                 type="date"
                 placeholder="dd / mm / yy"
+                name="date"
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                onChange={handleInputChange}
               />
             </div>
             {/* sex */}
@@ -153,9 +168,11 @@ const SignUpEmail = () => {
                 type="password"
                 placeholder="Password"
                 className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                name="sex"
+                onChange={handleInputChange}
               >
-                <option value="mail">Mail</option>
-                <option value="femail">Femail</option>
+                <option value="male">male</option>
+                <option value="female">Female</option>
               </select>
             </div>
           </div>
@@ -208,9 +225,7 @@ const SignUpEmail = () => {
       <div
         className={`flex justify-center items-center overflow-hidden w-[50%] min-h-[750px]`}
       >
-        <div
-          className={`w-full min-h-[750px] flex items-start justify-center`}
-        >
+        <div className={`w-full min-h-[750px] flex items-start justify-center`}>
           <img src={img1} alt="signUp" />
         </div>
       </div>
