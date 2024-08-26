@@ -12,19 +12,19 @@ import {
 import "swiper/css";
 import ReactStars from "react-rating-stars-component";
 import courceImg from "../../assets/images/home/courceImg.png";
+import { useSelector } from "react-redux";
+import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
+import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 
 const Gifts = () => {
-  const stars = {
-    count: 5,
-    size: 20,
-    activeColor: "#FFD130",
-    edit: false,
-    value: 4.5,
-    isHalf: true,
-    emptyIcon: <i className="far fa-star" />,
-    halfIcon: <i className="fa fa-star-half-alt" />,
-    filledIcon: <i className="fa fa-star" />,
-  };
+  const { defaultStars } = useSelector((state) => state.ratingStars);
+  // const { user } = useSelector((state) => state.user);
+  const text = "just for test";
+
+  useProtectedRoute();
+
+  const { copyToClipboard } = useCopyToClipboard();
+
   return (
     <main className="container mx-auto">
       <div className="flex items-start justify-between mt-10">
@@ -156,7 +156,10 @@ const Gifts = () => {
             Free training programs
           </h4>
           <div className="flex flex-col items-start justify-start gap-1">
-            <span className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1">
+            <span
+              onClick={() => copyToClipboard(text)}
+              className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
+            >
               <svg
                 width="20"
                 height="24"
@@ -227,7 +230,7 @@ const Gifts = () => {
                     becoming professional Illustrator Now...
                   </p>
                   <div className="flex w-full items-center justify-start gap-1">
-                    <ReactStars {...stars} />
+                    <ReactStars {...defaultStars} />
                     <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
                       (1.2K)
                     </span>
@@ -318,7 +321,7 @@ const Gifts = () => {
                   professional Illustrator Now...
                 </p>
                 <div className="flex w-full items-center justify-start gap-1">
-                  <ReactStars {...stars} />
+                  <ReactStars {...defaultStars} />
                   <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
                     (1.2K)
                   </span>

@@ -1,9 +1,8 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import Cookies from "universal-cookie";
 
 const useUserLoggedIn = () => {
-  const user = useSelector((state) => state.user);
-  if (user.isLoggedIn && user.token !== "") {
+  const cookies = new Cookies(null, { path: "/" });
+  if (localStorage.getItem("user") && cookies.get("token")) {
     return true;
   } else {
     return false;

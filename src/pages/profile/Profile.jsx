@@ -13,8 +13,18 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import slideHead from "../../assets/images/home/slideHeader.png";
 import courceImg from "../../assets/images/home/courceImg.png";
 import ReactStars from "react-rating-stars-component";
+import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
+import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const text = "just for test";
+  const { copyToClipboard } = useCopyToClipboard();
+  const { defaultStars } = useSelector((state) => state.ratingStars);
+  const { user } = useSelector((state) => state.user);
+
+  useProtectedRoute();
+
   const Celebrities = [
     {
       name: "ibrahim mohamed",
@@ -58,17 +68,6 @@ const Profile = () => {
     },
   ];
 
-  const stars = {
-    count: 5,
-    size: 20,
-    activeColor: "#FFD130",
-    edit: false,
-    value: 4.5,
-    isHalf: true,
-    emptyIcon: <i className="far fa-star" />,
-    halfIcon: <i className="fa fa-star-half-alt" />,
-    filledIcon: <i className="fa fa-star" />,
-  };
   return (
     <main className="container mx-auto flex items-center justify-center flex-col ">
       <div className="flex w-full flex-col items-center justify-center my-12 relative">
@@ -80,7 +79,10 @@ const Profile = () => {
         />
       </div>
       <div className="flex flex-col items-end justify-start gap-1 w-[80%] mx-auto mt-[-20px]">
-        <span className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1">
+        <span
+          onClick={() => copyToClipboard(text)}
+          className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
+        >
           <svg
             width="20"
             height="24"
@@ -101,7 +103,7 @@ const Profile = () => {
       </div>
       <div className="flex items-start  w-[80%] mx-auto justify-start gap-1 mt-8 ">
         <div className="flex items-center justify-center flex-col">
-          <h2 className="text-[18px] font-[600]  ">Mohamed Aboelyazed</h2>
+          <h2 className="text-[18px] font-[600]  ">{user.name}</h2>
           <div className=" flex items-center justify-center gap-2">
             <svg
               width="20"
@@ -332,7 +334,7 @@ const Profile = () => {
                     becoming professional Illustrator Now...
                   </p>
                   <div className="flex w-full items-center justify-start gap-1">
-                    <ReactStars {...stars} />
+                    <ReactStars {...defaultStars} />
                     <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
                       (1.2K)
                     </span>

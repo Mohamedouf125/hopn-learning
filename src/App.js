@@ -24,7 +24,6 @@ function App() {
     dispatch(getRememberedUser());
   }, []);
 
-
   return (
     <div className="App">
       <Header />
