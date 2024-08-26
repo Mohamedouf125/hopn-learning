@@ -19,10 +19,12 @@ import { useSelector } from "react-redux";
 import RegistrationGifts from "../../components/gifts/RegistrationGifts";
 import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 import DepositGifts from "../../components/gifts/DepositGifts";
+import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 
 const Home = () => {
   const { newAccount } = useSelector((state) => state.user);
   const { defaultStars } = useSelector((state) => state.ratingStars);
+  const userLoggedIn = useUserLoggedIn();
 
   const Celebrities = [
     {
@@ -69,7 +71,7 @@ const Home = () => {
 
   return (
     <main>
-      {newAccount && <RegistrationGifts />}
+      {newAccount && userLoggedIn && <RegistrationGifts />}
       {/* <ExceptionalGifts /> */}
       {/* <DepositGifts /> */}
 

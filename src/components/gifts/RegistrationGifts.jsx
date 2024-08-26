@@ -70,7 +70,12 @@ const RegistrationGifts = () => {
                   return (
                     <div
                       key={index}
-                      className="rounded-3xl border border-[#D9D9D9] w-[260px]"
+                      className={`rounded-3xl border w-[260px] ${
+                        choosedGift === index + 1
+                          ? "border-[]"
+                          : "border-[#D9D9D9]"
+                      } `}
+                      onClick={() => setChooosedGift(index + 1)}
                     >
                       <div>
                         <img
