@@ -19,6 +19,7 @@ const homeDataSlice = createSlice({
     sliders: [],
     cvs: [],
     courses: [],
+    users: [],
     status: "idle",
     error: null,
   },
@@ -33,6 +34,7 @@ const homeDataSlice = createSlice({
         state.sliders = action.payload.sliders;
         state.cvs = action.payload.cvs;
         state.courses = action.payload.courses;
+        state.users = action.payload.users;
       })
       .addCase(fetchHomeData.rejected, (state, action) => {
         state.status = "failed";

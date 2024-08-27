@@ -15,6 +15,7 @@ import Profile from "./pages/profile/Profile";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getRememberedUser } from "./store/slices/user/userSlice";
+import Courses from "./pages/courses/Courses";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +32,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gifts" element={<Gifts />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signUp-email" element={<SignUpEmail />} />
