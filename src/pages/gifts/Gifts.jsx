@@ -15,6 +15,7 @@ import courceImg from "../../assets/images/home/courceImg.png";
 import { useSelector } from "react-redux";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
+import { toast } from "react-toastify";
 
 const Gifts = () => {
   const { defaultStars } = useSelector((state) => state.ratingStars);
@@ -157,7 +158,10 @@ const Gifts = () => {
           </h4>
           <div className="flex flex-col items-start justify-start gap-1">
             <span
-              onClick={() => copyToClipboard(user.invite_code)}
+              onClick={() => {
+                copyToClipboard(user.invite_code);
+                toast.success("code copied to clipboard");
+              }}
               className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
             >
               <svg

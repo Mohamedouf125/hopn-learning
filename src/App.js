@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getRememberedUser } from "./store/slices/user/userSlice";
 import Courses from "./pages/courses/Courses";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +52,7 @@ function App() {
           element={<ForgotePasswordNewPassword />}
         />
       </Routes>
+      <ToastContainer />
       <Footer />
     </div>
   );

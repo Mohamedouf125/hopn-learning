@@ -17,6 +17,7 @@ import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Profile = () => {
   const text = "just for test";
@@ -106,7 +107,10 @@ const Profile = () => {
       </div>
       <div className="flex flex-col items-end justify-start gap-1 w-[80%] mx-auto mt-[-20px]">
         <span
-          onClick={() => copyToClipboard(user.invite_code)}
+          onClick={() => {
+            copyToClipboard(user.invite_code);
+            toast.success("code copied to clipboard");
+          }}
           className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
         >
           <svg
