@@ -18,7 +18,7 @@ import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 
 const Gifts = () => {
   const { defaultStars } = useSelector((state) => state.ratingStars);
-  // const { user } = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const text = "just for test";
 
   useProtectedRoute();
@@ -157,7 +157,7 @@ const Gifts = () => {
           </h4>
           <div className="flex flex-col items-start justify-start gap-1">
             <span
-              onClick={() => copyToClipboard(text)}
+              onClick={() => copyToClipboard(user.invite_code)}
               className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
             >
               <svg

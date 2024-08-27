@@ -16,14 +16,40 @@ import ReactStars from "react-rating-stars-component";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const Profile = () => {
   const text = "just for test";
   const { copyToClipboard } = useCopyToClipboard();
   const { defaultStars } = useSelector((state) => state.ratingStars);
   const { user } = useSelector((state) => state.user);
+  const [age, setAge] = useState("");
 
   useProtectedRoute();
+
+  // clculate age based on birthday
+  useEffect(() => {
+    function calculateAge(birthday) {
+      const birthDate = new Date(birthday);
+      const today = new Date();
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const monthDifference = today.getMonth() - birthDate.getMonth();
+
+      if (
+        monthDifference < 0 ||
+        (monthDifference === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        age--;
+      }
+
+      return age;
+    }
+
+    if (user.date) {
+      const calculatedAge = calculateAge(user.date);
+      setAge(calculatedAge);
+    }
+  }, [user.date]);
 
   const Celebrities = [
     {
@@ -80,7 +106,7 @@ const Profile = () => {
       </div>
       <div className="flex flex-col items-end justify-start gap-1 w-[80%] mx-auto mt-[-20px]">
         <span
-          onClick={() => copyToClipboard(text)}
+          onClick={() => copyToClipboard(user.invite_code)}
           className="bg-[#D9D9D9] inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
         >
           <svg
@@ -164,7 +190,7 @@ const Profile = () => {
               />
             </svg>
             <span className="text-[12px] font-[600] text-[#B0B0B0] ">
-              Male , 23 Years Old
+              {user.sex} , {age} Years Old
             </span>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ReactStars from "react-rating-stars-component";
@@ -15,16 +15,36 @@ import slideHead from "../../assets/images/home/slideHeader.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courceImg from "../../assets/images/home/courceImg.png";
 import ahlyClub from "../../assets/images/home/ahlyClub.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RegistrationGifts from "../../components/gifts/RegistrationGifts";
 import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 import DepositGifts from "../../components/gifts/DepositGifts";
 import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
+import { oldAccount } from "../../store/slices/user/userSlice";
+import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 
 const Home = () => {
   const { newAccount } = useSelector((state) => state.user);
   const { defaultStars } = useSelector((state) => state.ratingStars);
   const userLoggedIn = useUserLoggedIn();
+  const dispatch = useDispatch();
+
+  // to check if first login or not
+  useEffect(() => {
+    const newAccount = localStorage.getItem("newAccount");
+    if (newAccount === "false") {
+      dispatch(oldAccount());
+    }
+  }, []);
+
+  // feach home data from backend
+  useEffect(() => {
+    dispatch(fetchHomeData());
+  }, []);
+
+  const { sliders, cvs, courses, status, error } = useSelector(
+    (state) => state.home
+  );
 
   const Celebrities = [
     {
@@ -68,6 +88,10 @@ const Home = () => {
       image: avatar,
     },
   ];
+
+  if (status === "loading") {
+    return <div>loading...</div>;
+  }
 
   return (
     <main>
@@ -117,7 +141,7 @@ const Home = () => {
               }}
               className="w-full"
             >
-              {Celebrities.map((slide, index) => (
+              {sliders.map((slide, index) => (
                 <SwiperSlide
                   key={index}
                   className="flex items-center justify-center bg-gray-100 rounded-lg shadow-md"
@@ -126,18 +150,18 @@ const Home = () => {
                     <div className="w-full  ">
                       <img
                         className="w-full  "
-                        src={slideHead}
+                        src={slide.url}
                         alt="slideHead"
                       />
                     </div>
                     <div className="w-full mt-[-30px] ">
                       <img
-                        src={slide.image}
-                        alt={slide.name}
+                        src={avatar}
+                        alt={`user avatar`}
                         className="w-16 h-16 rounded-full mx-auto mb-2"
                       />
-                      <h3 className="text-lg font-[600] ">{slide.name}</h3>
-                      <p className="font-[400]">{slide.job}</p>
+                      <h3 className="text-lg font-[600] ">{`slide.name`}</h3>
+                      <p className="font-[400]">{`slide.job`}</p>
                     </div>
                     <div className="flex items-center justify-center gap-6 py-3">
                       <button className="text-[#EB4335] font-[600] ">
@@ -224,29 +248,33 @@ const Home = () => {
             </span>
           </div>
           <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-            {Celebrities.slice(0, 4).map((slide, index) => {
-              return (
-                <div
-                  key={index}
-                  className="bg-[#D9D9D9] p-10 rounded-lg relative border border-[#D9D9D9] w-[260px]"
-                >
-                  <div>
-                    <img src={cvImg} alt="cv image" className="w-full" />
-                  </div>
-                  <div className="bg-white w-full absolute bottom-0 left-0 rounded-lg p-3 flex items-center justify-center gap-2">
-                    <img
-                      src={slide.image}
-                      alt={slide.image}
-                      className="mt-[-60px] "
-                    />
-                    <div className="flex flex-col items-center justify-center">
-                      <h3 className="font-[600] ">{slide.name}</h3>
-                      <p className="font-[400]">{slide.job}</p>
+            {cvs.length === 0 ? (
+              <div>No Cvs Founded!</div>
+            ) : (
+              cvs.slice(0, 4).map((slide, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="bg-[#D9D9D9] p-10 rounded-lg relative border border-[#D9D9D9] w-[260px]"
+                  >
+                    <div>
+                      <img src={cvImg} alt="cv image" className="w-full" />
+                    </div>
+                    <div className="bg-white w-full absolute bottom-0 left-0 rounded-lg p-3 flex items-center justify-center gap-2">
+                      <img
+                        src={slide.image}
+                        alt={slide.image}
+                        className="mt-[-60px] "
+                      />
+                      <div className="flex flex-col items-center justify-center">
+                        <h3 className="font-[600] ">{slide.name}</h3>
+                        <p className="font-[400]">{slide.job}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </section>
 
@@ -261,7 +289,7 @@ const Home = () => {
             </span>
           </div>
           <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-            {Celebrities.slice(0, 4).map((slide, index) => {
+            {courses.slice(0, 4).map((slide, index) => {
               return (
                 <div
                   key={index}

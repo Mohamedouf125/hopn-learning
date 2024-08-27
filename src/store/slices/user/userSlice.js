@@ -16,6 +16,7 @@ export const userSlice = createSlice({
   reducers: {
     oldAccount: (state) => {
       state.newAccount = false;
+      localStorage.setItem('newAccount', false)
     },
     setUser: (state, action) => {
       state.user = action.payload.user;
