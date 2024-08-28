@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import logoIcon from "../../assets/images/logo/logoIcon.png";
 import logoTitle from "../../assets/images/logo/logoTitle.png";
 
@@ -5,11 +6,13 @@ const Footer = () => {
   return (
     <footer className="w-full bg-[#0A142F] flex items-center justify-center text-white">
       <div className="container mx-auto flex flex-col items-center justify-center p-16">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex w-[60%] items-start justify-between">
-            <div className="flex flex-col items-start justify-start ">
-              <div className="text-[16px] font-[700] ">Product</div>
-              <ul className="flex flex-col items-start justify-start mt-3 gap-1">
+        <div className="flex items-center justify-between gap-10 lg:gap-0 flex-col lg:flex-row w-full">
+          <div className="flex w-full lg:w-[60%] flex-col lg:flex-row items-start justify-between gap-8 lg:gap-0">
+            <div className="flex flex-col items-start justify-start w-full ">
+              <div className="text-[16px] font-[700] w-full lg:w-auto text-center lg:text-start ">
+                Product
+              </div>
+              <ul className="flex flex-col items-center lg:items-start w-full lg:w-auto justify-start mt-3 gap-1">
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   Employee database
                 </li>
@@ -30,9 +33,11 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="">
-              <div className="text-[16px] font-[700]">Information</div>
-              <ul className="flex flex-col items-start justify-start mt-3 gap-1">
+            <div className="flex flex-col items-start justify-start w-full ">
+              <div className="text-[16px] font-[700] w-full lg:w-auto text-center lg:text-start">
+                Information
+              </div>
+              <ul className="flex flex-col items-center lg:items-start w-full lg:w-auto justify-start mt-3 gap-1">
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">FAQ</li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   Blog
@@ -42,9 +47,11 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="">
-              <div className="text-[16px] font-[700]">Company</div>
-              <ul className="flex flex-col items-start justify-start mt-3 gap-1">
+            <div className="flex flex-col items-start justify-start w-full ">
+              <div className="text-[16px] font-[700] w-full lg:w-auto text-center lg:text-start">
+                Company
+              </div>
+              <ul className="flex flex-col items-center lg:items-start w-full lg:w-auto justify-start mt-3 gap-1">
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   About us
                 </li>
@@ -60,14 +67,14 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="flex w-[30%] items-start justify-between">
+          <div className="flex w-full lg:w-[30%] items-start justify-between">
             <div className=" w-full flex flex-col items-start bg-[#ffffff1f] p-6">
               <h3 className="text-[16px] font-[700]">Subscribe</h3>
               <div className="flex w-full items-center justify-start mt-3">
                 <div className="w-full bg-white rounded overflow-hidden flex items-center justify-start">
                   <input
                     type="email"
-                    className="bg-transparent text-[14px] font-[400] w-[80%] text-[#7A7E92] border-none outline-none "
+                    className="bg-transparent text-[14px] font-[400] w-full text-[#7A7E92] border-none outline-none "
                   />
                   <button className="border-none outline-none bg-[#28AF60] px-6 py-2">
                     <i className="fas fa-arrow-right"></i>
@@ -83,7 +90,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="flex w-full items-center justify-between mt-10 border-t border-[#ffffff42] p-5">
+        <div className="flex w-full items-center flex-col lg:flex-row gap-10 lg:gap-0 justify-between mt-10 border-t border-[#ffffff42] p-5">
           <div className="flex items-center justify-center gap-2">
             <img className="" src={logoIcon} />
             <img className="" src={logoTitle} />
@@ -97,9 +104,16 @@ const Footer = () => {
             <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
               <i className="fab fa-linkedin-in"></i>
             </div>
-            <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
-              <i className="fab fa-facebook-f"></i>
-            </div>
+            <a
+              target="_blank"
+              href={
+                "https://www.facebook.com/profile.php?id=61564821815728&mibextid=ZbWKwL"
+              }
+            >
+              <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
+                <i className="fab fa-facebook-f"></i>
+              </div>
+            </a>
             <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
               <i className="fab fa-twitter"></i>
             </div>

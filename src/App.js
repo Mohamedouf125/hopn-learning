@@ -18,6 +18,7 @@ import { getRememberedUser } from "./store/slices/user/userSlice";
 import Courses from "./pages/courses/Courses";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FloatingWhatsapp from "./components/whatsappicon/FloatingWhatsapp";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
           element={<ForgotePasswordNewPassword />}
         />
       </Routes>
+      <FloatingWhatsapp />
       <ToastContainer />
       <Footer />
     </div>
