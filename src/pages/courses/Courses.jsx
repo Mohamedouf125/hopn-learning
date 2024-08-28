@@ -1,9 +1,18 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import courceImg from "../../assets/images/home/courceImg.png";
 import ReactStars from "react-rating-stars-component";
+import { useEffect } from "react";
+import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 
 const Courses = () => {
+  const dispatch = useDispatch();
+
+  // feach home data from backend
+  useEffect(() => {
+    dispatch(fetchHomeData());
+  }, []);
+
   const { sliders, cvs, courses, status, users, error } = useSelector(
     (state) => state.home
   );
