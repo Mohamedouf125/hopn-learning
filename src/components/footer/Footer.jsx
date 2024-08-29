@@ -1,11 +1,11 @@
-import { Link } from "react-router-dom";
 import logoIcon from "../../assets/images/logo/logoIcon.png";
 import logoTitle from "../../assets/images/logo/logoTitle.png";
+import hopnLogo from "../../assets/images/logo/hopnLogo.png";
 
 const Footer = () => {
   return (
     <footer className="w-full bg-[#0A142F] flex items-center justify-center text-white">
-      <div className="container mx-auto flex flex-col items-center justify-center p-16">
+      <div className="container mx-auto flex flex-col items-center justify-center p-16 pb-2">
         <div className="flex items-center justify-between gap-10 lg:gap-0 flex-col lg:flex-row w-full">
           <div className="flex w-full lg:w-[60%] flex-col lg:flex-row items-start justify-between gap-8 lg:gap-0">
             <div className="flex flex-col items-start justify-start w-full ">
@@ -118,6 +118,10 @@ const Footer = () => {
               <i className="fab fa-twitter"></i>
             </div>
           </div>
+        </div>
+        <div className="w-full flex items-center justify-center gap-2">
+          <span> In cooperation with</span>
+          <img className="w-[63px]" src={hopnLogo} alt="hopn logo" />
         </div>
       </div>
     </footer>

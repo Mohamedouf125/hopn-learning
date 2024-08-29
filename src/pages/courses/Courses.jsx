@@ -52,7 +52,9 @@ const Courses = () => {
                   <div className="flex w-full items-center justify-start gap-1">
                     <ReactStars {...defaultStars} />
                     <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
-                      (1.2K)
+                      {`(${
+                        Math.floor(Math.random() * (10000 - 100 + 1)) + 100
+                      })`}
                     </span>
                   </div>
                 </div>

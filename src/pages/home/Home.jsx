@@ -23,6 +23,7 @@ import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 import { oldAccount } from "../../store/slices/user/userSlice";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { useNavigate } from "react-router-dom";
+import balanceBg from "../../assets/images/home/Subtract.png";
 
 const Home = () => {
   const { newAccount } = useSelector((state) => state.user);
@@ -103,8 +104,60 @@ const Home = () => {
 
       {/* home content */}
       <div className="container mx-auto px-4 py-8">
-        <section className="mb-8">
-          <h1 className="text-3xl font-bold text-center">Banner</h1>
+        <section className="mb-8 w-full ">
+          <div className="flex flex-col md:flex-row w-full gap-10 md:gap-0 ">
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+              centeredSlides={true}
+              navigation={{
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+              }}
+              pagination={{ clickable: true }}
+              scrollbar={{ draggable: true }}
+              autoplay={{ delay: 4500, disableOnInteraction: false }}
+              loop={true}
+              breakpoints={{
+                320: {
+                  slidesPerView: 1,
+                  spaceBetween: 5,
+                },
+              }}
+              className="w-full md:w-[60%]"
+            >
+              {sliders.map((slide, index) => (
+                <SwiperSlide
+                  key={index}
+                  className="flex rounded-3xl overflow-hidden items-center justify-center bg-gray-100 shadow-md"
+                >
+                  <img src={slide.url} alt="banner" />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="flex w-full md:w-[30%] items-center justify-center md:justify-end ">
+              <div className="w-[240px] h-[180px] rounded-3xl relative">
+                <img
+                  src={balanceBg}
+                  alt="balanceBg"
+                  className="w-[240px] h-[180px]"
+                />
+                <div className="absolute border-white bottom-0 cursor-pointer right-1 bg-[#28AF60] rounded-2xl w-[65px] h-[55px] flex items-center justify-center ">
+                  <svg
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M16.5098 6.87999C16.3896 6.82875 16.2605 6.80157 16.1298 6.79999H7.73978C7.47456 6.79999 7.22021 6.90534 7.03267 7.09288C6.84513 7.28042 6.73978 7.53477 6.73978 7.79999C6.73978 8.0652 6.84513 8.31956 7.03267 8.50709C7.22021 8.69463 7.47456 8.79999 7.73978 8.79999H13.7398L6.99978 15.49C6.81353 15.6774 6.70898 15.9308 6.70898 16.195C6.70898 16.4592 6.81353 16.7126 6.99978 16.9C7.18714 17.0862 7.44059 17.1908 7.70478 17.1908C7.96896 17.1908 8.22241 17.0862 8.40978 16.9L15.0998 10.22V16.22C15.0998 16.4852 15.2051 16.7396 15.3927 16.9271C15.5802 17.1146 15.8346 17.22 16.0998 17.22C16.365 17.22 16.6193 17.1146 16.8069 16.9271C16.9944 16.7396 17.0998 16.4852 17.0998 16.22V7.79999C17.0988 7.60256 17.0394 7.40985 16.9291 7.24613C16.8187 7.08241 16.6624 6.95501 16.4798 6.87999H16.5098Z"
+                      fill="white"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
         {/* profiles slide */}
         <section className="w-full flex flex-col items-center justify-center">
