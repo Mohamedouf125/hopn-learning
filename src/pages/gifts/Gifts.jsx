@@ -11,20 +11,30 @@ import {
 } from "swiper/modules";
 import "swiper/css";
 import ReactStars from "react-rating-stars-component";
-import courceImg from "../../assets/images/home/courceImg.png";
-import { useSelector } from "react-redux";
+import courseImg from "../../assets/images/home/courceImg.png";
+import { useDispatch, useSelector } from "react-redux";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
+import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Gifts = () => {
   const { defaultStars } = useSelector((state) => state.ratingStars);
-  const { user } = useSelector((state) => state.user);
-  const text = "just for test";
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useProtectedRoute();
 
   const { copyToClipboard } = useCopyToClipboard();
+  // feach home data from backend
+  useEffect(() => {
+    dispatch(fetchHomeData());
+  }, [dispatch]);
+
+  const { user } = useSelector((state) => state.user);
+  const { courses, status, error } = useSelector((state) => state.home);
 
   return (
     <main className="container mx-auto">
@@ -213,26 +223,31 @@ const Gifts = () => {
           }}
           className="w-full"
         >
-          {[1, 2, 2, 2, 4, 2, 7, 6, 7, 8].map((_, index) => (
+          {courses.slice(0, 10).map((course, index) => (
             <SwiperSlide
               key={index}
-              className="flex max-w[270px] items-center justify-center bg-gray-100 rounded-lg shadow-md"
+              className="flex max-w[270px] items-center justify-center bg-gray-100 rounded-3xl shadow-md"
             >
               <div
                 key={index}
-                className="rounded-3xl w-full border border-[#D9D9D9] "
+                onClick={() => navigate(`/courses/course/${course.id}`)}
+                className="rounded-3xl border overflow-hidden cursor-pointer h-[300px] border-[#D9D9D9] w-full"
               >
                 <div>
-                  <img src={courceImg} alt="cv image" className="w-full" />
+                  <img
+                    src={course.image || courseImg}
+                    alt="cv image"
+                    className="w-full"
+                  />
                 </div>
                 <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                  <h3 className="font-[600] ">
-                    Sports Injuries and Sports Rehabilitation
+                  <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
+                    {course.title}
                   </h3>
-                  <p className="font-[400] text-[12px]">
-                    More than 8yr Experience as Illustrator. Learn how to
-                    becoming professional Illustrator Now...
-                  </p>
+                  <p
+                    className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
+                    dangerouslySetInnerHTML={{ __html: course.description }}
+                  />
                   <div className="flex w-full items-center justify-start gap-1">
                     <ReactStars {...defaultStars} />
                     <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
@@ -308,22 +323,27 @@ const Gifts = () => {
       <div className="mb-10">
         <h2 className="text-[22px] font=[600] ">Paid training programs</h2>
         <div className="flex flex-wrap w-full gap-10 items-center justify-center mt-10">
-          {[1, 2, 2, 2, 4, 2, 7, 6, 7, 8].map((_, index) => (
+          {courses.slice(0, 8).map((course, index) => (
             <div
               key={index}
-              className="rounded-3xl w-[260px] border border-[#D9D9D9] "
+              onClick={() => navigate(`/courses/course/${course.id}`)}
+              className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
             >
               <div>
-                <img src={courceImg} alt="cv image" className="w-full" />
+                <img
+                  src={course.image || courseImg}
+                  alt="cv image"
+                  className="w-full"
+                />
               </div>
               <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                <h3 className="font-[600] ">
-                  Sports Injuries and Sports Rehabilitation
+                <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
+                  {course.title}
                 </h3>
-                <p className="font-[400] text-[12px]">
-                  More than 8yr Experience as Illustrator. Learn how to becoming
-                  professional Illustrator Now...
-                </p>
+                <p
+                  className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
+                  dangerouslySetInnerHTML={{ __html: course.description }}
+                />
                 <div className="flex w-full items-center justify-start gap-1">
                   <ReactStars {...defaultStars} />
                   <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
