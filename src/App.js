@@ -19,6 +19,7 @@ import Courses from "./pages/courses/Courses";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FloatingWhatsapp from "./components/whatsappicon/FloatingWhatsapp";
+import Course from "./pages/courses/Course";
 
 function App() {
   const dispatch = useDispatch();
@@ -36,6 +37,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/gifts" element={<Gifts />} />
         <Route path="/courses" element={<Courses />} />
+        <Route path="/courses/course/:courseId" element={<Course />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/signUp-email" element={<SignUpEmail />} />

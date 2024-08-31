@@ -11,22 +11,32 @@ import {
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import slideHead from "../../assets/images/home/slideHeader.png";
-import courceImg from "../../assets/images/home/courceImg.png";
+import courseImg from "../../assets/images/home/courceImg.png";
 import ReactStars from "react-rating-stars-component";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const text = "just for test";
   const { copyToClipboard } = useCopyToClipboard();
   const { defaultStars } = useSelector((state) => state.ratingStars);
   const { user } = useSelector((state) => state.user);
   const [age, setAge] = useState("");
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useProtectedRoute();
+
+  // feach home data from backend
+  useEffect(() => {
+    dispatch(fetchHomeData());
+  }, [dispatch]);
+
+  const { courses, status, error } = useSelector((state) => state.home);
 
   // clculate age based on birthday
   useEffect(() => {
@@ -346,23 +356,28 @@ const Profile = () => {
           <h2 className="text-2xl font-semibold mb-4 text-left">Hestory</h2>
         </div>
         <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-          {Celebrities.slice(0, 4).map((slide, index) => {
+          {courses.slice(0, 4).map((course, index) => {
             return (
               <div
                 key={index}
-                className="rounded-3xl border border-[#D9D9D9] w-[260px]"
+                onClick={() => navigate(`/courses/course/${course.id}`)}
+                className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
               >
                 <div>
-                  <img src={courceImg} alt="cv image" className="w-full" />
+                  <img
+                    src={course.image || courseImg}
+                    alt="cv image"
+                    className="w-full"
+                  />
                 </div>
                 <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                  <h3 className="font-[600] ">
-                    Sports Injuries and Sports Rehabilitation
+                  <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
+                    {course.title}
                   </h3>
-                  <p className="font-[400] text-[12px]">
-                    More than 8yr Experience as Illustrator. Learn how to
-                    becoming professional Illustrator Now...
-                  </p>
+                  <p
+                    className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
+                    dangerouslySetInnerHTML={{ __html: course.description }}
+                  />
                   <div className="flex w-full items-center justify-start gap-1">
                     <ReactStars {...defaultStars} />
                     <span className="font-[400] text-[14px] text-[#1B1B1B99] ">

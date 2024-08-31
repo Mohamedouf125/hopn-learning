@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import ReactStars from "react-rating-stars-component";
@@ -13,7 +13,7 @@ import avatar from "../../assets/images/icons/avatar.png";
 import bigAvatar from "../../assets/images/home/bigAvatar.png";
 import slideHead from "../../assets/images/home/slideHeader.png";
 import cvImg from "../../assets/images/home/cvImg.png";
-import courceImg from "../../assets/images/home/courceImg.png";
+import courseImg from "../../assets/images/home/courceImg.png";
 import ahlyClub from "../../assets/images/home/ahlyClub.png";
 import { useDispatch, useSelector } from "react-redux";
 import RegistrationGifts from "../../components/gifts/RegistrationGifts";
@@ -24,6 +24,10 @@ import { oldAccount } from "../../store/slices/user/userSlice";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { useNavigate } from "react-router-dom";
 import balanceBg from "../../assets/images/home/Subtract.png";
+import {
+  fetchPlayersData,
+  voteForPlayer,
+} from "../../store/slices/players/playersSlice";
 
 const Home = () => {
   const { newAccount } = useSelector((state) => state.user);
@@ -31,6 +35,7 @@ const Home = () => {
   const userLoggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [choosedPlayer, setChoosdePlayer] = useState(0);
 
   // to check if first login or not
   useEffect(() => {
@@ -43,54 +48,20 @@ const Home = () => {
   // feach home data from backend
   useEffect(() => {
     dispatch(fetchHomeData());
-  }, []);
+    dispatch(fetchPlayersData());
+  }, [dispatch]);
 
   const { sliders, cvs, courses, status, users, error } = useSelector(
     (state) => state.home
   );
 
-  const Celebrities = [
-    {
-      name: "ibrahim mohamed",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "ahmed mohamed",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "mahnoud ibrahim",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "amir mohamed",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "mohamed ahmed",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "mohamed ahmed",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "mohamed ahmed",
-      job: "frontend",
-      image: avatar,
-    },
-    {
-      name: "mohamed ahmed",
-      job: "frontend",
-      image: avatar,
-    },
-  ];
+  const { players } = useSelector((state) => state.players);
+
+  const choosePlayer = (id, index) => {
+    const updatedPlayer = index + 1;
+    setChoosdePlayer(updatedPlayer);
+    dispatch(voteForPlayer(id));
+  };
 
   if (status === "loading") {
     return <div>loading...</div>;
@@ -115,7 +86,7 @@ const Home = () => {
               }}
               pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
-              autoplay={{ delay: 4500, disableOnInteraction: false }}
+              autoplay={{ delay: 6500, disableOnInteraction: false }}
               loop={true}
               breakpoints={{
                 320: {
@@ -159,6 +130,7 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
         {/* profiles slide */}
         <section className="w-full flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold mb-4 w-full text-left">
@@ -296,6 +268,7 @@ const Home = () => {
             </div>
           </div>
         </section>
+        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
         {/* cv */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
@@ -336,7 +309,7 @@ const Home = () => {
             )}
           </div>
         </section>
-
+        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
         {/* courses */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
@@ -351,26 +324,27 @@ const Home = () => {
             </span>
           </div>
           <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-            {courses.slice(0, 4).map((cource, index) => {
+            {courses.slice(0, 4).map((course, index) => {
               return (
                 <div
                   key={index}
-                  className="rounded-3xl border overflow-hidden border-[#D9D9D9] w-[260px]"
+                  onClick={() => navigate(`/courses/course/${course.id}`)}
+                  className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
                 >
                   <div>
                     <img
-                      src={cource.image || courceImg}
+                      src={course.image || courseImg}
                       alt="cv image"
                       className="w-full"
                     />
                   </div>
                   <div className=" w-full  p-3 flex flex-col items-start justify-start">
                     <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
-                      {cource.title}
+                      {course.title}
                     </h3>
                     <p
                       className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
-                      dangerouslySetInnerHTML={{ __html: cource.description }}
+                      dangerouslySetInnerHTML={{ __html: course.description }}
                     />
                     <div className="flex w-full items-center justify-start gap-1">
                       <ReactStars {...defaultStars} />
@@ -384,42 +358,56 @@ const Home = () => {
             })}
           </div>
         </section>
-
+        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
         {/* Vote for the best player */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-center w-full">
             Vote for the best player
           </h2>
 
-          <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-            {Celebrities.map((_, index) => {
+          <div className="flex items-center justify-center gap-2 md:gap-10 flex-wrap w-full">
+            {players.map((player, index) => {
               return (
                 <div
                   key={index}
-                  className="rounded-xl border p-5 border-[#D9D9D9] min-w-[260px]"
+                  className={`rounded-xl border p-5 overflow-hidden cursor-pointer w-[48%] h-[300px] md:w-[260px] relative ${
+                    choosedPlayer === index + 1
+                      ? "border-none bg-[#0A142F] text-white "
+                      : "border-[#D9D9D9]"
+                  }  `}
+                  onClick={() => choosePlayer(player.id, index)}
                 >
-                  <div className="p-5">
+                  <div className="p-5 rounded-full mx-auto overflow-hidden w-[150px] h-[150px]">
                     <img
-                      src={bigAvatar}
+                      src={player.image || bigAvatar}
                       alt="personal image"
                       className="w-full "
                     />
                   </div>
                   <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                    <h3 className="font-[600] text-[18px] w-full text-center ">
-                      Mohamed Aboelyazed
+                    <h3 className=" font-[500] text-[14px] md:font-[600] md:text-[18px] w-full text-center ">
+                      {player.name}
                     </h3>
                     <div className="flex items-center justify-center gap-1 mt-2">
-                      <div>
-                        <img src={ahlyClub} alt="club" />
+                      <div className=" w-[30px] h-[30px] md:w-[40px] md:h-[40px] ">
+                        <img
+                          className="w-full"
+                          src={player.team.image}
+                          alt="club"
+                        />
                       </div>
                       <div className="flex items-center justify-center flex-col ">
                         <span className="text-[12px] font-[400] ">
                           Football Player in
                         </span>
-                        <span className="text-[16px] font-[700] ">Alahly</span>
+                        <span className="text-[12px] font-[500] md:text-[16px] md:font-[700] ">
+                          {player.team.name}
+                        </span>
                       </div>
                     </div>
+                  </div>
+                  <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
+                    {player.count} Vote
                   </div>
                 </div>
               );

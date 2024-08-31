@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import courceImg from "../../assets/images/home/courceImg.png";
+import courseImg from "../../assets/images/home/courceImg.png";
 import ReactStars from "react-rating-stars-component";
 import { useEffect } from "react";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
@@ -13,9 +13,7 @@ const Courses = () => {
     dispatch(fetchHomeData());
   }, []);
 
-  const { sliders, cvs, courses, status, users, error } = useSelector(
-    (state) => state.home
-  );
+  const { courses, status, error } = useSelector((state) => state.home);
   const navigate = useNavigate();
   const { defaultStars } = useSelector((state) => state.ratingStars);
 
@@ -28,26 +26,27 @@ const Courses = () => {
           </h2>
         </div>
         <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-          {courses.map((cource, index) => {
+          {courses.map((course, index) => {
             return (
               <div
                 key={index}
-                className="rounded-3xl border overflow-hidden min-h-[285px] border-[#D9D9D9] w-[260px]"
+                onClick={() => navigate(`/courses/course/${course.id}`)}
+                className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
               >
                 <div>
                   <img
-                    src={cource.image || courceImg}
+                    src={course.image || courseImg}
                     alt="cv image"
                     className="w-full"
                   />
                 </div>
                 <div className=" w-full  p-3 flex flex-col items-start justify-start">
                   <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
-                    {cource.title}
+                    {course.title}
                   </h3>
                   <p
                     className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
-                    dangerouslySetInnerHTML={{ __html: cource.description }}
+                    dangerouslySetInnerHTML={{ __html: course.description }}
                   />
                   <div className="flex w-full items-center justify-start gap-1">
                     <ReactStars {...defaultStars} />
