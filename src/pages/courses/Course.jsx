@@ -17,7 +17,7 @@ const Course = () => {
     <main>
       <div className="container mx-auto my-10">
         <section className="w-full flex items-center justify-center flex-col p-5">
-          <h2 className="w-full text-start my-5 px-5 text-[18px] md:text-[30px] font-[700] font-['Cairo'] ">
+          <h2 className="w-full text-start my-5 text-[18px] md:text-[30px] font-[700] font-['Cairo'] ">
             Sports Injuries and Sports Rehabilitation Course
           </h2>
           <div className="w-full flex flex-col md:flex-row items-center justify-between gap-10 md:gap-0 ">
