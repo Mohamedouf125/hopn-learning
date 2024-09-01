@@ -277,7 +277,7 @@ const Login = () => {
 
         {/* ///////// */}
         <div
-          className={`flex flex-col justify-center items-center overflow-hidden rounded-[40px] w-full md:w-[45%] min-h-[190px] md:min-h-[750px] px-5 max-w-[597px]`}
+          className={`flex flex-col justify-center items-center order-1 md:order-2 overflow-hidden rounded-[40px] w-full md:w-[45%] min-h-[190px] md:min-h-[750px] px-5 max-w-[597px]`}
         >
           <div
             ref={overlayRref}
