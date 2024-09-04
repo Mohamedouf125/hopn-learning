@@ -48,6 +48,7 @@ export const en = {
     "Making profit for users through paid service packages, which are included in gifts.",
   rights: "All rights reserved to sports in and partners",
   cooperation: "In cooperation with",
+  privacy: "privacy policy",
 };
 
 export const ar = {
@@ -100,4 +101,5 @@ export const ar = {
     "تحقيق الربح لدي المستخدمين من خلال باقات الخدمات المدفوعة، والموجودة داخل الهدايا.",
   rights: "جميع الحقوق محفوظه لدي sports in و شركاه",
   cooperation: "بالتعاون مع",
+  privacy: "سياسة الخصوصية",
 };

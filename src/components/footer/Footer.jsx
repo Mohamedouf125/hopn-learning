@@ -69,6 +69,14 @@ const Footer = () => {
                     {currentLang.advertiseWithUs}
                   </a>
                 </li>
+                <li className="text-[16px] font-[400] text-[#ffffffb4]">
+                  <a
+                    href=""
+                    target="_blank"
+                  >
+                    {currentLang.privacy}
+                  </a>
+                </li>
               </ul>
             </div>
             <div className="flex flex-col items-start justify-start w-full lg:w-[40%] ">

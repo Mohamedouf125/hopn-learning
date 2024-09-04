@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourseData } from "../../store/slices/courses/courceSlice";
+import {
+  fetchCourseBanner,
+  fetchCourseData,
+} from "../../store/slices/courses/courceSlice";
 import { useParams } from "react-router-dom";
 import courseAdBg from "../../assets/images/courses/courseAdBg.png";
 import { ar, en } from "../../assets/langs/translation";
@@ -11,9 +14,10 @@ const Course = () => {
 
   useEffect(() => {
     dispatch(fetchCourseData(params.courseId));
+    dispatch(fetchCourseBanner());
   }, [dispatch]);
 
-  const { course } = useSelector((state) => state.course);
+  const { course, courseBanner } = useSelector((state) => state.course);
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -34,7 +38,9 @@ const Course = () => {
                 alt="course image"
               />
             </div>
-            <div className="flex items-center justify-center w-full md:w-[30%] h-[400px] bg-[#F1F1F2] rounded-2xl"></div>
+            <div className="flex items-center justify-center w-full md:w-[30%] overflow-hidden bg-[#F1F1F2] rounded-2xl">
+            <img className="w-full" src={courseBanner[1]?.url} alt="Banner" />
+            </div>
           </div>
           <div className="w-full flex items-center justify-between flex-col md:flex-row mt-10">
             <div className="flex items-center justify-center w-full md:w-[60%]  rounded-2xl overflow-hidden">
@@ -43,8 +49,10 @@ const Course = () => {
                 dangerouslySetInnerHTML={{ __html: course.description }}
               />
             </div>
-            <div className="flex items-start justify-start flex-col rounded-2xl w-full md:w-[30%] min-h-[500px] bg-[#0A142F] text-white relative p-5">
-              <img
+
+            <div className="flex items-start justify-start overflow-hidden flex-col rounded-2xl w-full mt-10 md:mt-0 md:w-[30%] min-h-[500px] bg-[#0A142F] text-white relative">
+              <img className="w-full" src={courseBanner[0]?.url} alt="Banner" />
+              {/* <img
                 src={courseAdBg}
                 alt="courseAdBg"
                 className="absolute bottom-0 right-0 rtl:scale-x-[-1]"
@@ -57,7 +65,7 @@ const Course = () => {
               </p>
               <button className="text-[12px] font-[700] z-10 px-5 py-2 font-['Cairo'] text-[#FFD130] bg-none border border-[#FFD130]">
                 {currentLang.learnMore}
-              </button>
+              </button> */}
             </div>
           </div>
         </section>
