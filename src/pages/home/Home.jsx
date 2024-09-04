@@ -14,7 +14,6 @@ import bigAvatar from "../../assets/images/home/bigAvatar.png";
 import slideHead from "../../assets/images/home/slideHeader.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courseImg from "../../assets/images/home/courceImg.png";
-import ahlyClub from "../../assets/images/home/ahlyClub.png";
 import { useDispatch, useSelector } from "react-redux";
 import RegistrationGifts from "../../components/gifts/RegistrationGifts";
 import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
@@ -28,6 +27,7 @@ import {
   fetchPlayersData,
   voteForPlayer,
 } from "../../store/slices/players/playersSlice";
+import { ar, en } from "../../assets/langs/translation";
 
 const Home = () => {
   const { newAccount } = useSelector((state) => state.user);
@@ -63,27 +63,28 @@ const Home = () => {
     dispatch(voteForPlayer(id));
   };
 
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang == "en" ? en : ar;
+
   if (status === "loading") {
     return <div>loading...</div>;
   }
 
   return (
     <main>
-      {newAccount && userLoggedIn && <RegistrationGifts />}
+      {/* {newAccount && userLoggedIn && <RegistrationGifts />} */}
       {/* <ExceptionalGifts /> */}
       {/* <DepositGifts /> */}
 
       {/* home content */}
       <div className="container mx-auto px-4 py-8">
+        {/* banner */}
         <section className="mb-8 w-full ">
           <div className="flex flex-col md:flex-row w-full gap-10 md:gap-0 ">
             <Swiper
               modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
               centeredSlides={true}
-              navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
-              }}
               pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
               autoplay={{ delay: 6500, disableOnInteraction: false }}
@@ -131,10 +132,10 @@ const Home = () => {
           </div>
         </section>
         <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
-        {/* profiles slide */}
+        {/* Celebrities */}
         <section className="w-full flex flex-col items-center justify-center">
-          <h2 className="text-2xl font-semibold mb-4 w-full text-left">
-            Celebrities in sports
+          <h2 className="text-2xl font-semibold mb-4 w-full text-start">
+            {currentLang.CelebritiesTitle}
           </h2>
           <div className="w-full relative">
             <Swiper
@@ -192,14 +193,14 @@ const Home = () => {
                         className="w-16 h-16 rounded-full mx-auto mb-2"
                       />
                       <h3 className="text-lg font-[600] ">{user.name}</h3>
-                      <p className="font-[400]">{user.sex || "male"}</p>
+                      {/* <p className="font-[400]">{user.sex || "male"}</p> */}
                     </div>
-                    <div className="flex items-center justify-center gap-6 py-3">
+                    <div className="flex items-center justify-center gap-6 mt-3 py-3">
                       <button className="text-[#EB4335] font-[600] ">
-                        REMOVE
+                        {currentLang.REMOVE}
                       </button>
                       <button className="text-white bg-[#075178] px-9 py-2 rounded-xl ">
-                        FOLOW
+                        {currentLang.FOLOW}
                       </button>
                     </div>
                   </div>
@@ -273,15 +274,15 @@ const Home = () => {
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
             <h2 className="text-2xl font-semibold mb-4 text-left">
-              Employment proposals
+              {currentLang.cvSectoinTitle}
             </h2>
             <span className="text-[#F39C12] font-[500] cursor-pointer ">
-              See More
+              {currentLang.SeeMore}
             </span>
           </div>
           <div className="flex items-center justify-center gap-10 flex-wrap w-full">
             {cvs.length === 0 ? (
-              <div>No Cvs Founded!</div>
+              <div>{currentLang.NoCvs}</div>
             ) : (
               cvs.slice(0, 4).map((slide, index) => {
                 return (
@@ -314,13 +315,13 @@ const Home = () => {
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
             <h2 className="text-2xl font-semibold mb-4 text-left">
-              Free courses
+              {currentLang.freeCourses}
             </h2>
             <span
               onClick={() => navigate("/courses")}
               className="text-[#F39C12] font-[500] cursor-pointer "
             >
-              View ALL
+              {currentLang.SeeMore}
             </span>
           </div>
           <div className="flex items-center justify-center gap-10 flex-wrap w-full">
@@ -362,7 +363,7 @@ const Home = () => {
         {/* Vote for the best player */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-center w-full">
-            Vote for the best player
+            {currentLang.voteTitle}
           </h2>
 
           <div className="flex items-center justify-center gap-2 md:gap-10 flex-wrap w-full">
@@ -377,11 +378,11 @@ const Home = () => {
                   }  `}
                   onClick={() => choosePlayer(player.id, index)}
                 >
-                  <div className="p-5 rounded-full mx-auto overflow-hidden w-[150px] h-[150px]">
+                  <div className=" rounded-full mx-auto flex items-center justify-center overflow-hidden w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
                     <img
                       src={player.image || bigAvatar}
                       alt="personal image"
-                      className="w-full "
+                      className="w-full  rounded-full "
                     />
                   </div>
                   <div className=" w-full  p-3 flex flex-col items-start justify-start">
@@ -398,7 +399,7 @@ const Home = () => {
                       </div>
                       <div className="flex items-center justify-center flex-col ">
                         <span className="text-[12px] font-[400] ">
-                          Football Player in
+                          {currentLang.playIn}
                         </span>
                         <span className="text-[12px] font-[500] md:text-[16px] md:font-[700] ">
                           {player.team.name}
@@ -407,7 +408,7 @@ const Home = () => {
                     </div>
                   </div>
                   <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
-                    {player.count} Vote
+                    {player.count} {currentLang.Vote}
                   </div>
                 </div>
               );

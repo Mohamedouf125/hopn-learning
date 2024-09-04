@@ -1,5 +1,5 @@
 import "./App.css";
-import  Header  from "./components/header/Header";
+import Header from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
 import Login from "./pages/login/Login";
 import SignUp from "./pages/signUp/SignUp";
@@ -12,7 +12,7 @@ import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 import Gifts from "./pages/gifts/Gifts";
 import Profile from "./pages/profile/Profile";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRememberedUser } from "./store/slices/user/userSlice";
 import Courses from "./pages/courses/Courses";
@@ -20,17 +20,23 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FloatingWhatsapp from "./components/whatsappicon/FloatingWhatsapp";
 import Course from "./pages/courses/Course";
+import Setting from "./pages/setting/Setting";
+import { getCurrentLang } from "./store/slices/settings/settingsSlice";
 
 function App() {
   const dispatch = useDispatch();
 
-  // get user data from localstorage
+  // Fetch the current language from Redux
+  const { lang } = useSelector((state) => state.settings);
+
+  // Load user data and language settings from local storage
   useEffect(() => {
     dispatch(getRememberedUser());
-  }, []);
+    dispatch(getCurrentLang());
+  }, [dispatch]);
 
   return (
-    <div className="App">
+    <div className={`${lang === "ar" ? "rtl" : "ltr"}`}>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -40,6 +46,7 @@ function App() {
         <Route path="/courses/course/:courseId" element={<Course />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/settings" element={<Setting />} />
         <Route path="/signUp-email" element={<SignUpEmail />} />
         <Route path="/signUp-email-2" element={<SignUpEmail2 />} />
         <Route

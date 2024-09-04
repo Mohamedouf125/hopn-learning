@@ -6,7 +6,6 @@ const fetchPlayersData = createAsyncThunk(
   async () => {
     try {
       const response = await server.get("/players");
-      console.log(response.data.data);
 
       return response.data.data;
     } catch (error) {

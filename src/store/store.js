@@ -5,6 +5,7 @@ import ratingStarsSlice from './slices/ratingStars/ratingStarsSlice';
 import homeDataSlice from './slices/home/homeDataSlice';
 import playersSlice from "./slices/players/playersSlice";
 import courceSlice from './slices/courses/courceSlice';
+import settingsSlice from "./slices/settings/settingsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export const store = configureStore({
     home: homeDataSlice,
     players: playersSlice,
     course: courceSlice,
+    settings: settingsSlice,
   },
 });

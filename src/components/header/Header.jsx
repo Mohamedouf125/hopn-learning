@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 import { logout } from "../../store/slices/user/userSlice";
+import { ar, en } from "../../assets/langs/translation";
 
 const Header = () => {
   const { user } = useSelector((state) => state.user);
@@ -17,6 +18,10 @@ const Header = () => {
     dispatch(logout());
     navigate("/login");
   };
+
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang == "en" ? en : ar;
 
   return (
     <div>
@@ -67,15 +72,15 @@ const Header = () => {
                         to="/profile"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Profile
+                        {currentLang.Profile}
                       </Link>
                     </li>
                     <li>
                       <Link
-                        to="#"
+                        to="/settings"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Settings
+                        {currentLang.Settings}
                       </Link>
                     </li>
                     <li>
@@ -83,14 +88,16 @@ const Header = () => {
                         onClick={handelLogout}
                         className="block px-4 border-none outline-none py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
                       >
-                        Sign out
+                        {currentLang.SignOut}
                       </button>
                     </li>
                   </ul>
                 </div>
               </>
             ) : (
-              <button onClick={() => navigate("/login")}>login</button>
+              <button onClick={() => navigate("/login")}>
+                {currentLang.login}
+              </button>
             )}
             <button
               data-collapse-toggle="navbar-user"
@@ -126,35 +133,35 @@ const Header = () => {
               <li>
                 <Link
                   to="/"
-                  className="block py-2 px-3 text-gray-900 rounded md:bg-transparent md:p-0 md:hover:text-blue-700"
+                  className="block py-2 px-3 text-gray-900 rounded"
                 >
-                  Home
+                  {currentLang.home}
                 </Link>
               </li>
               {loggedIn && (
                 <li>
                   <Link
                     to="/gifts"
-                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="block py-2 px-3 text-gray-900 rounded"
                   >
-                    Gifts
+                    {currentLang.Gifts}
                   </Link>
                 </li>
               )}
               <li>
                 <Link
                   to="/Courses"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 text-gray-900 rounded"
                 >
-                  Courses
+                  {currentLang.Courses}
                 </Link>
               </li>
               <li>
                 <Link
                   to="/about"
-                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  className="block py-2 px-3 text-gray-900 rounded"
                 >
-                  About
+                  {currentLang.About}
                 </Link>
               </li>
             </ul>

@@ -16,7 +16,7 @@ export const userSlice = createSlice({
   reducers: {
     oldAccount: (state) => {
       state.newAccount = false;
-      localStorage.setItem('newAccount', false)
+      localStorage.setItem("newAccount", false);
     },
     setUser: (state, action) => {
       state.user = action.payload.user;
@@ -24,9 +24,14 @@ export const userSlice = createSlice({
       state.isLoggedIn = true;
     },
     rememberUser: (state, action) => {
-      cookies.set("token", action.payload.token);
+      const options = {
+        path: "/",
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      }; // 7 days
+      cookies.set("token", action.payload.token, options);
       localStorage.setItem("user", JSON.stringify(action.payload.user));
     },
+
     getRememberedUser: (state) => {
       const token = cookies.get("token");
       const user = localStorage.getItem("user");

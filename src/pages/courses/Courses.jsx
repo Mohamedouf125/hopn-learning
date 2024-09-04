@@ -4,6 +4,7 @@ import courseImg from "../../assets/images/home/courceImg.png";
 import ReactStars from "react-rating-stars-component";
 import { useEffect } from "react";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
+import { ar, en } from "../../assets/langs/translation";
 
 const Courses = () => {
   const dispatch = useDispatch();
@@ -17,12 +18,16 @@ const Courses = () => {
   const navigate = useNavigate();
   const { defaultStars } = useSelector((state) => state.ratingStars);
 
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang == "en" ? en : ar;
+
   return (
     <main className="container mx-auto mb-10">
       <section className="w-full flex flex-col items-center justify-center mt-10">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-2xl font-semibold mb-4 text-left">
-            Based on your interest
+            {currentLang.allCourses}
           </h2>
         </div>
         <div className="flex items-center justify-center gap-10 flex-wrap w-full">
