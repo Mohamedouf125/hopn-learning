@@ -60,6 +60,9 @@ export const en = {
   getReward: "Invite your friends to get rewards",
   noJob: "No Job",
   userLocation: "No Location",
+  complete: "Complete",
+  CompleteInformation: "Complete your information",
+  addCv: "Add CV",
 };
 
 export const ar = {
@@ -124,4 +127,7 @@ export const ar = {
   getReward: " قم بدعوة أصدقائك للحصول على المكافآت",
   noJob: "لا يوجد وظيفه",
   userLocation: "لا يوجد عنوان",
+  complete: "إكمال",
+  CompleteInformation: "أكمل معلوماتك",
+  addCv: "اضف سيره ذاتية",
 };

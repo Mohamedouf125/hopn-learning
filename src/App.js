@@ -36,7 +36,11 @@ function App() {
   }, [dispatch]);
 
   return (
-    <div className={`${lang === "ar" ? "rtl" : "ltr"}`}>
+    <div
+      className={`${
+        lang === "ar" ? "rtl" : "ltr"
+      } !font-["Poppins"] rtl:!font-["Tajawal"]`}
+    >
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
