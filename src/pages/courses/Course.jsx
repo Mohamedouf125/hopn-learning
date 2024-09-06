@@ -5,12 +5,16 @@ import {
   fetchCourseData,
 } from "../../store/slices/courses/courceSlice";
 import { useParams } from "react-router-dom";
-import courseAdBg from "../../assets/images/courses/courseAdBg.png";
 import { ar, en } from "../../assets/langs/translation";
+import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
+import { toast } from "react-toastify";
+import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 
 const Course = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const { copyToClipboard } = useCopyToClipboard();
+  const loggedIn = useUserLoggedIn();
 
   useEffect(() => {
     dispatch(fetchCourseData(params.courseId));
@@ -39,7 +43,7 @@ const Course = () => {
               />
             </div>
             <div className="flex items-center justify-center w-full md:w-[30%] overflow-hidden bg-[#F1F1F2] rounded-2xl">
-            <img className="w-full" src={courseBanner[1]?.url} alt="Banner" />
+              <img className="w-full" src={courseBanner[1]?.url} alt="Banner" />
             </div>
           </div>
           <div className="w-full flex items-center justify-between flex-col md:flex-row mt-10">
@@ -67,6 +71,24 @@ const Course = () => {
                 {currentLang.learnMore}
               </button> */}
             </div>
+          </div>
+          <div className="w-full flex items-center justify-center flex-col md:flex-row mt-10 gap-5">
+            <button
+              className="flex items-center justify-center gap-2 px-5 text-white py-2 bg-[#0A142F] rounded text-[18px] font-[600]"
+              disabled={!loggedIn}
+            >
+              {currentLang.enrollNow}
+            </button>
+            <button
+              onClick={() => {
+                copyToClipboard(window.location.href);
+                toast.success("Link copied to clipboard");
+              }}
+              className="flex items-center justify-center gap-2 px-5 py-2 bg-[#25d366] text-white rounded text-[18px] font-[600]"
+            >
+              {currentLang.shareCourse}
+              <i className="fas fa-share text-white"></i>
+            </button>
           </div>
         </section>
       </div>

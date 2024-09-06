@@ -27,6 +27,8 @@ export const en = {
   courseBannerDesc:
     "To get the highest return when inviting your friends, what are you waiting for? Hurry up and register.",
   learnMore: "learn More",
+  enrollNow: "enroll Now",
+  shareCourse: "Share",
 
   // footer
   Links: "Links",
@@ -49,6 +51,15 @@ export const en = {
   rights: "All rights reserved to sports in and partners",
   cooperation: "In cooperation with",
   privacy: "privacy policy",
+
+  // profile
+  myCourses: "My courses",
+  shareProfile: "share Profile",
+  userDesc: "No descriptoin",
+  inviteLink: "Copy invitation link",
+  getReward: "Invite your friends to get rewards",
+  noJob: "No Job",
+  userLocation: "No Location",
 };
 
 export const ar = {
@@ -80,6 +91,8 @@ export const ar = {
   courseBannerDesc:
     "للحصول على أعلى عائد عند دعوة أصدقائك، ما الذي تنتظره؟ سارع بالتسجيل.",
   learnMore: "اعرف المزيد",
+  enrollNow: "سجل الان",
+  shareCourse: "مشاركه الكورس",
 
   // footer
   Links: "روابط هامة",
@@ -102,4 +115,13 @@ export const ar = {
   rights: "جميع الحقوق محفوظه لدي sports in و شركاه",
   cooperation: "بالتعاون مع",
   privacy: "سياسة الخصوصية",
+
+  // profile
+  myCourses: "كورساتي",
+  shareProfile: "مشاركه الملف الشخصي",
+  userDesc: "لا يوجد وصف",
+  inviteLink: "نسخ رابط الدعوة",
+  getReward: " قم بدعوة أصدقائك للحصول على المكافآت",
+  noJob: "لا يوجد وظيفه",
+  userLocation: "لا يوجد عنوان",
 };

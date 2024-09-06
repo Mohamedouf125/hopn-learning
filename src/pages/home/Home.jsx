@@ -290,14 +290,14 @@ const Home = () => {
                     key={index}
                     className="bg-[#D9D9D9] p-10 rounded-lg relative border border-[#D9D9D9] w-[260px]"
                   >
-                    <div>
-                      <img src={cvImg} alt="cv image" className="w-full" />
-                    </div>
+                    <a target="_blank" href={slide.cv}>
+                      <img src={slide.background_image || cvImg} alt="cv image" className="w-full" />
+                    </a>
                     <div className="bg-white w-full absolute bottom-0 left-0 rounded-lg p-3 flex items-center justify-center gap-2">
                       <img
-                        src={slide.image}
-                        alt={slide.image}
-                        className="mt-[-60px] "
+                        src={slide.photo}
+                        alt={"cv"}
+                        className="mt-[-60px] w-[66px] h-[66px] rounded-full "
                       />
                       <div className="flex flex-col items-center justify-center">
                         <h3 className="font-[600] ">{slide.name}</h3>
