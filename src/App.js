@@ -22,6 +22,7 @@ import FloatingWhatsapp from "./components/whatsappicon/FloatingWhatsapp";
 import Course from "./pages/courses/Course";
 import Setting from "./pages/setting/Setting";
 import { getCurrentLang } from "./store/slices/settings/settingsSlice";
+import UserProfile from "./pages/profile/UserProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/course/:courseId" element={<Course />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/user/profile/:userId" element={<UserProfile />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/settings" element={<Setting />} />
         <Route path="/signUp-email" element={<SignUpEmail />} />

@@ -64,7 +64,7 @@ const Gifts = () => {
           <img
             src={gift}
             alt="gift"
-            className="absolute right-0 bottom-[-90px]"
+            className="absolute right-0 left-auto rtl:left-0 rtl:right-auto bottom-[-90px]"
           />
         </div>
 

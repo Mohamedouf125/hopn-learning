@@ -164,7 +164,7 @@ const Home = () => {
                 },
                 1024: {
                   slidesPerView: 4,
-                  spaceBetween: 16,
+                  spaceBetween: 40,
                 },
               }}
               className="w-full"
@@ -175,14 +175,21 @@ const Home = () => {
                   className="flex items-center justify-center bg-gray-100 rounded-lg shadow-md"
                 >
                   <div className="text-center">
-                    <div className="w-full  ">
+                    <div className="w-full rounded overflow-hidden  ">
                       <img
-                        className="w-full  "
-                        src={slideHead}
+                        className="w-full max-h-[66px]  "
+                        src={
+                          user.background_image === "https://api.sportiin.com"
+                            ? slideHead
+                            : user.photo || slideHead
+                        }
                         alt="slideHead"
                       />
                     </div>
-                    <div className="w-full mt-[-30px] ">
+                    <div
+                      onClick={()=> navigate(`/user/profile/${user.id}`)}
+                      className="w-full mt-[-30px] cursor-pointer "
+                    >
                       <img
                         src={
                           user.photo === "https://api.sportiin.com"
@@ -291,9 +298,13 @@ const Home = () => {
                     className="bg-[#D9D9D9] p-10 rounded-lg relative border border-[#D9D9D9] w-[260px]"
                   >
                     <a target="_blank" href={slide.cv}>
-                      <img src={slide.background_image || cvImg} alt="cv image" className="w-full" />
+                      <img
+                        src={slide.background_image || cvImg}
+                        alt="cv image"
+                        className="w-[180px] h-[180px] rounded  "
+                      />
                     </a>
-                    <div className="bg-white w-full absolute bottom-0 left-0 rounded-lg p-3 flex items-center justify-center gap-2">
+                    <div onClick={()=> navigate(`/user/profile/${slide.id}`)} className="bg-white cursor-pointer w-full absolute bottom-0 left-0 px-5 rounded-lg p-3 flex items-center justify-between gap-2">
                       <img
                         src={slide.photo}
                         alt={"cv"}
