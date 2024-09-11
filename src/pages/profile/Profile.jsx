@@ -22,6 +22,7 @@ import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { useNavigate } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import FileInput from "../../components/inputs/FileInput";
+import server from "../../assets/axios/server";
 
 const Profile = () => {
   const { copyToClipboard } = useCopyToClipboard();
@@ -30,7 +31,7 @@ const Profile = () => {
   const [age, setAge] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [file, setFile] = useState(null);
+  const [userCourses, setUserCourses] = useState(null);
 
   useProtectedRoute();
 
@@ -39,7 +40,18 @@ const Profile = () => {
     dispatch(fetchHomeData());
   }, [dispatch]);
 
-  const { courses, users, status, error } = useSelector((state) => state.home);
+  const { users } = useSelector((state) => state.home);
+
+  // feach user courses
+  useEffect(() => {
+    server
+      .get(`/course-show-api/${user.id}`)
+      .then((res) => {
+        setUserCourses(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, [user]);
 
   // clculate age based on birthday
   useEffect(() => {
@@ -239,24 +251,6 @@ const Profile = () => {
       <section className="mt-10 rounded-lg bg-[#0751781A] p-5 flex-col gap-5 w-full md:w-[80%] flex items-center justify-center">
         <span>{currentLang.NoCvs}</span>
         <div className="w-full">
-          {/* <button
-            onClick={() => navigate("/settings")}
-            className="bg-[#075178] rounded-lg border-none outline-none text-white px-5 py-2 "
-          >
-            {currentLang.addCv}
-          </button> */}
-          {/* <div className="p-4">
-            <form onSubmit={handleSubmit}>
-              <input type="file" onChange={handleFileChange} className="mb-4" />
-              <button
-                type="submit"
-                className="bg-blue-500 text-white py-2 px-4 rounded"
-              >
-                Upload
-              </button>
-            </form>
-            {file && <p>Selected file: {file.name}</p>}
-          </div> */}
           <FileInput />
         </div>
       </section>
@@ -405,38 +399,42 @@ const Profile = () => {
           </h2>
         </div>
         <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-          {courses.slice(0, 4).map((course, index) => {
-            return (
-              <div
-                key={index}
-                onClick={() => navigate(`/courses/course/${course.id}`)}
-                className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
-              >
-                <div>
-                  <img
-                    src={course.image || courseImg}
-                    alt="cv image"
-                    className="w-full"
-                  />
-                </div>
-                <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                  <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
-                    {course.title}
-                  </h3>
-                  <p
-                    className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
-                    dangerouslySetInnerHTML={{ __html: course.description }}
-                  />
-                  <div className="flex w-full items-center justify-start gap-1">
-                    <ReactStars {...defaultStars} />
-                    <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
-                      (1.2K)
-                    </span>
-                  </div>
+          {/* {courses.slice(0, 4).map((course, index) => { */}
+          {/* // return ( */}
+          {userCourses ? (
+            <div
+              // key={index}
+              onClick={() => navigate(`/courses/course/${userCourses?.id}`)}
+              className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
+            >
+              <div>
+                <img
+                  src={userCourses?.image || courseImg}
+                  alt="cv image"
+                  className="w-full"
+                />
+              </div>
+              <div className=" w-full  p-3 flex flex-col items-start justify-start">
+                <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
+                  {userCourses?.title}
+                </h3>
+                <p
+                  className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
+                  dangerouslySetInnerHTML={{ __html: userCourses?.description }}
+                />
+                <div className="flex w-full items-center justify-start gap-1">
+                  <ReactStars {...defaultStars} />
+                  <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
+                    (1.2K)
+                  </span>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ) : (
+            <div>No courses to show</div>
+          )}
+          {/* ); */}
+          {/* })} */}
         </div>
       </section>
     </main>

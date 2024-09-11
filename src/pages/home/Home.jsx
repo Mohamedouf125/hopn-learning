@@ -30,12 +30,11 @@ import {
 import { ar, en } from "../../assets/langs/translation";
 
 const Home = () => {
-  const { newAccount } = useSelector((state) => state.user);
+  const { newAccount, token } = useSelector((state) => state.user);
   const { defaultStars } = useSelector((state) => state.ratingStars);
   const userLoggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [choosedPlayer, setChoosdePlayer] = useState(0);
 
   // to check if first login or not
   useEffect(() => {
@@ -47,29 +46,32 @@ const Home = () => {
 
   // feach home data from backend
   useEffect(() => {
-    dispatch(fetchHomeData());
+    dispatch(fetchHomeData(token));
     dispatch(fetchPlayersData());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
-  const { sliders, cvs, courses, status, users, error } = useSelector(
-    (state) => state.home
-  );
+  const { sliders, cvs, courses, status, users, error, voted_player } =
+    useSelector((state) => state.home);
 
   const { players } = useSelector((state) => state.players);
 
-  const choosePlayer = (id, index) => {
-    const updatedPlayer = index + 1;
-    setChoosdePlayer(updatedPlayer);
-    dispatch(voteForPlayer(id));
+  const choosePlayer = (id) => {
+    if (voted_player) {
+      return;
+    }
+
+    if (!userLoggedIn) {
+      return;
+    }
+    dispatch(voteForPlayer({ id, token }));
+    dispatch(fetchHomeData(token));
   };
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang == "en" ? en : ar;
 
-  if (status === "loading") {
-    return <div>loading...</div>;
-  }
+
 
   return (
     <main>
@@ -187,7 +189,7 @@ const Home = () => {
                       />
                     </div>
                     <div
-                      onClick={()=> navigate(`/user/profile/${user.id}`)}
+                      onClick={() => navigate(`/user/profile/${user.id}`)}
                       className="w-full mt-[-30px] cursor-pointer "
                     >
                       <img
@@ -304,7 +306,10 @@ const Home = () => {
                         className="w-[180px] h-[180px] rounded  "
                       />
                     </a>
-                    <div onClick={()=> navigate(`/user/profile/${slide.id}`)} className="bg-white cursor-pointer w-full absolute bottom-0 left-0 px-5 rounded-lg p-3 flex items-center justify-between gap-2">
+                    <div
+                      onClick={() => navigate(`/user/profile/${slide.id}`)}
+                      className="bg-white cursor-pointer w-full absolute bottom-0 left-0 px-5 rounded-lg p-3 flex items-center justify-between gap-2"
+                    >
                       <img
                         src={slide.photo}
                         alt={"cv"}
@@ -383,11 +388,13 @@ const Home = () => {
                 <div
                   key={index}
                   className={`rounded-xl border p-5 overflow-hidden cursor-pointer w-[48%] h-[300px] md:w-[260px] relative ${
-                    choosedPlayer === index + 1
-                      ? "border-none bg-[#0A142F] text-white "
+                    voted_player?.id === player.id
+                      ? "border-none bg-[#D9D9D9] "
                       : "border-[#D9D9D9]"
                   }  `}
-                  onClick={() => choosePlayer(player.id, index)}
+                  onClick={() => {
+                    choosePlayer(player.id);
+                  }}
                 >
                   <div className=" rounded-full mx-auto flex items-center justify-center overflow-hidden w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
                     <img
@@ -418,9 +425,11 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
-                    {player.count} {currentLang.Vote}
-                  </div>
+                  {voted_player?.id && (
+                    <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
+                      {player.count} {currentLang.Vote}
+                    </div>
+                  )}
                 </div>
               );
             })}

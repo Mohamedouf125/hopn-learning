@@ -1,11 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import server from "../../../assets/axios/server";
 
+
  const fetchHomeData = createAsyncThunk(
   "home/fetchHomeData",
-  async () => {
+  async (token) => {
     try {
-      const response = await server.get("/home");
+      const response = await server.get("/home", { headers: {
+        Authorization: `Bearer ${token}`,
+      }},);
       
       return response.data.data;
     } catch (error) {
@@ -21,6 +24,7 @@ const homeDataSlice = createSlice({
     cvs: [],
     courses: [],
     users: [],
+    voted_player:{},
     status: "idle",
     error: null,
   },
@@ -36,6 +40,7 @@ const homeDataSlice = createSlice({
         state.cvs = action.payload.cvs;
         state.courses = action.payload.courses;
         state.users = action.payload.users;
+        state.voted_player = action.payload.voted_player;
       })
       .addCase(fetchHomeData.rejected, (state, action) => {
         state.status = "failed";

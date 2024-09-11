@@ -5,7 +5,7 @@ import img from "../../assets/images/gifts/balanceBg.jpg";
 
 function FileInput() {
   const [file, setFile] = useState(null);
-  const { user } = useSelector((state) => state.user);
+  const { user, token } = useSelector((state) => state.user);
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -20,23 +20,12 @@ function FileInput() {
     event.preventDefault();
 
     if (file) {
-      // Create a FormData object
-      const formData = new FormData();
-
-      // Add user data to the FormData
-      Object.keys(user).forEach((key) => {
-        formData.append(key, user[key]);
-      });
-
-      formData.append("cv", file);
-      formData.append("photo", file);
-      formData.append("phone", 1012312312);
-
       // Make the request using FormData
       server
-        .post("/update-profile-api", formData, {
+        .post("/update-profile-api", {cv: file, name:"hema2", photo:file, phone: 1010101010, email:"heam2@test.com"}, {
           headers: {
-            "Content-Type": "multipart/form-data", // Important for file uploads
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
           },
         })
         .then(() => {

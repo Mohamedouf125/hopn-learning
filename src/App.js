@@ -23,6 +23,7 @@ import Course from "./pages/courses/Course";
 import Setting from "./pages/setting/Setting";
 import { getCurrentLang } from "./store/slices/settings/settingsSlice";
 import UserProfile from "./pages/profile/UserProfile";
+import About from "./pages/about/About";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/gifts" element={<Gifts />} />
+        <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/course/:courseId" element={<Course />} />
         <Route path="/profile" element={<Profile />} />

@@ -13,16 +13,23 @@ const fetchPlayersData = createAsyncThunk(
     }
   }
 );
-const voteForPlayer = createAsyncThunk("players/voteForPlayer", async (id) => {
-  try {
-    const response = await server.get(`/make-vote/${id}`);
-    console.log(response.data.data);
+const voteForPlayer = createAsyncThunk(
+  "players/voteForPlayer",
+  async ({id, token}) => {
 
-    return response.data.data;
-  } catch (error) {
-    throw error;
+    try {
+      const response = await server.get(`/make-vote/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      return response.data.data;
+    } catch (error) {
+      throw error;
+    }
   }
-});
+);
 
 const playersDataSlice = createSlice({
   name: "players",

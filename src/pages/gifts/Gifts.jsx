@@ -17,13 +17,15 @@ import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import server from "../../assets/axios/server";
 
 const Gifts = () => {
   const { defaultStars } = useSelector((state) => state.ratingStars);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [inviteCount, setInviteCount] = useState(0);
 
   useProtectedRoute();
 
@@ -33,13 +35,28 @@ const Gifts = () => {
     dispatch(fetchHomeData());
   }, [dispatch]);
 
-  const { user } = useSelector((state) => state.user);
+  const { user, token } = useSelector((state) => state.user);
   const { courses, status, error } = useSelector((state) => state.home);
 
+  // featch invitation count
+  useEffect(() => {
+    server
+      .get(`/user-count-invite`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data.data);
+        setInviteCount(res.data.data.count);
+      })
+      .catch((error) => console.log(error));
+  }, [token]);
+
   return (
-    <main className="container mx-auto">
-      <div className="flex items-start justify-between mt-10">
-        <div className="flex relative mb-20 w-[60%] flex-col items-start justify-start gap-3 border border-[#F1F1F2] rounded bg-[#F1F1F2] p-5 ">
+    <main className="container mx-auto overflow-hidden p-5">
+      <div className="flex items-start justify-between mt-10 flex-col md:flex-row">
+        <div className="flex relative mb-20 w-full md:w-[60%] flex-col items-start justify-start gap-3 border border-[#F1F1F2] rounded bg-[#F1F1F2] p-5 ">
           <h3 className="text-[18px] font-[600]  ">Withdrawal Notes</h3>
           <div>
             <span className="text-[14px] font-[500]">
@@ -68,7 +85,7 @@ const Gifts = () => {
           />
         </div>
 
-        <div className="w-[30%] flex flex-col  ">
+        <div className="w-full md:w-[30%] flex flex-col  ">
           <div
             className="flex items-center justify-between w-full p-5 rounded"
             style={{
@@ -147,22 +164,24 @@ const Gifts = () => {
 
       <div className="w-full border-t border-[#d9d9d9] my-10"></div>
 
-      <div className="flex items-start justify-between w-full ">
+      <div className="flex items-center md:items-start justify-between w-full flex-col md:flex-row gap-10 md:gap-0 ">
         <div className="relative ">
           <div
             className="semi-donut flex items-center justify-center flex-col"
-            style={{ "--percentage": 70, "--fill": "#075178" }}
+            style={{ "--percentage": inviteCount * 10, "--fill": "#075178" }}
           >
             <div className="flex items-center justify-center flex-col mt-10">
               <span className="text-[18px] text-[#414141] font-[500]">
-                Remaining
+                Invitations
               </span>
-              <span className="text-[28px] text-[#414141] font-[700]">10</span>
+              <span className="text-[28px] text-[#414141] font-[700]">
+                {inviteCount}
+              </span>
             </div>
           </div>
         </div>
 
-        <div className="flex flex-col items-start justify-start gap-4 mb-8">
+        <div className="flex flex-col items-center md:items-start justify-start gap-4 mb-8">
           <h4 className="text-[22px] font-[600] text-[#000]">
             Free training programs
           </h4>

@@ -16,7 +16,7 @@ const Header = () => {
 
   const handelLogout = () => {
     dispatch(logout());
-    navigate("/login");
+    window.location = "/login";
   };
 
   // to set lang
