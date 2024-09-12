@@ -29,6 +29,7 @@ import {
   rememberEditedUser,
 } from "../../store/slices/user/userSlice";
 import { editForm } from "../../assets/helpers/formInputsData";
+import cover from "../../assets/images/profile/COVER.png";
 
 const Profile = () => {
   const { copyToClipboard } = useCopyToClipboard();
@@ -42,7 +43,7 @@ const Profile = () => {
   const [editProfileInputs, setEditProfileInputs] = useState({});
   const [editCover, setEditCover] = useState(null);
   const [editProfileImg, setEditProfileImg] = useState(null);
-  const reader = new FileReader();
+ 
 
   useProtectedRoute();
 
@@ -238,11 +239,11 @@ const Profile = () => {
           </div>
         </FullPagePopup>
       )}
-      <div className="flex w-full flex-col items-center justify-center mt-12 relative ">
+      <div className="flex w-full flex-col items-center justify-center mt-5 relative ">
         <img
-          src={user.background_image || "https://via.placeholder.com/1060x212"}
+          src={user.background_image || cover}
           alt="profileHeader"
-          className=" w-full h-[212px] rounded-lg"
+          className=" w-full md:max-h-[800px] md:min-h-[500px] rounded-lg"
         />
         <div className="flex flex-col items-center justify-center w-full">
           <img

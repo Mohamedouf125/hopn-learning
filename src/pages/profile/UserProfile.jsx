@@ -22,6 +22,7 @@ import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import server from "../../assets/axios/server";
+import cover from "../../assets/images/profile/COVER.png";
 
 const UserProfile = () => {
   const { copyToClipboard } = useCopyToClipboard();
@@ -94,19 +95,19 @@ const UserProfile = () => {
 
   return (
     <main className="container overflow-hidden mx-auto flex items-center justify-center flex-col p-5">
-      <div className="flex w-full flex-col items-center justify-center mt-12 relative ">
+      <div className="flex w-full flex-col items-center justify-center mt-5 relative ">
         <img
-          src={"https://via.placeholder.com/1060x212"}
+          src={user.background_image || cover}
           alt="profileHeader"
-          className=" w-full rounded-lg"
+          className=" w-full md:max-h-[800px] md:min-h-[500px] rounded-lg"
         />
         <div className="flex flex-col items-center justify-center w-full">
           <img
-            className="w-[70px] sm:w-[100px] border-white border-[2px] rounded-full md:w-[200px] mt-[-35px] sm:mt-[-50px] md:mt-[-100px] md:ml-[10%] md:mr-auto rtl:md:ml-auto rtl:md:mr-[10%]  z-10 "
+            className="w-[70px] sm:w-[100px] h-[70px] sm:h-[100px] border-white border-[2px] rounded-full md:w-[200px] md:h-[200px] mt-[-35px] sm:mt-[-50px] md:mt-[-100px] md:ml-[10%] md:mr-auto rtl:md:ml-auto rtl:md:mr-[10%]  z-10 "
             src={
               user.photo === "https://api.sportiin.com"
                 ? profileAvatar
-                : user?.photo || profileAvatar
+                : user.photo || profileAvatar
             }
             alt="avatar"
           />
@@ -227,8 +228,21 @@ const UserProfile = () => {
 
       {/* cv section */}
       <section className="mt-10 rounded-lg bg-[#0751781A] p-5 flex-col gap-5 w-full md:w-[80%] flex items-center justify-center">
-        <span>{currentLang.NoCvs}</span>
         <div className="w-full"></div>
+        {user.cv ? (
+          <div className="flex items-center justify-between w-full flex-col md:flex-row gap-5 md:gap-0">
+            <div className="bg-[#D9D9D9] w-fit p-5 rounded-lg">
+              <a target="_blank" href={user.cv}>
+                <img src={user.cv} className="w-[235px] h-[333px]" />
+              </a>
+            </div>
+            <span className="w-full text-center font-[600] text-[15px]">
+              {user.name} CV
+            </span>
+          </div>
+        ) : (
+          <span>{currentLang.NoCvs}</span>
+        )}
       </section>
 
       {/* Celebrities */}

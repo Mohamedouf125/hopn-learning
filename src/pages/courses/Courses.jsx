@@ -28,17 +28,36 @@ const Courses = () => {
     <main className="container mx-auto mb-10">
       {openMessage && (
         <FullPagePopup>
-          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-14 max-h-[90vh]  rounded-lg bg-white">
             <div className="flex w-full items-center justify-between">
-              <h1 className="text-3xl font-bold text-gray-900">
-                {currentLang.editProfile}
-              </h1>
+              <h1 className="text-3xl font-bold text-gray-900"></h1>
               <span
                 className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
                 onClick={() => setOpenMessage(false)}
               >
                 <i class="fas fa-times"></i>
               </span>
+            </div>
+            <div className="w-full flex flex-col items-center justify-start mt-10 px-5">
+              <h2 className="mb-5">{currentLang.welcome}</h2>
+              <p className="w-full md:w-[80%] mx-auto">
+                {currentLang.popupMessage}{" "}
+                <a
+                  href="https://wa.me/971544066811"
+                  target="_blank"
+                  className="underline"
+                >
+                  {currentLang.pcustomerService}
+                </a>
+              </p>
+            </div>
+            <div className="w-full flex flex-col items-center justify-start mt-10">
+              <button
+                onClick={() => setOpenMessage(false)}
+                className="px-5 text-white py-2 bg-[#0A142F] rounded-lg text-[18px] font-[600]"
+              >
+                {currentLang.close}
+              </button>
             </div>
           </div>
         </FullPagePopup>

@@ -12,3 +12,9 @@ export const editForm = (user) => [
     value: user.phone,
   },
 ];
+
+
+export const courseFormData = () => [
+  { title: "full_name", placeholder: "name" },
+  { title: "whatsapp_number", placeholder: "whatsapp number" },
+];

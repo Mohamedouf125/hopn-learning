@@ -9,9 +9,9 @@ import {
   Scrollbar,
   Autoplay,
 } from "swiper/modules";
-import avatar from "../../assets/images/icons/avatar.png";
+import avatar from "../../assets/images/profile/profileAvatar.png";
 import bigAvatar from "../../assets/images/home/bigAvatar.png";
-import slideHead from "../../assets/images/home/slideHeader.png";
+import cover from "../../assets/images/profile/COVER.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courseImg from "../../assets/images/home/courceImg.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -71,8 +71,6 @@ const Home = () => {
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang == "en" ? en : ar;
 
-
-
   return (
     <main>
       {/* {newAccount && userLoggedIn && <RegistrationGifts />} */}
@@ -108,7 +106,7 @@ const Home = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="flex w-full md:w-[30%] items-center justify-center md:justify-end ">
+            <div className="hidden md:flex w-full md:w-[30%] items-center justify-center md:justify-end ">
               <div className="w-[240px] h-[180px] rounded-3xl relative">
                 <img
                   src={balanceBg}
@@ -179,11 +177,11 @@ const Home = () => {
                   <div className="text-center">
                     <div className="w-full rounded overflow-hidden  ">
                       <img
-                        className="w-full max-h-[66px]  "
+                        className="w-full rounded h-[190px] "
                         src={
                           user.background_image === "https://api.sportiin.com"
-                            ? slideHead
-                            : user.photo || slideHead
+                            ? cover
+                            : user.background_image || cover
                         }
                         alt="slideHead"
                       />
@@ -301,7 +299,7 @@ const Home = () => {
                   >
                     <a target="_blank" href={slide.cv}>
                       <img
-                        src={slide.background_image || cvImg}
+                        src={slide.cv || cvImg}
                         alt="cv image"
                         className="w-[180px] h-[180px] rounded  "
                       />

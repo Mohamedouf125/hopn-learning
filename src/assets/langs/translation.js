@@ -28,6 +28,7 @@ export const en = {
     "To get the highest return when inviting your friends, what are you waiting for? Hurry up and register.",
   learnMore: "learn More",
   enrollNow: "enroll Now",
+  enrollNowFree: "enroll Now free",
   shareCourse: "Share",
   enrollWithOffer: (num) => {
     if (num === 0) {
@@ -35,6 +36,11 @@ export const en = {
     }
     return `Enroll With ${num}% offer`;
   },
+  popupMessage:
+    "Please note that you only have 2 free training programs per month. To book any other programs during the same month, you will be at a 90% discount on the total price of the training program for a period of three months only. Free registration for training programs starts from the 1st to the 10th of each month. To learn about the price list and discounts, contact ",
+  pcustomerService: "customer service.",
+  welcome: "Welcome",
+  close: "Close",
 
   // footer
   Links: "Links",
@@ -103,6 +109,7 @@ export const ar = {
     "للحصول على أعلى عائد عند دعوة أصدقائك، ما الذي تنتظره؟ سارع بالتسجيل.",
   learnMore: "اعرف المزيد",
   enrollNow: "سجل الان",
+  enrollNowFree: "سجل الان مجانا",
   shareCourse: "مشاركه الكورس",
   enrollWithOffer: (num) => {
     if (num === 0) {
@@ -110,6 +117,11 @@ export const ar = {
     }
     return `سجل مع خصم ${num}%`;
   },
+  popupMessage:
+    "يرجي العلم أنه لديك عدد 2 برنامج تدريبي فقط بشكل مجاني خلال الشهر الواحد، لحجز أي برامج أخري خلال نفس الشهر سوف تكون بخصم 90% من إجمالي سعر البرنامج التدريبي وذلك فقط لمدة ثلاثة أشهر، كما يبدأ التسجيل المجاني للبرامج التدريبية من يوم 1 حتي 10 من كل شهر، للتعرف علي لائحة الأسعار والخصومات تواصل مع ",
+  pcustomerService: " خدمةالعملاء.",
+  welcome: "مرحبا",
+  close: "إغلاق",
 
   // footer
   Links: "روابط هامة",
