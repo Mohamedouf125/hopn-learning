@@ -23,12 +23,18 @@ export const userSlice = createSlice({
       state.token = action.payload.token;
       state.isLoggedIn = true;
     },
+    editUser: (state, action) => {
+      state.user = action.payload.user;
+    },
     rememberUser: (state, action) => {
       const options = {
         path: "/",
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
       }; // 7 days
       cookies.set("token", action.payload.token, options);
+      localStorage.setItem("user", JSON.stringify(action.payload.user));
+    },
+    rememberEditedUser: (state, action) => {
       localStorage.setItem("user", JSON.stringify(action.payload.user));
     },
 
@@ -51,7 +57,14 @@ export const userSlice = createSlice({
   },
 });
 
-export const { oldAccount, setUser, rememberUser, getRememberedUser, logout } =
-  userSlice.actions;
+export const {
+  oldAccount,
+  setUser,
+  editUser,
+  rememberUser,
+  getRememberedUser,
+  rememberEditedUser,
+  logout,
+} = userSlice.actions;
 
 export default userSlice.reducer;

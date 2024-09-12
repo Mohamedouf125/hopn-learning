@@ -1,3 +1,4 @@
+import "./profile.css";
 import profileAvatar from "../../assets/images/profile/profileAvatar.png";
 import avatar from "../../assets/images/icons/avatar.png";
 import {
@@ -18,18 +19,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
-import FileInput from "../../components/inputs/FileInput";
+import server from "../../assets/axios/server";
 
 const UserProfile = () => {
   const { copyToClipboard } = useCopyToClipboard();
   const { defaultStars } = useSelector((state) => state.ratingStars);
-  const { user } = useSelector((state) => state.user);
   const [age, setAge] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [file, setFile] = useState(null);
+  const params = useParams();
+  const [userCourses, setUserCourses] = useState(null);
+  const [user, setUser] = useState({});
 
   useProtectedRoute();
 
@@ -38,7 +40,29 @@ const UserProfile = () => {
     dispatch(fetchHomeData());
   }, [dispatch]);
 
-  const { courses, users, status, error } = useSelector((state) => state.home);
+  const { users } = useSelector((state) => state.home);
+
+  // featch user
+  useEffect(() => {
+    server
+      .get(`/get-user/${params.userId}`)
+      .then((res) => {
+        console.log(res);
+        setUser(res.data.data.user);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  // feach user courses
+  useEffect(() => {
+    server
+      .get(`/course-show-api/${user.id}`)
+      .then((res) => {
+        setUserCourses(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, [user]);
 
   // clculate age based on birthday
   useEffect(() => {
@@ -82,13 +106,15 @@ const UserProfile = () => {
             src={
               user.photo === "https://api.sportiin.com"
                 ? profileAvatar
-                : user.photo || profileAvatar
+                : user?.photo || profileAvatar
             }
             alt="avatar"
           />
           <div className="flex items-center justify-center gap-1 mt-5 md:ml-[13%] md:mr-auto rtl:md:ml-auto rtl:md:mr-[13%] ">
             <div className="flex items-center justify-center flex-col">
-              <h2 className="text-[18px] font-[600]  ">{user.name}</h2>
+              <h2 className="text-[18px] font-[600] flex items-center justify-center gap-3">
+                {user?.name}
+              </h2>
               <div className=" flex items-center justify-center gap-2">
                 <svg
                   width="20"
@@ -103,7 +129,7 @@ const UserProfile = () => {
                   />
                 </svg>
                 <span className="text-[18px] font-[600] text-[#2B3D4F] ">
-                  {user.job || currentLang.noJob}
+                  {user?.job || currentLang.noJob}
                 </span>
               </div>
               <div className=" flex items-center justify-center gap-2">
@@ -132,7 +158,7 @@ const UserProfile = () => {
                 </svg>
 
                 <span className="text-[12px] font-[600] text-[#B0B0B0] ">
-                  {user.location || currentLang.userLocation}
+                  {user?.location || currentLang.userLocation}
                 </span>
               </div>
               <div className=" flex items-center justify-center gap-2">
@@ -149,7 +175,7 @@ const UserProfile = () => {
                   />
                 </svg>
                 <span className="text-[12px] font-[600] text-[#B0B0B0] ">
-                  {user.sex} , {age} Years Old
+                  {user?.sex} , {age} Years Old
                 </span>
               </div>
               <button
@@ -169,7 +195,7 @@ const UserProfile = () => {
       <div className="flex flex-col items-center md:items-end justify-center md:justify-start gap-1 w-[80%] mx-auto mt-5 md:mt-[-200px]">
         <span
           onClick={() => {
-            copyToClipboard(user.invite_code);
+            copyToClipboard(user?.invite_code);
             toast.success("code copied to clipboard");
           }}
           className="bg-[#D9D9D9] z-20 inline-flex items-center justify-ceitems-center cursor-pointer text-[14px] font-[600] p-2 rounded-lg gap-1"
@@ -195,10 +221,15 @@ const UserProfile = () => {
 
       <div className="flex items-center justify-center w-[80%] mx-auto mb-5 mt-10 md:mt-[200px]">
         <p className="text-[14px] w-full text-start font-[500] text-[#6E6E6E]">
-          {user.desc || currentLang.userDesc}
+          {user?.desc || currentLang.userDesc}
         </p>
       </div>
 
+      {/* cv section */}
+      <section className="mt-10 rounded-lg bg-[#0751781A] p-5 flex-col gap-5 w-full md:w-[80%] flex items-center justify-center">
+        <span>{currentLang.NoCvs}</span>
+        <div className="w-full"></div>
+      </section>
 
       {/* Celebrities */}
       <section className="w-full flex flex-col items-center justify-center mt-10 ">
@@ -249,15 +280,15 @@ const UserProfile = () => {
                   <div className="w-full mt-[-30px] ">
                     <img
                       src={
-                        user.photo === "https://api.sportiin.com"
+                        user?.photo === "https://api.sportiin.com"
                           ? avatar
-                          : user.photo || avatar
+                          : user?.photo || avatar
                       }
                       alt={`user avatar`}
                       className="w-16 h-16 rounded-full mx-auto mb-2"
                     />
-                    <h3 className="text-lg font-[600] ">{user.name}</h3>
-                    {/* <p className="font-[400]">{user.sex || "male"}</p> */}
+                    <h3 className="text-lg font-[600] ">{user?.name}</h3>
+                    {/* <p className="font-[400]">{user?.sex || "male"}</p> */}
                   </div>
                   <div className="flex items-center justify-center gap-6 mt-3 py-3">
                     <button className="text-[#EB4335] font-[600] ">
@@ -344,38 +375,42 @@ const UserProfile = () => {
           </h2>
         </div>
         <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-          {courses.slice(0, 4).map((course, index) => {
-            return (
-              <div
-                key={index}
-                onClick={() => navigate(`/courses/course/${course.id}`)}
-                className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
-              >
-                <div>
-                  <img
-                    src={course.image || courseImg}
-                    alt="cv image"
-                    className="w-full"
-                  />
-                </div>
-                <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                  <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
-                    {course.title}
-                  </h3>
-                  <p
-                    className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
-                    dangerouslySetInnerHTML={{ __html: course.description }}
-                  />
-                  <div className="flex w-full items-center justify-start gap-1">
-                    <ReactStars {...defaultStars} />
-                    <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
-                      (1.2K)
-                    </span>
-                  </div>
+          {/* {courses.slice(0, 4).map((course, index) => { */}
+          {/* // return ( */}
+          {userCourses ? (
+            <div
+              // key={index}
+              onClick={() => navigate(`/courses/course/${userCourses?.id}`)}
+              className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
+            >
+              <div>
+                <img
+                  src={userCourses?.image || courseImg}
+                  alt="cv image"
+                  className="w-full"
+                />
+              </div>
+              <div className=" w-full  p-3 flex flex-col items-start justify-start">
+                <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
+                  {userCourses?.title}
+                </h3>
+                <p
+                  className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
+                  dangerouslySetInnerHTML={{ __html: userCourses?.description }}
+                />
+                <div className="flex w-full items-center justify-start gap-1">
+                  <ReactStars {...defaultStars} />
+                  <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
+                    (1.2K)
+                  </span>
                 </div>
               </div>
-            );
-          })}
+            </div>
+          ) : (
+            <div>No courses to show</div>
+          )}
+          {/* ); */}
+          {/* })} */}
         </div>
       </section>
     </main>

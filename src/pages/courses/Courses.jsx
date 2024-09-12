@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import courseImg from "../../assets/images/home/courceImg.png";
 import ReactStars from "react-rating-stars-component";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { ar, en } from "../../assets/langs/translation";
+import FullPagePopup from "../../components/popups/FullPagePopup";
 
 const Courses = () => {
   const dispatch = useDispatch();
+  const [openMessage, setOpenMessage] = useState(true);
 
   // feach home data from backend
   useEffect(() => {
@@ -24,6 +26,23 @@ const Courses = () => {
 
   return (
     <main className="container mx-auto mb-10">
+      {openMessage && (
+        <FullPagePopup>
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
+            <div className="flex w-full items-center justify-between">
+              <h1 className="text-3xl font-bold text-gray-900">
+                {currentLang.editProfile}
+              </h1>
+              <span
+                className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
+                onClick={() => setOpenMessage(false)}
+              >
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
+          </div>
+        </FullPagePopup>
+      )}
       <section className="w-full flex flex-col items-center justify-center mt-10">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-2xl font-semibold mb-4 text-left">

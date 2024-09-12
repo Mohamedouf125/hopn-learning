@@ -10,7 +10,7 @@ import ForgotePasswordAddOTP from "./pages/forgotPassword/ForgotePasswordAddOTP"
 import ForgotePasswordNewPassword from "./pages/forgotPassword/ForgotePasswordNewPassword";
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
-import Gifts from "./pages/gifts/Gifts";
+// import Gifts from "./pages/gifts/Gifts";
 import Profile from "./pages/profile/Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
@@ -47,7 +47,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/gifts" element={<Gifts />} />
+        {/* <Route path="/gifts" element={<Gifts />} /> */}
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/course/:courseId" element={<Course />} />

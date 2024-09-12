@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import footerLogo from "../../assets/images/logo/footerLogo.png";
 
 import hopnLogo from "../../assets/images/logo/hopnLogo.png";
@@ -34,14 +35,14 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
-                  <a href="" target="_blank">
+                  <Link to={"/about#rulesCourse"}>
                     {currentLang.coursesRules}
-                  </a>
+                  </Link>
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
-                  <a href="" target="_blank">
+                  <Link to={"/about#rulesCertificates"}>
                     {currentLang.certificatesRules}
-                  </a>
+                  </Link>
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <a
@@ -70,12 +71,7 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
-                  <a
-                    href=""
-                    target="_blank"
-                  >
-                    {currentLang.privacy}
-                  </a>
+                  <Link to="/about#privacy">{currentLang.privacy}</Link>
                 </li>
               </ul>
             </div>
@@ -101,34 +97,9 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          {/* <div className="flex w-full lg:w-[30%] items-start justify-between">
-            <div className=" w-full flex flex-col items-start bg-[#ffffff1f] p-6">
-              <h3 className="text-[16px] font-[700]">Subscribe</h3>
-              <div className="flex w-full items-center justify-start mt-3">
-                <div className="w-full bg-white rounded overflow-hidden flex items-center justify-start">
-                  <input
-                    type="email"
-                    className="bg-transparent text-[14px] font-[400] w-full text-[#7A7E92] border-none outline-none "
-                  />
-                  <button className="border-none outline-none bg-[#28AF60] px-6 py-2">
-                    <i className="fas fa-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-              <p className="text-[13px] font-[400] text-[#ffffff8e] w-full mt-3">
-                Hello, we are Lift Media. Our goal is to translate the positive
-                effects from revolutionizing how companies engage with their
-                clients & their team.
-              </p>
-            </div>
-          </div> */}
         </div>
 
         <div className="flex w-full items-center flex-col lg:flex-row gap-10 lg:gap-0 justify-between mt-10 border-b border-[#ffffff42] p-5">
-          {/* <div className="flex items-center justify-center gap-2">
-            <img className="" src={logoIcon} />
-            <img className="" src={logoTitle} />
-          </div> */}
           <div className=" flex items-center justify-center gap-5">
             <div className="text-[14px] font-[500]">
               <a href="/">{currentLang.home}</a>

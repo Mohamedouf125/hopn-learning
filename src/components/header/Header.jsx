@@ -166,7 +166,7 @@ const Header = () => {
                   {currentLang.home}
                 </Link>
               </li>
-              {loggedIn && (
+              {/* {loggedIn && (
                 <li>
                   <Link
                     to="/gifts"
@@ -175,7 +175,7 @@ const Header = () => {
                     {currentLang.Gifts}
                   </Link>
                 </li>
-              )}
+              )} */}
               <li>
                 <Link
                   to="/Courses"

@@ -1,4 +1,4 @@
-import profileHeader from "../../assets/images/profile/profileHeader.png";
+import "./profile.css";
 import profileAvatar from "../../assets/images/profile/profileAvatar.png";
 import avatar from "../../assets/images/icons/avatar.png";
 import {
@@ -23,15 +23,26 @@ import { useNavigate } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import FileInput from "../../components/inputs/FileInput";
 import server from "../../assets/axios/server";
+import FullPagePopup from "../../components/popups/FullPagePopup";
+import {
+  editUser,
+  rememberEditedUser,
+} from "../../store/slices/user/userSlice";
+import { editForm } from "../../assets/helpers/formInputsData";
 
 const Profile = () => {
   const { copyToClipboard } = useCopyToClipboard();
   const { defaultStars } = useSelector((state) => state.ratingStars);
-  const { user } = useSelector((state) => state.user);
+  const { user, token } = useSelector((state) => state.user);
   const [age, setAge] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userCourses, setUserCourses] = useState(null);
+  const [editProfile, setEditProfile] = useState(false);
+  const [editProfileInputs, setEditProfileInputs] = useState({});
+  const [editCover, setEditCover] = useState(null);
+  const [editProfileImg, setEditProfileImg] = useState(null);
+  const reader = new FileReader();
 
   useProtectedRoute();
 
@@ -48,7 +59,6 @@ const Profile = () => {
       .get(`/course-show-api/${user.id}`)
       .then((res) => {
         setUserCourses(res.data.data);
-        console.log(res.data.data);
       })
       .catch((error) => console.log(error));
   }, [user]);
@@ -81,17 +91,162 @@ const Profile = () => {
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang == "en" ? en : ar;
 
+  const handelEditProfile = () => {
+    server
+      .post(`/update-profile-api`, editProfileInputs, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        dispatch(editUser({ user: res.data.data.user }));
+        dispatch(rememberEditedUser({ user: res.data.data.user }));
+        setEditProfile(false);
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <main className="container overflow-hidden mx-auto flex items-center justify-center flex-col p-5">
+      {editProfile && (
+        <FullPagePopup>
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
+            <div className="flex w-full items-center justify-between">
+              <h1 className="text-3xl font-bold text-gray-900">
+                {currentLang.editProfile}
+              </h1>
+              <span
+                className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
+                onClick={() => {
+                  setEditProfile(false);
+                }}
+              >
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
+            <div className="mt-10">
+              {/* edit profile cover photo */}
+              <div className="w-full flex-col flex items-center justify-center pb-10">
+                <h4>Cover Photo</h4>
+                <img
+                  src={
+                    editCover ||
+                    user.background_image ||
+                    "https://via.placeholder.com/1060x212"
+                  }
+                  alt="profileHeader"
+                  className=" w-full md:w-[80%] mx-auto h-[212px] rounded-lg cursor-pointer"
+                  onClick={() =>
+                    document.getElementById("userCoverPhotoInput").click()
+                  }
+                />
+
+                <input
+                  type="file"
+                  id="userCoverPhotoInput"
+                  name="background_image"
+                  onChange={(event) => {
+                    setEditProfileInputs((prev) => ({
+                      ...prev,
+                      [event.target.name]: event.target.files[0],
+                    }));
+                    const file = event.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setEditCover(reader.result);
+                      };
+                      reader.readAsDataURL(file); // Read the file as a data URL
+                    }
+                  }}
+                  style={{ display: "none" }}
+                />
+              </div>
+              {/* edit profile image */}
+              <div className="w-full flex flex-col items-center justify-center pb-10">
+                <h4>Profile Photo</h4>
+                <img
+                  className="w-[70px] h-[70px] sm:w-[100px] sm:h-[100px] md:w-[150px] md:h-[150px] cursor-pointer border-white border-[2px] rounded-full  "
+                  src={editProfileImg || user.photo || profileAvatar}
+                  alt="avatar"
+                  onClick={() =>
+                    document.getElementById("userImgInput").click()
+                  }
+                />
+
+                <input
+                  type="file"
+                  id="userImgInput"
+                  name="image"
+                  onChange={(event) => {
+                    setEditProfileInputs((prev) => ({
+                      ...prev,
+                      [event.target.name]: event.target.files[0],
+                    }));
+                    const file = event.target.files[0];
+                    if (file) {
+                      const reader = new FileReader();
+                      reader.onloadend = () => {
+                        setEditProfileImg(reader.result);
+                      };
+                      reader.readAsDataURL(file);
+                    }
+                  }}
+                  style={{ display: "none" }}
+                />
+              </div>
+              {/* edit profile info */}
+              <div className="flex flex-col md:flex-row flex-wrap items-start justify-start w-full px-8 pb-5 gap-4">
+                {editForm(user).map((input, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="flex flex-col items-start justify-start w-full md:w-[48%] "
+                    >
+                      <label
+                        htmlFor={input.title}
+                        className="text-[14px] font-[400] text-[#252525]"
+                      >
+                        {input.title}
+                      </label>
+                      <input
+                        type="text"
+                        name={input.title}
+                        className="w-full border-[#E1E3EA] rounded bg-[#F9F9F9] text-[#A1A5B7] "
+                        placeholder={`${input.value}`}
+                        onChange={(e) =>
+                          setEditProfileInputs((prev) => ({
+                            ...prev,
+                            [e.target.name]: e.target.value,
+                          }))
+                        }
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+            <div className="w-full flex items-center justify-center p-5">
+              <button
+                onClick={handelEditProfile}
+                className="border-none outline-none rounded-lg px-5 py-2 bg-[#075178] text-white"
+              >
+                {currentLang.save}
+              </button>
+            </div>
+          </div>
+        </FullPagePopup>
+      )}
       <div className="flex w-full flex-col items-center justify-center mt-12 relative ">
         <img
-          src={"https://via.placeholder.com/1060x212"}
+          src={user.background_image || "https://via.placeholder.com/1060x212"}
           alt="profileHeader"
-          className=" w-full rounded-lg"
+          className=" w-full h-[212px] rounded-lg"
         />
         <div className="flex flex-col items-center justify-center w-full">
           <img
-            className="w-[70px] sm:w-[100px] border-white border-[2px] rounded-full md:w-[200px] mt-[-35px] sm:mt-[-50px] md:mt-[-100px] md:ml-[10%] md:mr-auto rtl:md:ml-auto rtl:md:mr-[10%]  z-10 "
+            className="w-[70px] sm:w-[100px] h-[70px] sm:h-[100px] border-white border-[2px] rounded-full md:w-[200px] md:h-[200px] mt-[-35px] sm:mt-[-50px] md:mt-[-100px] md:ml-[10%] md:mr-auto rtl:md:ml-auto rtl:md:mr-[10%]  z-10 "
             src={
               user.photo === "https://api.sportiin.com"
                 ? profileAvatar
@@ -101,7 +256,9 @@ const Profile = () => {
           />
           <div className="flex items-center justify-center gap-1 mt-5 md:ml-[13%] md:mr-auto rtl:md:ml-auto rtl:md:mr-[13%] ">
             <div className="flex items-center justify-center flex-col">
-              <h2 className="text-[18px] font-[600]  ">{user.name}</h2>
+              <h2 className="text-[18px] font-[600] flex items-center justify-center gap-3">
+                {user.name}
+              </h2>
               <div className=" flex items-center justify-center gap-2">
                 <svg
                   width="20"
@@ -165,6 +322,15 @@ const Profile = () => {
                   {user.sex} , {age} Years Old
                 </span>
               </div>
+              <button
+                onClick={() => {
+                  setEditProfile(true);
+                }}
+                className="flex items-center mt-3 justify-center gap-1 px-2 py-2 bg-[#999999] text-white rounded text-[14px] font-[600]"
+              >
+                {currentLang.editProfile}
+                <i class="fas fa-pencil-alt text-white"></i>
+              </button>
               <button
                 onClick={() => {
                   copyToClipboard(window.location.href);
@@ -240,7 +406,7 @@ const Profile = () => {
           </div>
         </div>
         <button
-          onClick={() => navigate("/settings")}
+          onClick={() => setEditProfile(true)}
           className="bg-[#075178] rounded-lg border-none outline-none text-white px-5 py-2 "
         >
           {currentLang.complete}
@@ -249,9 +415,22 @@ const Profile = () => {
 
       {/* cv section */}
       <section className="mt-10 rounded-lg bg-[#0751781A] p-5 flex-col gap-5 w-full md:w-[80%] flex items-center justify-center">
-        <span>{currentLang.NoCvs}</span>
         <div className="w-full">
-          <FileInput />
+          {user.cv ? (
+            <div className="flex items-center justify-between w-full flex-col md:flex-row gap-5 md:gap-0">
+              <div className="bg-[#D9D9D9] w-fit p-5 rounded-lg">
+                <a target="_blank" href={user.cv}>
+                  <img src={user.cv} className="w-[235px] h-[333px]" />
+                </a>
+              </div>
+              <span className="w-full text-center font-[600] text-[15px]">
+                {user.name} CV
+                <FileInput />
+              </span>
+            </div>
+          ) : (
+            <FileInput />
+          )}
         </div>
       </section>
 

@@ -29,6 +29,12 @@ export const en = {
   learnMore: "learn More",
   enrollNow: "enroll Now",
   shareCourse: "Share",
+  enrollWithOffer: (num) => {
+    if (num === 0) {
+      return `Enroll Now`;
+    }
+    return `Enroll With ${num}% offer`;
+  },
 
   // footer
   Links: "Links",
@@ -55,6 +61,7 @@ export const en = {
   // profile
   myCourses: "My courses",
   shareProfile: "share Profile",
+  editProfile: "Edit Profile",
   userDesc: "No descriptoin",
   inviteLink: "Copy invitation link",
   getReward: "Invite your friends to get rewards",
@@ -63,6 +70,7 @@ export const en = {
   complete: "Complete",
   CompleteInformation: "Complete your information",
   addCv: "Add CV",
+  save: "Save",
 };
 
 export const ar = {
@@ -96,6 +104,12 @@ export const ar = {
   learnMore: "اعرف المزيد",
   enrollNow: "سجل الان",
   shareCourse: "مشاركه الكورس",
+  enrollWithOffer: (num) => {
+    if (num === 0) {
+      return "سجل الان";
+    }
+    return `سجل مع خصم ${num}%`;
+  },
 
   // footer
   Links: "روابط هامة",
@@ -122,6 +136,7 @@ export const ar = {
   // profile
   myCourses: "كورساتي",
   shareProfile: "مشاركه الملف الشخصي",
+  editProfile: "تعديل الملف الشخصي",
   userDesc: "لا يوجد وصف",
   inviteLink: "نسخ رابط الدعوة",
   getReward: " قم بدعوة أصدقائك للحصول على المكافآت",
@@ -130,4 +145,5 @@ export const ar = {
   complete: "إكمال",
   CompleteInformation: "أكمل معلوماتك",
   addCv: "اضف سيره ذاتية",
+  save: "حفظ",
 };

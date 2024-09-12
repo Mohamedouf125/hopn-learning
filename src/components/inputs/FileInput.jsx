@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import server from "../../assets/axios/server";
-import { useSelector } from "react-redux";
-import img from "../../assets/images/gifts/balanceBg.jpg";
+import { useDispatch, useSelector } from "react-redux";
+import { ar, en } from "../../assets/langs/translation";
+import { editUser, rememberEditedUser } from "../../store/slices/user/userSlice";
 
 function FileInput() {
   const [file, setFile] = useState(null);
-  const { user, token } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.user);
+  const dispatch = useDispatch()
 
   const handleFileChange = (event) => {
     const selectedFile = event.target.files[0];
@@ -22,14 +24,21 @@ function FileInput() {
     if (file) {
       // Make the request using FormData
       server
-        .post("/update-profile-api", {cv: file, name:"hema2", photo:file, phone: 1010101010, email:"heam2@test.com"}, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${token}`,
-          },
-        })
-        .then(() => {
+        .post(
+          "/update-profile-api",
+          { cv: file },
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
           console.log("File uploaded successfully");
+          dispatch(editUser({ user: res.data.data.user }));
+          dispatch(rememberEditedUser({ user: res.data.data.user }));
+          setFile(null)
         })
         .catch((error) => {
           console.error("Error uploading file:", error);
@@ -38,6 +47,11 @@ function FileInput() {
       console.log("No file selected");
     }
   };
+
+  
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang == "en" ? en : ar;
 
   return (
     <div className="p-4 w-full">
@@ -79,7 +93,7 @@ function FileInput() {
             type="submit"
             className="bg-green-500 text-white py-2 px-4 rounded"
           >
-            Upload
+            {currentLang.save}
           </button>
         )}
       </form>

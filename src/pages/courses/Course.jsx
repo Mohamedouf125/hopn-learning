@@ -4,7 +4,7 @@ import {
   fetchCourseBanner,
   fetchCourseData,
 } from "../../store/slices/courses/courceSlice";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ const Course = () => {
   const params = useParams();
   const { copyToClipboard } = useCopyToClipboard();
   const loggedIn = useUserLoggedIn();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchCourseData(params.courseId));
@@ -46,6 +47,23 @@ const Course = () => {
               <img className="w-full" src={courseBanner[1]?.url} alt="Banner" />
             </div>
           </div>
+          <div className=" w-full flex flex-col md:flex-row items-center justify-start gap-5 md:gap-8 mt-5 ">
+            {course.percent !== 0 && (
+              <button className="px-5 border border-[#0A142F] py-2 text-[#0A142F] rounded-lg text-[18px] font-[600]">
+                <a target="_blank" href="https://wa.me/971544066811">
+                  {currentLang.enrollWithOffer(course.percent)}
+                </a>
+              </button>
+            )}
+            <button
+              onClick={() => {
+                navigate("/gifts");
+              }}
+              className="px-5 text-white py-2 bg-[#0A142F] rounded-lg text-[18px] font-[600]"
+            >
+              {currentLang.enrollNow}
+            </button>
+          </div>
           <div className="w-full flex items-center justify-between flex-col md:flex-row mt-10">
             <div className="flex items-center justify-center w-full md:w-[60%]  rounded-2xl overflow-hidden">
               <p
@@ -73,12 +91,6 @@ const Course = () => {
             </div>
           </div>
           <div className="w-full flex items-center justify-center flex-col md:flex-row mt-10 gap-5">
-            <button
-              className="flex items-center justify-center gap-2 px-5 text-white py-2 bg-[#0A142F] rounded text-[18px] font-[600]"
-              disabled={!loggedIn}
-            >
-              {currentLang.enrollNow}
-            </button>
             <button
               onClick={() => {
                 copyToClipboard(window.location.href);
