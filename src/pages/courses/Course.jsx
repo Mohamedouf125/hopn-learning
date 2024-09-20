@@ -21,11 +21,9 @@ const Course = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const { copyToClipboard } = useCopyToClipboard();
-  const loggedIn = useUserLoggedIn();
-  const navigate = useNavigate();
   const [openForm, setOpenForm] = useState(false);
-  const [formInputs, setFormInputs] = useState({});
   const [countries, setCountries] = useState([]);
+  const [openMessage, setOpenMessage] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCourseData(params.courseId));
@@ -34,6 +32,11 @@ const Course = () => {
 
   const { course, courseBanner } = useSelector((state) => state.course);
   const { user, token } = useSelector((state) => state.user);
+  const [formInputs, setFormInputs] = useState({
+    country_id: user.country_id,
+    full_name: user.name,
+    whatsapp_number: user.phone,
+  });
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -44,7 +47,6 @@ const Course = () => {
     server
       .get(`/countries-api`)
       .then((res) => {
-        console.log(res.data.data);
         setCountries(res.data.data);
       })
       .catch((error) => console.log(error));
@@ -65,13 +67,17 @@ const Course = () => {
         dispatch(editUser({ user: res.data.data }));
         dispatch(rememberEditedUser({ user: res.data.data }));
         setOpenForm(false);
-        setFormInputs({});
+        setFormInputs({ country_id: 3 });
+        toast.success(currentLang.successfullyRegisteredCourse);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error.response.data.message || currentLang.error);
+      });
   };
 
   return (
     <main>
+      {/* sighn to course form */}
       {openForm && (
         <FullPagePopup>
           <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
@@ -88,6 +94,9 @@ const Course = () => {
                 <i class="fas fa-times"></i>
               </span>
             </div>
+            <div className="w-full md:w-[80%] mx-auto mt-10 bg-[#e74c3c] rounded-lg p-5 text-white font-[700] ">
+              {currentLang.registrationNote}
+            </div>
             <div className="mt-10">
               {/* edit profile info */}
               <div className="flex flex-col md:flex-row flex-wrap items-start justify-start w-full px-8 pb-5 gap-4">
@@ -95,7 +104,7 @@ const Course = () => {
                   return (
                     <div
                       key={index}
-                      className="flex flex-col items-start justify-start w-full md:w-[48%] "
+                      className="flex flex-col items-start justify-start w-full md:w-[48%]"
                     >
                       <label
                         htmlFor={input.title}
@@ -106,18 +115,24 @@ const Course = () => {
                       <input
                         type="text"
                         name={input.title}
-                        className="w-full border-[#E1E3EA] rounded bg-[#F9F9F9] text-[#A1A5B7] "
-                        placeholder={`${input.placeholder}`}
-                        onChange={(e) =>
+                        className="w-full border-[#E1E3EA] rounded bg-[#F9F9F9] text-[#A1A5B7]"
+                        value={`${formInputs[input.title] || ""}`}
+                        onChange={(e) => {
+                          const value = e.target.value;
+                          const englishOnly = value.replace(
+                            /[^a-zA-Z0-9\s.,?!]/g,
+                            ""
+                          );
                           setFormInputs((prev) => ({
                             ...prev,
-                            [e.target.name]: e.target.value,
-                          }))
-                        }
+                            [e.target.name]: englishOnly,
+                          }));
+                        }}
                       />
                     </div>
                   );
                 })}
+
                 <div className="flex flex-col items-start justify-start w-full md:w-[48%] ">
                   <label
                     htmlFor={`country_id`}
@@ -128,6 +143,7 @@ const Course = () => {
                   <select
                     name={"country_id"}
                     className="w-full border-[#E1E3EA] rounded bg-[#F9F9F9] text-[#A1A5B7] "
+                    value={formInputs.country_id || user.country_id}
                     onChange={(e) =>
                       setFormInputs((prev) => ({
                         ...prev,
@@ -157,6 +173,41 @@ const Course = () => {
           </div>
         </FullPagePopup>
       )}
+      {/* go to whatsapp message */}
+      {openMessage && (
+        <FullPagePopup>
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-14 max-h-[90vh]  rounded-lg bg-white">
+            <div className="flex w-full items-center justify-between">
+              <h1 className="text-3xl font-bold text-gray-900"></h1>
+              <span
+                className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
+                onClick={() => setOpenMessage(false)}
+              >
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
+            <div className="w-full flex flex-col items-center justify-center mt-10 px-5">
+              <h2 className="mb-5">{currentLang.welcome}</h2>
+              <p className="w-full md:w-[80%] mx-auto text-center">
+                {currentLang.courseMessage}
+              </p>
+            </div>
+            <div className="w-full flex-col md:flex-row gap-5 flex items-center justify-center mt-10">
+              <button className="px-5 border border-[#0A142F] py-2 text-[#0A142F] rounded-lg text-[18px] font-[600]">
+                <a target="_blank" href="https://wa.me/971544066811">
+                  {currentLang.enrollWithOffer(course.percent)}
+                </a>
+              </button>
+              <button
+                onClick={() => setOpenMessage(false)}
+                className="px-5 text-white py-2 bg-[#0A142F] rounded-lg text-[18px] font-[600]"
+              >
+                {currentLang.close}
+              </button>
+            </div>
+          </div>
+        </FullPagePopup>
+      )}
       <div className="container mx-auto my-10">
         <section className="w-full flex items-center justify-center flex-col p-5">
           <h2 className="w-full text-start my-5 text-[18px] md:text-[30px] font-[700] font-['Cairo'] ">
@@ -175,18 +226,18 @@ const Course = () => {
             </div>
           </div>
           <div className=" w-full flex flex-col items-start justify-start gap-5 mt-5 ">
-            {user.couress_count === 0 && (
+            {/* {user.couress_count === 0 && (
               
               <span className="text-[16px] font-[700]">
                 {course.price}$
               </span>
-            )}
+            )} */}
             {user.couress_count === 0 && (
-
-              <button className="px-5 border border-[#0A142F] py-2 text-[#0A142F] rounded-lg text-[18px] font-[600]">
-                <a target="_blank" href="https://wa.me/971544066811">
-                  {currentLang.enrollWithOffer(course.percent)}
-                </a>
+              <button
+                onClick={() => setOpenMessage(true)}
+                className="px-5 border border-[#0A142F] py-2 text-[#0A142F] rounded-lg text-[18px] font-[600]"
+              >
+                {currentLang.enrollWithOffer(course.percent)}
               </button>
             )}
             {user.couress_count > 0 && (

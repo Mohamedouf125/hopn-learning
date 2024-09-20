@@ -15,9 +15,9 @@ import cover from "../../assets/images/profile/COVER.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courseImg from "../../assets/images/home/courceImg.png";
 import { useDispatch, useSelector } from "react-redux";
-import RegistrationGifts from "../../components/gifts/RegistrationGifts";
-import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
-import DepositGifts from "../../components/gifts/DepositGifts";
+// import RegistrationGifts from "../../components/gifts/RegistrationGifts";
+// import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
+// import DepositGifts from "../../components/gifts/DepositGifts";
 import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 import { oldAccount } from "../../store/slices/user/userSlice";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
@@ -28,9 +28,10 @@ import {
   voteForPlayer,
 } from "../../store/slices/players/playersSlice";
 import { ar, en } from "../../assets/langs/translation";
+import { toast } from "react-toastify";
 
 const Home = () => {
-  const { newAccount, token } = useSelector((state) => state.user);
+  const {token } = useSelector((state) => state.user);
   const { defaultStars } = useSelector((state) => state.ratingStars);
   const userLoggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
@@ -57,19 +58,23 @@ const Home = () => {
 
   const choosePlayer = (id) => {
     if (voted_player) {
+      toast.success(currentLang.alreadyotVed)
       return;
     }
 
     if (!userLoggedIn) {
+      toast.error(currentLang.loginToVote)
+      navigate("/login")
       return;
     }
     dispatch(voteForPlayer({ id, token }));
     dispatch(fetchHomeData(token));
+    toast.success(currentLang.VotedSuccessfully)
   };
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
-  const currentLang = lang == "en" ? en : ar;
+  const currentLang = lang === "en" ? en : ar;
 
   return (
     <main>

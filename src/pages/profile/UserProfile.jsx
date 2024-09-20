@@ -19,7 +19,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import server from "../../assets/axios/server";
 import cover from "../../assets/images/profile/COVER.png";
@@ -48,11 +48,10 @@ const UserProfile = () => {
     server
       .get(`/get-user/${params.userId}`)
       .then((res) => {
-        console.log(res);
         setUser(res.data.data.user);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [params.userId]);
 
   // feach user courses
   useEffect(() => {
@@ -91,7 +90,7 @@ const UserProfile = () => {
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
-  const currentLang = lang == "en" ? en : ar;
+  const currentLang = lang === "en" ? en : ar;
 
   return (
     <main className="container overflow-hidden mx-auto flex items-center justify-center flex-col p-5">
@@ -159,7 +158,7 @@ const UserProfile = () => {
                 </svg>
 
                 <span className="text-[12px] font-[600] text-[#B0B0B0] ">
-                  {user?.location || currentLang.userLocation}
+                  {user?.address || currentLang.userLocation}
                 </span>
               </div>
               <div className=" flex items-center justify-center gap-2">
@@ -232,8 +231,8 @@ const UserProfile = () => {
         {user.cv ? (
           <div className="flex items-center justify-between w-full flex-col md:flex-row gap-5 md:gap-0">
             <div className="bg-[#D9D9D9] w-fit p-5 rounded-lg">
-              <a target="_blank" href={user.cv}>
-                <img src={user.cv} className="w-[235px] h-[333px]" />
+              <a target="_blank" rel="noreferrer" href={user.cv}>
+                <img src={user.cv} alt="cv" className="w-[235px] h-[333px]" />
               </a>
             </div>
             <span className="w-full text-center font-[600] text-[15px]">
@@ -400,7 +399,7 @@ const UserProfile = () => {
               <div>
                 <img
                   src={userCourses?.image || courseImg}
-                  alt="cv image"
+                  alt="CV model"
                   className="w-full"
                 />
               </div>

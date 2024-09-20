@@ -11,7 +11,7 @@ const About = () => {
         console.log(res.data);
         setTerms(res.data);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log()); 
   }, []);
 
   useEffect(() => {

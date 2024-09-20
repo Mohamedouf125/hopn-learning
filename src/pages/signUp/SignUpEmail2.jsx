@@ -9,13 +9,19 @@ import {
 } from "../../store/slices/user/rejesterSlice";
 import server from "../../assets/axios/server";
 import { rememberUser, setUser } from "../../store/slices/user/userSlice";
+import { SyncLoader } from "react-spinners";
+import { toast } from "react-toastify";
+import { ar, en } from "../../assets/langs/translation";
+import { useState } from "react";
 
 const SignUpEmail2 = () => {
   const dispatch = useDispatch();
   const rejesterData = useSelector((state) => state.rejester);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const handelRejester = () => {
+    setLoading(true);
     server
       .post("/register-api", rejesterData)
       .then((data) => {
@@ -29,10 +35,12 @@ const SignUpEmail2 = () => {
           })
         );
         dispatch(resetRejesterState());
+        navigate("/login");
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        setLoading(false);
+        toast.error(error.response.data.message || currentLang.error);
       });
   };
 
@@ -40,6 +48,11 @@ const SignUpEmail2 = () => {
     const { name, value } = e.target;
     dispatch(changeData({ field: name, value }));
   };
+
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang === "en" ? en : ar;
+
   return (
     <main className="container flex items-center justify-center mx-auto">
       <div
@@ -141,6 +154,7 @@ const SignUpEmail2 = () => {
                   placeholder="Password"
                   className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
                   name="password"
+                  value={rejesterData.password}
                   onChange={handleInputChange}
                 />
               </div>
@@ -189,6 +203,7 @@ const SignUpEmail2 = () => {
                   placeholder="Confirm Password"
                   className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
                   name="password_confirmation"
+                  value={rejesterData.password_confirmation}
                   onChange={handleInputChange}
                 />
               </div>
@@ -210,13 +225,15 @@ const SignUpEmail2 = () => {
           </div>
           <div className={`flex justify-end items-center w-full`}>
             <div
-              className={`flex justify-end items-center w-1/2 py-[16px] mt-[50px] bg-[#075178] rounded-[20px] cursor-pointer`}
+              className={`flex justify-end items-center w-1/2 py-[16px] mt-[50px] ${
+                loading ? "bg-[#075178a8]" : "bg-[#075178]"
+              } rounded-[20px] ${!loading && "cursor-pointer"}`}
             >
               <button
                 onClick={handelRejester}
                 className={`text-center border-none outline-none text-white text-[16px] font-[Poppins] font-medium leading-[24px] w-full`}
               >
-                Sign Up
+                {loading ? <SyncLoader color="white" /> : "Sign Up"}
               </button>
             </div>
           </div>

@@ -90,7 +90,7 @@ const Profile = () => {
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
-  const currentLang = lang == "en" ? en : ar;
+  const currentLang = lang === "en" ? en : ar;
 
   const handelEditProfile = () => {
     server
@@ -104,8 +104,11 @@ const Profile = () => {
         dispatch(editUser({ user: res.data.data.user }));
         dispatch(rememberEditedUser({ user: res.data.data.user }));
         setEditProfile(false);
+        toast.success(currentLang.ProfileUpdatedSuccessfully)
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        toast.error(error.response.data.message || currentLang.error);
+      });
   };
 
   return (
@@ -303,7 +306,7 @@ const Profile = () => {
                 </svg>
 
                 <span className="text-[12px] font-[600] text-[#B0B0B0] ">
-                  {user.location || currentLang.userLocation}
+                  {user.address || currentLang.userLocation}
                 </span>
               </div>
               <div className=" flex items-center justify-center gap-2">
@@ -420,8 +423,8 @@ const Profile = () => {
           {user.cv ? (
             <div className="flex items-center justify-between w-full flex-col md:flex-row gap-5 md:gap-0">
               <div className="bg-[#D9D9D9] w-fit p-5 rounded-lg">
-                <a target="_blank" href={user.cv}>
-                  <img src={user.cv} className="w-[235px] h-[333px]" />
+                <a target="_blank"  rel="noreferrer" href={user.cv}>
+                  <img src={user.cv} alt="cv" className="w-[235px] h-[333px]" />
                 </a>
               </div>
               <span className="w-full text-center font-[600] text-[15px]">
@@ -488,7 +491,7 @@ const Profile = () => {
                           ? avatar
                           : user.photo || avatar
                       }
-                      alt={`user avatar`}
+                      alt={`personal `}
                       className="w-16 h-16 rounded-full mx-auto mb-2"
                     />
                     <h3 className="text-lg font-[600] ">{user.name}</h3>
@@ -590,7 +593,7 @@ const Profile = () => {
               <div>
                 <img
                   src={userCourses?.image || courseImg}
-                  alt="cv image"
+                  alt="cv "
                   className="w-full"
                 />
               </div>

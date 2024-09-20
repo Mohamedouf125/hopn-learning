@@ -11,6 +11,14 @@ export const editForm = (user) => [
     title: "phone",
     value: user.phone,
   },
+  {
+    title: "job",
+    value: user.job,
+  },
+  {
+    title: "address",
+    value: user.address,
+  },
 ];
 
 

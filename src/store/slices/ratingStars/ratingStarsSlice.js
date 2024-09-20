@@ -20,6 +20,5 @@ export const ratingStarsSlice = createSlice({
   reducers: {},
 });
 
-export const {} = ratingStarsSlice.actions;
 
 export default ratingStarsSlice.reducer;

@@ -2,17 +2,39 @@ import googleIcon from "../../assets/images/icons/googleIcon.png";
 import img1 from "../../assets/images/authImages/SignUpEmIl.png";
 
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeData } from "../../store/slices/user/rejesterSlice";
+import server from "../../assets/axios/server";
+import { useEffect, useState } from "react";
+import { ar, en } from "../../assets/langs/translation";
 
 const SignUpEmail = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [countries, setCountries] = useState([]);
+
+  // get countries
+  useEffect(() => {
+    server
+      .get(`/countries-api`)
+      .then((res) => {
+        setCountries(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     dispatch(changeData({ field: name, value }));
   };
+
+  const { name, date, email, country_id, sex } = useSelector(
+    (state) => state.rejester
+  );
+
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang === "en" ? en : ar;
 
   return (
     <main className="container flex items-center justify-center mx-auto">
@@ -106,6 +128,7 @@ const SignUpEmail = () => {
                   type="text"
                   placeholder="Your name"
                   name="name"
+                  value={name}
                   className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
                   onChange={handleInputChange}
                 />
@@ -146,6 +169,7 @@ const SignUpEmail = () => {
                 <input
                   type="email"
                   placeholder="Email"
+                  value={email}
                   name="email"
                   className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
                   onChange={handleInputChange}
@@ -158,6 +182,7 @@ const SignUpEmail = () => {
                 <input
                   type="date"
                   placeholder="dd / mm / yy"
+                  value={date}
                   name="date"
                   className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
                   onChange={handleInputChange}
@@ -172,10 +197,33 @@ const SignUpEmail = () => {
                   placeholder="Password"
                   className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
                   name="sex"
+                  value={sex}
                   onChange={handleInputChange}
                 >
                   <option value="male">male</option>
                   <option value="female">Female</option>
+                </select>
+              </div>
+              {/* country */}
+              <div
+                className={`flex justify-start items-center gap-4 w-full py-[13px] px-[16px] border-2 border-[#efeefc] rounded-[20px]`}
+              >
+                <select
+                  type="password"
+                  placeholder="Password"
+                  className={`w-full border-none outline-none text-[16px] font-[Poppins] font-normal`}
+                  name="country_id"
+                  value={country_id}
+                  onChange={handleInputChange}
+                >
+                  <option value="">{currentLang.country}</option>
+                  {countries.map((contry, index) => {
+                    return (
+                      <option key={index} value={contry.id}>
+                        {contry.name}
+                      </option>
+                    );
+                  })}
                 </select>
               </div>
             </div>

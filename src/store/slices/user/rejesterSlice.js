@@ -6,7 +6,7 @@ const initialState = {
   email: "",
   password: "",
   password_confirmation: "",
-  country_id: "2",
+  country_id: "",
   sex: "male",
 };
 
