@@ -174,7 +174,7 @@ const Course = () => {
         </FullPagePopup>
       )}
       {/* go to whatsapp message */}
-      {openMessage && (
+      {/* {openMessage && (
         <FullPagePopup>
           <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-14 max-h-[90vh]  rounded-lg bg-white">
             <div className="flex w-full items-center justify-between">
@@ -207,7 +207,7 @@ const Course = () => {
             </div>
           </div>
         </FullPagePopup>
-      )}
+      )} */}
       <div className="container mx-auto my-10">
         <section className="w-full flex items-center justify-center flex-col p-5">
           <h2 className="w-full text-start my-5 text-[18px] md:text-[30px] font-[700] font-['Cairo'] ">
@@ -232,24 +232,24 @@ const Course = () => {
                 {course.price}$
               </span>
             )} */}
-            {user.couress_count === 0 && (
+            {/* {user.couress_count === 0 && (
               <button
                 onClick={() => setOpenMessage(true)}
                 className="px-5 border border-[#0A142F] py-2 text-[#0A142F] rounded-lg text-[18px] font-[600]"
               >
                 {currentLang.enrollWithOffer(course.percent)}
               </button>
-            )}
-            {user.couress_count > 0 && (
-              <button
-                onClick={() => {
-                  setOpenForm(true);
-                }}
-                className="px-5 text-white py-2 bg-[#0A142F] rounded-lg text-[18px] font-[600]"
-              >
-                {currentLang.enrollNowFree}
-              </button>
-            )}
+            )} */}
+            {/* {user.couress_count > 0 && ( */}
+            <button
+              onClick={() => {
+                setOpenForm(true);
+              }}
+              className="px-5 text-white py-2 bg-[#0A142F] rounded-lg text-[18px] font-[600]"
+            >
+              {currentLang.enrollNowFree}
+            </button>
+            {/* )} */}
           </div>
           <div className="w-full flex items-center justify-between flex-col md:flex-row mt-10">
             <div className="flex items-center justify-center w-full md:w-[60%]  rounded-2xl overflow-hidden">

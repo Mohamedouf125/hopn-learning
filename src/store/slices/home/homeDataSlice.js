@@ -25,6 +25,7 @@ const homeDataSlice = createSlice({
     courses: [],
     users: [],
     voted_player:{},
+    trainers: [],
     status: "idle",
     error: null,
   },
@@ -41,6 +42,7 @@ const homeDataSlice = createSlice({
         state.courses = action.payload.courses;
         state.users = action.payload.users;
         state.voted_player = action.payload.voted_player;
+        state.trainers = action.payload.trainers;
       })
       .addCase(fetchHomeData.rejected, (state, action) => {
         state.status = "failed";

@@ -9,16 +9,16 @@ import {
   Scrollbar,
   Autoplay,
 } from "swiper/modules";
-import avatar from "../../assets/images/profile/profileAvatar.png";
+// import avatar from "../../assets/images/profile/profileAvatar.png";
 import bigAvatar from "../../assets/images/home/bigAvatar.png";
-import cover from "../../assets/images/profile/COVER.png";
+// import cover from "../../assets/images/profile/COVER.png";
 import cvImg from "../../assets/images/home/cvImg.png";
 import courseImg from "../../assets/images/home/courceImg.png";
 import { useDispatch, useSelector } from "react-redux";
 // import RegistrationGifts from "../../components/gifts/RegistrationGifts";
 // import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 // import DepositGifts from "../../components/gifts/DepositGifts";
-import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
+// import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 import { oldAccount } from "../../store/slices/user/userSlice";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { useNavigate } from "react-router-dom";
@@ -29,13 +29,17 @@ import {
 } from "../../store/slices/players/playersSlice";
 import { ar, en } from "../../assets/langs/translation";
 import { toast } from "react-toastify";
+import Cv from "../../components/cv/Cv";
+import TraineeCard from "../../components/trainee/TraineeCard";
+import Course from "../../components/course/Course";
 
 const Home = () => {
-  const {token } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.user);
   const { defaultStars } = useSelector((state) => state.ratingStars);
-  const userLoggedIn = useUserLoggedIn();
+  // const userLoggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [isVoted, setiIsVoted] = useState(false);
 
   // to check if first login or not
   useEffect(() => {
@@ -51,25 +55,34 @@ const Home = () => {
     dispatch(fetchPlayersData());
   }, [dispatch, token]);
 
-  const { sliders, cvs, courses, status, users, error, voted_player } =
-    useSelector((state) => state.home);
+  const {
+    sliders,
+    cvs,
+    courses,
+    trainers,
+    status,
+    users,
+    error,
+    voted_player,
+  } = useSelector((state) => state.home);
 
   const { players } = useSelector((state) => state.players);
 
   const choosePlayer = (id) => {
-    if (voted_player) {
-      toast.success(currentLang.alreadyotVed)
-      return;
-    }
+    // if (voted_player) {
+    //   toast.success(currentLang.alreadyotVed)
+    //   return;
+    // }
 
-    if (!userLoggedIn) {
-      toast.error(currentLang.loginToVote)
-      navigate("/login")
-      return;
-    }
+    // if (!userLoggedIn) {
+    //   toast.error(currentLang.loginToVote)
+    //   // navigate("/login")
+    //   return;
+    // }
     dispatch(voteForPlayer({ id, token }));
     dispatch(fetchHomeData(token));
-    toast.success(currentLang.VotedSuccessfully)
+    toast.success(currentLang.VotedSuccessfully);
+    setiIsVoted(true);
   };
 
   // to set lang
@@ -93,6 +106,7 @@ const Home = () => {
               pagination={{ clickable: true }}
               scrollbar={{ draggable: true }}
               autoplay={{ delay: 6500, disableOnInteraction: false }}
+              dir="rtl"
               loop={true}
               breakpoints={{
                 320: {
@@ -136,11 +150,11 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
-        {/* Celebrities */}
+        <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
+        {/* trainers */}
         <section className="w-full flex flex-col items-center justify-center">
           <h2 className="text-2xl font-semibold mb-4 w-full text-start">
-            {currentLang.CelebritiesTitle}
+            {currentLang.trainersTitle}
           </h2>
           <div className="w-full relative">
             <Swiper
@@ -154,6 +168,8 @@ const Home = () => {
               scrollbar={{ draggable: true }}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               loop={true}
+              dir="rtl"
+              direction="horizontal"
               breakpoints={{
                 320: {
                   slidesPerView: 1,
@@ -168,60 +184,22 @@ const Home = () => {
                   spaceBetween: 10,
                 },
                 1024: {
-                  slidesPerView: 4,
-                  spaceBetween: 40,
+                  slidesPerView: 3.5,
+                  spaceBetween: 30,
                 },
               }}
               className="w-full"
             >
-              {users.map((user, index) => (
-                <SwiperSlide
-                  key={index}
-                  className="flex items-center justify-center bg-gray-100 rounded-lg shadow-md"
-                >
-                  <div className="text-center">
-                    <div className="w-full rounded overflow-hidden  ">
-                      <img
-                        className="w-full rounded h-[190px] "
-                        src={
-                          user.background_image === "https://api.sportiin.com"
-                            ? cover
-                            : user.background_image || cover
-                        }
-                        alt="slideHead"
-                      />
-                    </div>
-                    <div
-                      onClick={() => navigate(`/user/profile/${user.id}`)}
-                      className="w-full mt-[-30px] cursor-pointer "
-                    >
-                      <img
-                        src={
-                          user.photo === "https://api.sportiin.com"
-                            ? avatar
-                            : user.photo || avatar
-                        }
-                        alt={`user avatar`}
-                        className="w-16 h-16 rounded-full mx-auto mb-2"
-                      />
-                      <h3 className="text-lg font-[600] ">{user.name}</h3>
-                      {/* <p className="font-[400]">{user.sex || "male"}</p> */}
-                    </div>
-                    <div className="flex items-center justify-center gap-6 mt-3 py-3">
-                      <button className="text-[#EB4335] font-[600] ">
-                        {currentLang.REMOVE}
-                      </button>
-                      <button className="text-white bg-[#075178] px-9 py-2 rounded-xl ">
-                        {currentLang.FOLOW}
-                      </button>
-                    </div>
-                  </div>
-                </SwiperSlide>
-              ))}
+              {trainers.map((trainee, index) => {
+                return (
+                  <SwiperSlide>
+                    <TraineeCard key={index} trainee={trainee} />
+                  </SwiperSlide>
+                );
+              })}
             </Swiper>
 
-            {/* Custom Navigation Arrows */}
-            <div className="swiper-button-next border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] translate-x-[-50%] ">
+            <div className="swiper-button-next border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] md:translate-x-[-50%] ">
               <svg
                 width="25"
                 height="24"
@@ -250,7 +228,7 @@ const Home = () => {
                 </defs>
               </svg>
             </div>
-            <div className="swiper-button-prev border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] translate-x-[50%]">
+            <div className="swiper-button-prev border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] md:translate-x-[50%]">
               <svg
                 width="25"
                 height="24"
@@ -281,104 +259,56 @@ const Home = () => {
             </div>
           </div>
         </section>
-        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
+        <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
+
         {/* cv */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
             <h2 className="text-2xl font-semibold mb-4 text-left">
               {currentLang.cvSectoinTitle}
             </h2>
-            <span className="text-[#F39C12] font-[500] cursor-pointer ">
-              {currentLang.SeeMore}
-            </span>
-          </div>
-          <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-            {cvs.length === 0 ? (
-              <div>{currentLang.NoCvs}</div>
-            ) : (
-              cvs.slice(0, 4).map((slide, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="bg-[#D9D9D9] p-10 rounded-lg relative border border-[#D9D9D9] w-[260px]"
-                  >
-                    <a target="_blank" href={slide.cv}>
-                      <img
-                        src={slide.cv || cvImg}
-                        alt="cv image"
-                        className="w-[180px] h-[180px] rounded  "
-                      />
-                    </a>
-                    <div
-                      onClick={() => navigate(`/user/profile/${slide.id}`)}
-                      className="bg-white cursor-pointer w-full absolute bottom-0 left-0 px-5 rounded-lg p-3 flex items-center justify-between gap-2"
-                    >
-                      <img
-                        src={slide.photo}
-                        alt={"cv"}
-                        className="mt-[-60px] w-[66px] h-[66px] rounded-full "
-                      />
-                      <div className="flex flex-col items-center justify-center">
-                        <h3 className="font-[600] ">{slide.name}</h3>
-                        <p className="font-[400]">{slide.job}</p>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })
-            )}
-          </div>
-        </section>
-        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
-        {/* courses */}
-        <section className="w-full flex flex-col items-center justify-center mt-10">
-          <div className="w-full flex items-center justify-between">
-            <h2 className="text-2xl font-semibold mb-4 text-left">
-              {currentLang.freeCourses}
-            </h2>
             <span
-              onClick={() => navigate("/courses")}
+              onClick={() => navigate("/cvs")}
               className="text-[#F39C12] font-[500] cursor-pointer "
             >
               {currentLang.SeeMore}
             </span>
           </div>
-          <div className="flex items-center justify-center gap-10 flex-wrap w-full">
+          <div className="flex items-start justify-center gap-10 flex-wrap w-full">
+            {cvs.length === 0 ? (
+              <div>{currentLang.NoCvs}</div>
+            ) : (
+              cvs.slice(0, 4).map((slide, index) => {
+                return (
+                  <Cv cv={slide} key={index} />
+                );
+              })
+            )}
+          </div>
+        </section>
+        <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
+        {/* courses */}
+        <section className="w-full flex flex-col items-center justify-center mt-[clamp(10px,2.083333333333333vw,40px)]">
+          <div className="w-full flex items-center justify-between">
+            <h2 className="text-[clamp(12px,1.0416666666666665vw,20px)] font-semibold mb-4 text-left">
+              {currentLang.freeCourses}
+            </h2>
+            <span
+              onClick={() => navigate("/courses")}
+              className="text-[#F39C12] text-[clamp(8px,0.625vw,12px)] font-[500] cursor-pointer  "
+            >
+              {currentLang.SeeMore}
+            </span>
+          </div>
+          <div className="flex items-center justify-center gap-[clamp(5px,1.0416666666666665vw,20px)] flex-wrap w-full">
             {courses.slice(0, 4).map((course, index) => {
               return (
-                <div
-                  key={index}
-                  onClick={() => navigate(`/courses/course/${course.id}`)}
-                  className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
-                >
-                  <div>
-                    <img
-                      src={course.image || courseImg}
-                      alt="cv image"
-                      className="w-full"
-                    />
-                  </div>
-                  <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                    <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
-                      {course.title}
-                    </h3>
-                    <p
-                      className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
-                      dangerouslySetInnerHTML={{ __html: course.description }}
-                    />
-                    <div className="flex w-full items-center justify-start gap-1">
-                      <ReactStars {...defaultStars} />
-                      <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
-                        (1.2K)
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                <Course course={course} key={index} />
               );
             })}
           </div>
         </section>
-        <div className="w-full h-[0px] border-t my-10 border-[#F1F1F2]"></div>
+        <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
         {/* Vote for the best player */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-center w-full">
@@ -428,7 +358,7 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  {voted_player?.id && (
+                  {isVoted && (
                     <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
                       {player.count} {currentLang.Vote}
                     </div>

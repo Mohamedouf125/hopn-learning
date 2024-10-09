@@ -1,17 +1,17 @@
 import "./App.css";
 import Header from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
-import Login from "./pages/login/Login";
-import SignUp from "./pages/signUp/SignUp";
-import SignUpEmail from "./pages/signUp/SignUpEmail";
-import SignUpEmail2 from "./pages/signUp/SignUpEmail2";
-import ForgotePasswordAddEmail from "./pages/forgotPassword/ForgotePasswordAddEmail";
-import ForgotePasswordAddOTP from "./pages/forgotPassword/ForgotePasswordAddOTP";
-import ForgotePasswordNewPassword from "./pages/forgotPassword/ForgotePasswordNewPassword";
+// import Login from "./pages/login/Login";
+// import SignUp from "./pages/signUp/SignUp";
+// import SignUpEmail from "./pages/signUp/SignUpEmail";
+// import SignUpEmail2 from "./pages/signUp/SignUpEmail2";
+// import ForgotePasswordAddEmail from "./pages/forgotPassword/ForgotePasswordAddEmail";
+// import ForgotePasswordAddOTP from "./pages/forgotPassword/ForgotePasswordAddOTP";
+// import ForgotePasswordNewPassword from "./pages/forgotPassword/ForgotePasswordNewPassword";
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 // import Gifts from "./pages/gifts/Gifts";
-import Profile from "./pages/profile/Profile";
+// import Profile from "./pages/profile/Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRememberedUser } from "./store/slices/user/userSlice";
@@ -20,10 +20,13 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import FloatingWhatsapp from "./components/whatsappicon/FloatingWhatsapp";
 import Course from "./pages/courses/Course";
-import Setting from "./pages/setting/Setting";
+// import Setting from "./pages/setting/Setting";
 import { getCurrentLang } from "./store/slices/settings/settingsSlice";
-import UserProfile from "./pages/profile/UserProfile";
+// import UserProfile from "./pages/profile/UserProfile";
 import About from "./pages/about/About";
+import NotFound from "./pages/404/NotFound";
+import Cvs from "./pages/cvs/Cvs";
+import Trainers from "./pages/trainers/Trainers";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,9 +36,11 @@ function App() {
 
   // Load user data and language settings from local storage
   useEffect(() => {
-    dispatch(getRememberedUser());
+    // dispatch(getRememberedUser());
     dispatch(getCurrentLang());
   }, [dispatch]);
+
+
 
   return (
     <div
@@ -46,16 +51,19 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/gifts" element={<Gifts />} /> */}
         <Route path="/about" element={<About />} />
+        <Route path="/trainers" element={<Trainers />} />
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/course/:courseId" element={<Course />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/user/profile/:userId" element={<UserProfile />} />
-        <Route path="/signUp" element={<SignUp />} />
-        <Route path="/settings" element={<Setting />} />
-        <Route path="/signUp-email" element={<SignUpEmail />} />
+        <Route path="/cvs" element={<Cvs />} />
+        <Route path="*" element={<NotFound />} />
+        {/* <Route path="/profile" element={<Profile />} /> */}
+        {/* <Route path="/user/profile/:userId" element={<UserProfile />} /> */}
+        {/* <Route path="/signUp" element={<SignUp />} /> */}
+        {/* <Route path="/settings" element={<Setting />} /> */}
+        {/* <Route path="/signUp-email" element={<SignUpEmail />} />
         <Route path="/signUp-email-2" element={<SignUpEmail2 />} />
         <Route
           path="/forgotePassword-addEmail"
@@ -68,7 +76,7 @@ function App() {
         <Route
           path="/forgotePassword-newPassword"
           element={<ForgotePasswordNewPassword />}
-        />
+        /> */}
       </Routes>
       <FloatingWhatsapp />
       <ToastContainer />

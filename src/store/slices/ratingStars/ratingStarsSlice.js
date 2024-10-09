@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   defaultStars: {
     count: 5,
-    size: 20,
+    size: 15,
     activeColor: "#FFD130",
     edit: false,
     value: 4.5,
@@ -17,8 +17,12 @@ const initialState = {
 export const ratingStarsSlice = createSlice({
   name: "ratingStars",
   initialState,
-  reducers: {},
+  reducers: {
+    starSize: (state, action) => {
+      state.defaultStars.size = action.payload;
+    },
+  },
 });
 
-
+export const { starSize } = ratingStarsSlice.actions;
 export default ratingStarsSlice.reducer;

@@ -13,10 +13,10 @@ export const en = {
   CelebritiesTitle: "Celebrities in sports",
   REMOVE: "REMOVE",
   FOLOW: "FOLOW",
-  cvSectoinTitle: "Employment proposals",
+  cvSectoinTitle: "Employment",
   SeeMore: "See More",
   NoCvs: "No Cvs Founded!",
-  freeCourses: "Free courses",
+  freeCourses: "courses",
   voteTitle: "Vote for the best Arab player",
   playIn: "Football Player in",
   Vote: "Vote",
@@ -31,7 +31,7 @@ export const en = {
     "To get the highest return when inviting your friends, what are you waiting for? Hurry up and register.",
   learnMore: "learn More",
   enrollNow: "enroll Now",
-  enrollNowFree: "enroll Now free",
+  enrollNowFree: "enroll Now",
   shareCourse: "Share",
   enrollWithOffer: (num) => {
     if (num === 0) {
@@ -96,6 +96,14 @@ export const en = {
   forgotPassword: "Forgot Password",
   resetPassword: "Reset Password",
   country: "Country",
+
+  // trainers
+  trainersTitle: "Trainees",
+  name: "Name",
+  email: "Email",
+  Nationality: "Nationality",
+  program: "Programs",
+  code: "Code",
 };
 
 export const ar = {
@@ -113,10 +121,10 @@ export const ar = {
   CelebritiesTitle: "مشاهير في الرياضة",
   REMOVE: "إزاله",
   FOLOW: "متابعة",
-  cvSectoinTitle: "السير الذاتية",
+  cvSectoinTitle: "التوظيف",
   SeeMore: "المزيد",
   NoCvs: "لا يوجد سيره ذاتيه",
-  freeCourses: " كورسات مجانية",
+  freeCourses: " البرامج التدريبية ",
   voteTitle: "صوت لافضل لاعب عربي",
   playIn: "لاعب في فريق",
   Vote: "صوت",
@@ -131,7 +139,7 @@ export const ar = {
     "للحصول على أعلى عائد عند دعوة أصدقائك، ما الذي تنتظره؟ سارع بالتسجيل.",
   learnMore: "اعرف المزيد",
   enrollNow: "سجل الان",
-  enrollNowFree: "سجل الان مجانا",
+  enrollNowFree: "سجل الان ",
   shareCourse: "مشاركه الكورس",
   enrollWithOffer: (num) => {
     if (num === 0) {
@@ -196,4 +204,12 @@ export const ar = {
   forgotPassword: "نسيت كلمة المرور",
   resetPassword: "إعادة تعيين كلمة المرور",
   country: "الدوله",
+
+  // trainers
+  trainersTitle: "المتدربين",
+  name: "الاسم",
+  email: "الايميل",
+  Nationality: "الجنسيه",
+  program: "البرامج",
+  code: "الكود"
 };

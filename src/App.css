@@ -49,6 +49,8 @@
 .active{
   color: #fff;
   background-color: var(--blue-primary);
+  margin: 0 !important;
+  border-radius: 5px;
 }
 
 .scrollbar-hide {

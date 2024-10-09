@@ -28,7 +28,7 @@ const Footer = () => {
               <ul className="flex p-5 flex-col items-start w-full justify-start mt-3 gap-3 list-disc">
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <a
-                    href="https://wa.me/971544066811?text=مرحباً،%20تواصلي%20معكم%20بخصوص%20الشكاوي%20وخدمة%20العملاء"
+                    href="https://wa.me/4915252455276?text=مرحباً،%20تواصلي%20معكم%20بخصوص%20الشكاوي%20وخدمة%20العملاء"
                     target="_blank"
                   >
                     {currentLang.customerService}
@@ -46,7 +46,7 @@ const Footer = () => {
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <a
-                    href="https://wa.me/971544066811?text=مرحبا،%20هل%20يمكنني%20التحقق%20من%20الشهادة%20التالية"
+                    href="https://wa.me/4915252455276?text=مرحبا،%20هل%20يمكنني%20التحقق%20من%20الشهادة%20التالية"
                     target="_blank"
                   >
                     {currentLang.verifyCertificates}
@@ -64,7 +64,7 @@ const Footer = () => {
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <a
-                    href="https://wa.me/971544066811?text=مرحبا،%20هل%20يمكنني%20،%20التعرف%20علي%20المزيد%20من%20باقات%20الإعلان%20علي%20موقعكم"
+                    href="https://wa.me/4915252455276?text=مرحبا،%20هل%20يمكنني%20،%20التعرف%20علي%20المزيد%20من%20باقات%20الإعلان%20علي%20موقعكم"
                     target="_blank"
                   >
                     {currentLang.advertiseWithUs}
@@ -112,7 +112,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex items-center justify-center gap-5">
-            <a target="_blank" href="https://wa.me/971544066811">
+            <a target="_blank" href="https://wa.me/4915252455276">
               <div className="flex items-center justify-center py-2 rounded-full border border-[#ffffff50] w-[35px] h-[35px]">
                 <i class="fab fa-whatsapp"></i>
               </div>
