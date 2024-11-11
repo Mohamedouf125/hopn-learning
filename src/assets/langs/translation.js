@@ -4,7 +4,6 @@ export const en = {
   Gifts: "Gifts",
   Courses: "Courses",
   About: "About",
-  login: "login",
   Settings: "Settings",
   Profile: "Profile",
   SignOut: "Sign Out",
@@ -17,12 +16,20 @@ export const en = {
   SeeMore: "See More",
   NoCvs: "No Cvs Founded!",
   freeCourses: "courses",
-  voteTitle: "Vote for the best Arab player",
-  playIn: "Football Player in",
+  voteTitle: "Our agents",
+  playIn: "State agent",
   Vote: "Vote",
   alreadyotVed:"You have already voted.",
   VotedSuccessfully:"Voted Successfully",
   loginToVote:"Please log in to vote.",
+  uploadeCVtitle: "Upload your CV Now",
+  uploadeCVdesc: "Your CV has been uploaded successfully, we will review and publish it.",
+  uploadCV: "Upload CV",
+  cvLoadedSuccessfly: "Your CV has been uploaded successfully",
+  ok : "I=Ok",
+  whatsapp: "whatsapp",
+  canTravel: "Available for travel",
+
 
   //   courses
   allCourses: "All Courses",
@@ -33,6 +40,7 @@ export const en = {
   enrollNow: "enroll Now",
   enrollNowFree: "enroll Now",
   shareCourse: "Share",
+  share: "Share",
   enrollWithOffer: (num) => {
     if (num === 0) {
       return `Enroll Now`;
@@ -112,7 +120,6 @@ export const ar = {
   Gifts: "الهدايا",
   Courses: "الكورسات",
   About: "من نحن",
-  login: "تسجيل الدخول",
   Settings: "الاعدادات",
   Profile: "الملف الشخصي",
   SignOut: "تسجيل الخروج",
@@ -125,12 +132,19 @@ export const ar = {
   SeeMore: "المزيد",
   NoCvs: "لا يوجد سيره ذاتيه",
   freeCourses: " البرامج التدريبية ",
-  voteTitle: "صوت لافضل لاعب عربي",
-  playIn: "لاعب في فريق",
+  voteTitle: "وكلائنا",
+  playIn: "وكيل دولة",
   Vote: "صوت",
   alreadyotVed:"لقد قمت بالتصويت بالفعل.",
   VotedSuccessfully:"تم التصويت بنجاح",
   loginToVote:"يرجى تسجيل الدخول للتصويت.",
+  uploadeCVtitle: "حمل سيراتك الذاتيه الان",
+  uploadeCVdesc: "لقد تم تحميل سيرتك الذاتية بنجاح، سنقوم بمراجعتها ونشرها.",
+  uploadCV: "اضف السيرة الذاتية مجانا",
+  cvLoadedSuccessfly: "لقد تم تحميل سيرتك الذاتية بنجاح",
+  ok :"موافق",
+  whatsapp: "واتساب",
+  canTravel: "متاح للسفر",
 
   //   courses
   allCourses: "جميع الكورسات",
@@ -141,6 +155,7 @@ export const ar = {
   enrollNow: "سجل الان",
   enrollNowFree: "سجل الان ",
   shareCourse: "مشاركه الكورس",
+  share: "مشاركه ",
   enrollWithOffer: (num) => {
     if (num === 0) {
       return "سجل الان";

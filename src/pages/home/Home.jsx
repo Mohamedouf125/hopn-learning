@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import ReactStars from "react-rating-stars-component";
 import {
   A11y,
   Navigation,
@@ -9,20 +8,14 @@ import {
   Scrollbar,
   Autoplay,
 } from "swiper/modules";
-// import avatar from "../../assets/images/profile/profileAvatar.png";
 import bigAvatar from "../../assets/images/home/bigAvatar.png";
-// import cover from "../../assets/images/profile/COVER.png";
-import cvImg from "../../assets/images/home/cvImg.png";
-import courseImg from "../../assets/images/home/courceImg.png";
 import { useDispatch, useSelector } from "react-redux";
 // import RegistrationGifts from "../../components/gifts/RegistrationGifts";
 // import ExceptionalGifts from "../../components/gifts/ExceptionalGifts";
 // import DepositGifts from "../../components/gifts/DepositGifts";
 // import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
-import { oldAccount } from "../../store/slices/user/userSlice";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { useNavigate } from "react-router-dom";
-import balanceBg from "../../assets/images/home/Subtract.png";
 import {
   fetchPlayersData,
   voteForPlayer,
@@ -32,22 +25,27 @@ import { toast } from "react-toastify";
 import Cv from "../../components/cv/Cv";
 import TraineeCard from "../../components/trainee/TraineeCard";
 import Course from "../../components/course/Course";
+import FullPagePopup from "../../components/popups/FullPagePopup";
+import UploadeCv from "../../components/uploadeCV/UploadeCv";
+import Cvpopup from "../../components/cv/Cvpopup";
 
 const Home = () => {
   const { token } = useSelector((state) => state.user);
-  const { defaultStars } = useSelector((state) => state.ratingStars);
-  // const userLoggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isVoted, setiIsVoted] = useState(false);
+  const [openUploaderCv, setOpenUploaderCv] = useState(false);
+  const [cvLoadedSuccess, setCvLoadedSuccess] = useState(false);
+  const [opencvpopup, setopencvpopup] = useState(false);
+  const [chosedCv, setchosedCv] = useState({});
 
   // to check if first login or not
-  useEffect(() => {
-    const newAccount = localStorage.getItem("newAccount");
-    if (newAccount === "false") {
-      dispatch(oldAccount());
-    }
-  }, []);
+  // useEffect(() => {
+  //   const newAccount = localStorage.getItem("newAccount");
+  //   if (newAccount === "false") {
+  //     dispatch(oldAccount());
+  //   }
+  // }, []);
 
   // feach home data from backend
   useEffect(() => {
@@ -55,16 +53,9 @@ const Home = () => {
     dispatch(fetchPlayersData());
   }, [dispatch, token]);
 
-  const {
-    sliders,
-    cvs,
-    courses,
-    trainers,
-    status,
-    users,
-    error,
-    voted_player,
-  } = useSelector((state) => state.home);
+  const { sliders, cvs, courses, trainers, voted_player } = useSelector(
+    (state) => state.home
+  );
 
   const { players } = useSelector((state) => state.players);
 
@@ -94,6 +85,52 @@ const Home = () => {
       {/* {newAccount && userLoggedIn && <RegistrationGifts />} */}
       {/* <ExceptionalGifts /> */}
       {/* <DepositGifts /> */}
+
+      {/* uploade CV form */}
+      {openUploaderCv && (
+        <FullPagePopup>
+          <UploadeCv
+            setOpenUploaderCv={setOpenUploaderCv}
+            setCvLoadedSuccess={setCvLoadedSuccess}
+          />
+        </FullPagePopup>
+      )}
+      {cvLoadedSuccess && (
+        <FullPagePopup>
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
+            <div className="flex w-full items-center justify-between">
+              {/* <h1 className="text-3xl font-bold text-green-500">
+                {currentLang.cvLoadedSuccessfly}
+              </h1> */}
+              <span
+                className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
+                onClick={() => {
+                  setCvLoadedSuccess(false);
+                }}
+              >
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
+
+            <p className="mt-10 text-center text-green-500 text-[clamp(10px,1.0416666666666665vw,20px)]">
+              
+              {currentLang.uploadeCVdesc}
+            </p>
+            <div className="w-full flex items-center justify-center mt-5">
+            <button
+              onClick={() => setCvLoadedSuccess(false)}
+              className="border-none outline-none rounded-lg px-5 mx-auto py-2 bg-[#075178] text-white"
+            >
+              {currentLang.ok}
+            </button>
+
+            </div>
+          </div>
+        </FullPagePopup>
+      )}
+      {opencvpopup && <FullPagePopup>
+        <Cvpopup setopencvpopup={setopencvpopup} cv={chosedCv} />
+      </FullPagePopup>}
 
       {/* home content */}
       <div className="container mx-auto px-4 py-8">
@@ -125,8 +162,8 @@ const Home = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="hidden md:flex w-full md:w-[30%] items-center justify-center md:justify-end ">
-              <div className="w-[240px] h-[180px] rounded-3xl relative">
+            <div className="flex md:flex-col gap-[clamp(10px,1.041665vw,20px)] text-white bg-[var(--blue-primary)] w-full p-5 md:w-[30%] items-center justify-center border border-[#F1F1F2] rounded-2xl ">
+              {/* <div className="w-[240px] h-[180px] rounded-3xl relative">
                 <img
                   src={balanceBg}
                   alt="balanceBg"
@@ -146,10 +183,17 @@ const Home = () => {
                     />
                   </svg>
                 </div>
-              </div>
+              </div> */}
+              <button
+                onClick={() => setOpenUploaderCv(true)}
+                className="md:mt-8 bg-[#ddd] text-nowrap p-[clamp(10px,1.041665vw,20px)] text-[clamp(10px,1.25vw,24px)] rounded-[clamp(10px,1.25vw,24px)] text-[#1B1B1BE5] font-bold "
+              >
+                {currentLang.uploadCV}
+              </button>
             </div>
           </div>
         </section>
+
         <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
         {/* trainers */}
         <section className="w-full flex flex-col items-center justify-center">
@@ -260,7 +304,6 @@ const Home = () => {
           </div>
         </section>
         <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
-
         {/* cv */}
         <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
@@ -274,14 +317,12 @@ const Home = () => {
               {currentLang.SeeMore}
             </span>
           </div>
-          <div className="flex items-start justify-center gap-10 flex-wrap w-full">
+          <div className="flex items-start justify-center gap-[clamp(5px,1.0416666666666665vw,20px)] flex-wrap w-full">
             {cvs.length === 0 ? (
               <div>{currentLang.NoCvs}</div>
             ) : (
-              cvs.slice(0, 4).map((slide, index) => {
-                return (
-                  <Cv cv={slide} key={index} />
-                );
+              cvs.slice(0, 4).map((cv, index) => {
+                return <Cv setchosedCv={setchosedCv} setopencvpopup={setopencvpopup} cv={cv} key={index} />;
               })
             )}
           </div>
@@ -302,9 +343,7 @@ const Home = () => {
           </div>
           <div className="flex items-center justify-center gap-[clamp(5px,1.0416666666666665vw,20px)] flex-wrap w-full">
             {courses.slice(0, 4).map((course, index) => {
-              return (
-                <Course course={course} key={index} />
-              );
+              return <Course course={course} key={index} />;
             })}
           </div>
         </section>
@@ -325,9 +364,9 @@ const Home = () => {
                       ? "border-none bg-[#D9D9D9] "
                       : "border-[#D9D9D9]"
                   }  `}
-                  onClick={() => {
-                    choosePlayer(player.id);
-                  }}
+                  // onClick={() => {
+                  //   choosePlayer(player.id);
+                  // }}
                 >
                   <div className=" rounded-full mx-auto flex items-center justify-center overflow-hidden w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
                     <img
@@ -340,8 +379,8 @@ const Home = () => {
                     <h3 className=" font-[500] text-[14px] md:font-[600] md:text-[18px] w-full text-center ">
                       {player.name}
                     </h3>
-                    <div className="flex items-center justify-center gap-1 mt-2">
-                      <div className=" w-[30px] h-[30px] md:w-[40px] md:h-[40px] ">
+                    <div className="flex w-full items-center justify-center gap-2 mt-2">
+                      <div className=" w-[30px] flex items-center justify-center h-[30px] md:w-[40px] md:h-[40px] ">
                         <img
                           className="w-full"
                           src={player.team.image}
@@ -358,11 +397,11 @@ const Home = () => {
                       </div>
                     </div>
                   </div>
-                  {isVoted && (
+                  {/* {isVoted && (
                     <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
                       {player.count} {currentLang.Vote}
                     </div>
-                  )}
+                  )} */}
                 </div>
               );
             })}
