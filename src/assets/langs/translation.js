@@ -112,6 +112,9 @@ export const en = {
   Nationality: "Nationality",
   program: "Programs",
   code: "Code",
+
+  // Institutions
+  Institutions: "Institutions",
 };
 
 export const ar = {
@@ -226,5 +229,8 @@ export const ar = {
   email: "الايميل",
   Nationality: "الجنسيه",
   program: "البرامج",
-  code: "الكود"
+  code: "الكود",
+
+  // Institutions
+  Institutions: "المؤسسات",
 };

@@ -1,6 +1,3 @@
-import logoIcon from "../../assets/images/logo/logoIconBlue.png";
-import logoTitle from "../../assets/images/logo/logoTitleBlue.png";
-import avatar from "../../assets/images/icons/avatar.png";
 import "flowbite";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -238,9 +235,9 @@ const Header = () => {
               )} */}
               <li className="!m-0 ">
                 <Link
-                  to="/Courses"
+                  to="/courses"
                   className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                    location.pathname === "/Courses" ? "active" : ""
+                    location.pathname.includes("/courses") ? "active" : ""
                   }`}
                 >
                   {currentLang.Courses}
@@ -264,6 +261,16 @@ const Header = () => {
                   }`}
                 >
                   {currentLang.cvSectoinTitle}
+                </Link>
+              </li>
+              <li className="!m-0 ">
+                <Link
+                  to="/academy"
+                  className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                    location.pathname.includes("/academy") ? "active" : ""
+                  }`}
+                >
+                  {currentLang.Institutions}
                 </Link>
               </li>
               <li className="!m-0 ">

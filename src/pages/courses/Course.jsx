@@ -4,11 +4,10 @@ import {
   fetchCourseBanner,
   fetchCourseData,
 } from "../../store/slices/courses/courceSlice";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useParams } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
-import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 import FullPagePopup from "../../components/popups/FullPagePopup";
 import { courseFormData } from "../../assets/helpers/formInputsData";
 import server from "../../assets/axios/server";
@@ -23,7 +22,6 @@ const Course = () => {
   const { copyToClipboard } = useCopyToClipboard();
   const [openForm, setOpenForm] = useState(false);
   const [countries, setCountries] = useState([]);
-  const [openMessage, setOpenMessage] = useState(false);
 
   useEffect(() => {
     dispatch(fetchCourseData(params.courseId));

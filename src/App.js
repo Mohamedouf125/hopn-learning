@@ -27,6 +27,8 @@ import About from "./pages/about/About";
 import NotFound from "./pages/404/NotFound";
 import Cvs from "./pages/cvs/Cvs";
 import Trainers from "./pages/trainers/Trainers";
+import Academy from "./pages/academy/Academy";
+import AcademyDetails from "./pages/academy/AcademyDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -58,6 +60,8 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/course/:courseId" element={<Course />} />
         <Route path="/cvs" element={<Cvs />} />
+        <Route path="/academy" element={<Academy />} />
+        <Route path="/academy/:academyId" element={<AcademyDetails />} />
         <Route path="*" element={<NotFound />} />
         {/* <Route path="/profile" element={<Profile />} /> */}
         {/* <Route path="/user/profile/:userId" element={<UserProfile />} /> */}
