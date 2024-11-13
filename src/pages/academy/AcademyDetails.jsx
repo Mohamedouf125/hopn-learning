@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import server from "../../assets/axios/server";
 // import academyCover from "../../assets/images/academy/academyCover.jpeg";
 // import academyLogo from "../../assets/images/academy/academyLogo.png";
+import traImg from "../../assets/images/academy/traImg.png";
 import userAvatar from "../../assets/images/profile/profileAvatar2.png";
 import { useEffect, useState } from "react";
 
@@ -244,7 +245,7 @@ const AcademyDetails = () => {
 
       {/* join now section */}
       <div className="flex w-full max-w-[1000px]  items-center justify-between bg-[#0751781A] rounded-[clamp(8px,0.625vw,12px)] p-[clamp(8px,0.625vw,12px)] mt-[18px] ">
-        <h2 className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[700] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#075178] flex items-center justify-center gap-[5px] ">
+        <h2 className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[700] leading-[clamp(15px,1.145833vw,22px)] text-[#075178] flex items-center justify-center gap-[5px] ">
           <svg
             width="38"
             height="38"
@@ -259,14 +260,36 @@ const AcademyDetails = () => {
           </svg>
           <div className="flex flex-col items-start justify-center">
             <span>انضم الينا الان </span>
-            <span className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[400] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#696969]">
+            <span className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[400] leading-[clamp(15px,1.145833vw,22px)] text-[#696969]">
               واعرض اكاديميتك لفتح لك فرص لمتدربين اكتر مع اسبوررتس ان
             </span>
           </div>
         </h2>
-        <button className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] ">
+        <button className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.145833vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] ">
           انضم الان
         </button>
+      </div>
+
+      <div className="w-full border-b border-[#F1F1F2] mt-[45px]"></div>
+
+      {/* training images */}
+      <div className=" flex w-full mt-[clamp(25px,1.67vw,32px)] flex-col items-center justify-center  ">
+        <h2 className="font-[Cairo] text-[clamp(15px,1.041vw,20px)] font-[600] leading-[clamp(20px,1.927085vw,37px)] text-[#000] w-full flex items-center justify-center sm:justify-start">
+          صور للتدريب الفعلي
+        </h2>
+        <div className="w-full flex flex-wrap justify-center items-stretch gap-[clamp(5px,1.04165vw,20px)] mt-[20px]">
+          {[1, 2, 3, 4, 5, 6].map(() => {
+            return (
+              <div className="w-[clamp(180px,17.7086vw,340px)] ">
+                <img
+                  className="w-full h-full rounded-[clamp(8px,0.625vw,12px)]"
+                  src={traImg}
+                  alt="training"
+                />
+              </div>
+            );
+          })}
+        </div>
       </div>
 
       <div className="w-full border-b border-[#F1F1F2] mt-[45px]"></div>
