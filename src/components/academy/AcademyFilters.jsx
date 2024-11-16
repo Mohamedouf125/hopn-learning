@@ -115,7 +115,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
               position: "absolute",
               inset:`0px auto auto 0px`,
               margin: "0px",
-              transform: lang === "en" ? "translate3d(1177px, 578px, 0px)": "translate3d(604px, 578px, 0px)" ,
+              transform: lang === "en" ? "translate3d(1177px, 492px, 0px)": "translate3d(604px, 492px, 0px)" ,
             }}
           >
             <ul
@@ -183,7 +183,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
               position: "absolute",
               inset: "0px auto auto 0px",
               margin: "0px",
-              transform: lang === "en" ? `translate3d(1379.5px, 578px, 0px)` : "translate3d(410.5px, 578px, 0px)",
+              transform: lang === "en" ? `translate3d(604px, 492px, 0px)` : "translate3d(410.5px, 492px, 0px)",
             }}
           >
             <ul

@@ -7,6 +7,8 @@ import userAvatar from "../../assets/images/profile/profileAvatar2.png";
 import { useEffect, useState } from "react";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { ar, en } from "../../assets/langs/translation";
 
 const AcademyDetails = () => {
   const [academyData, setAcademyData] = useState({});
@@ -19,6 +21,10 @@ const AcademyDetails = () => {
       setAcademyData(res.data.data);
     });
   }, []);
+
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang === "en" ? en : ar;
 
   return (
     <div className="container mx-auto lg:max-w-[1060px] flex flex-col items-center justify-center px-[5px] sm:px-0 mb-[50px] mt-[20px]">
@@ -79,7 +85,7 @@ const AcademyDetails = () => {
               </span>
             </div>
             <div className="flex items-center justify-start gap-[5px] font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[600] leading-[clamp(15px,1.1458vw,22px)] text-[#075178]">
-              <span>المدير العام :</span>
+              <span>{currentLang.leader}</span>
               <span>{academyData.leader}</span>
             </div>
           </div>
@@ -180,7 +186,7 @@ const AcademyDetails = () => {
               />
             </svg>
             <span className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[600] leading-[clamp(15px,1.1458vw,22px)] text-[#fff]">
-              التواصل مع الاكاديمية
+              {currentLang.contactInstitutions}
             </span>
           </a>
 
@@ -248,7 +254,7 @@ const AcademyDetails = () => {
 
       {/* times */}
       <div className="w-full flex-col mt-[16px]">
-        <h2>مواعيد التدريب :</h2>
+        <h2>{currentLang.opiningTimes}</h2>
         <div className="mt-[21px] flex items-start justify-start">
           <p
             dangerouslySetInnerHTML={{ __html: academyData.times }}
@@ -260,30 +266,20 @@ const AcademyDetails = () => {
       <div className="w-full border-b border-[#F1F1F2] mt-[10px]"></div>
 
       {/* join now section */}
-      <div className="flex w-full max-w-[1000px]  items-center justify-between bg-[#0751781A] rounded-[clamp(8px,0.625vw,12px)] p-[clamp(8px,0.625vw,12px)] mt-[18px] ">
-        <h2 className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[700] leading-[clamp(15px,1.145833vw,22px)] text-[#075178] flex items-center justify-center gap-[5px] ">
-          <svg
-            width="38"
-            height="38"
-            viewBox="0 0 38 38"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M30.0833 6.33333H23.75V4.75C23.75 3.49022 23.2496 2.28204 22.3588 1.39124C21.468 0.500445 20.2598 0 19 0C17.7402 0 16.532 0.500445 15.6412 1.39124C14.7504 2.28204 14.25 3.49022 14.25 4.75V6.33333H7.91667C5.81781 6.33585 3.80563 7.17073 2.32151 8.65485C0.837396 10.139 0.00251411 12.1511 0 14.25L0 30.0833C0.00251411 32.1822 0.837396 34.1944 2.32151 35.6785C3.80563 37.1626 5.81781 37.9975 7.91667 38H30.0833C32.1822 37.9975 34.1944 37.1626 35.6785 35.6785C37.1626 34.1944 37.9975 32.1822 38 30.0833V14.25C37.9975 12.1511 37.1626 10.139 35.6785 8.65485C34.1944 7.17073 32.1822 6.33585 30.0833 6.33333ZM17.4167 4.75C17.4167 4.33007 17.5835 3.92735 17.8804 3.63041C18.1773 3.33348 18.5801 3.16667 19 3.16667C19.4199 3.16667 19.8227 3.33348 20.1196 3.63041C20.4165 3.92735 20.5833 4.33007 20.5833 4.75V7.91667C20.5833 8.33659 20.4165 8.73932 20.1196 9.03625C19.8227 9.33319 19.4199 9.5 19 9.5C18.5801 9.5 18.1773 9.33319 17.8804 9.03625C17.5835 8.73932 17.4167 8.33659 17.4167 7.91667V4.75ZM34.8333 30.0833C34.8333 31.3431 34.3329 32.5513 33.4421 33.4421C32.5513 34.3329 31.3431 34.8333 30.0833 34.8333H7.91667C6.65689 34.8333 5.44871 34.3329 4.55791 33.4421C3.66711 32.5513 3.16667 31.3431 3.16667 30.0833V14.25C3.16667 12.9902 3.66711 11.782 4.55791 10.8912C5.44871 10.0004 6.65689 9.5 7.91667 9.5H14.5413C14.8638 10.4255 15.4662 11.2278 16.2652 11.7955C17.0641 12.3632 18.0199 12.6682 19 12.6682C19.9801 12.6682 20.9359 12.3632 21.7348 11.7955C22.5338 11.2278 23.1362 10.4255 23.4587 9.5H30.0833C31.3431 9.5 32.5513 10.0004 33.4421 10.8912C34.3329 11.782 34.8333 12.9902 34.8333 14.25V30.0833ZM15.8333 15.8333H7.91667C7.49674 15.8333 7.09401 16.0001 6.79708 16.2971C6.50015 16.594 6.33333 16.9967 6.33333 17.4167V30.0833C6.33333 30.5033 6.50015 30.906 6.79708 31.2029C7.09401 31.4999 7.49674 31.6667 7.91667 31.6667H15.8333C16.2533 31.6667 16.656 31.4999 16.9529 31.2029C17.2499 30.906 17.4167 30.5033 17.4167 30.0833V17.4167C17.4167 16.9967 17.2499 16.594 16.9529 16.2971C16.656 16.0001 16.2533 15.8333 15.8333 15.8333ZM14.25 28.5H9.5V19H14.25V28.5ZM31.6667 23.75C31.6667 24.1699 31.4999 24.5727 31.2029 24.8696C30.906 25.1665 30.5033 25.3333 30.0833 25.3333H22.1667C21.7467 25.3333 21.344 25.1665 21.0471 24.8696C20.7501 24.5727 20.5833 24.1699 20.5833 23.75C20.5833 23.3301 20.7501 22.9273 21.0471 22.6304C21.344 22.3335 21.7467 22.1667 22.1667 22.1667H30.0833C30.5033 22.1667 30.906 22.3335 31.2029 22.6304C31.4999 22.9273 31.6667 23.3301 31.6667 23.75ZM31.6667 17.4167C31.6667 17.8366 31.4999 18.2393 31.2029 18.5363C30.906 18.8332 30.5033 19 30.0833 19H22.1667C21.7467 19 21.344 18.8332 21.0471 18.5363C20.7501 18.2393 20.5833 17.8366 20.5833 17.4167C20.5833 16.9967 20.7501 16.594 21.0471 16.2971C21.344 16.0001 21.7467 15.8333 22.1667 15.8333H30.0833C30.5033 15.8333 30.906 16.0001 31.2029 16.2971C31.4999 16.594 31.6667 16.9967 31.6667 17.4167ZM28.5 30.0833C28.5 30.5033 28.3332 30.906 28.0363 31.2029C27.7393 31.4999 27.3366 31.6667 26.9167 31.6667H22.1667C21.7467 31.6667 21.344 31.4999 21.0471 31.2029C20.7501 30.906 20.5833 30.5033 20.5833 30.0833C20.5833 29.6634 20.7501 29.2607 21.0471 28.9637C21.344 28.6668 21.7467 28.5 22.1667 28.5H26.9167C27.3366 28.5 27.7393 28.6668 28.0363 28.9637C28.3332 29.2607 28.5 29.6634 28.5 30.0833Z"
-              fill="#075178"
-            />
-          </svg>
-          <div className="flex flex-col items-start justify-center">
-            <span>انضم الينا الان </span>
-            <span className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[400] leading-[clamp(15px,1.145833vw,22px)] text-[#696969]">
-              واعرض اكاديميتك لفتح لك فرص لمتدربين اكتر مع اسبوررتس ان
-            </span>
-          </div>
+      <div className="flex w-full max-w-[1060px]  items-center justify-between bg-[#0751781A] border border-[#0751784D] rounded-[12px] p-[12px] mt-[20px] ">
+        <h2 className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[700] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#075178] ">
+          {currentLang.joinInstitutions}
         </h2>
-        <button className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.145833vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] ">
-          انضم الان
-        </button>
+        <a
+          href={
+            `https://wa.me/${academyData.whatsapp_number}` ||
+            "https://wa.me/4915252455276"
+          }
+          target="_blank"
+          className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] "
+        >
+          {currentLang.joinNow}
+        </a>
       </div>
 
       <div className="w-full border-b border-[#F1F1F2] mt-[45px]"></div>
@@ -291,18 +287,23 @@ const AcademyDetails = () => {
       {/* training images */}
       <div className=" flex w-full mt-[clamp(25px,1.67vw,32px)] flex-col items-center justify-center  ">
         <h2 className="font-[Cairo] text-[clamp(15px,1.041vw,20px)] font-[600] leading-[clamp(20px,1.927085vw,37px)] text-[#000] w-full flex items-center justify-center sm:justify-start">
-         معرض الصور  
+          {currentLang.photos}
         </h2>
         <div className="w-full flex flex-wrap justify-center items-stretch gap-[clamp(5px,1.04165vw,20px)] mt-[20px]">
           {academyData.photos?.map((photo) => {
             return (
-              <div key={photo.id} className="w-[clamp(180px,17.7086vw,340px)] ">
+              <a
+                target="_blank"
+                href={photo.image}
+                key={photo.id}
+                className="w-[clamp(180px,17.7086vw,340px)] "
+              >
                 <img
                   className="w-full h-[clamp(128px,12.6041vw,242px)] rounded-[clamp(8px,0.625vw,12px)]"
                   src={photo.image}
                   alt="training"
                 />
-              </div>
+              </a>
             );
           })}
         </div>
@@ -312,7 +313,9 @@ const AcademyDetails = () => {
 
       {/* team */}
       <div className="flex flex-col items-center justify-center mt-[clamp(20px,1.9791vw,38px)]">
-        <div>الجهاز الفني</div>
+        <div className="font-[Cairo] text-[clamp(20px,1.5625vw,30px)] font-[600] ">
+          {currentLang.teamwork}{" "}
+        </div>
         <div className=" mt-[clamp(20px,2.604166666666667vw,50px)] flex flex-col items-center justify-center ">
           <div className="flex items-center justify-center w-[clamp(100px,8.072916666666668vw,155px)] h-[clamp(100px,8.072916666666668vw,155px)] ">
             <img

@@ -121,10 +121,18 @@ export const en = {
   allInstitutions: "All Institutions",
   allCountries: "All countries",
   country: "Country :",
-  academy:"Academies",
+  academy: "Academies",
   gym: "Gyms",
-  filters : "Filters",
+  filters: "Filters",
   noInstitutions: "No Institutions founded",
+  joinInstitutions:
+    "Join us now and showcase your academy to unlock more opportunities for interns with Esporrts.",
+  joinNow: "Join Now",
+  photos: "Photos",
+  opiningTimes: "Opining Times :",
+  teamwork: "Teamwork",
+  leader: "General Manager:",
+  contactInstitutions: "Contact the institution"
 };
 
 export const ar = {
@@ -252,4 +260,12 @@ export const ar = {
   gym: "جيمات",
   filters: "التصنيفات حسب",
   noInstitutions: "لا يوجد اي مؤسسة",
+  joinInstitutions:
+    "انضم الينا الان واعرض اكاديميتك لفتح لك فرص لمتدربين اكتر مع اسبوررتس ان",
+  joinNow:"انضم الان",
+  photos:"الصور",
+  opiningTimes: "مواعيد العمل :",
+  teamwork: "طاقم العمل",
+  leader: "المدير العام :",
+  contactInstitutions: "تواصل مع المؤسسه",
 };
