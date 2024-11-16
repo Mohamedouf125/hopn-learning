@@ -76,7 +76,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
       </div>
 
       <div className="flex items-center justify-end gap-[clamp(8px,0.7291666666666666vw,14px)] w-full">
-        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)]">
+        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)] relative">
           <span className=" hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] ">
             {currentLang.Institutions2}
           </span>
@@ -85,7 +85,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
             data-dropdown-toggle="academyDropdown"
             className=" text-nowrap font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] flex items-center justify-center  "
             type="button"
-            onClick={() => settypesopendropdown((prev) => !prev)}
+            onClick={() => {settypesopendropdown((prev) => !prev); setcountriesopendropdown(false);}}
           >
             {filters.type === "all"
               ? `${currentLang.allInstitutions}`
@@ -113,9 +113,9 @@ const AcademyFilters = ({ filters, setfilters }) => {
             } bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
             style={{
               position: "absolute",
-              inset:`0px auto auto 0px`,
+              insetBlockStart: "50px",
+              insetInlineEnd:"0px",
               margin: "0px",
-              transform: lang === "en" ? "translate3d(1177px, 492px, 0px)": "translate3d(604px, 492px, 0px)" ,
             }}
           >
             <ul
@@ -144,8 +144,8 @@ const AcademyFilters = ({ filters, setfilters }) => {
         </div>
         <div className="border-l border-[#F1F1F2] h-[38px] w-[1px] "></div>
         {/* countries */}
-        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)]">
-          <span className="hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] ">
+        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)] relative">
+          <span className="hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000]  ">
             {currentLang.country}
           </span>
           <button
@@ -153,7 +153,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
             data-dropdown-toggle="countryDropdown"
             className=" text-nowrap font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] flex items-center justify-center  "
             type="button"
-            onClick={() => setcountriesopendropdown((prev) => !prev)}
+            onClick={() => {setcountriesopendropdown((prev) => !prev); settypesopendropdown(false);}}
           >
             {filters.country === "all"
               ? `${currentLang.allCountries}`
@@ -181,9 +181,9 @@ const AcademyFilters = ({ filters, setfilters }) => {
             } bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
             style={{
               position: "absolute",
-              inset: "0px auto auto 0px",
+              insetBlockStart: "50px",
+              insetInlineEnd: "0",
               margin: "0px",
-              transform: lang === "en" ? `translate3d(604px, 492px, 0px)` : "translate3d(410.5px, 492px, 0px)",
             }}
           >
             <ul

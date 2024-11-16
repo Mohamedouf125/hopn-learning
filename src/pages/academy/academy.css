@@ -15,3 +15,35 @@
     width: clamp( 45px, 4.166666666666666vw, 80px);
   }
 }
+
+/* academy deatails */
+.subscriptionCard:nth-child(1){
+  .card-head{
+    background-color: #E74D3C;
+  }
+}
+.subscriptionCard:nth-child(2){
+  .card-head{
+    background-color: #2B3D4F;
+  }
+}
+.subscriptionCard:nth-child(3){
+  .card-head{
+    background-color: #28AF60;
+  }
+}
+.subscriptionCard:nth-child(4){
+  .card-head{
+    background-color: #075178;
+  }
+}
+.subscriptionCard:nth-child(5){
+  .card-head{
+    background-color: #8a0669;
+  }
+}
+.subscriptionCard:nth-child(6){
+  .card-head{
+    background-color: #e65f11;
+  }
+}

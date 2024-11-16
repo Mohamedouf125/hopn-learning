@@ -242,10 +242,10 @@ const AcademyDetails = () => {
 
       {/* academy info */}
       <div className="mt-[200px] flex flex-col items-start justify-start gap-[5px] w-full ">
-        <div className="mt-[21px] flex items-center justify-start">
+        <div className="mt-[21px] w-full flex items-center justify-start">
           <p
             dangerouslySetInnerHTML={{ __html: academyData.description }}
-            className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[400] leading-[clamp(14px, 1.041vw,20px)] text-[#000]"
+            className="font-[Cairo] text-center sm:text-start w-full text-[clamp(10px,0.625vw,12px)] font-[400] leading-[clamp(14px, 1.041vw,20px)] text-[#000]"
           />
         </div>
       </div>
@@ -254,12 +254,42 @@ const AcademyDetails = () => {
 
       {/* times */}
       <div className="w-full flex-col mt-[16px]">
-        <h2>{currentLang.opiningTimes}</h2>
+        <h2 className="font-[Cairo]  text-center sm:text-start text-[clamp(16px,1.04165vw,20px)] font-[400]">{currentLang.opiningTimes}</h2>
         <div className="mt-[21px] flex items-start justify-start">
           <p
             dangerouslySetInnerHTML={{ __html: academyData.times }}
-            className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[400] leading-[clamp(14px, 1.041vw,20px)] text-[#000] px-[20px]"
+            className="times-desc font-[Cairo]  text-center sm:text-start w-full text-[12px] font-[400] leading-[clamp(14px, 1.041vw,20px)] text-[#000] px-[20px]"
           />
+        </div>
+      </div>
+
+      <div className="w-full border-b border-[#F1F1F2] mt-[20px]"></div>
+
+      {/* subscribtion */}
+      <div className=" flex w-full mt-[10px] flex-col items-center justify-center  ">
+        <h2 className="font-[Cairo] text-[clamp(15px,1.041vw,20px)] font-[600] leading-[clamp(20px,1.927085vw,37px)] text-[#000] w-full flex items-center justify-center sm:justify-start">
+          {currentLang.subscription}
+        </h2>
+        <div className="w-full flex flex-wrap justify-center items-stretch gap-[clamp(5px,1.04165vw,20px)] mt-[20px]">
+          {academyData.subscriptions?.map((plan) => {
+            return (
+              <div className=" subscriptionCard gap-[5px] w-[clamp(180px,13.02084vw,250px)] p-[6px] rounded-[12px] border border-[#F1F1F2] flex flex-col items-start justify-between ">
+                <div className="card-head flex items-center justify-between w-full rounded-[12px] px-[clamp(8px,0.625vw,12px)] py-[clamp(10px,0.9375vw,18px)] ">
+                  <span className="text-white font-[cairo] text-[clamp(12px,0.834vw,16px)] font-[600]">{plan.title}</span>
+                  <span className="text-white font-[cairo] text-[clamp(12px,0.834vw,16px)] font-[600]">{plan.price} {currentLang.pound}</span>
+                </div>
+                <div className="w-full text-center px-[clamp(10px,0.9375vw,18px)] text-[12px] font-[400] text-[cairo]  ">
+                  {plan.description}
+                </div>
+                <div className="w-full text-center px-[clamp(10px,0.9375vw,18px)]">
+                  {plan?.advantages}
+                </div>
+                <button className="mx-auto text-white text-[12px] font-[600] px-[20px] py-[5px] text-center bg-[#28AF60] rounded-[8px]">
+                  {currentLang.subscripe}
+                </button>
+              </div>
+            );
+          })}
         </div>
       </div>
 

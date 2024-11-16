@@ -132,7 +132,10 @@ export const en = {
   opiningTimes: "Opining Times :",
   teamwork: "Teamwork",
   leader: "General Manager:",
-  contactInstitutions: "Contact the institution"
+  contactInstitutions: "Contact the institution",
+  subscription: "Subscription",
+  pound: "L.E",
+  subscripe: "subscripe",
 };
 
 export const ar = {
@@ -262,10 +265,13 @@ export const ar = {
   noInstitutions: "لا يوجد اي مؤسسة",
   joinInstitutions:
     "انضم الينا الان واعرض اكاديميتك لفتح لك فرص لمتدربين اكتر مع اسبوررتس ان",
-  joinNow:"انضم الان",
-  photos:"الصور",
+  joinNow: "انضم الان",
+  photos: "الصور",
   opiningTimes: "مواعيد العمل :",
   teamwork: "طاقم العمل",
   leader: "المدير العام :",
   contactInstitutions: "تواصل مع المؤسسه",
+  subscription: "الاشتراكات",
+  pound: "ج.م",
+  subscripe: "اشترك",
 };
