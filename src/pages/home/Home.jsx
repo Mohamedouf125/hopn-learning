@@ -138,10 +138,8 @@ const Home = () => {
         <section className="mb-8 w-full ">
           <div className="flex flex-col md:flex-row w-full gap-10 md:gap-0 ">
             <Swiper
-              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+              modules={[A11y, Autoplay]}
               centeredSlides={true}
-              pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
               autoplay={{ delay: 6500, disableOnInteraction: false }}
               dir="rtl"
               loop={true}
@@ -202,14 +200,12 @@ const Home = () => {
           </h2>
           <div className="w-full relative">
             <Swiper
-              modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+              modules={[Navigation, A11y, Autoplay]}
               centeredSlides={true}
               navigation={{
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".trainers-swiper-button-next",
+                prevEl: ".trainers-swiper-button-prev",
               }}
-              pagination={{ clickable: true }}
-              scrollbar={{ draggable: true }}
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               loop={true}
               dir="rtl"
@@ -243,7 +239,7 @@ const Home = () => {
               })}
             </Swiper>
 
-            <div className="swiper-button-next border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] md:translate-x-[-50%] ">
+            <div className="trainers-swiper-button-next border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] md:translate-x-[-50%] ">
               <svg
                 width="25"
                 height="24"
@@ -272,7 +268,7 @@ const Home = () => {
                 </defs>
               </svg>
             </div>
-            <div className="swiper-button-prev border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] md:translate-x-[50%]">
+            <div className="trainers-swiper-button-prev border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] md:translate-x-[50%]">
               <svg
                 width="25"
                 height="24"

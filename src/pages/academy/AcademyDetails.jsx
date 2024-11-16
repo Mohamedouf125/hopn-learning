@@ -5,10 +5,13 @@ import server from "../../assets/axios/server";
 import traImg from "../../assets/images/academy/traImg.png";
 import userAvatar from "../../assets/images/profile/profileAvatar2.png";
 import { useEffect, useState } from "react";
+import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
+import { toast } from "react-toastify";
 
 const AcademyDetails = () => {
   const [academyData, setAcademyData] = useState({});
   const params = useParams();
+  const { copyToClipboard } = useCopyToClipboard();
 
   useEffect(() => {
     server.get(`/academias-api/${params.academyId}`).then((res) => {
@@ -84,7 +87,9 @@ const AcademyDetails = () => {
 
         <div className="w-full flex items-center justify-center sm:justify-end mt-[140px] sm:mt-[10px] gap-[8px] ">
           {/* instagram */}
-          <div
+          <a
+            href={academyData.instagram_link || "https://instagram.com"}
+            target="_blank"
             className="w-[44px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] "
             style={{
               background:
@@ -113,10 +118,12 @@ const AcademyDetails = () => {
                 fill="white"
               />
             </svg>
-          </div>
+          </a>
 
           {/* facebook */}
-          <div
+          <a
+            href={academyData.facebook_link || "https://facebook.com"}
+            target="_blank"
             className="w-[44px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] bg-[#1877F2] "
             style={{
               boxShadow: "0px 3px 4px 0px #00000008",
@@ -134,10 +141,15 @@ const AcademyDetails = () => {
                 fill="white"
               />
             </svg>
-          </div>
+          </a>
 
           {/* whatsapp */}
-          <div
+          <a
+            href={
+              `https://wa.me/${academyData.whatsapp_number}` ||
+              "https://wa.me/4915252455276"
+            }
+            target="_blank"
             className="w-[clamp(140px,8.69791vw,167px)] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center gap-[5px] rounded-[8px] bg-[#28AF60] "
             style={{
               boxShadow: "0px 3px 4px 0px #00000008",
@@ -170,10 +182,14 @@ const AcademyDetails = () => {
             <span className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[600] leading-[clamp(15px,1.1458vw,22px)] text-[#fff]">
               التواصل مع الاكاديمية
             </span>
-          </div>
+          </a>
 
-          {/* facebook */}
+          {/* share */}
           <div
+            onClick={() => {
+              copyToClipboard(window.location.href);
+              toast.success("Link copied to clipboard");
+            }}
             className="w-[66px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] border border-[#28AF6080] "
             style={{
               boxShadow: "0px 3px 4px 0px #00000008",
@@ -275,15 +291,15 @@ const AcademyDetails = () => {
       {/* training images */}
       <div className=" flex w-full mt-[clamp(25px,1.67vw,32px)] flex-col items-center justify-center  ">
         <h2 className="font-[Cairo] text-[clamp(15px,1.041vw,20px)] font-[600] leading-[clamp(20px,1.927085vw,37px)] text-[#000] w-full flex items-center justify-center sm:justify-start">
-          صور للتدريب الفعلي
+         معرض الصور  
         </h2>
         <div className="w-full flex flex-wrap justify-center items-stretch gap-[clamp(5px,1.04165vw,20px)] mt-[20px]">
-          {[1, 2, 3, 4, 5, 6].map(() => {
+          {academyData.photos?.map((photo) => {
             return (
-              <div className="w-[clamp(180px,17.7086vw,340px)] ">
+              <div key={photo.id} className="w-[clamp(180px,17.7086vw,340px)] ">
                 <img
-                  className="w-full h-full rounded-[clamp(8px,0.625vw,12px)]"
-                  src={traImg}
+                  className="w-full h-[clamp(128px,12.6041vw,242px)] rounded-[clamp(8px,0.625vw,12px)]"
+                  src={photo.image}
                   alt="training"
                 />
               </div>

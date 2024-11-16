@@ -19,17 +19,17 @@ export const en = {
   voteTitle: "Our agents",
   playIn: "State agent",
   Vote: "Vote",
-  alreadyotVed:"You have already voted.",
-  VotedSuccessfully:"Voted Successfully",
-  loginToVote:"Please log in to vote.",
+  alreadyotVed: "You have already voted.",
+  VotedSuccessfully: "Voted Successfully",
+  loginToVote: "Please log in to vote.",
   uploadeCVtitle: "Upload your CV Now",
-  uploadeCVdesc: "Your CV has been uploaded successfully, we will review and publish it.",
+  uploadeCVdesc:
+    "Your CV has been uploaded successfully, we will review and publish it.",
   uploadCV: "Upload CV",
   cvLoadedSuccessfly: "Your CV has been uploaded successfully",
-  ok : "I=Ok",
+  ok: "I=Ok",
   whatsapp: "whatsapp",
   canTravel: "Available for travel",
-
 
   //   courses
   allCourses: "All Courses",
@@ -54,8 +54,10 @@ export const en = {
   close: "Close",
   courseMessage:
     "You will be transferred to customer service to learn about the discount list for training programs and the set prices.",
-  successfullyRegisteredCourse: "You have successfully registered for the course.",
-  registrationNote:"Please note that this information will be printed on the certificate you will receive after completing the course. Please write all information in English.",
+  successfullyRegisteredCourse:
+    "You have successfully registered for the course.",
+  registrationNote:
+    "Please note that this information will be printed on the certificate you will receive after completing the course. Please write all information in English.",
 
   // footer
   Links: "Links",
@@ -92,7 +94,7 @@ export const en = {
   CompleteInformation: "Complete your information",
   addCv: "Add CV",
   save: "Save",
-  ProfileUpdatedSuccessfully:"Profile updated successfully",
+  ProfileUpdatedSuccessfully: "Profile updated successfully",
 
   // validation
   required: "This field is required",
@@ -115,6 +117,14 @@ export const en = {
 
   // Institutions
   Institutions: "Institutions",
+  Institutions2: "Institutions :",
+  allInstitutions: "All Institutions",
+  allCountries: "All countries",
+  country: "Country :",
+  academy:"Academies",
+  gym: "Gyms",
+  filters : "Filters",
+  noInstitutions: "No Institutions founded",
 };
 
 export const ar = {
@@ -138,14 +148,14 @@ export const ar = {
   voteTitle: "وكلائنا",
   playIn: "وكيل دولة",
   Vote: "صوت",
-  alreadyotVed:"لقد قمت بالتصويت بالفعل.",
-  VotedSuccessfully:"تم التصويت بنجاح",
-  loginToVote:"يرجى تسجيل الدخول للتصويت.",
+  alreadyotVed: "لقد قمت بالتصويت بالفعل.",
+  VotedSuccessfully: "تم التصويت بنجاح",
+  loginToVote: "يرجى تسجيل الدخول للتصويت.",
   uploadeCVtitle: "حمل سيراتك الذاتيه الان",
   uploadeCVdesc: "لقد تم تحميل سيرتك الذاتية بنجاح، سنقوم بمراجعتها ونشرها.",
   uploadCV: "اضف السيرة الذاتية مجانا",
   cvLoadedSuccessfly: "لقد تم تحميل سيرتك الذاتية بنجاح",
-  ok :"موافق",
+  ok: "موافق",
   whatsapp: "واتساب",
   canTravel: "متاح للسفر",
 
@@ -172,8 +182,9 @@ export const ar = {
   close: "إغلاق",
   courseMessage:
     "سيتم تحويلك الي خدمه العملاء للتعرف علي لائحة الخصم للبرامج التدريبية والاسعار المقرره",
-  successfullyRegisteredCourse:"لقد قمت بالتسجيل في الدورة بنجاح.",
-  registrationNote:"يرجى ملاحظة أن هذه المعلومات سيتم طباعتها على الشهادة التي ستحصل عليها بعد إكمال الدورة. يرجى كتابة جميع المعلومات باللغة الإنجليزية.",
+  successfullyRegisteredCourse: "لقد قمت بالتسجيل في الدورة بنجاح.",
+  registrationNote:
+    "يرجى ملاحظة أن هذه المعلومات سيتم طباعتها على الشهادة التي ستحصل عليها بعد إكمال الدورة. يرجى كتابة جميع المعلومات باللغة الإنجليزية.",
 
   // footer
   Links: "روابط هامة",
@@ -210,7 +221,7 @@ export const ar = {
   CompleteInformation: "أكمل معلوماتك",
   addCv: "اضف سيره ذاتية",
   save: "حفظ",
-  ProfileUpdatedSuccessfully:"تم تحديث الملف الشخصي بنجاح",
+  ProfileUpdatedSuccessfully: "تم تحديث الملف الشخصي بنجاح",
 
   // validation
   required: "هذا الحقل مطلوب",
@@ -233,4 +244,12 @@ export const ar = {
 
   // Institutions
   Institutions: "المؤسسات",
+  Institutions2: "المؤسسات :",
+  allInstitutions: "جميع المؤسسات",
+  allCountries: "جميع الدول ",
+  country: "الدولة :",
+  academy: "الاكاديميات",
+  gym: "جيمات",
+  filters: "التصنيفات حسب",
+  noInstitutions: "لا يوجد اي مؤسسة",
 };

@@ -1,6 +1,36 @@
-import "flowbite";
+import server from "../../assets/axios/server";
+import { useEffect, useState } from "react";
+import { ar, en } from "../../assets/langs/translation";
+import { useSelector } from "react-redux";
 
-const AcademyFilters = () => {
+const AcademyFilters = ({ filters, setfilters }) => {
+  const [countries, setCountries] = useState([]);
+  const [countriesopendropdown, setcountriesopendropdown] = useState(false);
+  const [typesopendropdown, settypesopendropdown] = useState(false);
+
+  useEffect(() => {
+    server
+      .get("/countries-api")
+      .then((res) => {
+        setCountries(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [server]);
+
+  const choseCountry = (country) => {
+    setfilters((prev) => ({ ...prev, country }));
+    setcountriesopendropdown(false);
+  };
+
+  const choseInstitutions = (type) => {
+    setfilters((prev) => ({ ...prev, type }));
+    settypesopendropdown(false);
+  };
+
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang === "en" ? en : ar;
+
   return (
     <div className="flex px-[5px] sm:px-0 items-center justify-between w-full max-w-[1060px] border-t border-b border-[#F1F1F2] mt-[clamp(10px,1.0416666666666665vw,20px)] py-[10px] ">
       <div className="flex items-center justify-start gap-[clamp(8px,0.7291666666666666vw,14px)] w-full">
@@ -41,20 +71,25 @@ const AcademyFilters = () => {
           />
         </svg>
         <span className=" font-[Cairo] text-[clamp(12px,0.8333333333333334vw,16px)] font-[400] leading-[30px] text-[#000] ">
-          التصنيفات حسب
+          {currentLang.filters}
         </span>
       </div>
 
       <div className="flex items-center justify-end gap-[clamp(8px,0.7291666666666666vw,14px)] w-full">
-        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)]"> 
-          <span className=" hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] ">الاكاديمية :</span>
+        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)]">
+          <span className=" hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] ">
+            {currentLang.Institutions2}
+          </span>
           <button
             id="academyDropdownButton"
             data-dropdown-toggle="academyDropdown"
             className=" text-nowrap font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] flex items-center justify-center  "
             type="button"
+            onClick={() => settypesopendropdown((prev) => !prev)}
           >
-            جميع الاكاديميات
+            {filters.type === "all"
+              ? `${currentLang.allInstitutions}`
+              : `${filters.type}`}
             <svg
               class="w-2.5 h-2.5 ms-3"
               aria-hidden="true"
@@ -73,33 +108,56 @@ const AcademyFilters = () => {
           </button>
           <div
             id="academyDropdown"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            class={`z-10 ${
+              typesopendropdown ? "block " : "hidden"
+            } bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
+            style={{
+              position: "absolute",
+              inset:`0px auto auto 0px`,
+              margin: "0px",
+              transform: lang === "en" ? "translate3d(1177px, 578px, 0px)": "translate3d(604px, 578px, 0px)" ,
+            }}
           >
             <ul
               class="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="academyDropdownButton"
             >
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
+              <li
+                onClick={() => choseInstitutions("all")}
+              >
+                <div class="block px-4 py-2 hover:bg-gray-100">
+                  {currentLang.allInstitutions}
+                </div>
+              </li>
+              <li onClick={() => choseInstitutions(currentLang.gym)}>
+                <div class="block px-4 py-2 hover:bg-gray-100">
+                  {currentLang.gym}
+                </div>
+              </li>
+              <li onClick={() => choseInstitutions(currentLang.academy)}>
+                <div class="block px-4 py-2 hover:bg-gray-100">
+                  {currentLang.academy}
+                </div>
               </li>
             </ul>
           </div>
         </div>
         <div className="border-l border-[#F1F1F2] h-[38px] w-[1px] "></div>
-        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)]"> 
-          <span className="hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] ">الدولة :</span>
+        {/* countries */}
+        <div className="flex items-center justify-start gap-[clamp(10px,1.0416666666666665vw,20px)]">
+          <span className="hidden sm:inline-block font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] ">
+            {currentLang.country}
+          </span>
           <button
             id="countryDropdownButton"
             data-dropdown-toggle="countryDropdown"
             className=" text-nowrap font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] flex items-center justify-center  "
             type="button"
+            onClick={() => setcountriesopendropdown((prev) => !prev)}
           >
-             جميع الدول
+            {filters.country === "all"
+              ? `${currentLang.allCountries}`
+              : `${filters.country}`}
             <svg
               class="w-2.5 h-2.5 ms-3"
               aria-hidden="true"
@@ -118,24 +176,40 @@ const AcademyFilters = () => {
           </button>
           <div
             id="countryDropdown"
-            class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+            class={`z-10 ${
+              countriesopendropdown ? "block " : "hidden"
+            } bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
+            style={{
+              position: "absolute",
+              inset: "0px auto auto 0px",
+              margin: "0px",
+              transform: lang === "en" ? `translate3d(1379.5px, 578px, 0px)` : "translate3d(410.5px, 578px, 0px)",
+            }}
           >
             <ul
-              class="py-2 text-sm text-gray-700 dark:text-gray-200"
+              class="py-2 text-sm text-gray-700"
               aria-labelledby="countryDropdownButton"
             >
-              <li>
-                <a
-                  href="#"
-                  class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                >
-                  Dashboard
-                </a>
+              <li onClick={() => choseCountry("all")}>
+                <div class="block px-4 py-2 hover:bg-gray-100">
+                  {currentLang.allCountries}
+                </div>
               </li>
+              {countries.map((country) => {
+                return (
+                  <li
+                    key={country.id}
+                    onClick={() => choseCountry(country.name)}
+                  >
+                    <div class="block px-4 py-2 hover:bg-gray-100">
+                      {country.name}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
-       
       </div>
     </div>
   );

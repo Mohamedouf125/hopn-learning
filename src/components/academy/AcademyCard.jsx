@@ -1,15 +1,20 @@
 import React from "react";
+import { useSelector } from "react-redux";
 // import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
-
+import { ar, en } from "../../assets/langs/translation";
 
 const AcademyCard = ({ cardData }) => {
+ // to set lang
+ const { lang } = useSelector((state) => state.settings);
+ const currentLang = lang === "en" ? en : ar;
+
   const navigate = useNavigate()
   return (
     <div className="w-[clamp(171px,14.0625vw,270px)] border border-[#F1F1F2] rounded-[clamp(8px,0.625vw,12px)] p-[clamp(5px,0.5208vw,10px)] flex flex-col justify-between ">
-      <div className="w-full rounded-[lamp(12px,1.197917vw,23px)] ">
+      <div className="w-full rounded-[clamp(12px,1.197917vw,23px)] ">
         <img
-          className="w-full rounded-[clamp(12px,1.197917vw,23px)] "
+          className="w-full h-[clamp(90px,7.34375vw,141px)] rounded-[clamp(12px,1.197917vw,23px)] "
           src={
             cardData.outsite_image !== "https://api.sportiin.com"
               ? cardData.outsite_image
@@ -48,7 +53,7 @@ const AcademyCard = ({ cardData }) => {
       </div>
       <div className="w-full mt-[20px] ">
         <button onClick={()=> navigate(`/academy/${cardData.id}`)} className="w-full font-[Cairo] text-[clamp(9px,0.729166vw,14px)] font-[400] leading-[clamp(14px,0.9375vw,18px)] text-[#fff] py-[13px] bg-[#075178] rounded-[8px] ">
-          معرفه التفاصيل
+          {currentLang.SeeMore}
         </button>
       </div>
     </div>
