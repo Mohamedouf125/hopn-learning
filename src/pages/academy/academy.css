@@ -18,32 +18,32 @@
 
 /* academy deatails */
 .subscriptionCard:nth-child(1){
-  .card-head{
-    background-color: #E74D3C;
-  }
-}
-.subscriptionCard:nth-child(2){
-  .card-head{
-    background-color: #2B3D4F;
-  }
-}
-.subscriptionCard:nth-child(3){
-  .card-head{
+  .card-head, button{
     background-color: #28AF60;
   }
 }
+.subscriptionCard:nth-child(2){
+  .card-head, button{
+    background-color: #B87333;
+  }
+}
+.subscriptionCard:nth-child(3){
+  .card-head, button{
+    background-color: #C0C0C0;
+  }
+}
 .subscriptionCard:nth-child(4){
-  .card-head{
-    background-color: #075178;
+  .card-head, button{
+    background-color: #d4ac0b;
   }
 }
 .subscriptionCard:nth-child(5){
-  .card-head{
-    background-color: #8a0669;
+  .card-head, button{
+    background-color: #b9f2ff ;
   }
 }
 .subscriptionCard:nth-child(6){
-  .card-head{
-    background-color: #e65f11;
+  .card-head, button{
+    background-color: #0F52BA;
   }
 }

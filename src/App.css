@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+  .container {
+    width: clamp(340px,73.61111111111111vw,1060px) !important;
+  }
+
 
 /* slider animation */
 @keyframes slideIn {

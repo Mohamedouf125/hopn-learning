@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
 import { ar, en } from "../../assets/langs/translation";
 import TraineeCard from "../../components/trainee/TraineeCard";
+import { Helmet } from "react-helmet";
 
 const Trainers = () => {
   const dispatch = useDispatch();
@@ -10,9 +11,9 @@ const Trainers = () => {
   // feach home data from backend
   useEffect(() => {
     dispatch(fetchHomeData());
-  }, []);
+  }, [dispatch]);
 
-  const { trainers, status, error } = useSelector((state) => state.home);
+  const { trainers} = useSelector((state) => state.home);
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -20,13 +21,18 @@ const Trainers = () => {
 
   return (
     <main className="container mx-auto mb-10">
+      {/* helmet to change page head */}
+       <Helmet>
+        <title>SportsIn - Trainers</title>
+      </Helmet>
+
       <section className="w-full flex flex-col items-center justify-center mt-10">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-2xl font-semibold mb-4 text-left">
             {currentLang.trainersTitle}
           </h2>
         </div>
-        <div className="flex items-start w-[90%] mx-auto justify-center gap-5 flex-wrap ">
+        <div className="flex items-start w-full mx-auto justify-center gap-[clamp(10px,1.0416666666666665vw,15px)] flex-wrap ">
           {trainers.map((trainee, index) => {
             return (
               <TraineeCard key={index} trainee={trainee} />

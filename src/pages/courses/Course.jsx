@@ -4,7 +4,7 @@ import {
   fetchCourseBanner,
   fetchCourseData,
 } from "../../store/slices/courses/courceSlice";
-import {useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ import {
   editUser,
   rememberEditedUser,
 } from "../../store/slices/user/userSlice";
+import { Helmet } from "react-helmet";
 
 const Course = () => {
   const dispatch = useDispatch();
@@ -75,6 +76,20 @@ const Course = () => {
 
   return (
     <main>
+      {/* helmet to change page head */}
+      <Helmet>
+        <title>
+          SportsIn {`- ${course.title !== undefined ? course.title : ""}`}
+        </title>
+        <meta
+          property="og:title"
+          content={`SportsIn - ${course.title || ""}`}
+        />
+        <meta
+          property="og:image"
+          content={course.image !== undefined ? course.image : ""}
+        />
+      </Helmet>
       {/* sighn to course form */}
       {openForm && (
         <FullPagePopup>

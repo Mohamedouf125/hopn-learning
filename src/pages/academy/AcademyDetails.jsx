@@ -1,8 +1,5 @@
 import { useParams } from "react-router-dom";
 import server from "../../assets/axios/server";
-// import academyCover from "../../assets/images/academy/academyCover.jpeg";
-// import academyLogo from "../../assets/images/academy/academyLogo.png";
-import traImg from "../../assets/images/academy/traImg.png";
 import userAvatar from "../../assets/images/profile/profileAvatar2.png";
 import { useEffect, useState } from "react";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
@@ -254,7 +251,9 @@ const AcademyDetails = () => {
 
       {/* times */}
       <div className="w-full flex-col mt-[16px]">
-        <h2 className="font-[Cairo]  text-center sm:text-start text-[clamp(16px,1.04165vw,20px)] font-[400]">{currentLang.opiningTimes}</h2>
+        <h2 className="font-[Cairo]  text-center sm:text-start text-[clamp(16px,1.04165vw,20px)] font-[400]">
+          {currentLang.opiningTimes}
+        </h2>
         <div className="mt-[21px] flex items-start justify-start">
           <p
             dangerouslySetInnerHTML={{ __html: academyData.times }}
@@ -273,19 +272,31 @@ const AcademyDetails = () => {
         <div className="w-full flex flex-wrap justify-center items-stretch gap-[clamp(5px,1.04165vw,20px)] mt-[20px]">
           {academyData.subscriptions?.map((plan) => {
             return (
-              <div className=" subscriptionCard gap-[5px] w-[clamp(180px,13.02084vw,250px)] p-[6px] rounded-[12px] border border-[#F1F1F2] flex flex-col items-start justify-between ">
+              <div
+                key={plan.id}
+                className=" subscriptionCard gap-[5px] w-[clamp(180px,13.02084vw,250px)] p-[6px] rounded-[12px] border border-[#F1F1F2] flex flex-col items-start justify-between "
+              >
                 <div className="card-head flex items-center justify-between w-full rounded-[12px] px-[clamp(8px,0.625vw,12px)] py-[clamp(10px,0.9375vw,18px)] ">
-                  <span className="text-white font-[cairo] text-[clamp(12px,0.834vw,16px)] font-[600]">{plan.title}</span>
-                  <span className="text-white font-[cairo] text-[clamp(12px,0.834vw,16px)] font-[600]">{plan.price} {currentLang.pound}</span>
+                  <span className="text-white font-[cairo] text-[clamp(12px,0.834vw,16px)] font-[600]">
+                    {plan.title}
+                  </span>
+                  <span className="text-white font-[cairo] text-[clamp(12px,0.834vw,16px)] font-[600]">
+                    {plan.price}
+                  </span>
                 </div>
-                <div className="w-full text-center px-[clamp(10px,0.9375vw,18px)] text-[12px] font-[400] text-[cairo]  ">
+                <div className="w-full min-h-[100px] flex items-center justify-center text-center px-[clamp(10px,0.9375vw,18px)] text-[12px] font-[400] text-[cairo]  ">
                   {plan.description}
                 </div>
-                <div className="w-full text-center px-[clamp(10px,0.9375vw,18px)]">
-                  {plan?.advantages}
-                </div>
                 <button className="mx-auto text-white text-[12px] font-[600] px-[20px] py-[5px] text-center bg-[#28AF60] rounded-[8px]">
-                  {currentLang.subscripe}
+                  <a
+                    target="_blank"
+                    href={
+                      `https://wa.me/${academyData.whatsapp_number}` ||
+                      "https://wa.me/4915252455276"
+                    }
+                  >
+                    {currentLang.subscripe}
+                  </a>
                 </button>
               </div>
             );
@@ -301,10 +312,7 @@ const AcademyDetails = () => {
           {currentLang.joinInstitutions}
         </h2>
         <a
-          href={
-            `https://wa.me/${academyData.whatsapp_number}` ||
-            "https://wa.me/4915252455276"
-          }
+          href={"https://wa.me/4915252455276"}
           target="_blank"
           className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] "
         >
@@ -342,24 +350,52 @@ const AcademyDetails = () => {
       <div className="w-full border-b border-[#F1F1F2] mt-[45px]"></div>
 
       {/* team */}
-      <div className="flex flex-col items-center justify-center mt-[clamp(20px,1.9791vw,38px)]">
-        <div className="font-[Cairo] text-[clamp(20px,1.5625vw,30px)] font-[600] ">
-          {currentLang.teamwork}{" "}
-        </div>
-        <div className=" mt-[clamp(20px,2.604166666666667vw,50px)] flex flex-col items-center justify-center ">
-          <div className="flex items-center justify-center w-[clamp(100px,8.072916666666668vw,155px)] h-[clamp(100px,8.072916666666668vw,155px)] ">
-            <img
-              className="w-full h-full"
-              src={userAvatar}
-              alt="member image"
-            />
+      {academyData.teamworks?.length !== 0 && (
+        <div className="flex flex-col items-center justify-center mt-[clamp(20px,1.9791vw,38px)]">
+          <div className="font-[Cairo] text-[clamp(20px,1.5625vw,30px)] font-[600] ">
+            {currentLang.teamwork}
           </div>
-          <div className="mt-[clamp(15px,1.5625vw,30px)] flex flex-col items-center justify-start font-[Cairo] gap-[10px] text-[clamp(12px,0.7291vw,14px)] font-[600] leading-[clamp(10px,0.625vw,12px)] text-[#000]">
-            <span>{academyData.leader}</span>
-            <span className="text-[#767676]">مدير الاكاديمية</span>
+          <div className=" mt-[clamp(20px,2.604166666666667vw,50px)] gap-[clamp(5px,1.04165vw,20px)] flex  w-full flex-wrap items-stretch justify-center ">
+            <div
+              className="flex flex-col items-center justify-center rounded-[12px] border py-[15px] px-[6px] border-[#F1F1F2]"
+            >
+              <div className="flex items-center justify-center w-[clamp(100px,8.072916668vw,155px)] h-[clamp(100px,8.072916668vw,155px)] ">
+                <img
+                  className="w-full h-full rounded-full"
+                  src={academyData.leader_image || userAvatar}
+                  alt="member image"
+                />
+              </div>
+              <div className="mt-[clamp(15px,1.5625vw,30px)] flex flex-col items-center justify-start font-[Cairo] gap-[10px] text-[clamp(12px,0.7291vw,14px)] font-[600] leading-[clamp(10px,0.625vw,12px)] text-[#000]">
+                {currentLang.leader2}
+              </div>
+              <div className="mt-[5px] flex flex-col items-center justify-start font-[Cairo] gap-[10px] text-[clamp(12px,0.7291vw,14px)] font-[600] leading-[clamp(10px,0.625vw,12px)] text-[#000]">
+                {academyData.leader}
+              </div>
+              
+            </div>
+            {academyData.teamworks?.map((member) => {
+              return (
+                <div
+                  key={member.id}
+                  className="flex flex-col items-center justify-center rounded-[12px] border py-[15px] px-[6px] border-[#F1F1F2]"
+                >
+                  <div className="flex items-center justify-center w-[clamp(100px,8.072916668vw,155px)] h-[clamp(100px,8.072916668vw,155px)] ">
+                    <img
+                      className="w-full h-full rounded-full"
+                      src={member.image || userAvatar}
+                      alt="member image"
+                    />
+                  </div>
+                  <div className="mt-[clamp(15px,1.5625vw,30px)] flex flex-col items-center justify-start font-[Cairo] gap-[10px] text-[clamp(12px,0.7291vw,14px)] font-[600] leading-[clamp(10px,0.625vw,12px)] text-[#000]">
+                    {member.name}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

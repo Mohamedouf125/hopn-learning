@@ -30,7 +30,7 @@ const AcademySwiper = ({ slides }) => {
                       }
                       alt="academy slider slide"
                       loading="lazy"
-                      className="w-full  "
+                      className="w-full h-[clamp(150px,20.78125vw,399px)] "
                     />
                   </a>
                 </SwiperSlide>

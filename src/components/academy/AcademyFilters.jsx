@@ -7,12 +7,24 @@ const AcademyFilters = ({ filters, setfilters }) => {
   const [countries, setCountries] = useState([]);
   const [countriesopendropdown, setcountriesopendropdown] = useState(false);
   const [typesopendropdown, settypesopendropdown] = useState(false);
+  const [filterTypes, setFilterTypes] = useState([]);
 
+  // get countries from api
   useEffect(() => {
     server
       .get("/countries-api")
       .then((res) => {
         setCountries(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [server]);
+
+  // get types from api
+  useEffect(() => {
+    server
+      .get("/type-api")
+      .then((res) => {
+        setFilterTypes(res.data);
       })
       .catch((err) => console.log(err));
   }, [server]);
@@ -85,7 +97,10 @@ const AcademyFilters = ({ filters, setfilters }) => {
             data-dropdown-toggle="academyDropdown"
             className=" text-nowrap font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] flex items-center justify-center  "
             type="button"
-            onClick={() => {settypesopendropdown((prev) => !prev); setcountriesopendropdown(false);}}
+            onClick={() => {
+              settypesopendropdown((prev) => !prev);
+              setcountriesopendropdown(false);
+            }}
           >
             {filters.type === "all"
               ? `${currentLang.allInstitutions}`
@@ -107,14 +122,14 @@ const AcademyFilters = ({ filters, setfilters }) => {
             </svg>
           </button>
           <div
-            id="academyDropdown"
+            id="academy"
             class={`z-10 ${
               typesopendropdown ? "block " : "hidden"
             } bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
             style={{
               position: "absolute",
               insetBlockStart: "50px",
-              insetInlineEnd:"0px",
+              insetInlineEnd: "0px",
               margin: "0px",
             }}
           >
@@ -122,23 +137,20 @@ const AcademyFilters = ({ filters, setfilters }) => {
               class="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="academyDropdownButton"
             >
-              <li
-                onClick={() => choseInstitutions("all")}
-              >
-                <div class="block px-4 py-2 hover:bg-gray-100">
+              <li onClick={() => choseInstitutions("all")}>
+                <div class="block cursor-pointer px-4 py-2 hover:bg-gray-100">
                   {currentLang.allInstitutions}
                 </div>
               </li>
-              <li onClick={() => choseInstitutions(currentLang.gym)}>
-                <div class="block px-4 py-2 hover:bg-gray-100">
-                  {currentLang.gym}
-                </div>
-              </li>
-              <li onClick={() => choseInstitutions(currentLang.academy)}>
-                <div class="block px-4 py-2 hover:bg-gray-100">
-                  {currentLang.academy}
-                </div>
-              </li>
+              {filterTypes?.map((type, index) => {
+                return (
+                  <li key={index} onClick={() => choseInstitutions(type)}>
+                    <div class="block px-4 py-2 cursor-pointer hover:bg-gray-100">
+                      {type}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -153,7 +165,10 @@ const AcademyFilters = ({ filters, setfilters }) => {
             data-dropdown-toggle="countryDropdown"
             className=" text-nowrap font-[Cairo] text-[clamp(12px,0.7291666666666666vw,14px)] font-[400] leading-[26px] text-[#000] flex items-center justify-center  "
             type="button"
-            onClick={() => {setcountriesopendropdown((prev) => !prev); settypesopendropdown(false);}}
+            onClick={() => {
+              setcountriesopendropdown((prev) => !prev);
+              settypesopendropdown(false);
+            }}
           >
             {filters.country === "all"
               ? `${currentLang.allCountries}`
@@ -175,7 +190,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
             </svg>
           </button>
           <div
-            id="countryDropdown"
+            id="country"
             class={`z-10 ${
               countriesopendropdown ? "block " : "hidden"
             } bg-white divide-y divide-gray-100 rounded-lg shadow w-44`}
@@ -184,6 +199,8 @@ const AcademyFilters = ({ filters, setfilters }) => {
               insetBlockStart: "50px",
               insetInlineEnd: "0",
               margin: "0px",
+              height: "250px",
+              overflow: "auto",
             }}
           >
             <ul
@@ -191,7 +208,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
               aria-labelledby="countryDropdownButton"
             >
               <li onClick={() => choseCountry("all")}>
-                <div class="block px-4 py-2 hover:bg-gray-100">
+                <div class="block px-4 py-2 cursor-pointer hover:bg-gray-100">
                   {currentLang.allCountries}
                 </div>
               </li>
@@ -201,7 +218,7 @@ const AcademyFilters = ({ filters, setfilters }) => {
                     key={country.id}
                     onClick={() => choseCountry(country.name)}
                   >
-                    <div class="block px-4 py-2 hover:bg-gray-100">
+                    <div class="block cursor-pointer px-4 py-2 hover:bg-gray-100">
                       {country.name}
                     </div>
                   </li>
