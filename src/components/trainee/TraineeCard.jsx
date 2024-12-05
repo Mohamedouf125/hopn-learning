@@ -36,7 +36,7 @@ const TraineeCard = ({ trainee }) => {
         ></div>
 
         <img
-          src={egypt}
+          src={trainee.country_image}
           alt="Background"
           class="absolute rounded-[8px] top-0 left-0 w-[50%] !h-[66px] object-cover z-0"
         />
