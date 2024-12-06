@@ -304,54 +304,40 @@ const Home = () => {
             {currentLang.voteTitle}
           </h2>
 
-          <div className="flex items-center justify-center gap-2 md:gap-10 flex-wrap w-full">
+          <div className="flex items-center justify-center mt-[20px] gap-2 md:gap-[16px] flex-wrap w-full">
             {players.map((player, index) => {
               return (
                 <div
                   key={index}
-                  className={`rounded-xl border p-5 overflow-hidden cursor-pointer w-[48%] h-[300px] md:w-[260px] relative ${
-                    voted_player?.id === player.id
-                      ? "border-none bg-[#D9D9D9] "
-                      : "border-[#D9D9D9]"
-                  }  `}
-                  // onClick={() => {
-                  //   choosePlayer(player.id);
-                  // }}
+                  className={`rounded-[12px] border border-[#F1F1F2] overflow-hidden cursor-pointer w-[48%] h-[200px] md:w-[138px] relative  `}
                 >
-                  <div className=" rounded-full mx-auto flex items-center justify-center overflow-hidden w-[100px] h-[100px] md:w-[150px] md:h-[150px]">
+                  <div className="w-full relative z-10 h-[78px] overflow-hidden">
+                    <img
+                      className="w-full h-full rounded-[4px]  "
+                      src={player.team.image}
+                      alt="club"
+                    />
+                  </div>
+                  <div className=" border-[4px] relative z-20 border-[#fff] mt-[-40px] rounded-full mx-auto flex items-center justify-center overflow-hidden w-[90px] h-[90px] ">
                     <img
                       src={player.image || bigAvatar}
                       alt="personal-img"
-                      className="w-full  rounded-full "
+                      className="w-full  rounded-full border border-[#F1F1F2] "
                     />
                   </div>
                   <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                    <h3 className=" font-[500] text-[14px] md:font-[600] md:text-[18px] w-full text-center ">
+                    <h3 className=" font-[500] text-[12px] w-full text-center ">
                       {player.name}
                     </h3>
-                    <div className="flex w-full items-center justify-center gap-2 mt-2">
-                      <div className=" w-[30px] flex items-center justify-center h-[30px] md:w-[40px] md:h-[40px] ">
-                        <img
-                          className="w-full"
-                          src={player.team.image}
-                          alt="club"
-                        />
-                      </div>
-                      <div className="flex items-center justify-center flex-col ">
-                        <span className="text-[12px] font-[400] ">
-                          {currentLang.playIn}
-                        </span>
-                        <span className="text-[12px] font-[500] md:text-[16px] md:font-[700] ">
-                          {player.team.name}
-                        </span>
-                      </div>
+                    <div className="flex items-center justify-center gap-[2px] w-full mt-[5px]">
+                      <span className="text-[10px] font-[400] ">
+                        {currentLang.playIn}
+                      </span>
+                      <span className="text-[10px] font-[500]">
+                        {player.team.name}
+                      </span>
                     </div>
                   </div>
-                  {/* {isVoted && (
-                    <div className="absolute top-0 left-0 p-2 bg-[#C0C0C0] rounded-br-xl ">
-                      {player.count} {currentLang.Vote}
-                    </div>
-                  )} */}
                 </div>
               );
             })}
