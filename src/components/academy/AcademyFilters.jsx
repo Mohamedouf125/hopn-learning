@@ -2,6 +2,7 @@ import server from "../../assets/axios/server";
 import { useEffect, useState } from "react";
 import { ar, en } from "../../assets/langs/translation";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const AcademyFilters = ({ filters, setfilters }) => {
   const [countries, setCountries] = useState([]);
@@ -32,11 +33,6 @@ const AcademyFilters = ({ filters, setfilters }) => {
   const choseCountry = (country) => {
     setfilters((prev) => ({ ...prev, country }));
     setcountriesopendropdown(false);
-  };
-
-  const choseInstitutions = (type) => {
-    setfilters((prev) => ({ ...prev, type }));
-    settypesopendropdown(false);
   };
 
   // to set lang
@@ -137,18 +133,18 @@ const AcademyFilters = ({ filters, setfilters }) => {
               class="py-2 text-sm text-gray-700 dark:text-gray-200"
               aria-labelledby="academyDropdownButton"
             >
-              <li onClick={() => choseInstitutions("all")}>
+              <Link to="/academy?type=all" >
                 <div class="block cursor-pointer px-4 py-2 hover:bg-gray-100">
                   {currentLang.allInstitutions}
                 </div>
-              </li>
+              </Link>
               {filterTypes?.map((type, index) => {
                 return (
-                  <li key={index} onClick={() => choseInstitutions(type)}>
+                  <Link key={index} to={`/academy?type=${type}`}>
                     <div class="block px-4 py-2 cursor-pointer hover:bg-gray-100">
                       {type}
                     </div>
-                  </li>
+                  </Link>
                 );
               })}
             </ul>

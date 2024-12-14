@@ -7,6 +7,13 @@ export const en = {
   Settings: "Settings",
   Profile: "Profile",
   SignOut: "Sign Out",
+  learning: "Education & Training",
+  Lecturers: "Lecturers",
+  JobOpportunities: "Job opportunities",
+  JobSeeker: "Job seeker",
+  next: "Next",
+  prev: "Previous",
+  send: "Send",
 
   // home
   CelebritiesTitle: "Celebrities in sports",
@@ -15,7 +22,7 @@ export const en = {
   cvSectoinTitle: "Employment",
   SeeMore: "See More",
   NoCvs: "No Cvs Founded!",
-  freeCourses: "courses",
+  freeCourses: "Training programs",
   voteTitle: "Our agents",
   playIn: "agent ",
   Vote: "Vote",
@@ -95,6 +102,10 @@ export const en = {
   addCv: "Add CV",
   save: "Save",
   ProfileUpdatedSuccessfully: "Profile updated successfully",
+  applyNow: "Apply now",
+  Paid: "Paid",
+  free: "Free",
+  searchForJob: "Find suitable job opportunities",
 
   // validation
   required: "This field is required",
@@ -148,6 +159,13 @@ export const ar = {
   Settings: "الاعدادات",
   Profile: "الملف الشخصي",
   SignOut: "تسجيل الخروج",
+  learning: "التعليم والتدريب",
+  Lecturers: "المحاضرون",
+  JobOpportunities: "فرص العمل",
+  JobSeeker: "طالب عمل",
+  next: "التالي",
+  prev: "السابق",
+  send: "إرسال",
 
   // home
   CelebritiesTitle: "مشاهير في الرياضة",
@@ -234,6 +252,10 @@ export const ar = {
   addCv: "اضف سيره ذاتية",
   save: "حفظ",
   ProfileUpdatedSuccessfully: "تم تحديث الملف الشخصي بنجاح",
+  applyNow: "اشترك الآن",
+  Paid: "مدفوعه",
+  free: "مجانيه",
+  searchForJob: "ابحث عن فرص العمل المناسبة",
 
   // validation
   required: "هذا الحقل مطلوب",

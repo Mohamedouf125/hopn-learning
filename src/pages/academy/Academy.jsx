@@ -6,18 +6,23 @@ import AcademySwiper from "../../components/academy/AcademySwiper";
 import "./academy.css";
 import { useSelector } from "react-redux";
 import { ar, en } from "../../assets/langs/translation";
+import { useSearchParams } from "react-router-dom";
 
 const Academy = () => {
   const [academias, setAcademias] = useState([]);
   const [sliders, setSliders] = useState([]);
   const [filters, setfilters] = useState({ country: "all", type: "all" });
+  const [searchParams] = useSearchParams();
+
+  useEffect(()=>{
+    searchParams.get("type") && setfilters((prev) => ({ ...prev, type :searchParams.get("type") }));
+  },[searchParams])
 
   // get data form backend
   useEffect(() => {
     server
       .get("/academias-api")
       .then((data) => {
-        console.log(data.data);
         setSliders(data.data.sliders);
 
         // filter logic

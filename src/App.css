@@ -1,14 +1,16 @@
-
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-  .container {
-    width: clamp(340px,73.61111111111111vw,1060px) !important;
-  }
+/* html{
+  background-color: #fff !important;
+} */
 
+.container {
+  width: clamp(340px, 73.61111111111111vw, 1060px) !important;
+}
 
 /* slider animation */
 @keyframes slideIn {
@@ -33,9 +35,9 @@
   }
 }
 
-:root{
+:root {
   --blue-primary: #075178;
-  --border: #F1F1F2;
+  --border: #f1f1f2;
 }
 
 .showWelcomeBox {
@@ -50,7 +52,7 @@
   width: 100%;
 }
 
-.active{
+.active {
   color: #fff;
   background-color: var(--blue-primary);
   margin: 0 !important;
@@ -64,4 +66,8 @@
 
 .scrollbar-hide::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
+}
+
+.main-shadow {
+  box-shadow: "0px 3px 4px 0px #00000008";
 }

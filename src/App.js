@@ -1,7 +1,7 @@
 import "./App.css";
 import Header from "./components/header/Header";
 import { Route, Routes } from "react-router-dom";
-// import Login from "./pages/login/Login";
+import Login from "./pages/login/Login";
 // import SignUp from "./pages/signUp/SignUp";
 // import SignUpEmail from "./pages/signUp/SignUpEmail";
 // import SignUpEmail2 from "./pages/signUp/SignUpEmail2";
@@ -11,7 +11,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/home/Home";
 import Footer from "./components/footer/Footer";
 // import Gifts from "./pages/gifts/Gifts";
-// import Profile from "./pages/profile/Profile";
+import Profile from "./pages/profile/Profile";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getRememberedUser } from "./store/slices/user/userSlice";
@@ -29,6 +29,8 @@ import Cvs from "./pages/cvs/Cvs";
 import Trainers from "./pages/trainers/Trainers";
 import Academy from "./pages/academy/Academy";
 import AcademyDetails from "./pages/academy/AcademyDetails";
+import Lecturers from "./pages/Lecturers/Lecturers";
+import JobOpportunities from "./pages/JobOpportunities/JobOpportunities";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +40,7 @@ function App() {
 
   // Load user data and language settings from local storage
   useEffect(() => {
-    // dispatch(getRememberedUser());
+    dispatch(getRememberedUser());
     dispatch(getCurrentLang());
   }, [dispatch]);
 
@@ -53,7 +55,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/login" element={<Login />} /> */}
+        <Route path="/login" element={<Login />} />
         {/* <Route path="/gifts" element={<Gifts />} /> */}
         <Route path="/about" element={<About />} />
         <Route path="/trainers" element={<Trainers />} />
@@ -62,8 +64,10 @@ function App() {
         <Route path="/cvs" element={<Cvs />} />
         <Route path="/academy" element={<Academy />} />
         <Route path="/academy/:academyId" element={<AcademyDetails />} />
+        <Route path="/lecturers" element={<Lecturers />} />
+        <Route path="/jobOpportunities" element={<JobOpportunities />} />
         <Route path="*" element={<NotFound />} />
-        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/profile" element={<Profile />} />
         {/* <Route path="/user/profile/:userId" element={<UserProfile />} /> */}
         {/* <Route path="/signUp" element={<SignUp />} /> */}
         {/* <Route path="/settings" element={<Setting />} /> */}

@@ -1,15 +1,24 @@
 import "flowbite";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import {
+  Link,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
 // import { logout } from "../../store/slices/user/userSlice";
 import { ar, en } from "../../assets/langs/translation";
 import { changeLang } from "../../store/slices/settings/settingsSlice";
+import server from "../../assets/axios/server";
+import { useEffect, useState } from "react";
 
 const Header = () => {
   // const { user } = useSelector((state) => state.user);
   // const loggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
+  const [filterTypes, setFilterTypes] = useState([]);
+  const [searchParams] = useSearchParams();
   // const navigate = useNavigate();
 
   // const handelLogout = () => {
@@ -18,6 +27,16 @@ const Header = () => {
   // };
 
   const location = useLocation();
+
+  // get types from api
+  useEffect(() => {
+    server
+      .get("/type-api")
+      .then((res) => {
+        setFilterTypes(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, [server]);
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -234,44 +253,211 @@ const Header = () => {
                 </li>
               )} */}
               <li className="!m-0 ">
-                <Link
-                  to="/courses"
-                  className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                    location.pathname.includes("/courses") ? "active" : ""
-                  }`}
+                <div
+                  className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
                 >
-                  {currentLang.Courses}
-                </Link>
+                  <button
+                    id="dropdownlearning"
+                    data-dropdown-toggle="learningDropdown"
+                    class=" inline-flex items-center text-gray-900 "
+                    type="button"
+                  >
+                    {currentLang.learning}
+                    <svg
+                      class="w-2.5 h-2.5 ms-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 4 4 4-4"
+                      />
+                    </svg>
+                  </button>
+
+                  <div
+                    id="learningDropdown"
+                    class="z-10 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
+                  >
+                    <ul
+                      class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
+                      aria-labelledby="dropdownlearning"
+                    >
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/courses"
+                          className={`block !m-0 py-2 px-5 text-gray-900 ${
+                            location.pathname.includes("/courses")
+                              ? "active"
+                              : ""
+                          }`}
+                        >
+                          {currentLang.freeCourses}
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/trainers"
+                          className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                            location.pathname === "/trainers" ? "active" : ""
+                          }`}
+                        >
+                          {currentLang.trainersTitle}
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/lecturers"
+                          className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                            location.pathname === "/lecturers" ? "active" : ""
+                          }`}
+                        >
+                          {currentLang.Lecturers}
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li className="!m-0 ">
-                <Link
-                  to="/trainers"
-                  className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                    location.pathname === "/trainers" ? "active" : ""
-                  }`}
+                <div
+                  className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
                 >
-                  {currentLang.trainersTitle}
-                </Link>
+                  <button
+                    id="dropdownEmployment"
+                    data-dropdown-toggle="educationDropdown"
+                    class=" inline-flex items-center text-gray-900 "
+                    type="button"
+                  >
+                    {currentLang.cvSectoinTitle}
+                    <svg
+                      class="w-2.5 h-2.5 ms-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 4 4 4-4"
+                      />
+                    </svg>
+                  </button>
+
+                  <div
+                    id="educationDropdown"
+                    class="z-10 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
+                  >
+                    <ul
+                      class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
+                      aria-labelledby="dropdownEmployment"
+                    >
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/jobOpportunities"
+                          className={`block !m-0 py-2 px-5 text-gray-900 ${
+                            location.pathname.includes("/jobOpportunities")
+                              ? "active"
+                              : ""
+                          }`}
+                        >
+                          {currentLang.JobOpportunities}
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/cvs"
+                          className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                            location.pathname === "/cvs" ? "active" : ""
+                          }`}
+                        >
+                          {currentLang.JobSeeker}
+                        </Link>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li className="!m-0 ">
-                <Link
-                  to="/cvs"
-                  className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                    location.pathname === "/cvs" ? "active" : ""
-                  }`}
+                <div
+                  className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
                 >
-                  {currentLang.cvSectoinTitle}
-                </Link>
-              </li>
-              <li className="!m-0 ">
-                <Link
-                  to="/academy"
-                  className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                    location.pathname.includes("/academy") ? "active" : ""
-                  }`}
-                >
-                  {currentLang.Institutions}
-                </Link>
+                  <button
+                    id="dropdownInstitutions"
+                    data-dropdown-toggle="institutionsDropdown"
+                    class=" inline-flex items-center text-gray-900 "
+                    type="button"
+                  >
+                    {currentLang.Institutions}
+                    <svg
+                      class="w-2.5 h-2.5 ms-3"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 10 6"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="m1 1 4 4 4-4"
+                      />
+                    </svg>
+                  </button>
+
+                  <div
+                    id="institutionsDropdown"
+                    class="z-10 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
+                  >
+                    <ul
+                      class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
+                      aria-labelledby="dropdownInstitutions"
+                    >
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/academy?type=all"
+                          className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                            location.pathname.includes("/academy") &&
+                            searchParams.get("type") === "all"
+                              ? "active"
+                              : ""
+                          }`}
+                        >
+                          {currentLang.allInstitutions}
+                        </Link>
+                      </li>
+                      {filterTypes?.map((type, index) => {
+                        return (
+                          <li
+                            key={index}
+                            className="cursor-pointer w-full text-center"
+                          >
+                            <Link
+                              to={`/academy?type=${type}`}
+                              className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                                location.pathname.includes("/academy") &&
+                                searchParams.get("type") === type
+                                  ? "active"
+                                  : ""
+                              } `}
+                            >
+                              {type}
+                            </Link>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                </div>
               </li>
               <li className="!m-0 ">
                 <Link
