@@ -36,7 +36,6 @@ const Profile = () => {
     dispatch(fetchHomeData());
   }, [dispatch]);
 
-
   // clculate age based on birthday
   useEffect(() => {
     function calculateAge(birthday) {
@@ -513,10 +512,11 @@ const Profile = () => {
             style={{ boxShadow: "0px 3px 4px 0px #00000008" }}
           >
             <div
-              className={`flex items-center text-[10px] font-[500] justify-center absolute top-[-1px] end-[-1px] w-[57px] h-[28px] rounded-es-[10px] ${
-                service.free ? "bg-[transparent] border border-[#F1F1F2]"  : "bg-[#28AF60]"
+              className={`main-shadow flex items-center text-[10px] font-[500] justify-center absolute top-[-1px] end-[-1px] w-[57px] h-[28px] rounded-es-[10px] ${
+                service.free
+                  ? "bg-[transparent] border border-[#F1F1F2] text-[#075178]"
+                  : "bg-[linear-gradient(180deg,#28AF60_0%,#9AD7B3_100%)] text-[#fff]"
               }`}
-              style={{ boxShadow: "0px 3px 4px 0px #00000008" }}
             >
               {service.free ? currentLang.free : currentLang.Paid}
             </div>
@@ -531,7 +531,7 @@ const Profile = () => {
             <button
               className={`w-[150px] h-[34px] flex items-center justify-center text-[12px] font-[400] font-[cairo] bg-[${
                 service.free ? "#075178" : "#28AF60"
-              }] rounded-[10px] text-white `}
+              }] rounded-[10px] text-white`}
               onClick={service.clickAction}
             >
               {currentLang.applyNow}
