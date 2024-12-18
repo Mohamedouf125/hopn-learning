@@ -1,0 +1,20 @@
+.masonry-grid {
+  display: flex;
+  margin-left: -16px; /* Adjust based on gap */
+  width: auto;
+}
+
+.masonry-column {
+  padding-left: 16px; /* Match gap value */
+  background-clip: padding-box;
+}
+
+.masonry-item {
+  margin-bottom: 16px; /* Match gap value */
+}
+
+.masonry-item img {
+  display: block;
+  width: 100%;
+  border-radius: 8px; /* Optional */
+}

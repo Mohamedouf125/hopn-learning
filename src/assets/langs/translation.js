@@ -125,6 +125,7 @@ export const en = {
   Nationality: "Nationality",
   program: "Programs",
   code: "Code",
+  trainers: "Trainers",
 
   // Institutions
   Institutions: "Institutions",
@@ -275,6 +276,7 @@ export const ar = {
   Nationality: "الجنسيه",
   program: "البرامج",
   code: "الكود",
+  trainers: "المدربين",
 
   // Institutions
   Institutions: "المؤسسات",

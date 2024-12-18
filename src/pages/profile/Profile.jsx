@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
-import { useNavigate } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
 import server from "../../assets/axios/server";
 import FullPagePopup from "../../components/popups/FullPagePopup";
@@ -19,6 +18,7 @@ import {
   profileServicesEn,
 } from "../../assets/helpers/profileServices";
 import JobSeekerForm from "../../components/profile/JobSeekerForm";
+import TrainerForm from "../../components/profile/TrainerForm";
 
 const Profile = () => {
   const { copyToClipboard } = useCopyToClipboard();
@@ -119,6 +119,7 @@ const Profile = () => {
     <main className="container mx-auto lg:max-w-[1060px] flex flex-col items-center justify-center px-[5px] sm:px-0 mb-[50px] mt-[20px]">
       {/* job seeker form */}
       <JobSeekerForm />
+      <TrainerForm />
       {editProfile && (
         <FullPagePopup>
           <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">

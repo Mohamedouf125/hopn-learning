@@ -8,13 +8,14 @@ const Setting = () => {
   // to get lang
   const { lang } = useSelector((state) => state.settings);
   return (
-    <main className="container mx-auto">
+    <main className="container mx-auto min-h-[200px] flex items-start justify-start">
       <select
         onChange={(e) => {
           dispatch(changeLang({ lang: e.target.value }));
         }}
         name="lang"
         value={lang}
+        className="w-[200px] flex items-center justify-center rounded-[8px] mt-[20px] "
       >
         <option value="en">English</option>
         <option value="ar">العربيه</option>

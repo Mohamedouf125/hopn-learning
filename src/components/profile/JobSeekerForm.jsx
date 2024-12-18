@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { ar, en } from "../../assets/langs/translation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import server from "../../assets/axios/server";
 
 const JobSeekerForm = () => {
@@ -15,10 +15,11 @@ const JobSeekerForm = () => {
     english: "good",
     services: "personal training",
     country_id: 17,
-    how_to_communication :"whatsapp"
+    how_to_communication: "whatsapp",
   });
   const [countries, setCountries] = useState([]);
   const [userImage, setUserImage] = useState(null);
+  const fileInputRef = useRef(null);
 
   const { token } = useSelector((state) => state.user);
 
@@ -96,19 +97,19 @@ const JobSeekerForm = () => {
         </form>
         {/* modal title */}
         <div className="flex items-end mb-[30px] justify-start gap-[20px] ">
-          <h2 className="pb-[20px] border-b border-[#28AF60] text-[#0B274B] font-[400] text-[36px] font-[cairo] ">
+          <h2 className="pb-[20px] border-b border-[#28AF60] text-[#0B274B] font-[400] text-[clamp(20px,2.5vw,36px)] font-[cairo] ">
             {currentLang.JobSeeker}
           </h2>
-          <p className="font-[400] text-[16px] text-[#767676] font-[cairo]">
+          <p className="font-[400] text-[clamp(12px,1.1111112vw,16px)] text-[#767676] font-[cairo]">
             {currentLang.searchForJob}
           </p>
         </div>
 
         {/* personal info */}
         {currentPage === 1 && (
-          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] py-[20px] px-[30px] main-shadow ">
-            <div className=" border border-[#F1F1F2] rounded-[8px] main-shadow">
-              <div className="flex items-center justify-start gap-[10px] p-[20px] w-full border-b border-[#F1F1F2] ">
+          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] sm:py-[clamp(0px,1.3888888888888888vw,20px)] sm:px-[clamp(0px,2.083333333333333vw,30px)] main-shadow ">
+            <div className=" sm:border border-[#F1F1F2] rounded-[8px] main-shadow">
+              <div className="flex items-center justify-start gap-[10px] p-[clamp(10px,1.3888888888888888vw,20px)] w-full border-b border-[#F1F1F2] ">
                 <svg
                   width="21"
                   height="25"
@@ -123,7 +124,7 @@ const JobSeekerForm = () => {
                 </svg>
                 <h3>المعلومات الشخصية</h3>
               </div>
-              <div className="p-[30px] flex items-start justify-between flex-col sm:flex-row ">
+              <div className="p-[clamp(10px,2.083333333333333vw,30px)] flex items-start justify-between flex-col sm:flex-row ">
                 {/* input group */}
                 <div className="flex flex-col w-full sm:w-[31%] items-start justify-start ">
                   <label className="form-control w-full">
@@ -134,7 +135,7 @@ const JobSeekerForm = () => {
                       type="text"
                       className="input input-bordered w-full "
                       name="name"
-                      value={formInputs.name || ''}
+                      value={formInputs.name || ""}
                       onChange={(e) => {
                         setFormInputs((prev) => ({
                           ...prev,
@@ -151,7 +152,7 @@ const JobSeekerForm = () => {
                       type="number"
                       className="input input-bordered w-full "
                       name="age"
-                      value={formInputs.age || ''}
+                      value={formInputs.age || ""}
                       onChange={(e) => {
                         setFormInputs((prev) => ({
                           ...prev,
@@ -205,21 +206,24 @@ const JobSeekerForm = () => {
                   </label>
                 </div>
                 {/* input group */}
-                <div className="flex flex-col w-full sm:w-[31%] items-start justify-start ">
+                <div className="flex flex-col w-full sm:w-[31%] items-start justify-start mt-[30px] sm:mt-0 ">
                   <span className="w-full flex items-center justify-start">
                     اضافة صورة شخصية *
                   </span>
                   <div className=" w-full  ">
                     <input
                       type="file"
+                      ref={fileInputRef}
                       id="job-seeker-input"
                       name="image"
+                      // value={formInputs.image}
                       onChange={(event) => {
                         const file = event.target.files[0];
                         setFormInputs((prev) => ({
                           ...prev,
                           [event.target.name]: file,
                         }));
+
                         if (file) {
                           const reader = new FileReader();
                           reader.onloadend = () => {
@@ -231,7 +235,7 @@ const JobSeekerForm = () => {
                       style={{ display: "none" }}
                     />
 
-                    <div className="w-full flex items-center justify-end relative ">
+                    <div className="w-full flex items-center justify-center sm:justify-end relative ">
                       <img
                         className="w-[90px] h-[90px] mt-[15px] rounded-full  "
                         src={
@@ -240,7 +244,7 @@ const JobSeekerForm = () => {
                         }
                         alt="job-seeker"
                       />
-                      <div className="absolute bottom-[-5px] end-[17%] translate-x-[-50%] flex items-center justify-center gap-[5px] z-20 ">
+                      <div className="absolute bottom-[-5px] end-[50%] sm:end-[17%] translate-x-[-50%] flex items-center justify-center gap-[5px] z-20 ">
                         <button
                           className="w-[20px] h-[20px] flex items-center justify-center bg-[#fff] rounded-[6px]  "
                           style={{ boxShadow: "0px 0px 5px 0px #00000024" }}
@@ -295,9 +299,14 @@ const JobSeekerForm = () => {
                             onClick={() => {
                               setFormInputs((prev) => ({
                                 ...prev,
-                                image: null,
+                                image: null, // Remove the image from the form inputs state
                               }));
-                              setUserImage(null);
+
+                              setUserImage(null); // Reset any state storing the uploaded file's preview or data
+
+                              if (fileInputRef.current) {
+                                fileInputRef.current.value = ""; // Reset the file input's value to allow re-uploading the same file
+                              }
                             }}
                           >
                             <svg
@@ -326,7 +335,7 @@ const JobSeekerForm = () => {
                         )}
                       </div>
                     </div>
-                    <p className="w-full flex items-center justify-end mt-[15px] ">
+                    <p className="w-full flex items-center justify-center sm:justify-end mt-[15px] ">
                       {formInputs?.image
                         ? formInputs?.image.name
                         : "Allowed file types: png, jpg, jpeg"}
@@ -340,9 +349,9 @@ const JobSeekerForm = () => {
 
         {/* learning exprince  */}
         {currentPage === 2 && (
-          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] py-[20px] px-[30px] main-shadow ">
-            <div className=" border border-[#F1F1F2] rounded-[8px] main-shadow">
-              <div className="flex items-center justify-start gap-[10px] p-[20px] w-full border-b border-[#F1F1F2] ">
+          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] sm:py-[clamp(0px,1.3888888888888888vw,20px)] sm:px-[clamp(0px,2.083333333333333vw,30px)] main-shadow ">
+            <div className=" sm:border border-[#F1F1F2] rounded-[8px] main-shadow">
+              <div className="flex items-center justify-start gap-[10px] p-[clamp(10px,1.3888888888888888vw,20px)] w-full border-b border-[#F1F1F2] ">
                 <svg
                   width="24"
                   height="25"
@@ -357,13 +366,13 @@ const JobSeekerForm = () => {
                 </svg>
                 <h3>المؤهلات والخبرات العملية</h3>
               </div>
-              <div className="p-[30px] flex items-start justify-between flex-col gap-[20px] ">
+              <div className="p-[clamp(10px,2.083333333333333vw,30px)] flex items-start justify-between flex-col gap-[clamp(10px,1.388vw,20px)] ">
                 {expInputs.map((expInput, index) => {
                   return (
                     // input group
                     <div
                       key={index}
-                      className="flex flex-col sm:flex-row w-full gap-[15px] items-stretch justify-start "
+                      className="flex flex-row w-full gap-[clamp(5px,1.0416666666666665vw,15px)] flex-nowrap items-stretch justify-start "
                     >
                       {index === expInputs.length - 1 ? (
                         <button
@@ -415,7 +424,7 @@ const JobSeekerForm = () => {
                       <label className="form-control w-full">
                         <input
                           type="text"
-                          className="input input-bordered w-full "
+                          className="input input-bordered sm:w-full "
                           value={expInput.value || ""}
                           onChange={(e) => handleExpInputChange(e, index)}
                         />
@@ -434,9 +443,11 @@ const JobSeekerForm = () => {
                                 .getElementById(`addDocument${index}`)
                                 ?.click()
                             }
-                            className="w-full h-full flex items-center justify-start rounded-[6px] text-[10px] font-[Alexandria] font-[400] border bg-[#C4C4C4] border-[#C4C4C4] gap-[10px] px-[10px] "
+                            className="w-full h-full flex items-center justify-center sm:justify-start rounded-[6px] text-[10px] font-[Alexandria] font-[400] border bg-[#C4C4C4] border-[#C4C4C4] gap-[10px] px-[10px] "
                           >
-                            <span className="w-full">تم رفع التوثيق</span>
+                            <span className="w-full hidden sm:block">
+                              تم رفع التوثيق
+                            </span>
                             <svg
                               width="19"
                               height="22"
@@ -477,9 +488,9 @@ const JobSeekerForm = () => {
                                 .getElementById(`addDocument${index}`)
                                 ?.click()
                             }
-                            className="w-full h-full flex items-center justify-start rounded-[6px] text-[10px] font-[Alexandria] font-[400] border border-[#E1E3EA] gap-[10px] px-[10px] "
+                            className="w-full h-full flex items-center justify-center sm:justify-start rounded-[6px] text-[10px] font-[Alexandria] font-[400] border border-[#E1E3EA] gap-0 sm:gap-[10px] px-[10px] "
                           >
-                            <span className="w-full">
+                            <span className="w-full hidden sm:block">
                               ارفع الشهادة او التوثيق
                             </span>
                             <svg
@@ -511,9 +522,9 @@ const JobSeekerForm = () => {
 
         {/* work exprince */}
         {currentPage === 3 && (
-          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] py-[20px] px-[30px] main-shadow ">
-            <div className=" border border-[#F1F1F2] rounded-[8px] main-shadow">
-              <div className="flex items-center justify-start gap-[10px] p-[20px] w-full border-b border-[#F1F1F2] ">
+          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] sm:py-[clamp(0px,1.3888888888888888vw,20px)] sm:px-[clamp(0px,2.083333333333333vw,30px)] main-shadow ">
+            <div className=" sm:border border-[#F1F1F2] rounded-[8px] main-shadow">
+              <div className="flex items-center justify-start gap-[10px] p-[clamp(10px,1.3888888888888888vw,20px)] w-full border-b border-[#F1F1F2] ">
                 <svg
                   width="24"
                   height="25"
@@ -528,7 +539,7 @@ const JobSeekerForm = () => {
                 </svg>
                 <h3> الخبرات العملية</h3>
               </div>
-              <div className="p-[30px] flex items-start justify-between flex-col sm:flex-row ">
+              <div className="p-[clamp(10px,2.083333333333333vw,30px)] flex items-start justify-between flex-col sm:flex-row ">
                 {/* input group */}
                 <div className="flex flex-col w-full sm:w-[48%] items-start justify-start ">
                   <label className="form-control w-full">
@@ -571,7 +582,7 @@ const JobSeekerForm = () => {
                 </div>
               </div>
               {/* input group */}
-              <div className="flex w-full items-start justify-start mt-[10px] p-[30px] ">
+              <div className="flex w-full items-start justify-start mt-[10px] p-[clamp(10px,2.083333333333333vw,30px)] ">
                 <label className="form-control w-full">
                   <div className="label">
                     <span className="label-text"> الخبرات *</span>
@@ -579,7 +590,7 @@ const JobSeekerForm = () => {
                   <textarea
                     className="textarea bg-[#F9F9F9]"
                     name="experiences"
-                    value={formInputs.experiences || ''}
+                    value={formInputs.experiences || ""}
                     onChange={(e) => {
                       setFormInputs((prev) => ({
                         ...prev,
@@ -593,7 +604,7 @@ const JobSeekerForm = () => {
 
             {/* location */}
             <div className=" border border-[#F1F1F2] rounded-[8px] main-shadow mt-[20px]">
-              <div className="flex items-center justify-start gap-[10px] p-[20px] w-full border-b border-[#F1F1F2] ">
+              <div className="flex items-center justify-start gap-[10px] p-[clamp(10px,1.3888888888888888vw,20px)] w-full border-b border-[#F1F1F2] ">
                 <svg
                   width="24"
                   height="25"
@@ -608,7 +619,7 @@ const JobSeekerForm = () => {
                 </svg>
                 <h3> الموقع والمواعيد</h3>
               </div>
-              <div className="p-[30px] flex items-start justify-between flex-col sm:flex-row ">
+              <div className="p-[clamp(10px,2.083333333333333vw,30px)] flex items-start justify-between flex-col sm:flex-row ">
                 {/* input group */}
                 <div className="flex flex-col w-full sm:w-[48%] items-start justify-start ">
                   <label className="form-control w-full">
@@ -619,7 +630,7 @@ const JobSeekerForm = () => {
                       type="text"
                       className="input input-bordered w-full "
                       name="address"
-                      value={formInputs.address || ''}
+                      value={formInputs.address || ""}
                       onChange={(e) => {
                         setFormInputs((prev) => ({
                           ...prev,
@@ -650,9 +661,9 @@ const JobSeekerForm = () => {
 
         {/* services */}
         {currentPage === 4 && (
-          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] py-[20px] px-[30px] main-shadow ">
-            <div className=" border border-[#F1F1F2] rounded-[8px] main-shadow">
-              <div className="flex items-center justify-start gap-[10px] p-[20px] w-full border-b border-[#F1F1F2] ">
+          <div className=" border border-[#F1F1F2] mt-30px rounded-[12px] sm:py-[clamp(0px,1.3888888888888888vw,20px)] sm:px-[clamp(0px,2.083333333333333vw,30px)] main-shadow ">
+            <div className=" sm:border border-[#F1F1F2] rounded-[8px] main-shadow">
+              <div className="flex items-center justify-start gap-[10px] p-[clamp(10px,1.3888888888888888vw,20px)] w-full border-b border-[#F1F1F2] ">
                 <svg
                   width="24"
                   height="25"
@@ -668,7 +679,7 @@ const JobSeekerForm = () => {
 
                 <h3> الخدمات</h3>
               </div>
-              <div className="p-[30px] flex items-start justify-between flex-col ">
+              <div className="p-[clamp(10px,2.083333333333333vw,30px)] flex items-start justify-between flex-col ">
                 {/* input group */}
                 <div className="flex w-full items-start justify-between ">
                   <label className="label cursor-pointer gap-[10px]">
@@ -701,7 +712,7 @@ const JobSeekerForm = () => {
                         }));
                       }}
                     />
-                    <span className="label-text">تدريب جماعي</span>
+                    <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">تدريب جماعي</span>
                   </label>
                   <label className="label cursor-pointer gap-[10px]">
                     <input
@@ -717,19 +728,19 @@ const JobSeekerForm = () => {
                         }));
                       }}
                     />
-                    <span className="label-text">تدريب لفئات معينه</span>
+                    <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">تدريب لفئات معينه</span>
                   </label>
                 </div>
                 {/* input group */}
                 <div className="flex w-full items-start justify-start mt-[10px] ">
                   <label className="form-control w-full">
                     <div className="label">
-                      <span className="label-text"> نبذه *</span>
+                      <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] "> نبذه *</span>
                     </div>
                     <textarea
                       className="textarea bg-[#F9F9F9]"
                       name="brief_summary"
-                      value={formInputs.brief_summary || ''}
+                      value={formInputs.brief_summary || ""}
                       onChange={(e) => {
                         setFormInputs((prev) => ({
                           ...prev,
@@ -742,7 +753,7 @@ const JobSeekerForm = () => {
               </div>
             </div>
             <div className=" border border-[#F1F1F2] rounded-[8px] main-shadow mt-[20px] ">
-              <div className="flex items-center justify-start gap-[10px] p-[20px] w-full border-b border-[#F1F1F2] ">
+              <div className="flex items-center justify-start gap-[10px] p-[clamp(10px,1.3888888888888888vw,20px)] w-full border-b border-[#F1F1F2] ">
                 <svg
                   width="24"
                   height="25"
@@ -757,7 +768,7 @@ const JobSeekerForm = () => {
                 </svg>
                 <h3> طرق التواصل </h3>
               </div>
-              <div className="p-[30px] flex items-start justify-between flex-col ">
+              <div className="p-[clamp(10px,2.083333333333333vw,30px)] flex items-start justify-between flex-col ">
                 {/* input group */}
                 <div className="flex w-full items-start justify-between ">
                   <label className="label cursor-pointer gap-[10px]">

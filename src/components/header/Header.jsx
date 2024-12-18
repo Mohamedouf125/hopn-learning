@@ -7,24 +7,24 @@ import {
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import useUserLoggedIn from "../../assets/hooks/useUserLoggedIn";
-// import { logout } from "../../store/slices/user/userSlice";
+import { logout } from "../../store/slices/user/userSlice";
 import { ar, en } from "../../assets/langs/translation";
 import { changeLang } from "../../store/slices/settings/settingsSlice";
 import server from "../../assets/axios/server";
 import { useEffect, useState } from "react";
 
 const Header = () => {
-  // const { user } = useSelector((state) => state.user);
-  // const loggedIn = useUserLoggedIn();
+  const { user } = useSelector((state) => state.user);
+  const loggedIn = useUserLoggedIn();
   const dispatch = useDispatch();
   const [filterTypes, setFilterTypes] = useState([]);
   const [searchParams] = useSearchParams();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // const handelLogout = () => {
-  //   dispatch(logout());
-  //   window.location = "/login";
-  // };
+  const handelLogout = () => {
+    dispatch(logout());
+    window.location = "/login";
+  };
 
   const location = useLocation();
 
@@ -87,7 +87,7 @@ const Header = () => {
           </Link>
 
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            {/* {loggedIn ? (
+            {loggedIn ? (
               <>
                 <button
                   type="button"
@@ -100,7 +100,7 @@ const Header = () => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full"
-                    src={avatar}
+                    src={user?.photo}
                     alt="user photo"
                   />
                 </button>
@@ -148,9 +148,9 @@ const Header = () => {
               <button onClick={() => navigate("/login")}>
                 {currentLang.login}
               </button>
-            )} */}
+            )}
 
-            <button
+            {/* <button
               id="dropdownDefaultButton"
               data-dropdown-toggle="dropdown"
               class="text-white bg-blue-800  rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "
@@ -172,7 +172,7 @@ const Header = () => {
                   d="m1 1 4 4 4-4"
                 />
               </svg>
-            </button>
+            </button> */}
 
             <div
               id="dropdown"
@@ -282,10 +282,10 @@ const Header = () => {
 
                   <div
                     id="learningDropdown"
-                    class="z-10 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
+                    class="z-50 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
                   >
                     <ul
-                      class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
+                      class="main-shadow flex flex-col gap-[2px] bg-white rounded-[5px] w-full items-center justify-center border border-[#d9d9d9]  "
                       aria-labelledby="dropdownlearning"
                     >
                       <li className="cursor-pointer w-full text-center">
@@ -302,9 +302,9 @@ const Header = () => {
                       </li>
                       <li className="cursor-pointer w-full text-center">
                         <Link
-                          to="/trainers"
+                          to="/trainees"
                           className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                            location.pathname === "/trainers" ? "active" : ""
+                            location.pathname === "/trainees" ? "active" : ""
                           }`}
                         >
                           {currentLang.trainersTitle}
@@ -318,6 +318,16 @@ const Header = () => {
                           }`}
                         >
                           {currentLang.Lecturers}
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
+                          to="/trainers"
+                          className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                            location.pathname === "/trainers" ? "active" : ""
+                          }`}
+                        >
+                          {currentLang.trainers}
                         </Link>
                       </li>
                     </ul>
@@ -354,7 +364,7 @@ const Header = () => {
 
                   <div
                     id="educationDropdown"
-                    class="z-10 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
+                    class="z-50 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
                   >
                     <ul
                       class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
@@ -416,7 +426,7 @@ const Header = () => {
 
                   <div
                     id="institutionsDropdown"
-                    class="z-10 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
+                    class="z-50 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
                   >
                     <ul
                       class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
