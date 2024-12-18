@@ -117,6 +117,7 @@ export const en = {
   forgotPassword: "Forgot Password",
   resetPassword: "Reset Password",
   country: "Country",
+  years: "Years",
 
   // trainers
   trainersTitle: "Trainees",
@@ -270,6 +271,7 @@ export const ar = {
   forgotPassword: "نسيت كلمة المرور",
   resetPassword: "إعادة تعيين كلمة المرور",
   country: "الدوله",
+  years:"سنه",
 
   // trainers
   trainersTitle: "المتدربين",

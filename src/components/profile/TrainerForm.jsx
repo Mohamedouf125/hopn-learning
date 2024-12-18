@@ -120,7 +120,7 @@ const TrainerForm = () => {
 
   //   work exp functions
   const addItemToWorkExp = () => {
-    setWorkExp([...workExp, { value: null, file: null }]);
+    setWorkExp([...workExp, { exp_name: null, exp_name: null }]);
   };
 
   const removeItemFromWorkExp = (index) => {
@@ -136,7 +136,7 @@ const TrainerForm = () => {
   };
 
   useEffect(() => {
-    setTrainerFormInputs((prev) => ({ ...prev, experience: workExp }));
+    setTrainerFormInputs((prev) => ({ ...prev, experiences: workExp }));
   }, [workExp]);
 
   console.log(trainerFormInputs);
@@ -862,8 +862,8 @@ const TrainerForm = () => {
                     <input
                       type="text"
                       className="input input-bordered w-full "
-                      name="address"
-                      value={trainerFormInputs.address || ""}
+                      name="location"
+                      value={trainerFormInputs.location || ""}
                       onChange={(e) => {
                         setTrainerFormInputs((prev) => ({
                           ...prev,

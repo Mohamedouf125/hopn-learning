@@ -1,4 +1,5 @@
 import "./profile.css";
+import profileBanner from '../../assets/images/profile/profileBanar.png'
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
@@ -188,7 +189,7 @@ const Profile = () => {
           <img
             className="w-full h-full rounded-[12px]"
             src={
-              "https://via.assets.so/img.jpg?w=1060&h=212&tc=blue&bg=#C4C4C4"
+              profileBanner
             }
             alt="academyCover"
             loading="lazy"

@@ -1,46 +1,34 @@
 // import "./profile.css";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
-import {useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { ar, en } from "../../assets/langs/translation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { A11y, Autoplay, Pagination } from "swiper/modules";
+import server from "../../assets/axios/server";
+import { useParams } from "react-router-dom";
+import trainerBanner from "../../assets/images/profile/trainerBanner.png";
 
 const Trainer = () => {
   const { copyToClipboard } = useCopyToClipboard();
   const { user } = useSelector((state) => state.user);
-  const [age, setAge] = useState("");
+  const [trainerData, setTrainerData] = useState([]);
 
   useProtectedRoute();
+  const { trainerID } = useParams();
 
-  
-
-
-  // clculate age based on birthday
+  // feach trainer data from
   useEffect(() => {
-    function calculateAge(birthday) {
-      const birthDate = new Date(birthday);
-      const today = new Date();
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const monthDifference = today.getMonth() - birthDate.getMonth();
-
-      if (
-        monthDifference < 0 ||
-        (monthDifference === 0 && today.getDate() < birthDate.getDate())
-      ) {
-        age--;
-      }
-
-      return age;
-    }
-
-    if (user.date) {
-      const calculatedAge = calculateAge(user.date);
-      setAge(calculatedAge);
-    }
-  }, [user.date]);
+    server
+      .get(`/trainer-requests/${trainerID}`)
+      .then((res) => {
+        setTrainerData(res.data.data);
+        console.log(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [server]);
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -56,9 +44,7 @@ const Trainer = () => {
         <div className="w-full rounded-[12px] h-[clamp(130px,11.041666666666666vw,212px)] relative">
           <img
             className="w-full h-full rounded-[12px]"
-            src={
-              "https://via.assets.so/img.jpg?w=1060&h=212&tc=blue&bg=#C4C4C4"
-            }
+            src={trainerBanner}
             alt="academyCover"
             loading="lazy"
           />
@@ -70,7 +56,7 @@ const Trainer = () => {
               <img
                 className="w-full h-full rounded-full"
                 src={
-                  user?.photo ||
+                  trainerData?.image ||
                   "https://via.assets.so/img.jpg?w=800&h=800&tc=blue&bg=#C4C4C4"
                 }
                 alt="avatar"
@@ -80,12 +66,12 @@ const Trainer = () => {
 
             {/* user info */}
             <div className="w-fit flex items-center justify-center flex-col gap-[8px] mt-[clamp(10px,1.0416vw,20px)]">
-              <h2 className="font-[Cairo] text-[clamp(14px,1.3888888888888888vw,20px)] font-[700] leading-[clamp(14px,1.09375vw,21px)] text-[#000]">
-                {user?.name}
+              <h2 className="font-[Cairo] text-nowrap text-[clamp(14px,1.3888888888888888vw,20px)] font-[700] leading-[clamp(14px,1.09375vw,21px)] text-[#000]">
+                {trainerData?.name}
               </h2>
               <div className="flex items-center justify-start gap-[5px]">
                 <span className="font-[Cairo] text-[clamp(9px,0.57291vw,11px)] font-[600] leading-[clamp(14px, 1.041vw,20px)] text-[#B0B0B0]">
-                  {user?.address}
+                  {trainerData?.job_title}
                 </span>
               </div>
             </div>
@@ -96,7 +82,7 @@ const Trainer = () => {
             <div className=" flex items-center gap-[8px]">
               {/* instagram */}
               <a
-                href={user.instagram_link || "https://instagram.com"}
+                href={trainerData.instagram || "https://instagram.com"}
                 target="_blank"
                 className="w-[44px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] "
                 style={{
@@ -130,7 +116,7 @@ const Trainer = () => {
 
               {/* facebook */}
               <a
-                href={user.facebook_link || "https://facebook.com"}
+                href={trainerData.facebook || "https://facebook.com"}
                 target="_blank"
                 className="w-[44px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] bg-[#1877F2] "
                 style={{
@@ -154,7 +140,7 @@ const Trainer = () => {
               {/* whatsapp */}
               <a
                 href={
-                  `https://wa.me/${user?.phone}` ||
+                  `https://wa.me/${trainerData?.whatsapp_number}` ||
                   "https://wa.me/4915252455276"
                 }
                 target="_blank"
@@ -293,15 +279,15 @@ const Trainer = () => {
           </div>
           <div className="flex items-center justify-start gap-[20px] mt-[4px] ">
             <span>العمر :</span>
-            <span>18</span>
+            <span>{trainerData.age}</span>
           </div>
           <div className="flex items-center justify-start gap-[20px] ">
             <span>الجنسية :</span>
-            <span>مصري</span>
+            <span>{trainerData.country_id}</span>
           </div>
           <div className="flex items-center justify-start gap-[20px] ">
             <span>مكان التواجد :</span>
-            <span>مصر</span>
+            <span>{trainerData.country_id}</span>
           </div>
         </div>
 
@@ -333,16 +319,19 @@ const Trainer = () => {
               </div>
             </div>
             <div className="w-full flex flex-wrap items-stretch justify-center gap-[clamp(5px,1.7361111111111112vw,25px)] ">
-              {[1, 2, 3, 4].map((item) => {
+              {trainerData?.qualifications?.map((item) => {
                 return (
                   <div className="flex w-[48%] sm:w-[162px] flex-col border border-[#F1F1F2] rounded-[8px] p-[3px]  ">
                     <img
                       className="rounded-[8px] "
-                      src="https://via.assets.so/img.jpg?w=155&h=111&tc=blue&bg=#C4C4C4"
-                      alt=""
+                      src={
+                        item.image ||
+                        "https://via.assets.so/img.jpg?w=155&h=111&tc=blue&bg=#C4C4C4"
+                      }
+                      alt="trainer image"
                     />
                     <div className="w-full text-center py-[5px] font-[cairo] font-[700] text-[12px] leading-[23px] ">
-                      مدرب لياقة بدنية معتمد
+                      {item.title}
                     </div>
                   </div>
                 );
@@ -375,14 +364,14 @@ const Trainer = () => {
               </div>
             </div>
             <div className="gap-[15px] flex items-start flex-col w-full justify-between">
-              {[0, 0, 1].map(() => {
+              {trainerData?.experience?.map((item) => {
                 return (
                   <div className="main-shadow flex flex-col sm:flex-row items-center justify-between gap-[5px] border border-[#F1F1F2] p-[10px] rounded-[12px] w-full ">
                     <div className="font-[cairo] font-[700] text-[clamp(9px,0.8334vw,12px)">
-                      مدرب رياضي محترف
+                      {item.exp_name}
                     </div>
                     <div className="font-[cairo] text-[#767676] font-[700] text-[clamp(9px,0.8334vw,12px)">
-                      من 12 ديسمبر 2022 الي 12 ديسمبر 2022
+                      {item.exp_time}
                     </div>
                   </div>
                 );
@@ -408,10 +397,10 @@ const Trainer = () => {
               <div className="font-[700] text-[14px] font-[cairo] ">خدماتي</div>
             </div>
             <div className="gap-[10px] flex items-center sm:items-start flex-wrap w-full justify-center sm:justify-start">
-              {[0, 0, 1].map(() => {
+              {trainerData?.services?.map((item) => {
                 return (
                   <div className="main-shadow flex items-center justify-between border border-[#F1F1F2] py-[10px] px-[12px] rounded-[12px] w-fit ">
-                    <div>تدريب شخصي </div>
+                    <div>{item}</div>
                   </div>
                 );
               })}
@@ -434,7 +423,7 @@ const Trainer = () => {
               </svg>
 
               <div className="font-[700] text-[14px] font-[cairo] ">
-                معرض صورالكابتن 
+                معرض صورالكابتن
               </div>
             </div>
             <div class="w-full  ">
@@ -448,15 +437,18 @@ const Trainer = () => {
                 direction="horizontal"
                 className="w-full max-w-[1060px] rounded-[clamp(15px,1.1979166666666667vw,23px)] academySwiper"
               >
-                {[1, 2, 3].map((slide) => {
+                {trainerData?.images?.map((slide) => {
                   return (
                     <SwiperSlide key={slide.id}>
                       <a className="w-full  " href="#">
                         <img
-                          src={`https://via.assets.so/img.jpg?w=1060&h=339`}
+                          src={
+                            slide.image ||
+                            `https://via.assets.so/img.jpg?w=1060&h=339`
+                          }
                           alt="academy slider slide"
                           loading="lazy"
-                          className="w-full h-[clamp(150px,20.78125vw,399px)] "
+                          className="w-full "
                         />
                       </a>
                     </SwiperSlide>
@@ -470,7 +462,7 @@ const Trainer = () => {
           <div className="w-full mt-[50px] p-[13px] rounded-[20px] flex items-center justify-center px-[10px] gap-[8px] ">
             {/* instagram */}
             <a
-              href={user.instagram_link || "https://instagram.com"}
+              href={trainerData.instagram || "https://instagram.com"}
               target="_blank"
               className="w-[44px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] "
               style={{
@@ -504,7 +496,7 @@ const Trainer = () => {
 
             {/* facebook */}
             <a
-              href={user.facebook_link || "https://facebook.com"}
+              href={trainerData.facebook || "https://facebook.com"}
               target="_blank"
               className="w-[44px] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center rounded-[8px] bg-[#1877F2] "
               style={{
@@ -528,7 +520,7 @@ const Trainer = () => {
             {/* whatsapp */}
             <a
               href={
-                `https://wa.me/${user?.phone}` || "https://wa.me/4915252455276"
+                `https://wa.me/${trainerData?.whatsapp_number}` || "https://wa.me/4915252455276"
               }
               target="_blank"
               className="w-[clamp(140px,8.69791vw,167px)] h-[clamp(35px,2.291vw,44px)] flex items-center justify-center gap-[5px] rounded-[8px] bg-[#28AF60] "
