@@ -126,6 +126,8 @@ export const en = {
   program: "Programs",
   code: "Code",
   trainers: "Trainers",
+  trainerFormMessage:
+    "Registration Successful! Thank you for registering as a certified trainer.Your information will be reviewed, and we will contact you soon to complete the next steps.If you have any questions, feel free to reach out to us.",
 
   // Institutions
   Institutions: "Institutions",
@@ -277,6 +279,8 @@ export const ar = {
   program: "البرامج",
   code: "الكود",
   trainers: "المدربين",
+  trainerFormMessage:
+    "تم التسجيل بنجاح! شكراً لتسجيلك كمدرب معتمد.سيتم مراجعة بياناتك والتواصل معك قريباً لاستكمال الخطوات اللازمة.إذا كان لديك أي استفسار، لا تتردد في التواصل معنا.",
 
   // Institutions
   Institutions: "المؤسسات",

@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { ar, en } from "../../assets/langs/translation";
 import { useEffect, useRef, useState } from "react";
 import server from "../../assets/axios/server";
+import { toast } from "react-toastify";
 
 const TrainerForm = () => {
   // to set lang
@@ -46,10 +47,17 @@ const TrainerForm = () => {
         })
         .then((response) => {
           console.log(response.data);
+          setCurrentPage(5);
         })
         .catch((error) => {
           console.log(error);
+          toast.error(error.message || currentLang.error);
         });
+        if(currentPage === 5 ){
+          document.getElementById("closeTrainerModal").click();
+          setCurrentPage(1)
+          setTrainerFormInputs({country_id: 17,})
+        };
   };
 
   const handelPrevNavigation = () => {
@@ -137,7 +145,7 @@ const TrainerForm = () => {
     <dialog id="trainerForm" className="modal">
       <div className="modal-box w-11/12 max-w-5xl">
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute end-2 top-2">
+          <button id="closeTrainerModal" className="btn btn-sm btn-circle btn-ghost absolute end-2 top-2">
             ✕
           </button>
         </form>
@@ -1108,6 +1116,14 @@ const TrainerForm = () => {
           </div>
         )}
 
+        {
+          currentPage === 5 && (
+            <div className="w-full sm:w-[90%] min-h-[200px] flex items-center justify-center mx-auto text-center ">
+              {currentLang.trainerFormMessage}
+            </div>
+          )
+        }
+
         {/* navigation btns */}
         <div className="mt-[20px] flex items-center justify-center gap-[5px] ">
           {[1, 2, 3, 4].map((item) => {
@@ -1128,7 +1144,7 @@ const TrainerForm = () => {
         </div>
         <div className="w-full flex items-center justify-between px-[20px] mt-[30px] ">
           <div>
-            {currentPage > 1 && (
+            {currentPage > 1 && currentPage !== 5 && (
               <button
                 onClick={handelPrevNavigation}
                 className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] border border-[#075178] text-[#075178] "
@@ -1141,7 +1157,7 @@ const TrainerForm = () => {
             onClick={handelNextNavigation}
             className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-[#075178] text-[#fff] "
           >
-            {currentPage < 4 ? currentLang.next : currentLang.send}
+            {currentPage < 4 ? currentLang.next :  currentPage === 4 ? currentLang.send : currentLang.close}
           </button>
         </div>
       </div>
