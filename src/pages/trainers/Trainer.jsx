@@ -13,10 +13,7 @@ import trainerBanner from "../../assets/images/profile/trainerBanner.png";
 
 const Trainer = () => {
   const { copyToClipboard } = useCopyToClipboard();
-  const { user } = useSelector((state) => state.user);
   const [trainerData, setTrainerData] = useState([]);
-
-  useProtectedRoute();
   const { trainerID } = useParams();
 
   // feach trainer data from

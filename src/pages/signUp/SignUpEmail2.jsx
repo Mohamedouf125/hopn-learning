@@ -13,6 +13,7 @@ import { SyncLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import { ar, en } from "../../assets/langs/translation";
 import { useState } from "react";
+import useLoginWithGoogle from "../../assets/hooks/useLoginWithGoogle";
 
 const SignUpEmail2 = () => {
   const dispatch = useDispatch();
@@ -53,6 +54,8 @@ const SignUpEmail2 = () => {
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
 
+  const lgoinWithGoogle = useLoginWithGoogle(currentLang.error);
+
   return (
     <main className="container flex items-center justify-center mx-auto">
       <div
@@ -78,6 +81,7 @@ const SignUpEmail2 = () => {
             className={`flex justify-center items-center w-full cursor-pointer py-6`}
           >
             <div
+            onClick={lgoinWithGoogle}
               className={`flex justify-center items-center gap-2 w-full mx-auto bg-[#e9f1ff] rounded-[20px] py-[15px]`}
             >
               <img

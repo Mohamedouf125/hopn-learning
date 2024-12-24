@@ -443,24 +443,23 @@ const Profile = () => {
           </div>
 
           <div className="mt-[10px] sm:mt-[70px] flex-col w-full px-[5px] flex items-start sm:items-end justify-start ">
-            <div className="min-w-[200px] w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
+           {user?.age &&  <div className="min-w-[200px] w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
               <span className="w-[30%] text-nowrap text-[12px] font-[400] font-[cairo]">
                 العمر :
               </span>
               <span className=" text-nowrap text-[12px] font-[700] font-[cairo]">
-                {" "}
-                عام{age}
+              {user?.age} عام
               </span>
-            </div>
-            <div className="min-w-[200px]  w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
+            </div>}
+            {user?.qualification && <div className="min-w-[200px]  w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
               <span className="w-[30%] text-nowrap text-[12px] font-[400] font-[cairo]">
                 الدرجة العلمية :
               </span>
               <span className=" text-nowrap text-[12px] font-[700] font-[cairo]">
-                {" "}
-                دكتوراه في تربية رياضية{" "}
+                
+                {user?.qualification}
               </span>
-            </div>
+            </div>}
           </div>
         </div>
       </div>

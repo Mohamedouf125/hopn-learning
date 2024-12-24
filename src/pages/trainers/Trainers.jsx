@@ -30,7 +30,7 @@ const Trainers = () => {
   const currentLang = lang === "en" ? en : ar;
 
   return (
-    <div className="container mx-auto lg:max-w-[1140px] flex flex-col items-center justify-center px-[5px] sm:px-0 mb-[50px]">
+    <div className="container mx-auto max-w-[1060px] flex flex-col items-center justify-center px-[5px] sm:px-0 mb-[50px]">
       {/* trianers modal */}
       <TrainerForm />
 
@@ -52,7 +52,7 @@ const Trainers = () => {
       {/* <TrainersFilters setfilters={setfilters} filters={filters} /> */}
 
       {/* cards */}
-      <div className="w-full flex flex-wrap gap-[clamp(5px,1.0416666666666665vw,20px)] items-stretch justify-center sm:justify-start mt-[20px] ">
+      <div className="w-full flex flex-wrap gap-[clamp(5px,1.0416666666666665vw,20px)] items-stretch justify-center mt-[20px] ">
         {trainers.length === 0 ? (
           <div className="w-full  min-h-[500px] font-[cairo] font-extrabold text-[#0000009f] text-[25px] flex items-center justify-center">
             {currentLang.noInstitutions}

@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { welcomeSlides } from "../../assets/helpers/loginSlides";
 import { ar, en } from "../../assets/langs/translation";
 import { SyncLoader } from "react-spinners";
+import useLoginWithGoogle from "../../assets/hooks/useLoginWithGoogle";
+// import { app } from "../../firebase/conf";
 
 const Login = () => {
   const [logindata, setLoginData] = useState({
@@ -19,6 +21,8 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
+
+ 
   const handelLgin = () => {
     setLoading(true);
     server
@@ -38,7 +42,8 @@ const Login = () => {
           password: "",
         });
         setLoading(false);
-        navigate("/");
+        // navigate("/");
+        window.location.href = "/";
       })
       .catch((error) => {
         toast.error(error.response.data.message || currentLang.error);
@@ -72,6 +77,8 @@ const Login = () => {
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
 
+  const lgoinWithGoogle = useLoginWithGoogle(currentLang.error);
+
   return (
     <main className="container flex items-center justify-center mx-auto">
       <div
@@ -97,6 +104,7 @@ const Login = () => {
             className={`flex justify-center items-center w-full cursor-pointer py-6`}
           >
             <div
+              onClick={lgoinWithGoogle}
               className={`flex justify-center items-center gap-2 w-full mx-auto bg-[#e9f1ff] rounded-[20px] py-[15px]`}
             >
               <img

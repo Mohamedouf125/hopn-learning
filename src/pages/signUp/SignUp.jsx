@@ -2,9 +2,19 @@ import googleIcon from "../../assets/images/icons/googleIcon.png";
 import img1 from "../../assets/images/authImages/signUp.png";
 
 import { Link, useNavigate } from "react-router-dom";
+import {  useSelector } from "react-redux";
+import { ar, en } from "../../assets/langs/translation";
+import useLoginWithGoogle from "../../assets/hooks/useLoginWithGoogle";
 
 const SignUp = () => {
   const navigate = useNavigate();
+
+
+  // to set lang
+  const { lang } = useSelector((state) => state.settings);
+  const currentLang = lang === "en" ? en : ar;
+
+  const lgoinWithGoogle = useLoginWithGoogle(currentLang.error);
 
   return (
     <main className="container flex items-center justify-center mx-auto">
@@ -34,6 +44,7 @@ const SignUp = () => {
               className={`flex justify-center items-center w-full cursor-pointer mt-10`}
             >
               <div
+                onClick={lgoinWithGoogle}
                 className={`flex justify-center items-center gap-2 border-[#E6E6E6] border-[3px] w-full mx-auto rounded-[20px] py-[15px]`}
               >
                 <img

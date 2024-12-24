@@ -3,21 +3,98 @@ import { useSelector } from "react-redux";
 // import ReactStars from "react-rating-stars-component";
 import { useNavigate } from "react-router-dom";
 import { ar, en } from "../../assets/langs/translation";
-import server from "../../assets/axios/server";
 
 const TrainersCard = ({ cardData }) => {
   // to set lang
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
 
-
   const navigate = useNavigate();
   return (
-    <div className="main-shadow w-[clamp(171px,14.0625vw,270px)] border border-[#F1F1F2] rounded-[clamp(8px,0.625vw,12px)] p-[clamp(5px,0.5208vw,10px)] flex flex-col justify-between ">
-        
-      <div className="w-full rounded-[clamp(12px,1.197917vw,23px)] ">
+    <div className="main-shadow w-[48%] sm:w-[clamp(200px,18.47222222222222vw,266px)] relative border border-[#F1F1F2] rounded-[clamp(8px,0.625vw,12px)] flex flex-col justify-between py-[clamp(5px,0.5208vw,10px)] ">
+      <div className="w-full rounded-[clamp(12px,1.197917vw,23px)] px-[clamp(5px,0.5208vw,10px)]  ">
+        <svg
+          width="37"
+          height="60"
+          viewBox="0 0 37 60"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          className="absolute top-0 left-[10px]"
+        >
+          <g filter="url(#filter0_d_1797_6064)">
+            <path
+              d="M4 1C4 0.447716 4.44772 0 5 0H32C32.5523 0 33 0.447715 33 1V50.7105C33 51.3638 32.3872 51.8458 31.7511 51.6968C29.1884 51.0963 23.2172 49.81 18.9394 49.7714C14.3568 49.7301 7.92436 51.0863 5.24621 51.7026C4.61103 51.8488 4 51.3671 4 50.7153V1Z"
+              fill="url(#paint0_linear_1797_6064)"
+            />
+          </g>
+          <path
+            d="M17.7377 14.0063C16.6118 14.2025 15.7788 14.8905 15.4376 15.9026C15.3154 16.258 15.2841 16.5167 15.3012 16.9517C15.3296 17.6965 15.5855 18.2737 16.1285 18.811C16.6886 19.3654 17.3311 19.627 18.1357 19.627C18.4569 19.627 18.565 19.6156 18.7924 19.553C19.307 19.4166 19.6738 19.2119 20.0633 18.8366C20.8138 18.1201 21.101 17.091 20.8366 16.0789C20.7115 15.6069 20.4556 15.1691 20.1002 14.8109C19.8472 14.5607 19.6112 14.3929 19.2899 14.2423C18.9175 14.0688 18.6645 14.012 18.2068 14.0034C17.9878 13.9978 17.7775 14.0006 17.7377 14.0063Z"
+            fill="white"
+          />
+          <path
+            d="M14.7002 20.5021C13.9639 20.6471 13.3271 21.1531 13.0513 21.8156C12.8864 22.2164 12.8693 22.3501 12.858 23.4617L12.8438 24.4795H18.109H23.3743L23.363 23.4617C23.3516 22.4752 23.3487 22.4382 23.2748 22.171C22.999 21.1418 22.2229 20.5334 21.117 20.4794C20.8128 20.4651 20.7843 20.468 20.7559 20.5163C20.736 20.5447 20.4176 21.2072 20.0451 21.9862C19.6699 22.7651 19.3543 23.4048 19.3429 23.4077C19.3116 23.4162 18.6208 22.2335 18.6208 22.1738C18.6208 22.1482 18.6833 22.043 18.7629 21.9378C18.9278 21.7132 19.0046 21.5227 19.0416 21.247C19.0728 21.0252 19.0472 20.8262 18.9762 20.7153C18.9079 20.613 18.726 20.5362 18.4701 20.5021C17.8759 20.4196 17.4125 20.5078 17.2561 20.7295C17.0941 20.9541 17.1993 21.6734 17.4267 21.8781C17.5802 22.0146 17.6087 22.2079 17.5035 22.3813C17.4694 22.441 17.3215 22.6941 17.1765 22.9443C17.0287 23.1944 16.9008 23.4048 16.8894 23.4134C16.8752 23.419 16.6449 22.9613 16.3748 22.3956C15.5617 20.6926 15.4906 20.5561 15.4025 20.5106C15.3172 20.4651 14.9078 20.4595 14.7002 20.5021Z"
+            fill="white"
+          />
+          <path
+            d="M25.2316 21.3016C24.5862 21.384 24.1058 22.0322 24.2166 22.6691C24.3019 23.1581 24.6658 23.5476 25.1435 23.6584C25.5187 23.7466 25.5045 23.7352 25.6182 23.9683C25.7519 24.2327 25.8059 24.4915 25.8315 24.9662L25.8485 25.333H17.2199C9.57219 25.333 8.57713 25.3387 8.44636 25.3756C8.27009 25.4297 8.14784 25.5292 8.06255 25.6855C8.00569 25.7936 8 25.839 8 26.328C8 26.8142 8.00569 26.8625 8.06255 26.9677C8.13931 27.1099 10.2687 29.2336 10.4024 29.3019C10.4876 29.3445 10.6042 29.353 11.2723 29.3644C11.9632 29.3758 12.0456 29.3729 12.0598 29.3303C12.0712 29.3047 12.0513 29.0176 12.02 28.6906C11.949 27.9599 11.9603 27.8889 12.1508 27.8036C12.2702 27.7496 12.401 27.7496 18.1553 27.7552C23.8328 27.7638 24.0375 27.7666 24.1114 27.8178C24.2479 27.9088 24.2621 28.0225 24.2081 28.5939C24.1825 28.8726 24.1541 29.1597 24.1427 29.2336L24.1257 29.3701H24.8762C25.587 29.3672 25.6353 29.3644 25.7775 29.3047C25.9054 29.2507 26.0902 29.0801 27.0511 28.1192C27.6709 27.5022 28.1883 26.9677 28.2026 26.9308C28.2367 26.8426 28.2367 25.913 28.1997 25.7907C28.1571 25.6343 28.0547 25.5093 27.9012 25.4268C27.7619 25.3472 27.7505 25.3472 27.199 25.3387L26.636 25.3273V25.1141C26.636 24.8923 26.4996 24.1872 26.366 23.7409C26.2693 23.4111 26.2721 23.3287 26.3944 23.1609C26.6645 22.7799 26.6872 22.345 26.4569 21.91C26.221 21.4665 25.7547 21.2362 25.2316 21.3016Z"
+            fill="white"
+          />
+          <path
+            d="M12.8675 28.6222C12.8589 28.6364 13.0494 30.4986 13.2854 32.7673C13.7659 37.3162 13.7289 37.0802 13.9592 37.2849C14.1753 37.4839 13.9535 37.4725 18.1242 37.4725C21.8145 37.4725 21.8884 37.4725 22.0391 37.4157C22.2694 37.3304 22.4172 37.1484 22.4854 36.8727C22.5139 36.7504 22.8749 33.3786 23.182 30.3792C23.2673 29.5348 23.344 28.7899 23.3526 28.7217L23.3696 28.6023H18.1242C15.2385 28.6023 12.8731 28.6108 12.8675 28.6222Z"
+            fill="white"
+          />
+          <defs>
+            <filter
+              id="filter0_d_1797_6064"
+              x="0"
+              y="0"
+              width="37"
+              height="59.7285"
+              filterUnits="userSpaceOnUse"
+              color-interpolation-filters="sRGB"
+            >
+              <feFlood flood-opacity="0" result="BackgroundImageFix" />
+              <feColorMatrix
+                in="SourceAlpha"
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha"
+              />
+              <feOffset dy="4" />
+              <feGaussianBlur stdDeviation="2" />
+              <feComposite in2="hardAlpha" operator="out" />
+              <feColorMatrix
+                type="matrix"
+                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"
+              />
+              <feBlend
+                mode="normal"
+                in2="BackgroundImageFix"
+                result="effect1_dropShadow_1797_6064"
+              />
+              <feBlend
+                mode="normal"
+                in="SourceGraphic"
+                in2="effect1_dropShadow_1797_6064"
+                result="shape"
+              />
+            </filter>
+            <linearGradient
+              id="paint0_linear_1797_6064"
+              x1="18.5"
+              y1="0"
+              x2="18.5"
+              y2="52"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0.44" stop-color="#9AD7B3" />
+              <stop offset="1" stop-color="#28AF60" />
+            </linearGradient>
+          </defs>
+        </svg>
+
         <img
-          className="w-full h-[clamp(90px,7.34375vw,141px)] rounded-[clamp(12px,1.197917vw,23px)] "
+          className="w-full h-[150px] sm:h-[clamp(210px,20vw,288px)] rounded-[clamp(5px,0.6944444444444444vw,10px)] "
           src={
             cardData.image !== "https://api.sportiin.com"
               ? cardData.image
@@ -34,7 +111,7 @@ const TrainersCard = ({ cardData }) => {
           {cardData.job_title}
         </p>
 
-        <div className="flex w-full items-center justify-center gap-[20px] mt-[5px] ">
+        <div className="flex w-full items-center justify-center py-[5px] border-b border-t border-[#F1F1F2] gap-[20px] mt-[10px] ">
           <div className="flex items-center justify-center gap-[5px] ">
             <svg
               width="17"
@@ -99,10 +176,10 @@ const TrainersCard = ({ cardData }) => {
           </div>
         </div>
       </div>
-      <div className="w-full mt-[20px] ">
+      <div className="w-full mt-[10px] px-[clamp(5px,0.5208vw,10px)] ">
         <button
           onClick={() => navigate(`/trainers/trainer/${cardData.id}`)}
-          className="w-full font-[Cairo] text-[clamp(9px,0.729166vw,14px)] font-[400] leading-[clamp(14px,0.9375vw,18px)] text-[#fff] py-[13px] bg-[#075178] rounded-[8px] "
+          className="w-[80%] mx-auto flex items-center justify-center font-[Cairo] text-[clamp(9px,0.729166vw,14px)] font-[400] leading-[clamp(14px,0.9375vw,18px)] text-[#fff] py-[clamp(5px,0.9027777777777777vw,13px)] bg-[#075178] rounded-[8px] "
         >
           {currentLang.SeeMore}
         </button>
