@@ -1,20 +1,21 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { fetchHomeData } from "../../store/slices/home/homeDataSlice";
+import {  useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 import { ar, en } from "../../assets/langs/translation";
-import TraineeCard from "../../components/trainee/TraineeCard";
 import { Helmet } from "react-helmet";
 import LuctureCard from "../../components/lucture/LuctureCard";
+import server from "../../assets/axios/server";
 
 const Lecturers = () => {
-  const dispatch = useDispatch();
+  const [lectures, setLectures] = useState([]);
 
-  // feach home data from backend
+  // feach lectures data from backend
   useEffect(() => {
-    dispatch(fetchHomeData());
-  }, [dispatch]);
+    server.get(`/lecture-requests/status/done`).then((res) => {
+      setLectures(res.data.data);
+      console.log(res.data.data);
+    })
+  }, []);
 
-  const { trainers} = useSelector((state) => state.home);
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -24,19 +25,19 @@ const Lecturers = () => {
     <main className="container mx-auto mb-10">
       {/* helmet to change page head */}
        <Helmet>
-        <title>SportsIn - Trainers</title>
+        <title>SportsIn - Lectures</title>
       </Helmet>
 
       <section className="w-full flex flex-col items-center justify-center mt-10">
         <div className="w-full flex items-center justify-between">
           <h2 className="text-2xl font-semibold mb-4 text-left">
-            {currentLang.trainersTitle}
+            {currentLang.Lecturers}
           </h2>
         </div>
         <div className="flex items-start w-full mx-auto justify-center gap-[clamp(10px,1.0416666666666665vw,15px)] flex-wrap ">
-          {trainers.map((trainee, index) => {
+          {lectures?.map((lecture, index) => {
             return (
-              <LuctureCard key={index} trainee={trainee} />
+              <LuctureCard key={index} lecture={lecture} />
             );
           })}
         </div>

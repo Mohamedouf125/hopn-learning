@@ -153,6 +153,9 @@ export const en = {
   subscription: "Subscription",
   pound: "L.E",
   subscripe: "subscripe",
+  lecturingFildes: "Lecturing Fields:",
+  expYears: "Years of experience",
+  location: "Location: ",
 };
 
 export const ar = {
@@ -308,4 +311,7 @@ export const ar = {
   subscription: "الاشتراكات",
   pound: "ج.م",
   subscripe: "اشترك",
+  lecturingFildes: "مجالات التدريس: "  ,
+  expYears: "سنوات من الخبرة",
+  location: "مكان التواجد: ",
 };
