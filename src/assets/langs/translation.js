@@ -129,7 +129,8 @@ export const en = {
   trainers: "Trainers",
   trainerFormMessage:
     "Registration Successful! Thank you for registering as a certified trainer.Your information will be reviewed, and we will contact you soon to complete the next steps.If you have any questions, feel free to reach out to us.",
-
+  lectureFormMessage:
+    "Registration Successful! Thank you for registering as a certified instructor. Your information will be reviewed and we will contact you shortly to complete the next steps. If you have any questions, please feel free to contact us.",
   // Institutions
   Institutions: "Institutions",
   Institutions2: "Institutions :",
@@ -271,7 +272,7 @@ export const ar = {
   forgotPassword: "نسيت كلمة المرور",
   resetPassword: "إعادة تعيين كلمة المرور",
   country: "الدوله",
-  years:"سنه",
+  years: "سنه",
 
   // trainers
   trainersTitle: "المتدربين",
@@ -283,7 +284,8 @@ export const ar = {
   trainers: "المدربين",
   trainerFormMessage:
     "تم التسجيل بنجاح! شكراً لتسجيلك كمدرب معتمد.سيتم مراجعة بياناتك والتواصل معك قريباً لاستكمال الخطوات اللازمة.إذا كان لديك أي استفسار، لا تتردد في التواصل معنا.",
-
+  lectureFormMessage:
+    "تم التسجيل بنجاح! شكرًا لك على التسجيل كمحاضر معتمد. سيتم مراجعة معلوماتك وسنتواصل معك قريبًا لإكمال الخطوات التالية. إذا كانت لديك أي أسئلة، فلا تتردد في التواصل معنا.",
   // Institutions
   Institutions: "المؤسسات",
   Institutions2: "المؤسسات :",

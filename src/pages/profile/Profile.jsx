@@ -1,5 +1,5 @@
 import "./profile.css";
-import profileBanner from '../../assets/images/profile/profileBanar.png'
+import profileBanner from "../../assets/images/profile/profileBanar.png";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import useProtectedRoute from "../../assets/hooks/useProtectedRoute";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,13 +18,14 @@ import {
   profileServicesAr,
   profileServicesEn,
 } from "../../assets/helpers/profileServices";
+import defaultUserImage from "../../assets/images/icons/userAvatar.png";
 import JobSeekerForm from "../../components/profile/JobSeekerForm";
 import TrainerForm from "../../components/profile/TrainerForm";
+import LuctureForm from "../../components/profile/LuctureForm";
 
 const Profile = () => {
   const { copyToClipboard } = useCopyToClipboard();
   const { user, token } = useSelector((state) => state.user);
-  const [age, setAge] = useState("");
   const dispatch = useDispatch();
   const [editProfile, setEditProfile] = useState(false);
   const [editProfileInputs, setEditProfileInputs] = useState({});
@@ -36,30 +37,6 @@ const Profile = () => {
   useEffect(() => {
     dispatch(fetchHomeData());
   }, [dispatch]);
-
-  // clculate age based on birthday
-  useEffect(() => {
-    function calculateAge(birthday) {
-      const birthDate = new Date(birthday);
-      const today = new Date();
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const monthDifference = today.getMonth() - birthDate.getMonth();
-
-      if (
-        monthDifference < 0 ||
-        (monthDifference === 0 && today.getDate() < birthDate.getDate())
-      ) {
-        age--;
-      }
-
-      return age;
-    }
-
-    if (user.date) {
-      const calculatedAge = calculateAge(user.date);
-      setAge(calculatedAge);
-    }
-  }, [user.date]);
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -118,9 +95,11 @@ const Profile = () => {
 
   return (
     <main className="container mx-auto lg:max-w-[1060px] flex flex-col items-center justify-center px-[5px] sm:px-0 mb-[50px] mt-[20px]">
-      {/* job seeker form */}
+      {/* services forms */}
       <JobSeekerForm />
       <TrainerForm />
+      <LuctureForm />
+      {/* edit profile form */}
       {editProfile && (
         <FullPagePopup>
           <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
@@ -180,6 +159,7 @@ const Profile = () => {
           </div>
         </FullPagePopup>
       )}
+      {/* profile content */}
       <div
         className="w-full pb-[250px] border border-[#F1F1F2] overflow-hidden rounded-[30px]"
         style={{ boxShadow: " 0px 3px 4px 0px #00000008" }}
@@ -188,9 +168,7 @@ const Profile = () => {
         <div className="w-full rounded-[12px] h-[clamp(130px,11.041666666666666vw,212px)] relative">
           <img
             className="w-full h-full rounded-[12px]"
-            src={
-              profileBanner
-            }
+            src={profileBanner}
             alt="academyCover"
             loading="lazy"
           />
@@ -211,11 +189,7 @@ const Profile = () => {
 
               <img
                 className="w-full h-full rounded-full"
-                src={
-                  editProfileImg ||
-                  user?.photo ||
-                  "https://via.assets.so/img.jpg?w=800&h=800&tc=blue&bg=#C4C4C4"
-                }
+                src={editProfileImg || user?.photo || defaultUserImage}
                 alt="avatar"
                 loading="lazy"
                 onClick={() => document.getElementById("userImgInput").click()}
@@ -443,23 +417,26 @@ const Profile = () => {
           </div>
 
           <div className="mt-[10px] sm:mt-[70px] flex-col w-full px-[5px] flex items-start sm:items-end justify-start ">
-           {user?.age &&  <div className="min-w-[200px] w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
-              <span className="w-[30%] text-nowrap text-[12px] font-[400] font-[cairo]">
-                العمر :
-              </span>
-              <span className=" text-nowrap text-[12px] font-[700] font-[cairo]">
-              {user?.age} عام
-              </span>
-            </div>}
-            {user?.qualification && <div className="min-w-[200px]  w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
-              <span className="w-[30%] text-nowrap text-[12px] font-[400] font-[cairo]">
-                الدرجة العلمية :
-              </span>
-              <span className=" text-nowrap text-[12px] font-[700] font-[cairo]">
-                
-                {user?.qualification}
-              </span>
-            </div>}
+            {user?.age && (
+              <div className="min-w-[200px] w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
+                <span className="w-[30%] text-nowrap text-[12px] font-[400] font-[cairo]">
+                  العمر :
+                </span>
+                <span className=" text-nowrap text-[12px] font-[700] font-[cairo]">
+                  {user?.age} عام
+                </span>
+              </div>
+            )}
+            {user?.qualification && (
+              <div className="min-w-[200px]  w-full sm:w-[30%] flex items-center sm:items-start px-[10px] justify-start gap-[10px]">
+                <span className="w-[30%] text-nowrap text-[12px] font-[400] font-[cairo]">
+                  الدرجة العلمية :
+                </span>
+                <span className=" text-nowrap text-[12px] font-[700] font-[cairo]">
+                  {user?.qualification}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -540,211 +517,6 @@ const Profile = () => {
           </div>
         ))}
       </div>
-
-      {/* cv section */}
-      {/* <section className="mt-10 rounded-lg bg-[#0751781A] p-5 flex-col gap-5 w-full md:w-[80%] flex items-center justify-center">
-        <div className="w-full">
-          {user.cv ? (
-            <div className="flex items-center justify-between w-full flex-col md:flex-row gap-5 md:gap-0">
-              <div className="bg-[#D9D9D9] w-fit p-5 rounded-lg">
-                <a target="_blank" rel="noreferrer" href={user.cv}>
-                  <img
-                    src={user.cv}
-                    alt="cv"
-                    loading="lazy"
-                    className="w-[235px] h-[333px]"
-                  />
-                </a>
-              </div>
-              <span className="w-full text-center font-[600] text-[15px]">
-                {user.name} CV
-                <FileInput />
-              </span>
-            </div>
-          ) : (
-            <FileInput />
-          )}
-        </div>
-      </section> */}
-
-      {/* Celebrities */}
-      {/* <section className="w-full flex flex-col items-center justify-center mt-10 ">
-        <h2 className="text-2xl font-semibold mb-4 w-full text-start">
-          {currentLang.CelebritiesTitle}
-        </h2>
-        <div className="w-full relative">
-          <Swiper
-            modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-            centeredSlides={true}
-            navigation={{
-              nextEl: ".swiper-button-next",
-              prevEl: ".swiper-button-prev",
-            }}
-            pagination={{ clickable: true }}
-            scrollbar={{ draggable: true }}
-            autoplay={{ delay: 3000, disableOnInteraction: false }}
-            loop={true}
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 5,
-              },
-              480: {
-                slidesPerView: 2,
-                spaceBetween: 8,
-              },
-              640: {
-                slidesPerView: 3,
-                spaceBetween: 10,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 16,
-              },
-            }}
-            className="w-full"
-          >
-            {users.map((user, index) => (
-              <SwiperSlide
-                key={index}
-                className="flex items-center justify-center bg-gray-100 rounded-lg shadow-md"
-              >
-                <div className="text-center">
-                  <div className="w-full  ">
-                    <img className="w-full  " src={slideHead} alt="slideHead" />
-                  </div>
-                  <div className="w-full mt-[-30px] ">
-                    <img
-                      src={
-                        user.photo === "https://api.sportiin.com"
-                          ? avatar
-                          : user.photo || avatar
-                      }
-                      alt={`personal `}
-                      className="w-16 h-16 rounded-full mx-auto mb-2"
-                    />
-                    <h3 className="text-lg font-[600] ">{user.name}</h3>
-                    <p className="font-[400]">{user.sex || "male"}</p>
-                  </div>
-                  <div className="flex items-center justify-center gap-6 mt-3 py-3">
-                    <button className="text-[#EB4335] font-[600] ">
-                      {currentLang.REMOVE}
-                    </button>
-                    <button className="text-white bg-[#075178] px-9 py-2 rounded-xl ">
-                      {currentLang.FOLOW}
-                    </button>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-
-          Custom Navigation Arrows
-          <div className="swiper-button-next border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] translate-x-[-50%] ">
-            <svg
-              width="25"
-              height="24"
-              viewBox="0 0 25 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_301_338)">
-                <path
-                  d="M15.5 6L9.5 12L15.5 18"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_301_338">
-                  <rect
-                    width="24"
-                    height="24"
-                    fill="white"
-                    transform="matrix(-1 0 0 1 24.5 0)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
-          </div>
-          <div className="swiper-button-prev border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] translate-x-[50%]">
-            <svg
-              width="25"
-              height="24"
-              viewBox="0 0 25 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clipPath="url(#clip0_301_332)">
-                <path
-                  d="M9.5 6L15.5 12L9.5 18"
-                  stroke="black"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_301_332">
-                  <rect
-                    width="24"
-                    height="24"
-                    fill="white"
-                    transform="translate(0.5)"
-                  />
-                </clipPath>
-              </defs>
-            </svg>
-          </div>
-        </div>
-      </section> */}
-
-      {/* <div className="w-full border-t border-black my-10"></div> */}
-
-      {/* cources */}
-      {/* <section className="w-full flex flex-col items-center justify-center mb-10">
-        <div className="w-full flex items-center justify-between">
-          <h2 className="text-2xl font-semibold mb-4 text-left">
-            {currentLang.myCourses}
-          </h2>
-        </div>
-        <div className="flex items-center justify-center gap-10 flex-wrap w-full">
-          {userCourses ? (
-            <div
-              onClick={() => navigate(`/courses/course/${userCourses?.id}`)}
-              className="rounded-3xl border overflow-hidden cursor-pointer min-h-[285px] border-[#D9D9D9] w-[260px]"
-            >
-              <div>
-                <img
-                  src={userCourses?.image || courseImg}
-                  alt="cv "
-                  loading="lazy"
-                  className="w-full"
-                />
-              </div>
-              <div className=" w-full  p-3 flex flex-col items-start justify-start">
-                <h3 className="font-[600] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal ">
-                  {userCourses?.title}
-                </h3>
-                <p
-                  className="font-[400] text-[12px] line-clamp-2 overflow-hidden text-ellipsis whitespace-normal"
-                  dangerouslySetInnerHTML={{ __html: userCourses?.description }}
-                />
-                <div className="flex w-full items-center justify-start gap-1">
-                  <ReactStars {...defaultStars} />
-                  <span className="font-[400] text-[14px] text-[#1B1B1B99] ">
-                    (1.2K)
-                  </span>
-                </div>
-              </div>
-            </div>
-          ) : (
-            <div>No courses to show</div>
-          )}
-        </div>
-      </section> */}
     </main>
   );
 };

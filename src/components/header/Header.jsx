@@ -12,6 +12,7 @@ import { ar, en } from "../../assets/langs/translation";
 import { changeLang } from "../../store/slices/settings/settingsSlice";
 import server from "../../assets/axios/server";
 import { useEffect, useState } from "react";
+import defaultUserImage from "../../assets/images/icons/userAvatar.png";
 
 const Header = () => {
   const { user } = useSelector((state) => state.user);
@@ -99,8 +100,8 @@ const Header = () => {
                 >
                   <span className="sr-only">Open user menu</span>
                   <img
-                    className="w-8 h-8 rounded-full"
-                    src={user?.photo}
+                    className="w-8 h-8 rounded-full border-[2px] border-gray-800"
+                    src={user?.photo || defaultUserImage }
                     alt="user photo"
                   />
                 </button>
