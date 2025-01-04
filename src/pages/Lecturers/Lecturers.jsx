@@ -1,4 +1,4 @@
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { ar, en } from "../../assets/langs/translation";
 import { Helmet } from "react-helmet";
@@ -10,12 +10,15 @@ const Lecturers = () => {
 
   // feach lectures data from backend
   useEffect(() => {
-    server.get(`/lecture-requests/status/done`).then((res) => {
-      setLectures(res.data.data);
-      console.log(res.data.data);
-    })
+    server
+      .get(`/lecture-requests/status/done`)
+      .then((res) => {
+        setLectures(res.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, []);
-
 
   // to set lang
   const { lang } = useSelector((state) => state.settings);
@@ -24,7 +27,7 @@ const Lecturers = () => {
   return (
     <main className="container mx-auto mb-10">
       {/* helmet to change page head */}
-       <Helmet>
+      <Helmet>
         <title>SportsIn - Lectures</title>
       </Helmet>
 
@@ -36,9 +39,7 @@ const Lecturers = () => {
         </div>
         <div className="flex items-start w-full mx-auto justify-center gap-[clamp(10px,1.0416666666666665vw,15px)] flex-wrap ">
           {lectures?.map((lecture, index) => {
-            return (
-              <LuctureCard key={index} lecture={lecture} />
-            );
+            return <LuctureCard key={index} lecture={lecture} />;
           })}
         </div>
       </section>

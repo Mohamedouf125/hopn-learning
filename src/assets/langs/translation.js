@@ -156,6 +156,13 @@ export const en = {
   lecturingFildes: "Lecturing Fields:",
   expYears: "Years of experience",
   location: "Location: ",
+  personalInfo: "Personal Information",
+  services: "Services",
+  qualifications: "Qualifications",
+  expWork:"Work Experience",
+  experience: "Experience",
+  workIn: "Works in",
+  achievements: "Achievements",
 };
 
 export const ar = {
@@ -314,4 +321,11 @@ export const ar = {
   lecturingFildes: "مجالات التدريس: "  ,
   expYears: "سنوات من الخبرة",
   location: "مكان التواجد: ",
+  personalInfo: "المعلومات الشخصية",
+  services: "الخدمات",
+  qualifications: "المؤهلات",
+  expWork:"الخبرات العمليه",
+  experience: "خبرة",
+  workIn: "يعمل في",
+  achievements: "الانجازات",
 };

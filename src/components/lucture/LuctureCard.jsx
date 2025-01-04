@@ -2,8 +2,10 @@ import { useSelector } from "react-redux";
 import lectureImage from "../../assets/images/luctures/lectureBanner.png";
 import { ar, en } from "../../assets/langs/translation";
 import lectureBanner from "../../assets/images/luctures/lectureBanner.png";
+import { useNavigate } from "react-router-dom";
 
 const LuctureCard = ({ lecture }) => {
+    const navigate = useNavigate()
   // to set lang
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
@@ -12,7 +14,7 @@ const LuctureCard = ({ lecture }) => {
     <div
       className={` ${
         lang === "en" ? "ltr" : "rtl"
-      }  flex-col w-[238px] border border-[#F1F1F2] rounded-[8px] max-w-[100%] overflow-hidden flex items-center justify-between `}
+      }  flex-col main-shadow w-[238px] border border-[#F1F1F2] rounded-[8px] max-w-[100%] overflow-hidden flex items-center justify-between `}
     >
       <div class="relative block !h-[74px] w-full">
         <img
@@ -35,8 +37,8 @@ const LuctureCard = ({ lecture }) => {
             <h2 className="text-[12px] font-[600] font-[Cairo] text-[#000] w-full text-nowrap">
               {lecture?.name}
             </h2>
-            <span className="text-[6px] font-[600] font-[Cairo] text-[#898989]">
-              {lecture?.job_title}
+            <span className="text-[6px] max-w-[120px] font-[600] font-[Cairo] text-[#898989]">
+              {lecture?.brief_summary}
             </span>
           </div>
         </div>
@@ -182,7 +184,7 @@ const LuctureCard = ({ lecture }) => {
       <div className="w-full my-[10px] border-b border-[#F1F1F2]"></div>
 
       <div className="w-full pb-[10px] flex items-center justify-center px-[15px]">
-        <button className="flex w-full py-[8px] items-center justify-center bg-[#075178] rounded-[8px] text-[#fff] text-[10px] font-[600] font-[Cairo]  ">
+        <button onClick={()=> navigate(`/lecture/${lecture.id}`)} className="flex w-full py-[8px] items-center justify-center bg-[#075178] rounded-[8px] text-[#fff] text-[10px] font-[600] font-[Cairo]  ">
             {currentLang.SeeMore}
         </button>
       </div>
