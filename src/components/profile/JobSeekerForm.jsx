@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { ar, en } from "../../assets/langs/translation";
 import { useEffect, useRef, useState } from "react";
 import server from "../../assets/axios/server";
+import { toast } from "react-toastify";
 
 const JobSeekerForm = () => {
   // to set lang
@@ -45,12 +46,23 @@ const JobSeekerForm = () => {
             Authorization: `Bearer ${token}`,
           },
         })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
+          setCurrentPage(5);
         })
         .catch((error) => {
-          console.log(error);
+          toast.error(error.message);
         });
+
+    if (currentPage === 5) {
+      document.getElementById("closeJpbSeekerModal").click();
+      setCurrentPage(1);
+      setFormInputs({
+        english: "good",
+        services: "personal training",
+        country_id: 17,
+        how_to_communication: "whatsapp",
+      });
+    }
   };
 
   const handelPrevNavigation = () => {
@@ -85,13 +97,14 @@ const JobSeekerForm = () => {
     setExpInputs(updatedExpInputs);
   };
 
-  console.log(formInputs);
-
   return (
     <dialog id="jobSeekerForm" className="modal">
       <div className="modal-box w-11/12 max-w-5xl">
         <form method="dialog">
-          <button class="btn btn-sm btn-circle btn-ghost absolute end-2 top-2">
+          <button
+            id="closeJpbSeekerModal"
+            class="btn btn-sm btn-circle btn-ghost absolute end-2 top-2"
+          >
             ✕
           </button>
         </form>
@@ -712,7 +725,9 @@ const JobSeekerForm = () => {
                         }));
                       }}
                     />
-                    <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">تدريب جماعي</span>
+                    <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">
+                      تدريب جماعي
+                    </span>
                   </label>
                   <label className="label cursor-pointer gap-[10px]">
                     <input
@@ -728,14 +743,19 @@ const JobSeekerForm = () => {
                         }));
                       }}
                     />
-                    <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">تدريب لفئات معينه</span>
+                    <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">
+                      تدريب لفئات معينه
+                    </span>
                   </label>
                 </div>
                 {/* input group */}
                 <div className="flex w-full items-start justify-start mt-[10px] ">
                   <label className="form-control w-full">
                     <div className="label">
-                      <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] "> نبذه *</span>
+                      <span className="label-text font-[cairo] text-[clamp(10px,0.972vw,14px)] leading-[22px] ">
+                        {" "}
+                        نبذه *
+                      </span>
                     </div>
                     <textarea
                       className="textarea bg-[#F9F9F9]"
@@ -822,6 +842,12 @@ const JobSeekerForm = () => {
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {currentPage === 5 && (
+          <div className="w-full sm:w-[90%] min-h-[200px] flex items-center justify-center mx-auto text-center ">
+            {currentLang.jobSeekerFormMessage}
           </div>
         )}
 

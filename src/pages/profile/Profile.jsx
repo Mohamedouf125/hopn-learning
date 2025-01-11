@@ -22,6 +22,7 @@ import defaultUserImage from "../../assets/images/icons/userAvatar.png";
 import JobSeekerForm from "../../components/profile/JobSeekerForm";
 import TrainerForm from "../../components/profile/TrainerForm";
 import LuctureForm from "../../components/profile/LuctureForm";
+import JobOpportunityForm from "../../components/profile/JobOpportunityForm";
 
 const Profile = () => {
   const { copyToClipboard } = useCopyToClipboard();
@@ -99,6 +100,7 @@ const Profile = () => {
       <JobSeekerForm />
       <TrainerForm />
       <LuctureForm />
+      <JobOpportunityForm />
       {/* edit profile form */}
       {editProfile && (
         <FullPagePopup>

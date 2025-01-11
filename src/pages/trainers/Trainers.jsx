@@ -2,7 +2,7 @@ import "./trainers.css";
 
 import { ar, en } from "../../assets/langs/translation";
 import { useSelector } from "react-redux";
-import TrainersFilters from "../../components/trainers/TrainersFilters";
+// import TrainersFilters from "../../components/trainers/TrainersFilters";
 import { useEffect, useState } from "react";
 import server from "../../assets/axios/server";
 import TrainersCard from "../../components/trainers/TrainersCard";
@@ -37,12 +37,12 @@ const Trainers = () => {
       {/* join now section */}
       <div className="flex w-full max-w-[1060px]  items-center justify-between bg-[#0751781A] border border-[#0751784D] rounded-[12px] p-[12px] mt-[20px] ">
         <h2 className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] font-[700] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#075178] ">
-          {currentLang.joinInstitutions}
+          {currentLang.joinTrainers}
         </h2>
         <a
           onClick={() => document.getElementById("trainerForm").showModal()}
           target="_blank"
-          className="font-[Cairo] text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] "
+          className="font-[Cairo] cursor-pointer text-[clamp(10px,0.625vw,12px)] text-nowrap font-[400] leading-[clamp(15px,1.1458333333333333vw,22px)] text-[#fff] rounded-[8px] bg-[#075178] py-[clamp(5px,0.46875vw,9px)] px-[clamp(10px,2.604166666666667vw,50px)] "
         >
           {currentLang.joinNow}
         </a>

@@ -46,11 +46,9 @@ const TrainerForm = () => {
           },
         })
         .then((response) => {
-          console.log(response.data);
           setCurrentPage(5);
         })
         .catch((error) => {
-          console.log(error);
           toast.error(error.message || currentLang.error);
         });
         if(currentPage === 5 ){
@@ -139,7 +137,6 @@ const TrainerForm = () => {
     setTrainerFormInputs((prev) => ({ ...prev, experiences: workExp }));
   }, [workExp]);
 
-  console.log(trainerFormInputs);
 
   return (
     <dialog id="trainerForm" className="modal">
