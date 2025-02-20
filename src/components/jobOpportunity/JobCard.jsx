@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ar, en } from "../../assets/langs/translation";
 
-const JobCard = () => {
+const JobCard = ({ job }) => {
+  const [showCommunication, setShowCommunication] = useState(false);
   // to set lang
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
+
+  console.log(showCommunication);
+
   return (
-    <div className="w-[311px] h-[240px] flex flex-col items-start justify-start py-[15px] relative rounded-[12px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border border-[#f1f1f2]">
+    <div className="w-[311px] overflow-hidden h-[240px] flex flex-col items-start justify-start py-[15px] relative rounded-[12px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border border-[#f1f1f2]">
       <div className=" w-full left-0 top-0 absolute z-0">
         <svg
           width="100%"
@@ -27,10 +31,10 @@ const JobCard = () => {
 
       <div className="border-b z-10 border-[#f1f1f2] w-full flex flex-col items-start justify-start px-[15px] pb-[9px] ">
         <div className="text-start text-black text-xs font-bold font-['Cairo']">
-          مدرب كره قدم محترف
+          {job?.title}
         </div>
         <div className="text-start text-[#888888] text-[10px] font-normal font-['Cairo']">
-          نبحث عن مدرب رياضي محترف لتقديم برامج تدريبية مميزة.
+          {job?.description}
         </div>
       </div>
 
@@ -80,13 +84,18 @@ const JobCard = () => {
           </svg>
 
           <div className="text-start text-black text-xs font-normal font-['Cairo'] leading-[15px]">
-            جيد في الإنجليزية
+            {job.english === "good"
+              ? currentLang.good
+              : job.english === "very good"
+              ? currentLang.verygood
+              : currentLang.excellent}{" "}
+            {currentLang.inEnglish}
           </div>
         </div>
 
         <div className="justify-start items-center gap-[5px] inline-flex">
           <div className="w-full text-center text-black text-[10px] font-normal font-['Cairo'] leading-[15px]">
-            {currentLang.lastApplayDate}: 1 يناير
+            {currentLang.lastApplayDate}: {job.last_date}
           </div>
         </div>
       </div>
@@ -137,7 +146,11 @@ const JobCard = () => {
             />
           </svg>
           <div className="text-start text-black text-[10px] font-normal font-['Cairo'] leading-[15px]">
-            دوام كامل
+            {job.type_of_work === "full"
+              ? currentLang.fullTime
+              : job.type_of_work === "part"
+              ? currentLang.partTime
+              : currentLang.freelance}
           </div>
         </div>
         <div className="border-r border-[#f1f1f2] h-full"></div>
@@ -157,7 +170,7 @@ const JobCard = () => {
             />
           </svg>
           <div className="text-start text-black text-[10px] font-normal font-['Cairo'] leading-[15px]">
-            مصر
+            {job.country}
           </div>
         </div>
         <div className="border-r border-[#f1f1f2] h-full"></div>
@@ -180,24 +193,112 @@ const JobCard = () => {
             </svg>
           }
           <div className="text-start text-black text-[10px] font-normal font-['Cairo'] leading-[15px]">
-            ذكر
+            {job.type === "male" ? currentLang.male : currentLang.female}
           </div>
         </div>
       </div>
 
       <div className="w-full z-10 justify-between items-center py-[10px] px-[15px] inline-flex">
-        <button className="text-center w-[179px] justify-center items-center gap-2.5 flex rounded-lg h-[41px] bg-[#075178] text-white text-[10px] font-semibold font-['Cairo'] ">
-          التواصل الان
+        <button
+          onClick={() => setShowCommunication(true)}
+          className="text-center w-[179px] justify-center items-center gap-2.5 flex rounded-lg h-[41px] bg-[#075178] text-white text-[10px] font-semibold font-['Cairo'] "
+        >
+          {currentLang.contactNow}
         </button>
         <div className="text-start flex flex-col items-start justify-start">
           <span className="text-black text-[10px] font-normal font-['Cairo'] ">
-            الراتب :
+            {currentLang.salary} :
           </span>
           <span className="text-black text-[25px] font-bold font-['Cairo'] ">
-            1000 $
+            {job.salary} $
           </span>
         </div>
       </div>
+
+      {showCommunication && (
+        <div className="w-full h-full bg-[#30323699] backdrop-filter: backdrop-blur-[2px] z-40 absolute top-0 left-0 flex flex-col items-center justify-center gap-4 px-4">
+          <a
+            href={`https://wa.me/${job.whatsapp}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-[194px] h-[66px] border border-[f1f1f2] bg-[#28AF60] text-white rounded-[20px] font-['Cairo'] text-sm hover:bg-[#2ed172] flex items-center justify-center gap-[5px]"
+          >
+            <svg
+              width="26"
+              height="25"
+              viewBox="0 0 26 25"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16.5784 18.0752C11.5648 18.0752 7.48575 13.9936 7.48438 8.97842C7.48575 7.70712 8.5206 6.67334 9.78878 6.67334C9.91916 6.67334 10.0482 6.68432 10.1717 6.70629C10.4434 6.75159 10.7015 6.84358 10.9389 6.98224C10.9732 7.00283 10.9966 7.03578 11.002 7.07422L11.5318 10.4145C11.5387 10.4543 11.5263 10.4927 11.5003 10.5215C11.2079 10.8455 10.8346 11.0789 10.4187 11.1956L10.2184 11.2519L10.2938 11.4455C10.9773 13.1863 12.369 14.5771 14.1107 15.2635L14.3042 15.3404L14.3605 15.1399C14.4772 14.724 14.7105 14.3505 15.0344 14.0581C15.0577 14.0361 15.0893 14.0252 15.1209 14.0252C15.1277 14.0252 15.1346 14.0252 15.1428 14.0265L18.4821 14.5565C18.5219 14.5633 18.5548 14.5853 18.5754 14.6196C18.7127 14.8571 18.8046 15.1166 18.8513 15.3884C18.8732 15.5092 18.8828 15.6369 18.8828 15.7701C18.8828 17.04 17.8494 18.0738 16.5784 18.0752Z"
+                fill="#FDFDFD"
+              />
+              <path
+                d="M25.4705 11.2439C25.2002 8.1879 23.8002 5.35289 21.5288 3.26198C19.2436 1.15872 16.279 0 13.1786 0C6.37381 0 0.837228 5.53823 0.837228 12.345C0.837228 14.6295 1.46718 16.8549 2.65987 18.7935L0 24.6831L8.51626 23.7757C9.99717 24.3825 11.5645 24.69 13.1772 24.69C13.6013 24.69 14.0364 24.668 14.4728 24.6227C14.8571 24.5815 15.2456 24.5211 15.6271 24.4443C21.3256 23.2924 25.4856 18.2333 25.5186 12.4109V12.345C25.5186 11.9743 25.5021 11.6036 25.4692 11.2439H25.4705ZM8.84429 21.1905L4.13256 21.693L5.53935 18.5752L5.25799 18.1976C5.2374 18.1702 5.21682 18.1427 5.19349 18.1111C3.97198 16.4238 3.3269 14.4304 3.3269 12.3464C3.3269 6.91249 7.74629 2.49179 13.1786 2.49179C18.2677 2.49179 22.5815 6.46355 22.9973 11.5336C23.0193 11.8055 23.0316 12.0787 23.0316 12.3477C23.0316 12.4246 23.0303 12.5001 23.0289 12.5811C22.9246 17.1268 19.75 20.9873 15.3087 21.9703C14.9697 22.0458 14.6224 22.1035 14.2766 22.1406C13.917 22.1817 13.5478 22.2023 13.1813 22.2023C11.8761 22.2023 10.6079 21.9497 9.40975 21.45C9.27662 21.3964 9.14622 21.3388 9.02407 21.2797L8.84566 21.1933L8.84429 21.1905Z"
+                fill="#FDFDFD"
+              />
+            </svg>
+            {currentLang.whatsapp}
+          </a>
+
+          <a
+            href={`mailto:${job.email}`}
+            className="w-[194px] h-[66px] border border-[f1f1f2] bg-[#fff] text-[#075178] rounded-[20px] font-['Cairo'] text-sm hover:bg-[#ffeaea] flex items-center justify-center gap-[5px]"
+          >
+            <svg
+              width="26"
+              height="26"
+              viewBox="0 0 26 26"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M4.32812 7.58355L11.0448 12.621C12.2004 13.4877 13.7892 13.4877 14.9448 12.621L21.6615 7.5835"
+                stroke="#075178"
+                stroke-width="2.16667"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M20.5833 5.4165H5.41667C4.22005 5.4165 3.25 6.38655 3.25 7.58317V18.4165C3.25 19.6131 4.22005 20.5832 5.41667 20.5832H20.5833C21.78 20.5832 22.75 19.6131 22.75 18.4165V7.58317C22.75 6.38655 21.78 5.4165 20.5833 5.4165Z"
+                stroke="#075178"
+                stroke-width="2.16667"
+                stroke-linecap="round"
+              />
+            </svg>
+            {currentLang.email}
+          </a>
+
+          <button
+            onClick={() => setShowCommunication(false)}
+            className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M18 6L6 18"
+                stroke="#fff"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M6 6L18 18"
+                stroke="#fff"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+      )}
     </div>
   );
 };

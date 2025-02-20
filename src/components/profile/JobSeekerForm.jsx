@@ -884,7 +884,11 @@ const JobSeekerForm = () => {
             onClick={handelNextNavigation}
             className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-[#075178] text-[#fff] "
           >
-            {currentPage < 4 ? currentLang.next : currentLang.send}
+            {currentPage < 4
+              ? currentLang.next
+              : currentPage === 4
+              ? currentLang.send
+              : currentLang.close}
           </button>
         </div>
       </div>

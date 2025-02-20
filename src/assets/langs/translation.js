@@ -188,6 +188,10 @@ export const en = {
   fullTime: "Full time",
   partTime: "Part time",
   freelance: "Freelance",
+  jobOpportunityFormMessage:
+    "Registration Successful! Thank you for registering with us. If you have any questions, please feel free to contact us.",
+  inEnglish: "in English ",
+  contactNow: "Contact now",
 };
 
 export const ar = {
@@ -377,4 +381,8 @@ export const ar = {
   fullTime: "دوام كامل",
   partTime: "دوام جزئي",
   freelance: "عمل حر",
+  jobOpportunityFormMessage:
+    "تم التسجيل بنجاح! نشكرك على التسجيل معنا. إذا كانت لديك أي أسئلة، فلا تتردد في الاتصال بنا.",
+  inEnglish: " في الإنجليزية",
+  contactNow: "تواصل الان",
 };

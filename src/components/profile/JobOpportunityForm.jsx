@@ -53,9 +53,10 @@ const JobOpportunityForm = () => {
       setCurrentPage(1);
       setJobOpportunityInputs({
         english: "good",
-        services: "personal training",
         country_id: 17,
         how_to_apply: "whatsapp",
+        type: "male",
+        type_of_work: "full",
       });
     }
   };
@@ -84,7 +85,6 @@ const JobOpportunityForm = () => {
     }));
   }, [resbonsabilityInputs]);
 
-  console.log(jobOpportunityInputs);
 
   return (
     <dialog id="jobOpportunityForm" className="modal">
@@ -233,7 +233,7 @@ const JobOpportunityForm = () => {
                       <span className="label-text">{currentLang.salary} *</span>
                     </div>
                     <input
-                      type="text"
+                      type="number"
                       className="input input-bordered w-full "
                       name="salary"
                       value={jobOpportunityInputs.salary || ""}
@@ -572,7 +572,7 @@ const JobOpportunityForm = () => {
           </div>
         )}
 
-        {currentPage === 5 && (
+        {currentPage === 3 && (
           <div className="w-full sm:w-[90%] min-h-[200px] flex items-center justify-center mx-auto text-center ">
             {currentLang.jobSeekerFormMessage}
           </div>
@@ -611,7 +611,11 @@ const JobOpportunityForm = () => {
             onClick={handelNextNavigation}
             className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-[#075178] text-[#fff] "
           >
-            {currentPage < 2 ? currentLang.next : currentLang.send}
+            {currentPage < 2
+              ? currentLang.next
+              : currentPage === 2
+              ? currentLang.send
+              : currentLang.close}
           </button>
         </div>
       </div>
