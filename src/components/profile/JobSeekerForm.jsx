@@ -3,6 +3,7 @@ import { ar, en } from "../../assets/langs/translation";
 import { useEffect, useRef, useState } from "react";
 import server from "../../assets/axios/server";
 import { toast } from "react-toastify";
+import userAvatar from "../../assets/images/icons/userAvatar.png";
 
 const JobSeekerForm = () => {
   // to set lang
@@ -253,7 +254,7 @@ const JobSeekerForm = () => {
                         className="w-[90px] h-[90px] mt-[15px] rounded-full  "
                         src={
                           userImage ||
-                          "https://via.assets.so/img.jpg?w=800&h=800&tc=blue&bg=#C4C4C4"
+                          userAvatar
                         }
                         alt="job-seeker"
                       />

@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import cvImg from "../../assets/images/home/cvImg.png";
 import { ar, en } from "../../assets/langs/translation";
 import footerLogo from "../../assets/images/logo/footerLogo.png";
-import egypt from "../../assets/images/icons/egypt.png";
+import FullPagePopup from "../../components/popups/FullPagePopup";
+import { useState } from "react";
 
 const TraineeCard = ({ trainee }) => {
   // to set lang
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
+  const [openCoursesPopup, setOpenCoursesPopup] = useState(false);
 
   return (
     <div
@@ -25,6 +27,35 @@ const TraineeCard = ({ trainee }) => {
         flexGrow: "1",
       }}
     >
+      {/* courses popup */}
+      {openCoursesPopup && (
+        <FullPagePopup>
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
+            <div className="flex w-full items-center justify-between">
+              <span
+                className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
+                onClick={() => {
+                  setOpenCoursesPopup(false);
+                }}
+              >
+                <i class="fas fa-times"></i>
+              </span>
+            </div>
+            <p className="mt-10 text-center text-green-500 text-[clamp(10px,1.0416666666666665vw,20px)]">
+              {currentLang.uploadeCVdesc}
+            </p>
+            <div className="w-full flex items-center justify-center mt-5">
+              <button
+                onClick={() => setOpenCoursesPopup(false)}
+                className="border-none outline-none rounded-lg px-5 mx-auto py-2 bg-[#075178] text-white"
+              >
+                {currentLang.ok}
+              </button>
+            </div>
+          </div>
+        </FullPagePopup>
+      )}
+
       <div class="relative block h-[66px] w-full">
         <div
           class="absolute flex h-[66px] top-0 left-0 w-full z-10 rounded-[8px] overflow-hidden"
