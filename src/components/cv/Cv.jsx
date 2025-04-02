@@ -3,7 +3,6 @@ import cvImg from "../../assets/images/home/cvImg.png";
 import { ar, en } from "../../assets/langs/translation";
 import useCopyToClipboard from "../../assets/hooks/useCopyToClipboard";
 import { toast } from "react-toastify";
-import { useState } from "react";
 
 const Cv = ({ cv, setchosedCv, setopencvpopup }) => {
   const { copyToClipboard } = useCopyToClipboard();
@@ -23,7 +22,7 @@ const Cv = ({ cv, setchosedCv, setopencvpopup }) => {
         <img
           src={cv.image || cvImg}
           alt="cv image"
-          className="w-full rounded h-[150px] md:h-[200px] "
+          className="w-full rounded h-[150px] md:h-[200px]"
         />
       </div>
       <div className="w-full relative p-2 mt-2">
@@ -39,7 +38,7 @@ const Cv = ({ cv, setchosedCv, setopencvpopup }) => {
         <p
           style={{
             direction: "ltr",
-            minHeight: "calc(1.4rem * 2)", // Adjust based on your line height, Tailwind's default for text-[14px] would be around 1.5rem
+            minHeight: "calc(1.4rem * 2)",
           }}
           className="font-[400] text-[14px] leading-[1.5] line-clamp-2 md:line-clamp-1 w-full text-left"
         >

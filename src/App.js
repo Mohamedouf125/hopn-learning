@@ -32,6 +32,7 @@ import ForgotePasswordAddEmail from "./pages/forgotPassword/ForgotePasswordAddEm
 import ForgotePasswordAddOTP from "./pages/forgotPassword/ForgotePasswordAddOTP";
 import ForgotePasswordNewPassword from "./pages/forgotPassword/ForgotePasswordNewPassword";
 import Lecture from "./pages/Lecturers/Lecture";
+import JobSeekers from "./pages/jobSeekers/JobSeekers";
 
 function App() {
   const dispatch = useDispatch();
@@ -63,6 +64,7 @@ function App() {
         <Route path="/courses" element={<Courses />} />
         <Route path="/courses/course/:courseId" element={<Course />} />
         <Route path="/cvs" element={<Cvs />} />
+        <Route path="/job-seekers" element={<JobSeekers />} />
         <Route path="/academy" element={<Academy />} />
         <Route path="/academy/:academyId" element={<AcademyDetails />} />
         <Route path="/lecturers" element={<Lecturers />} />

@@ -101,7 +101,7 @@ const Header = () => {
                   <span className="sr-only">Open user menu</span>
                   <img
                     className="w-8 h-8 rounded-full border-[2px] border-gray-800"
-                    src={user?.photo || defaultUserImage }
+                    src={user?.photo || defaultUserImage}
                     alt="user photo"
                   />
                 </button>
@@ -385,12 +385,22 @@ const Header = () => {
                       </li>
                       <li className="cursor-pointer w-full text-center">
                         <Link
+                          to="/job-seekers"
+                          className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                            location.pathname === "/job-seekers" ? "active" : ""
+                          }`}
+                        >
+                          {currentLang.JobSeeker}
+                        </Link>
+                      </li>
+                      <li className="cursor-pointer w-full text-center">
+                        <Link
                           to="/cvs"
                           className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
                             location.pathname === "/cvs" ? "active" : ""
                           }`}
                         >
-                          {currentLang.JobSeeker}
+                          {currentLang.cvSectoinTitle}
                         </Link>
                       </li>
                     </ul>
