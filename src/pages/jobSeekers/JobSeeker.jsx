@@ -107,7 +107,7 @@ const JobSeeker = ({ cv, setchosedCv, setopencvpopup }) => {
             </div>
             <div className="text-right text-black text-[8px] font-normal font-['Cairo']">
               {`${currentLang.expYears || "عدد سنوات الخبرة"}: ${
-                cv?.experience || "5"
+                cv?.y_of_exp
               } ${currentLang.years || "سنوات"}`}
             </div>
           </div>
@@ -268,8 +268,8 @@ const JobSeeker = ({ cv, setchosedCv, setopencvpopup }) => {
         {/* Contact button */}
         <div className="px-2 py-2">
           <a
-           href={`https://wa.me/${cv?.phone}`}
-           target="_blank"
+            href={`https://wa.me/${cv?.phone}`}
+            target="_blank"
             className="w-full h-8 bg-sky-900 rounded-lg flex justify-center items-center cursor-pointer hover:bg-sky-800 transition-colors"
           >
             <div className="text-center text-white text-[10px] font-semibold font-['Cairo'] leading-3">

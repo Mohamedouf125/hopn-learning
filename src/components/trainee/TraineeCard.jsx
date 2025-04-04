@@ -4,6 +4,7 @@ import { ar, en } from "../../assets/langs/translation";
 import footerLogo from "../../assets/images/logo/footerLogo.png";
 import FullPagePopup from "../../components/popups/FullPagePopup";
 import { useState } from "react";
+import logo from "../../assets/images/logo/footerLogo.png";
 
 const TraineeCard = ({ trainee }) => {
   // to set lang
@@ -15,7 +16,7 @@ const TraineeCard = ({ trainee }) => {
     <div
       className={` ${
         lang === "en" ? "ltr" : "rtl"
-      }  flex-col w-[238px] h-[150px] border border-[#F1F1F2] rounded-[8px] max-w-[100%] overflow-hidden flex items-center justify-between `}
+      }  flex-col w-[238px] md:max-w-[238px] h-[150px] border border-[#F1F1F2] rounded-[8px] max-w-[100%] overflow-hidden flex items-center justify-between `}
       style={{
         boxShadow: "0px 3px 4px 0px #00000008",
         background: `url(${footerLogo})`,
@@ -30,24 +31,42 @@ const TraineeCard = ({ trainee }) => {
       {/* courses popup */}
       {openCoursesPopup && (
         <FullPagePopup>
-          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
-            <div className="flex w-full items-center justify-between">
+          <div className="container mx-auto overflow-x-hidden overflow-y-auto p-6 mt-10 max-h-[90vh] rounded-lg bg-white shadow-lg border border-gray-100">
+            <div className="flex w-full items-center justify-between mb-4">
+              <h3 className="text-xl font-bold text-sky-900">
+                {currentLang.trainee_certificates}
+              </h3>
               <span
-                className="cursor-pointer w-[30px] h-[30px] rounded-full bg-[#D9D9D9] flex items-center justify-center "
+                className="cursor-pointer w-[36px] h-[36px] rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center transition-all duration-200"
                 onClick={() => {
                   setOpenCoursesPopup(false);
                 }}
               >
-                <i class="fas fa-times"></i>
+                <i className="fas fa-times text-gray-600"></i>
               </span>
             </div>
-            <p className="mt-10 text-center text-green-500 text-[clamp(10px,1.0416666666666665vw,20px)]">
-              {currentLang.uploadeCVdesc}
-            </p>
-            <div className="w-full flex items-center justify-center mt-5">
+            <div className="mt-6 p-4 bg-sky-50 rounded-lg border border-sky-100">
+              <h4 className="text-lg font-semibold text-sky-800 mb-3">
+                {trainee.name}
+              </h4>
+              <ul className="flex flex-col items-start justify-start space-y-3">
+                {trainee.courses.map((cource, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="text-sm text-gray-700 font-medium font-[inter] gap-2 flex items-center"
+                    >
+                      <span className="w-2 h-2 bg-sky-600 rounded-full mr-2"></span>
+                      {cource.title}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className="w-full flex items-center justify-center mt-6">
               <button
                 onClick={() => setOpenCoursesPopup(false)}
-                className="border-none outline-none rounded-lg px-5 mx-auto py-2 bg-[#075178] text-white"
+                className="border-none outline-none rounded-lg px-6 py-2.5 bg-sky-600 hover:bg-sky-700 text-white font-medium transition-all duration-200 shadow-sm"
               >
                 {currentLang.ok}
               </button>
@@ -56,24 +75,18 @@ const TraineeCard = ({ trainee }) => {
         </FullPagePopup>
       )}
 
-      <div class="relative block h-[66px] w-full">
-        <div
-          class="absolute flex h-[66px] top-0 left-0 w-full z-10 rounded-[8px] overflow-hidden"
-          style={{
-            backgroundImage: `
-            linear-gradient(270deg, #075178 50%, rgba(0, 0, 0, 0) 120%)`,
-            // background: "#075178"
-          }}
-        ></div>
-
+      <div class="flex items-center justify-end py-[13px] px-[10px] top-0 left-0 w-full rounded-[8px]  bg-[#075178]">
         <img
-          src={trainee.country_image}
+          src={logo}
           alt="Background"
-          class="absolute rounded-[8px] top-0 left-0 w-[50%] !h-[66px] object-cover z-0"
+          class=" rounded-[8px] left-0 w-[40px] !h-[40px] object-cover "
         />
       </div>
 
-      <div className="flex px-[10px] items-stretch justify-between w-full flex-col z-20 mt-[32px]">
+      <div
+        onClick={() => setOpenCoursesPopup(true)}
+        className="flex px-[10px] items-stretch justify-between w-full flex-col z-20 mt-[-50px]"
+      >
         <div className="flex gap-[7px]  items-center justify-start w-full ">
           <div className="border-4 border-[#fff] rounded-full bg-[#fff] !w-[70px] !h-[70px] flex items-center justify-center">
             <img
@@ -83,12 +96,19 @@ const TraineeCard = ({ trainee }) => {
             />
           </div>
           <div className="flex flex-col items-start justify-start mt-[30px]">
-            <h2 className="text-[10px] font-[600] font-[Inter] text-[#000] w-full text-nowrap">
-              {trainee.name}
+            <h2 className="text-[10px] font-[600] font-[Inter] text-[#000] text-ellipsis text-nowrap overflow-hidden whitespace-nowrap max-w-[100px]">
+              {trainee.name.split(' ').slice(0, 3).join(' ')}
             </h2>
             <span className="text-[8px] font-[600] font-[Inter] text-[#767676]">
               {trainee.code}
             </span>
+          </div>
+          <div className="flex items-start justify-start mt-[30px] ms-auto">
+            <img
+              src={trainee.country_image}
+              alt="Background"
+              class=" rounded-[2px] w-wfull !h-[20px] object-cover z-0"
+            />
           </div>
         </div>
 
@@ -101,14 +121,20 @@ const TraineeCard = ({ trainee }) => {
 
               if (index === 1) {
                 return (
-                  <li key={index} className="text-[8px] text-[#263238] font-[500] font-[inter] ">
+                  <li
+                    key={index}
+                    className="text-[8px] text-[#263238] font-[500] font-[inter] "
+                  >
                     - {cource.title}....{currentLang.SeeMore}
                   </li>
                 );
               }
 
               return (
-                <li key={index} className="text-[8px] text-[#263238] font-[500] font-[inter] ">
+                <li
+                  key={index}
+                  className="text-[8px] text-[#263238] font-[500] font-[inter] "
+                >
                   - {cource.title}
                 </li>
               );

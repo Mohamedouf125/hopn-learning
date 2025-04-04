@@ -289,7 +289,7 @@ const Header = () => {
                       class="main-shadow flex flex-col gap-[2px] bg-white rounded-[5px] w-full items-center justify-center border border-[#d9d9d9]  "
                       aria-labelledby="dropdownlearning"
                     >
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('learningDropdown').classList.add('hidden')}>
                         <Link
                           to="/courses"
                           className={`block !m-0 py-2 px-5 text-gray-900 ${
@@ -301,7 +301,10 @@ const Header = () => {
                           {currentLang.freeCourses}
                         </Link>
                       </li>
-                      <li className="cursor-pointer w-full text-center">
+                      <li onClick={() => {
+                        navigate("/trainees");
+                        document.getElementById('learningDropdown').classList.add('hidden');
+                      }} className="cursor-pointer w-full text-center">
                         <Link
                           to="/trainees"
                           className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
@@ -311,7 +314,7 @@ const Header = () => {
                           {currentLang.trainersTitle}
                         </Link>
                       </li>
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('learningDropdown').classList.add('hidden')}>
                         <Link
                           to="/lecturers"
                           className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
@@ -321,7 +324,7 @@ const Header = () => {
                           {currentLang.Lecturers}
                         </Link>
                       </li>
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('learningDropdown').classList.add('hidden')}>
                         <Link
                           to="/trainers"
                           className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
@@ -335,6 +338,7 @@ const Header = () => {
                   </div>
                 </div>
               </li>
+              
               <li className="!m-0 ">
                 <div
                   className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
@@ -371,7 +375,7 @@ const Header = () => {
                       class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
                       aria-labelledby="dropdownEmployment"
                     >
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('educationDropdown').classList.add('hidden')}>
                         <Link
                           to="/jobOpportunities"
                           className={`block !m-0 py-2 px-5 text-gray-900 ${
@@ -379,28 +383,31 @@ const Header = () => {
                               ? "active"
                               : ""
                           }`}
+                        
                         >
                           {currentLang.JobOpportunities}
                         </Link>
                       </li>
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('educationDropdown').classList.add('hidden')}>
                         <Link
                           to="/job-seekers"
                           className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
                             location.pathname === "/job-seekers" ? "active" : ""
                           }`}
+                        
                         >
                           {currentLang.JobSeeker}
                         </Link>
                       </li>
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('educationDropdown').classList.add('hidden')}>
                         <Link
                           to="/cvs"
                           className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
                             location.pathname === "/cvs" ? "active" : ""
                           }`}
+                        
                         >
-                          {currentLang.cvSectoinTitle}
+                          {currentLang.cvs}
                         </Link>
                       </li>
                     </ul>
@@ -443,7 +450,7 @@ const Header = () => {
                       class="flex flex-col gap-1 rounded-[5px] w-full items-center justify-center border border-[#d9d9d9] "
                       aria-labelledby="dropdownInstitutions"
                     >
-                      <li className="cursor-pointer w-full text-center">
+                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('institutionsDropdown').classList.add('hidden')}>
                         <Link
                           to="/academy?type=all"
                           className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
@@ -461,6 +468,7 @@ const Header = () => {
                           <li
                             key={index}
                             className="cursor-pointer w-full text-center"
+                            onClick={() => document.getElementById('institutionsDropdown').classList.add('hidden')}
                           >
                             <Link
                               to={`/academy?type=${type}`}

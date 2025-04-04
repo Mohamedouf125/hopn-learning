@@ -192,6 +192,12 @@ export const en = {
     "Registration Successful! Thank you for registering with us. If you have any questions, please feel free to contact us.",
   inEnglish: "in English ",
   contactNow: "Contact now",
+  cvs: "CVs",
+  search: "Search",
+  certificates: "Certificate",
+  all: "All",
+  trainee_courses: "Trainee Courses",
+  trainee_certificates: "Trainee Certificates",
 };
 
 export const ar = {
@@ -385,4 +391,10 @@ export const ar = {
     "تم التسجيل بنجاح! نشكرك على التسجيل معنا. إذا كانت لديك أي أسئلة، فلا تتردد في الاتصال بنا.",
   inEnglish: " في الإنجليزية",
   contactNow: "تواصل الان",
+  cvs: "السير الذاتية",
+  search: "بحث",
+  certificates: " كود الشهادات",
+  all: "الكل",
+  trainee_courses: "كورسات المتدرب",
+  trainee_certificates: "شهادات المتدرب",
 };
