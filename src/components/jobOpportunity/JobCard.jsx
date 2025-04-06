@@ -8,10 +8,10 @@ const JobCard = ({ job }) => {
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang === "en" ? en : ar;
 
-  console.log(showCommunication);
+  console.log(job);
 
   return (
-    <div className="w-[311px] overflow-hidden h-[240px] flex flex-col items-start justify-start py-[15px] relative rounded-[12px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border border-[#f1f1f2]">
+    <div className="w-[311px] h-[270px] overflow-hidden flex flex-col items-start justify-center py-[15px] relative rounded-[12px] shadow-[0px_4px_4px_0px_rgba(0,0,0,0.25)] border border-[#f1f1f2]">
       <div className=" w-full left-0 top-0 absolute z-0">
         <svg
           width="100%"
@@ -198,7 +198,7 @@ const JobCard = ({ job }) => {
         </div>
       </div>
 
-      <div className="w-full z-10 justify-between items-center py-[10px] px-[15px] inline-flex">
+      <div className="w-full z-10 justify-between gap-2 items-center py-[10px] px-[15px] inline-flex">
         <button
           onClick={() => setShowCommunication(true)}
           className="text-center w-[179px] justify-center items-center gap-2.5 flex rounded-lg h-[41px] bg-[#075178] text-white text-[10px] font-semibold font-['Cairo'] "
@@ -209,8 +209,8 @@ const JobCard = ({ job }) => {
           <span className="text-black text-[10px] font-normal font-['Cairo'] ">
             {currentLang.salary} :
           </span>
-          <span className="text-black text-[25px] font-bold font-['Cairo'] ">
-            {job.salary} $
+          <span className="text-black text-[16px] text-nowrap font-bold font-['Cairo'] ">
+            {job.salary} 
           </span>
         </div>
       </div>
@@ -218,7 +218,7 @@ const JobCard = ({ job }) => {
       {showCommunication && (
         <div className="w-full h-full bg-[#30323699] backdrop-filter: backdrop-blur-[2px] z-40 absolute top-0 left-0 flex flex-col items-center justify-center gap-4 px-4">
           <a
-            href={`https://wa.me/${job.whatsapp}`}
+            href={`https://wa.me/${job.phone}`}
             target="_blank"
             rel="noopener noreferrer"
             className="w-[194px] h-[66px] border border-[f1f1f2] bg-[#28AF60] text-white rounded-[20px] font-['Cairo'] text-sm hover:bg-[#2ed172] flex items-center justify-center gap-[5px]"

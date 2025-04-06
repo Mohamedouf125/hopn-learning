@@ -399,7 +399,7 @@ const Header = () => {
                           {currentLang.JobSeeker}
                         </Link>
                       </li>
-                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('educationDropdown').classList.add('hidden')}>
+                      {/* <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('educationDropdown').classList.add('hidden')}>
                         <Link
                           to="/cvs"
                           className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
@@ -409,7 +409,7 @@ const Header = () => {
                         >
                           {currentLang.cvs}
                         </Link>
-                      </li>
+                      </li> */}
                     </ul>
                   </div>
                 </div>
