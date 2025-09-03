@@ -243,6 +243,29 @@ const Header = () => {
                   {currentLang.home}
                 </Link>
               </li>
+
+              <li className="!m-0 ">
+                <Link
+                  to="/courses"
+                  className={`block py-2 md:border-e px-3 text-gray-900  ${
+                    location.pathname.includes("/courses") ? "active" : ""
+                  }`}
+                >
+                  {currentLang.freeCourses}
+                </Link>
+              </li>
+
+              <li className="!m-0 ">
+                <Link
+                  to="/trainees"
+                  className={`block py-2 md:border-e px-3 text-gray-900  ${
+                    location.pathname === "/trainees" ? "active" : ""
+                  }`}
+                >
+                  {currentLang.trainersTitle}
+                </Link>
+              </li>
+
               {/* {loggedIn && (
                 <li>
                   <Link
@@ -253,93 +276,8 @@ const Header = () => {
                   </Link>
                 </li>
               )} */}
-              <li className="!m-0 ">
-                <div
-                  className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
-                >
-                  <button
-                    id="dropdownlearning"
-                    data-dropdown-toggle="learningDropdown"
-                    class=" inline-flex items-center text-gray-900 "
-                    type="button"
-                  >
-                    {currentLang.learning}
-                    <svg
-                      class="w-2.5 h-2.5 ms-3"
-                      aria-hidden="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 10 6"
-                    >
-                      <path
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="m1 1 4 4 4-4"
-                      />
-                    </svg>
-                  </button>
 
-                  <div
-                    id="learningDropdown"
-                    class="z-50 hidden min-w-[140px] w-full md:w-auto p-4 md:p-0 rounded-[5px] bg-white divide-y divide-gray-100"
-                  >
-                    <ul
-                      class="main-shadow flex flex-col gap-[2px] bg-white rounded-[5px] w-full items-center justify-center border border-[#d9d9d9]  "
-                      aria-labelledby="dropdownlearning"
-                    >
-                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('learningDropdown').classList.add('hidden')}>
-                        <Link
-                          to="/courses"
-                          className={`block !m-0 py-2 px-5 text-gray-900 ${
-                            location.pathname.includes("/courses")
-                              ? "active"
-                              : ""
-                          }`}
-                        >
-                          {currentLang.freeCourses}
-                        </Link>
-                      </li>
-                      <li onClick={() => {
-                        navigate("/trainees");
-                        document.getElementById('learningDropdown').classList.add('hidden');
-                      }} className="cursor-pointer w-full text-center">
-                        <Link
-                          to="/trainees"
-                          className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                            location.pathname === "/trainees" ? "active" : ""
-                          }`}
-                        >
-                          {currentLang.trainersTitle}
-                        </Link>
-                      </li>
-                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('learningDropdown').classList.add('hidden')}>
-                        <Link
-                          to="/lecturers"
-                          className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                            location.pathname === "/lecturers" ? "active" : ""
-                          }`}
-                        >
-                          {currentLang.Lecturers}
-                        </Link>
-                      </li>
-                      <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('learningDropdown').classList.add('hidden')}>
-                        <Link
-                          to="/trainers"
-                          className={`block !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                            location.pathname === "/trainers" ? "active" : ""
-                          }`}
-                        >
-                          {currentLang.trainers}
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </li>
-              
-              <li className="!m-0 ">
+              {/* <li className="!m-0 ">
                 <div
                   className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
                 >
@@ -399,21 +337,12 @@ const Header = () => {
                           {currentLang.JobSeeker}
                         </Link>
                       </li>
-                      {/* <li className="cursor-pointer w-full text-center" onClick={() => document.getElementById('educationDropdown').classList.add('hidden')}>
-                        <Link
-                          to="/cvs"
-                          className={`block md:border-s md:border-e !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
-                            location.pathname === "/cvs" ? "active" : ""
-                          }`}
-                        
-                        >
-                          {currentLang.cvs}
-                        </Link>
-                      </li> */}
+                      
                     </ul>
                   </div>
                 </div>
               </li>
+
               <li className="!m-0 ">
                 <div
                   className={`block md:border-s w-fit md:border-e !m-0 border-[#F1F1F2] py-2 px-[5px] text-gray-900 `}
@@ -487,7 +416,8 @@ const Header = () => {
                     </ul>
                   </div>
                 </div>
-              </li>
+              </li> */}
+
               <li className="!m-0 ">
                 <Link
                   to="/about"

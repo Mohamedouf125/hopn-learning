@@ -53,23 +53,23 @@ const Footer = () => {
                   </a>
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
-                  <a href="https://hopn.online/" target="_blank">
+                  <a href="https://sportiin.com/" target="_blank">
                     {currentLang.Partners}
                   </a>
                 </li>
-                <li className="text-[16px] font-[400] text-[#ffffffb4]">
+                {/* <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <a href="https://forms.gle/xNpk6WDVaSKJZeiu8" target="_blank">
                     {currentLang.workWithUs}
                   </a>
-                </li>
-                <li className="text-[16px] font-[400] text-[#ffffffb4]">
+                </li> */}
+                {/* <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <a
                     href="https://wa.me/4915252455276?text=مرحبا،%20هل%20يمكنني%20،%20التعرف%20علي%20المزيد%20من%20باقات%20الإعلان%20علي%20موقعكم"
                     target="_blank"
                   >
                     {currentLang.advertiseWithUs}
                   </a>
-                </li>
+                </li> */}
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   <Link to="/about#privacy">{currentLang.privacy}</Link>
                 </li>
@@ -92,9 +92,28 @@ const Footer = () => {
                   {currentLang.goal2}
                 </li>
                 <li className="text-[16px] font-[400] text-[#ffffffb4]">
+                  {currentLang.goal3}
+                </li>
+                <li className="text-[16px] font-[400] text-[#ffffffb4]">
                   {currentLang.goal4}
                 </li>
               </ul>
+
+              {/* Contracts Section */}
+              <div className="w-full text-start mt-5">
+                <h4 className="text-[16px] font-[700] mb-3">
+                  {currentLang.contracts}
+                </h4>
+                <div className="text-[14px] font-[500] text-[#ffffffe1] mb-3">
+                  {currentLang.contractsInfo}
+                </div>
+                <div className="text-[14px] font-[500] text-[#ffffffe1]">
+                  <div className="mb-2">🇪🇬 {currentLang.egyptContracts}</div>
+                  <div className="mb-2">🇹🇳 {currentLang.tunisiaContracts}</div>
+                  <div className="mb-2">🇮🇶 {currentLang.iraqContracts}</div>
+                  <div className="mb-2">🇯🇴 {currentLang.jordanContracts}</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

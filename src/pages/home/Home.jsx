@@ -248,7 +248,7 @@ const Home = () => {
         </section>
         <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
         {/* cv */}
-        <section className="w-full flex flex-col items-center justify-center mt-10">
+        {/* <section className="w-full flex flex-col items-center justify-center mt-10">
           <div className="w-full flex items-center justify-between">
             <h2 className="text-2xl font-semibold mb-4 text-left">
               {currentLang.cvSectoinTitle}
@@ -276,8 +276,8 @@ const Home = () => {
               })
             )}
           </div>
-        </section>
-        <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
+        </section> */}
+        {/* <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div> */}
         {/* courses */}
         <section className="w-full flex flex-col items-center justify-center mt-[clamp(10px,2.083333333333333vw,40px)]">
           <div className="w-full flex items-center justify-between">
@@ -295,11 +295,11 @@ const Home = () => {
             {courses.slice(0, 4).map((course, index) => {
               return <Course course={course} key={index} />;
             })}
-          </div>
+          </div> 
         </section>
-        <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div>
+        {/* <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div> */}
         {/* Vote for the best player */}
-        <section className="w-full flex flex-col items-center justify-center mt-10">
+        {/* <section className="w-full flex flex-col items-center justify-center mt-10">
           <h2 className="text-2xl font-semibold mb-4 text-center w-full">
             {currentLang.voteTitle}
           </h2>
@@ -342,7 +342,7 @@ const Home = () => {
               );
             })}
           </div>
-        </section>
+        </section> */}
       </div>
     </main>
   );

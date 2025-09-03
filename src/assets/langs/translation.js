@@ -75,16 +75,17 @@ export const en = {
   Partners: "Partners",
   workWithUs: "Work with us",
   advertiseWithUs: " advertise",
-  aboutSportsIn: "About sports in",
-  goals: "We aim to serve Arab youth by helping in:",
+  aboutSportsIn: "About HOPN Student Platform",
+  goals: "Our Vision",
   goal1:
-    "Publishing and promoting sports recruitment ads with our partners in Saudi Arabia and the UAE.",
+    "We provide innovative educational and digital services to support students in Europe and the Arab world through modern tools that help them learn and develop.",
   goal2:
-    "Get free training programs in the sports field, with accreditations from international companies, as the Sports in website plays the role of mediation as a company that manages websites and electronic applications within the sports field in providing the best free experiences for its users, as well as free training programs with accreditations from our partners and advertisers.",
-  goal3: "Join the list of celebrities in Sports in",
+    "Interactive e-learning platforms and training programs, both free and paid, with internationally accredited certificates and barcodes for verification.",
+  goal3:
+    "Building an Arab-European student community to exchange experiences and knowledge.",
   goal4:
-    "Making profit for users through paid service packages, which are included in gifts.",
-  rights: "All rights reserved to sports in and partners",
+    "Our partners include Sports IN - Germany, Minutes 90 - Germany, and educational institutions in Egypt, Tunisia, Iraq, and Jordan.",
+  rights: "All rights reserved to HOPN Student Platform and partners",
   cooperation: "In cooperation with",
   privacy: "privacy policy",
 
@@ -199,6 +200,13 @@ export const en = {
   trainee_courses: "Trainee Courses",
   trainee_certificates: "Trainee Certificates",
   youMustAddPhoneAndEmailBefore: "You must add phone and email first",
+  contracts: "Contracts",
+  contractsInfo:
+    "Contracts have already been signed and work will begin soon on implementing digital programs and educational services.",
+  egyptContracts: "Egypt: Contract with 5 high schools",
+  tunisiaContracts: "Tunisia: Partnership with 3 schools",
+  iraqContracts: "Iraq: Cooperation with 4 schools",
+  jordanContracts: "Jordan: Agreement with 3 schools",
 };
 
 export const ar = {
@@ -276,16 +284,16 @@ export const ar = {
   Partners: "الشركاء",
   workWithUs: "العمل معنا",
   advertiseWithUs: "للإعلان معنا",
-  aboutSportsIn: "نبذة عن sports in",
-  goals: "نستهدف خدمة الشباب العربي من خلال المساعدة في:",
+  aboutSportsIn: "منصة HOPN للطلاب",
+  goals: "رؤيتنا",
   goal1:
-    "نشر إعلانات التوظيف بالمجال الرياضي، والترويج لها مع شركاؤنا داخل السعودية والإمارات.",
+    "تقدم منصة HOPN Student Platform خدمات تعليمية ورقمية مبتكرة لدعم الطلاب في أوروبا والعالم العربي، من خلال أدوات حديثة تساعدهم على التعلم والتطوير.",
   goal2:
-    "الحصول على برامج تدريبية مجانية في المجال الرياضي، بإعتمادات من شركات دولية، حيث يلعب موقع  Sports in  دور الوساطة كونها شركة لإدارة المواقع والتطبيقات الإلكترونية داخل المجال الرياضي في توفير أفضل التجارب المجانية لمستخدميها، وايضا البرامج التدريبية المجانية باعتمادات الشركاء، والمعلنين لدينا.",
-  goal3: " الإنضمام لقائمة المشاهير داخل Sports in",
+    "منصات تعليم إلكتروني وتفاعلي، وبرامج تدريبية مجانية ومدفوعة مع شهادات دولية معتمدة وباركود للتحقق.",
+  goal3: "بناء مجتمع طلابي عربي–أوروبي لتبادل الخبرات والمعرفة.",
   goal4:
-    "تحقيق الربح لدي المستخدمين من خلال باقات الخدمات المدفوعة، والموجودة داخل الهدايا.",
-  rights: "جميع الحقوق محفوظه لدي sports in و شركاه",
+    "شركاؤنا: Sports IN – ألمانيا، Minutes 90 – ألمانيا، ومؤسسات تعليمية في مصر، تونس، العراق، والأردن.",
+  rights: "جميع الحقوق محفوظه لدي منصة HOPN للطلاب وشركاه",
   cooperation: "بالتعاون مع",
   privacy: "سياسة الخصوصية",
 
@@ -400,4 +408,11 @@ export const ar = {
   trainee_certificates: "شهادات المتدرب",
   youMustAddPhoneAndEmailBefore:
     "يجب عليك اضافة رقم الهاتف والبريد الالكتروني اولا",
+  contracts: "العقود",
+  contractsInfo:
+    "تم توقيع العقود وسيبدأ العمل قريباً لتنفيذ برامج رقمية وخدمات تعليمية.",
+  egyptContracts: "مصر: تعاقد مع 5 مدارس ثانوية",
+  tunisiaContracts: "تونس: شراكة مع 3 مدارس",
+  iraqContracts: "العراق: تعاون مع 4 مدارس",
+  jordanContracts: "الأردن: اتفاق مع 3 مدارس",
 };
