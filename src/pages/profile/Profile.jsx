@@ -94,6 +94,14 @@ const Profile = () => {
       });
   };
 
+  const showAddEmailAndPhoneMessage = () => {
+    toast.error(
+      currentLang.youMustAddPhoneAndEmailBefore
+    )
+  }
+
+  
+
   return (
     <main className="container mx-auto lg:max-w-[1060px] flex flex-col items-center justify-center px-[5px] sm:px-0 mb-[50px] mt-[20px]">
       {/* services forms */}
@@ -512,7 +520,7 @@ const Profile = () => {
               className={`w-[150px] h-[34px] flex items-center justify-center text-[12px] font-[400] font-[cairo] bg-[${
                 service.free ? "#075178" : "#28AF60"
               }] rounded-[10px] text-white`}
-              onClick={service.clickAction}
+              onClick={user.email && user.phone ? service.clickAction : showAddEmailAndPhoneMessage}
             >
               {currentLang.applyNow}
             </button>

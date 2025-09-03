@@ -77,7 +77,7 @@ function App() {
         {/* <Route path="/user/profile/:userId" element={<UserProfile />} /> */}
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/settings" element={<Setting />} />
-        <Route path="/signUp-email" element={<SignUpEmail />} /> 
+        <Route path="/signUp-email" element={<SignUpEmail />} />
         <Route path="/signUp-email-2" element={<SignUpEmail2 />} />
         <Route
           path="/forgotePassword-addEmail"
@@ -93,7 +93,16 @@ function App() {
         />
       </Routes>
       <FloatingWhatsapp />
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar
+        closeButton={false}
+        theme="dark"
+        closeOnClick
+        rtl={lang === "ar"}
+        pauseOnHover
+      />
       <Footer />
     </div>
   );

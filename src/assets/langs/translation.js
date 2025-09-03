@@ -198,6 +198,7 @@ export const en = {
   all: "All",
   trainee_courses: "Trainee Courses",
   trainee_certificates: "Trainee Certificates",
+  youMustAddPhoneAndEmailBefore: "You must add phone and email first",
 };
 
 export const ar = {
@@ -397,4 +398,6 @@ export const ar = {
   all: "الكل",
   trainee_courses: "كورسات المتدرب",
   trainee_certificates: "شهادات المتدرب",
+  youMustAddPhoneAndEmailBefore:
+    "يجب عليك اضافة رقم الهاتف والبريد الالكتروني اولا",
 };
