@@ -143,13 +143,16 @@ const TrainerForm = () => {
     <dialog id="trainerForm" className="modal">
       <div className="modal-box w-11/12 max-w-5xl">
         <form method="dialog">
-          <button id="closeTrainerModal" className="btn btn-sm btn-circle btn-ghost absolute end-2 top-2">
+          <button
+            id="closeTrainerModal"
+            className="btn btn-sm btn-circle btn-ghost absolute end-2 top-2"
+          >
             ✕
           </button>
         </form>
         {/* modal title */}
         <div className="flex items-end mb-[30px] justify-start gap-[20px] ">
-          <h2 className="pb-[20px] border-b border-[#28AF60] text-[#0B274B] font-[400] text-[clamp(20px,2.5vw,36px)] font-[cairo] ">
+          <h2 className="pb-[20px] border-b border-yellow-secondary text-black font-[400] text-[clamp(20px,2.5vw,36px)] font-[cairo] ">
             {/* {currentLang.JobSeeker} */}
             مدرب رياضي
           </h2>
@@ -289,10 +292,7 @@ const TrainerForm = () => {
                     <div className="w-full flex items-center justify-center sm:justify-end relative ">
                       <img
                         className="w-[90px] h-[90px] mt-[15px] rounded-full  "
-                        src={
-                          userImage ||
-                          userAvatar
-                        }
+                        src={userImage || userAvatar}
                         alt="job-seeker"
                       />
                       <div className="absolute bottom-[-5px] end-[50%] sm:end-[17%] translate-x-[-50%] flex items-center justify-center gap-[5px] z-20 ">
@@ -1114,13 +1114,11 @@ const TrainerForm = () => {
           </div>
         )}
 
-        {
-          currentPage === 5 && (
-            <div className="w-full sm:w-[90%] min-h-[200px] flex items-center justify-center mx-auto text-center ">
-              {currentLang.trainerFormMessage}
-            </div>
-          )
-        }
+        {currentPage === 5 && (
+          <div className="w-full sm:w-[90%] min-h-[200px] flex items-center justify-center mx-auto text-center ">
+            {currentLang.trainerFormMessage}
+          </div>
+        )}
 
         {/* navigation btns */}
         <div className="mt-[20px] flex items-center justify-center gap-[5px] ">
@@ -1155,7 +1153,11 @@ const TrainerForm = () => {
             onClick={handelNextNavigation}
             className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-[#075178] text-[#fff] "
           >
-            {currentPage < 4 ? currentLang.next :  currentPage === 4 ? currentLang.send : currentLang.close}
+            {currentPage < 4
+              ? currentLang.next
+              : currentPage === 4
+              ? currentLang.send
+              : currentLang.close}
           </button>
         </div>
       </div>

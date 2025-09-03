@@ -46,15 +46,15 @@ const Home = () => {
   return (
     <main>
       {/* uploade CV form */}
-      {openUploaderCv && (
+      {/* {openUploaderCv && (
         <FullPagePopup>
           <UploadeCv
             setOpenUploaderCv={setOpenUploaderCv}
             setCvLoadedSuccess={setCvLoadedSuccess}
           />
         </FullPagePopup>
-      )}
-      {cvLoadedSuccess && (
+      )} */}
+      {/* {cvLoadedSuccess && (
         <FullPagePopup>
           <div className="container mx-auto overflow-x-hidden overflow-y-auto p-5 mt-10 max-h-[90vh]  rounded-lg bg-white">
             <div className="flex w-full items-center justify-between">
@@ -74,7 +74,7 @@ const Home = () => {
             <div className="w-full flex items-center justify-center mt-5">
               <button
                 onClick={() => setCvLoadedSuccess(false)}
-                className="border-none outline-none rounded-lg px-5 mx-auto py-2 bg-[#075178] text-white"
+                className="border-none outline-none rounded-lg px-5 mx-auto py-2 bg-orange-primary text-white"
               >
                 {currentLang.ok}
               </button>
@@ -86,13 +86,13 @@ const Home = () => {
         <FullPagePopup>
           <Cvpopup setopencvpopup={setopencvpopup} cv={chosedCv} />
         </FullPagePopup>
-      )}
+      )} */}
 
       {/* home content */}
       <div className="container mx-auto px-4 py-8">
         {/* banner */}
         <section className="mb-8 w-full ">
-          <div className="flex flex-col md:flex-row w-full gap-[clamp(10px,1.6666666666666667vw,24px)] ">
+          <div className="w-full">
             <Swiper
               modules={[A11y, Autoplay]}
               centeredSlides={true}
@@ -105,7 +105,7 @@ const Home = () => {
                   spaceBetween: 5,
                 },
               }}
-              className="w-full h-[clamp(100px,18.47222222222222vw,266px)] md:w-[clamp(300px,55.55555555555556vw,800px)]"
+              className="w-full h-[clamp(100px,18.47222222222222vw,266px)]"
             >
               {sliders.map((slide, index) => (
                 <SwiperSlide
@@ -116,20 +116,6 @@ const Home = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="flex h-[75px] md:h-[clamp(100px,18.47222222222222vw,266px)] w-full md:w-[clamp(300px,16.73611111111111vw,241px)] items-center justify-center">
-              <img
-                onClick={() => setOpenUploaderCv(true)}
-                className="w-full h-full cursor-pointer hidden md:block"
-                src={banimg}
-                alt=""
-              />
-              <img
-                onClick={() => setOpenUploaderCv(true)}
-                className="w-full h-full cursor-pointer md:hidden"
-                src={banimgmob}
-                alt=""
-              />
-            </div>
           </div>
         </section>
 
@@ -182,7 +168,7 @@ const Home = () => {
 
             <div
               style={{ boxShadow: "0px 3px 4px 0px #00000008" }}
-              className="trainers-swiper-button-next border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] md:translate-x-[-50%] "
+              className="trainers-swiper-button-next border border-[#F1F1F2] text-orange-primary bg-white rounded-full p-2 absolute top-[50%] z-50 left-0 translate-y-[-50%] md:translate-x-[-50%] "
             >
               <svg
                 width="25"
@@ -214,7 +200,7 @@ const Home = () => {
             </div>
             <div
               style={{ boxShadow: "0px 3px 4px 0px #00000008" }}
-              className="trainers-swiper-button-prev border border-[#F1F1F2] text-black bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] md:translate-x-[50%]"
+              className="trainers-swiper-button-prev border border-[#F1F1F2] text-orange-primary bg-white rounded-full p-2 absolute top-[50%] z-50 right-0 translate-y-[-50%] md:translate-x-[50%]"
             >
               <svg
                 width="25"
@@ -255,7 +241,7 @@ const Home = () => {
             </h2>
             <span
               onClick={() => navigate("/cvs")}
-              className="text-[#F39C12] font-[500] cursor-pointer "
+              className="text-yellow-secondary font-[500] cursor-pointer "
             >
               {currentLang.SeeMore}
             </span>
@@ -286,7 +272,7 @@ const Home = () => {
             </h2>
             <span
               onClick={() => navigate("/courses")}
-              className="text-[#F39C12] text-[clamp(8px,0.625vw,12px)] font-[500] cursor-pointer  "
+              className="text-yellow-secondary text-[clamp(8px,0.625vw,12px)] font-[500] cursor-pointer  "
             >
               {currentLang.SeeMore}
             </span>
@@ -295,7 +281,7 @@ const Home = () => {
             {courses.slice(0, 4).map((course, index) => {
               return <Course course={course} key={index} />;
             })}
-          </div> 
+          </div>
         </section>
         {/* <div className="w-full h-[0px] border-t my-[clamp(20px,2.083333333333333vw,40px)] border-[#F1F1F2]"></div> */}
         {/* Vote for the best player */}
@@ -309,7 +295,7 @@ const Home = () => {
               return (
                 <div
                   key={index}
-                  className={`rounded-[12px] border border-[#F1F1F2] overflow-hidden cursor-pointer w-[48%] h-[200px] md:w-[138px] relative  `}
+                  className={`rounded-[12px] border border-[#F1F1F2] overflow-hidden cursor-pointer w-[48%] h-[200px] md:w-[138px] relative hover:border-orange-primary transition-colors `}
                 >
                   <div className="w-full relative z-10 h-[78px] overflow-hidden">
                     <img
@@ -322,7 +308,7 @@ const Home = () => {
                     <img
                       src={player.image || bigAvatar}
                       alt="personal-img"
-                      className="w-full  rounded-full border border-[#F1F1F2] "
+                      className="w-full  rounded-full border border-[#F1F1F2] hover:border-orange-primary transition-colors "
                     />
                   </div>
                   <div className=" w-full  p-3 flex flex-col items-start justify-start">

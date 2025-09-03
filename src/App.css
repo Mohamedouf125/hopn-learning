@@ -36,7 +36,8 @@
 }
 
 :root {
-  --blue-primary: #075178;
+  --orange-primary: #FF6B35;
+  --yellow-secondary: #FFD23F;
   --border: #f1f1f2;
 }
 
@@ -54,7 +55,7 @@
 
 .active {
   color: #fff;
-  background-color: var(--blue-primary);
+  background-color: var(--orange-primary);
   margin: 0 !important;
   border-radius: 5px;
 }

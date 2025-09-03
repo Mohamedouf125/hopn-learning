@@ -4,7 +4,7 @@ const initialState = {
   defaultStars: {
     count: 5,
     size: 15,
-    activeColor: "#FFD130",
+    activeColor: "#FFD23F",
     edit: false,
     value: 4.5,
     isHalf: true,

@@ -1,8 +1,13 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{js,jsx,ts,tsx}", "./node_modules/flowbite/**/*.js"],
+  content: ["./src/**/*.{js,jsx,ts,tsx}", "node_modules/flowbite/**/*.js"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "orange-primary": "#FF6B35",
+        "yellow-secondary": "#FFD23F",
+      },
+    },
   },
   variants: {
     extend: {
@@ -24,6 +29,6 @@ module.exports = {
     require("daisyui"),
   ],
   daisyui: {
-    themes: ["light"], 
+    themes: ["light"],
   },
 };

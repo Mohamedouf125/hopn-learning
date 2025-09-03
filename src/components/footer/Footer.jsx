@@ -10,13 +10,13 @@ const Footer = () => {
   const { lang } = useSelector((state) => state.settings);
   const currentLang = lang == "en" ? en : ar;
   return (
-    <footer className="w-full bg-[#0A142F] flex items-center justify-center text-white">
+    <footer className="w-full bg-black flex items-center justify-center text-white">
       <div className="container mx-auto flex flex-col items-center justify-center p-5 pb-2">
         <div className="flex items-center justify-between gap-10 lg:gap-0 flex-col lg:flex-row w-full">
           <div className="flex w-full flex-col lg:flex-row items-start justify-between gap-8 lg:gap-0">
             <div className="w-full lg:w-[20%] flex items-center justify-center mt-5  ">
               <img
-                className="w-[200px] md:w-full"
+                className="!w-[170px] rounded-full mt-[50px] md:w-full"
                 src={footerLogo}
                 alt="footerLogo"
               />
@@ -100,7 +100,7 @@ const Footer = () => {
               </ul>
 
               {/* Contracts Section */}
-              <div className="w-full text-start mt-5">
+              {/* <div className="w-full text-start mt-5">
                 <h4 className="text-[16px] font-[700] mb-3">
                   {currentLang.contracts}
                 </h4>
@@ -113,7 +113,7 @@ const Footer = () => {
                   <div className="mb-2">🇮🇶 {currentLang.iraqContracts}</div>
                   <div className="mb-2">🇯🇴 {currentLang.jordanContracts}</div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

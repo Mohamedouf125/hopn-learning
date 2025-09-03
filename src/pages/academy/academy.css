@@ -11,7 +11,7 @@
   }
 
   .swiper-pagination-bullet-active {
-    background-color: #28AF60;
+    background-color: #FFD23F;
     width: clamp( 45px, 4.166666666666666vw, 80px);
   }
 }
@@ -19,7 +19,7 @@
 /* academy deatails */
 .subscriptionCard:nth-child(1){
   .card-head, button{
-    background-color: #28AF60;
+    background-color: #FF6B35;
   }
 }
 .subscriptionCard:nth-child(2){

@@ -226,12 +226,12 @@ const UploadeCv = ({ setOpenUploaderCv, setCvLoadedSuccess }) => {
                     setImageUrl(reader.result);
                   };
                   reader.readAsDataURL(file); // Read the file as a data URL
-                }else{
-                    setImageUrl("")
-                    setCvData((prev) => ({
-                        ...prev,
-                        [event.target.name]:"",
-                      }));
+                } else {
+                  setImageUrl("");
+                  setCvData((prev) => ({
+                    ...prev,
+                    [event.target.name]: "",
+                  }));
                 }
                 // handelCvImageUrl();
               }}
@@ -243,7 +243,7 @@ const UploadeCv = ({ setOpenUploaderCv, setCvLoadedSuccess }) => {
       <div className="w-full flex items-center justify-center p-5">
         <button
           onClick={uploadeCV}
-          className="border-none outline-none rounded-lg px-5 py-2 bg-[#075178] text-white"
+          className="border-none outline-none rounded-lg px-5 py-2 bg-orange-primary text-white"
         >
           {currentLang.uploadCV}
         </button>

@@ -45,13 +45,13 @@ const RegistrationGifts = () => {
     <>
       <FullPagePopup>
         <div className="bg-white mt-20 rounded-lg overflow-auto max-h-[80vh] scrollbar-hide">
-          <h2 className="w-full text-center bg-[#075178] text-white py-3 font-[600] text-[20px] ">
+          <h2 className="w-full text-center bg-orange-primary text-white py-3 font-[600] text-[20px] ">
             Registration gifts
           </h2>
           {/* choose cource */}
           {/* {phase === 1 && ( */}
           <>
-            <div className="flex items-center justify-start gap-2 w-[75%] mx-auto bg-[#0751784D] rounded-xl my-5 p-2 ">
+            <div className="flex items-center justify-start gap-2 w-[75%] mx-auto bg-orange-primary/30 rounded-xl my-5 p-2 ">
               <svg
                 width="20"
                 height="20"
@@ -62,7 +62,7 @@ const RegistrationGifts = () => {
                 <g clipPath="url(#clip0_466_1348)">
                   <path
                     d="M13.4996 6.49992C13.4996 6.89775 13.3415 7.27928 13.0602 7.56058C12.7789 7.84189 12.3974 7.99992 11.9996 7.99992C11.6017 7.99992 11.2202 7.84189 10.9389 7.56058C10.6576 7.27928 10.4996 6.89775 10.4996 6.49992C10.4996 6.1021 10.6576 5.72057 10.9389 5.43926C11.2202 5.15796 11.6017 4.99992 11.9996 4.99992C12.3974 4.99992 12.7789 5.15796 13.0602 5.43926C13.3415 5.72057 13.4996 6.1021 13.4996 6.49992ZM23.9996 18.9999V12.3399C24.0369 9.25737 22.9067 6.27482 20.8359 3.99109C18.7651 1.70737 15.9071 0.291558 12.8356 0.0279206C11.1212 -0.0920218 9.4011 0.15766 7.7916 0.760073C6.1821 1.36249 4.72077 2.30358 3.50648 3.51967C2.29219 4.73576 1.35327 6.19849 0.75324 7.80888C0.153213 9.41927 -0.0939187 11.1398 0.028565 12.8539C0.470565 19.2079 6.08157 23.9999 13.0826 23.9999H18.9996C20.3252 23.9983 21.596 23.471 22.5333 22.5337C23.4707 21.5964 23.998 20.3255 23.9996 18.9999ZM12.6996 2.02392C15.266 2.25096 17.6515 3.44083 19.3767 5.35448C21.1018 7.26812 22.0389 9.76374 21.9996 12.3399V18.9999C21.9996 19.7956 21.6835 20.5586 21.1209 21.1212C20.5583 21.6839 19.7952 21.9999 18.9996 21.9999H13.0826C7.04857 21.9999 2.39957 18.0999 2.02457 12.7159C1.92612 11.3445 2.11154 9.96752 2.56925 8.67099C3.02696 7.37446 3.74712 6.18625 4.68474 5.18059C5.62236 4.17493 6.75729 3.37343 8.01863 2.82617C9.27997 2.2789 10.6406 1.99763 12.0156 1.99992C12.2426 1.99992 12.4716 2.00892 12.6996 2.02392ZM13.9996 17.9999V11.9999C13.9996 11.4695 13.7889 10.9608 13.4138 10.5857C13.0387 10.2106 12.53 9.99992 11.9996 9.99992H10.9996C10.7344 9.99992 10.48 10.1053 10.2925 10.2928C10.1049 10.4804 9.99957 10.7347 9.99957 10.9999C9.99957 11.2651 10.1049 11.5195 10.2925 11.707C10.48 11.8946 10.7344 11.9999 10.9996 11.9999H11.9996V17.9999C11.9996 18.2651 12.1049 18.5195 12.2925 18.707C12.48 18.8946 12.7344 18.9999 12.9996 18.9999C13.2648 18.9999 13.5191 18.8946 13.7067 18.707C13.8942 18.5195 13.9996 18.2651 13.9996 17.9999Z"
-                    fill="#075178"
+                    fill="#FF6B35"
                   />
                 </g>
                 <defs>
@@ -84,7 +84,7 @@ const RegistrationGifts = () => {
                     key={index}
                     className={`rounded-3xl border w-[260px] overflow-hidden cursor-pointer ${
                       choosedGift === index + 1
-                        ? "border-[#075178]"
+                        ? "border-orange-primary"
                         : "border-[#D9D9D9]"
                     } `}
                     onClick={() => setChooosedGift(index + 1)}
@@ -117,7 +117,7 @@ const RegistrationGifts = () => {
               <button
                 disabled={choosedGift === null}
                 onClick={handelChooseCource}
-                className="border-none outline-0 flex items-center justify-center gap-1 bg-[#075178] disabled:bg-[#07517898] text-[14px] font-[500] text-white rounded py-2 px-4 "
+                className="border-none outline-0 flex items-center justify-center gap-1 bg-orange-primary disabled:bg-orange-primary/60 text-[14px] font-[500] text-white rounded py-2 px-4 "
               >
                 Choose <i class="fas fa-angle-double-right"></i>
               </button>
