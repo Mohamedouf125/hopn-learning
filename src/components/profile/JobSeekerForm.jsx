@@ -111,7 +111,7 @@ const JobSeekerForm = () => {
         </form>
         {/* modal title */}
         <div className="flex items-end mb-[30px] justify-start gap-[20px] ">
-          <h2 className="pb-[20px] border-b border-[#28AF60] text-[#0B274B] font-[400] text-[clamp(20px,2.5vw,36px)] font-[cairo] ">
+          <h2 className="pb-[20px] border-b border-yellow-secondary text-black font-[400] text-[clamp(20px,2.5vw,36px)] font-[cairo] ">
             {currentLang.JobSeeker}
           </h2>
           <p className="font-[400] text-[clamp(12px,1.1111112vw,16px)] text-[#767676] font-[cairo]">
@@ -252,10 +252,7 @@ const JobSeekerForm = () => {
                     <div className="w-full flex items-center justify-center sm:justify-end relative ">
                       <img
                         className="w-[90px] h-[90px] mt-[15px] rounded-full  "
-                        src={
-                          userImage ||
-                          userAvatar
-                        }
+                        src={userImage || userAvatar}
                         alt="job-seeker"
                       />
                       <div className="absolute bottom-[-5px] end-[50%] sm:end-[17%] translate-x-[-50%] flex items-center justify-center gap-[5px] z-20 ">
@@ -861,7 +858,7 @@ const JobSeekerForm = () => {
                 onClick={() => setCurrentPage(item)}
                 className={`w-[30px] h-[30px] rounded-full border font-[600] font-[cairo] text-[15px] main-shadow ${
                   currentPage === item
-                    ? "border-[#075178] text-[#075178]"
+                    ? "border-orange-primary text-orange-primary"
                     : "border-[#f1f1f2] text-[#f1f1f2]"
                 } cursor-pointer flex items-center justify-center  `}
               >
@@ -875,7 +872,7 @@ const JobSeekerForm = () => {
             {currentPage > 1 && (
               <button
                 onClick={handelPrevNavigation}
-                className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] border border-[#075178] text-[#075178] "
+                className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] border border-orange-primary text-orange-primary "
               >
                 {currentLang.prev}
               </button>
@@ -883,7 +880,7 @@ const JobSeekerForm = () => {
           </div>
           <button
             onClick={handelNextNavigation}
-            className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-[#075178] text-[#fff] "
+            className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-orange-primary text-[#fff] "
           >
             {currentPage < 4
               ? currentLang.next

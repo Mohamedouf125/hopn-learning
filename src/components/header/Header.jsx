@@ -22,6 +22,7 @@ const Header = () => {
   const [filterTypes, setFilterTypes] = useState([]);
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const [showLangMenu, setShowLangMenu] = useState(false);
 
   const handelLogout = () => {
     dispatch(logout());
@@ -46,7 +47,7 @@ const Header = () => {
 
   return (
     <div>
-      <nav className="bg-white border-gray-200 dark:bg-gray-900">
+      <nav className="bg-[#0a0a0a] border-b border-[#FF6B35] text-white">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <Link
             to="/"
@@ -86,7 +87,7 @@ const Header = () => {
                 stroke="#FF6B35"
               />
             </svg> */}
-            <img className="w-[80px] rounded-full" src={footerLogo} alt="" />
+            <img className="!w-[50px] rounded-full" src={footerLogo} alt="" />
           </Link>
 
           <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -153,67 +154,73 @@ const Header = () => {
               </button>
             )} */}
 
-            {/* <button
-              id="dropdownDefaultButton"
-              data-dropdown-toggle="dropdown"
-              class="text-white bg-blue-800  rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center "
-              type="button"
-            >
-              {lang === "en" ? "English" : "العربيه"}
-              <svg
-                class="w-2.5 h-2.5 ms-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 10 6"
+            <div className="relative mr-3">
+              <button
+                id="dropdownDefaultButton"
+                onClick={() => setShowLangMenu((v) => !v)}
+                className="text-white border border-orange-primary rounded-lg text-sm px-3 py-2 inline-flex items-center hover:text-orange-primary hover:bg-white/10 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20"
+                type="button"
               >
-                <path
-                  stroke="currentColor"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="m1 1 4 4 4-4"
-                />
-              </svg>
-            </button> */}
+                {lang === "en" ? "English" : "العربيه"}
+                <svg
+                  className="w-3 h-3 ms-2"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 10 6"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="m1 1 4 4 4-4"
+                  />
+                </svg>
+              </button>
 
-            <div
-              id="dropdown"
-              class="z-10 hidden bg-white divide-y divide-gray-100"
-            >
-              <ul
-                class="flex flex-col gap-3 bg-[#D9D9D9] rounded-lg w-[112px] items-center justify-center py-2 "
-                aria-labelledby="dropdownDefaultButton"
-              >
-                <li
-                  onClick={() => {
-                    dispatch(changeLang({ lang: "en" }));
-                  }}
-                  className="cursor-pointer w-full text-center"
+              {showLangMenu && (
+                <div
+                  className="z-10 absolute right-0 mt-2 bg-[#D9D9D9] rounded-lg shadow divide-y divide-gray-100"
+                  role="menu"
                 >
-                  English
-                </li>
-                <li
-                  onClick={() => {
-                    dispatch(changeLang({ lang: "ar" }));
-                  }}
-                  className="cursor-pointer w-full text-center"
-                >
-                  العربيه
-                </li>
-              </ul>
+                  <ul
+                    className="flex flex-col gap-1 rounded-lg min-w-[140px] items-stretch justify-center py-2"
+                    aria-labelledby="dropdownDefaultButton"
+                  >
+                    <li
+                      onClick={() => {
+                        dispatch(changeLang({ lang: "en" }));
+                        setShowLangMenu(false);
+                      }}
+                      className="cursor-pointer px-4 py-2 text-center hover:bg-white/60 hover:text-orange-primary"
+                    >
+                      English
+                    </li>
+                    <li
+                      onClick={() => {
+                        dispatch(changeLang({ lang: "ar" }));
+                        setShowLangMenu(false);
+                      }}
+                      className="cursor-pointer px-4 py-2 text-center hover:bg-white/60 hover:text-orange-primary"
+                    >
+                      العربيه
+                    </li>
+                  </ul>
+                </div>
+              )}
             </div>
 
             <button
               data-collapse-toggle="navbar-user"
               type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-300 rounded-lg md:hidden hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20"
               aria-controls="navbar-user"
               aria-expanded="false"
             >
               <span className="sr-only">Open main menu</span>
               <svg
-                className="w-5 h-5"
+                className="w-5 h-5 text-white"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -230,15 +237,15 @@ const Header = () => {
             </button>
           </div>
           <div
-            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 md:rounded-[91px] overflow-hidden md:border-2 border-[#F1F1F2] "
+            className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1 md:rounded-[91px] overflow-hidden md:border-2 border-[#FF6B35] "
             id="navbar-user"
           >
             {/* nav links */}
-            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+            <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-[#FF6B35] rounded-lg bg-[#0f0f0f] md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-transparent">
               <li className="!m-0 ">
                 <Link
                   to="/"
-                  className={`block py-2 md:border-e px-3 text-gray-900  ${
+                  className={`block py-2 md:border-e border-orange-primary px-3 text-white hover:text-orange-primary hover:bg-white/10 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 ${
                     location.pathname === "/" ? "active" : ""
                   }`}
                 >
@@ -249,7 +256,7 @@ const Header = () => {
               <li className="!m-0 ">
                 <Link
                   to="/courses"
-                  className={`block py-2 md:border-e px-3 text-gray-900  ${
+                  className={`block py-2 md:border-e border-orange-primary px-3 text-white hover:text-orange-primary hover:bg-white/10 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20  ${
                     location.pathname.includes("/courses") ? "active" : ""
                   }`}
                 >
@@ -260,7 +267,7 @@ const Header = () => {
               <li className="!m-0 ">
                 <Link
                   to="/trainees"
-                  className={`block py-2 md:border-e px-3 text-gray-900  ${
+                  className={`block py-2 md:border-e border-orange-primary px-3 text-white hover:text-orange-primary hover:bg-white/10 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20  ${
                     location.pathname === "/trainees" ? "active" : ""
                   }`}
                 >
@@ -423,7 +430,7 @@ const Header = () => {
               <li className="!m-0 ">
                 <Link
                   to="/about"
-                  className={`block md:border-s !m-0 border-[#F1F1F2] py-2 px-5 text-gray-900 ${
+                  className={`block md:border-s !m-0 border-orange-primary py-2 px-5 text-white hover:text-orange-primary hover:bg-white/10 rounded transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/20 ${
                     location.pathname === "/about" ? "active" : ""
                   }`}
                 >

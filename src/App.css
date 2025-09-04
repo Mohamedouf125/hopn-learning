@@ -4,6 +4,16 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
+.dark body {
+  background-color: #0a0a0a;
+  color: #ffffff;
+}
+
 /* html{
   background-color: #fff !important;
 } */
@@ -72,3 +82,68 @@
 .main-shadow {
   box-shadow: 0px 3px 4px 0px #00000008;
 }
+
+/* Hopn glow/effect utilities */
+.cursor-glow {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, rgba(255, 107, 53, 0.25) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+
+/* Glassmorphism helpers */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.glass-strong {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 2px solid rgba(255, 255, 255, 0.25);
+}
+
+/* Gradient text helpers */
+.text-gradient-hopn {
+  background: linear-gradient(45deg, #ffffff, #FFD23F, #FF6B35);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+@keyframes glowHopn {
+  from { box-shadow: 0 0 20px rgba(255, 107, 53, 0.35); }
+  to { box-shadow: 0 0 30px rgba(255, 210, 63, 0.6); }
+}
+@keyframes textGlowHopn {
+  from { text-shadow: 0 0 20px rgba(255, 210, 63, 0.5); }
+  to { text-shadow: 0 0 40px rgba(255, 210, 63, 1); }
+}
+@keyframes pulseHopn {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Animation utility classes */
+.animate-floating { animation: floating 6s ease-in-out infinite; }
+.animate-glow { animation: glowHopn 2s ease-in-out infinite alternate; }
+.animate-text-glow { animation: textGlowHopn 3s ease-in-out infinite alternate; }
+.animate-pulse-hopn { animation: pulseHopn 2s infinite; }
+
+/* Accent helpers */
+.border-accent-hopn { border-color: #FFD23F !important; }
+.bg-accent-hopn { background-color: #FF6B35 !important; }
+.text-accent-hopn { color: #FF6B35 !important; }
+.text-secondary-hopn { color: #FFD23F !important; }

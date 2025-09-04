@@ -1129,7 +1129,7 @@ const TrainerForm = () => {
                 onClick={() => setCurrentPage(item)}
                 className={`w-[30px] h-[30px] rounded-full border font-[600] font-[cairo] text-[15px] main-shadow ${
                   currentPage === item
-                    ? "border-[#075178] text-[#075178]"
+                    ? "border-orange-primary text-orange-primary"
                     : "border-[#f1f1f2] text-[#f1f1f2]"
                 } cursor-pointer flex items-center justify-center  `}
               >
@@ -1143,7 +1143,7 @@ const TrainerForm = () => {
             {currentPage > 1 && currentPage !== 5 && (
               <button
                 onClick={handelPrevNavigation}
-                className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] border border-[#075178] text-[#075178] "
+                className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] border border-orange-primary text-orange-primary "
               >
                 {currentLang.prev}
               </button>
@@ -1151,7 +1151,7 @@ const TrainerForm = () => {
           </div>
           <button
             onClick={handelNextNavigation}
-            className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-[#075178] text-[#fff] "
+            className="py-[5px] px-[15px] text-[12px] font-[500] font-[cairo] flex items-center justify-center rounded-[8px] bg-orange-primary text-[#fff] "
           >
             {currentPage < 4
               ? currentLang.next

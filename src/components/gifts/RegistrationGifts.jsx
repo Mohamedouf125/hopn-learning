@@ -128,14 +128,14 @@ const RegistrationGifts = () => {
           {/* {phase === 2 && (
             <>
               <div className="w-full items-center justify-start m-5   ">
-                <h3 className="border-b border-[#28AF60] w-fit text-[20px] font-[500] text-[#0B274B] pb-2">
+                <h3 className="border-b border-yellow-secondary w-fit text-[20px] font-[500] text-black pb-2">
                   Please enter the following data
                 </h3>
               </div>
 
               <div className="w-[70%] mx-auto border border-[#F1F1F2] rounded my-5 ">
                 <div className="w-full items-center justify-start m-5   ">
-                  <h3 className="border-b border-[#28AF60] w-fit text-[16px] font-[400] text-[#0B274B] pb-2 flex items-center justify-start gap-2 ">
+                  <h3 className="border-b border-yellow-secondary w-fit text-[16px] font-[400] text-black pb-2 flex items-center justify-start gap-2 ">
                     <svg
                       width="22"
                       height="24"
@@ -145,7 +145,7 @@ const RegistrationGifts = () => {
                     >
                       <path
                         d="M11.4805 12.0001C8.15234 12.0001 5.48047 9.32819 5.48047 6.00006C5.48047 2.71881 8.15234 6.10352e-05 11.4805 6.10352e-05C14.7617 6.10352e-05 17.4805 2.71881 17.4805 6.00006C17.4805 9.32819 14.7617 12.0001 11.4805 12.0001ZM15.9336 13.5469C19.3086 13.6876 21.9805 16.4532 21.9805 19.8282V21.7501C21.9805 23.0157 20.9492 24.0001 19.7305 24.0001H3.23047C1.96484 24.0001 0.980469 23.0157 0.980469 21.7501V19.8282C0.980469 16.4532 3.60547 13.6876 6.98047 13.5469L9.23047 22.5001L10.7305 16.1251L9.23047 13.5001H13.7305L12.2305 16.1251L13.7305 22.5001L15.9336 13.5469Z"
-                        fill="#0B274B"
+                        fill="#FF6B35"
                       />
                     </svg>
                     Trainee data
@@ -295,7 +295,7 @@ const RegistrationGifts = () => {
                 <div className="flex items-center justify-end gap-2 my-5 w-[95%] mx-0  ">
                   <button
                     onClick={() => dispatch(oldAccount())}
-                    className="border-none outline-0 flex items-center justify-center gap-1 bg-[#075178] text-[14px] font-[500] text-white rounded py-2 px-4 "
+                    className="border-none outline-0 flex items-center justify-center gap-1 bg-orange-primary text-[14px] font-[500] text-white rounded py-2 px-4 "
                   >
                     Confirm <i class="fas fa-angle-double-right"></i>
                   </button>

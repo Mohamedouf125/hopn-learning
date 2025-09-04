@@ -52,7 +52,7 @@ function App() {
     <div
       className={`${
         lang === "ar" ? "rtl" : "ltr"
-      } !font-["Poppins"] rtl:!font-["Tajawal"]`}
+      } dark bg-[#0a0a0a] text-white !font-["Poppins"] rtl:!font-["Tajawal"]`}
     >
       <Header />
       <Routes>
